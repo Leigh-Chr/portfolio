@@ -1,0 +1,524 @@
+---
+import DefaultLayout from "../../layouts/default-layout.astro";
+
+interface ProjectData {
+  slug: string;
+  title: string;
+  image: string;
+  tags: string[];
+  presentation: string;
+  contexte: string;
+  objectifs: string[];
+  processus: {
+    recherche: string;
+    ideation: string;
+    wireframes: string;
+    developpement: string;
+    tests: string;
+  };
+  acteurs: string;
+  resultats: {
+    personnels: string;
+    organisation: string;
+  };
+  lendemains: string;
+  critique: string;
+  competences: {
+    nom: string;
+    slug: string;
+  }[];
+}
+
+interface ProjectParams {
+  projet: string;
+}
+
+interface ProjectProps {
+  projetData: ProjectData;
+}
+
+// Définition complète des projets
+export function getStaticPaths() {
+  const projets: Record<string, ProjectData> = {
+    "portail-associatif": {
+      slug: "portail-associatif",
+      title: "Refonte portail associatif",
+      image: "/images/projects/portail-associatif.jpg",
+      tags: ["Accessibilité", "UX/UI", "Refonte"],
+      presentation:
+        "Transformation complète d'une plateforme associative pour la rendre accessible, intuitive et adaptée à tous les publics, des bénévoles seniors aux nouveaux volontaires, en passant par les membres en situation de handicap.",
+      contexte:
+        "Le portail associatif existant depuis 2010 était devenu obsolète tant sur le plan technique que sur le plan de l'expérience utilisateur. Avec un taux d'abandon de 70% lors de la création de compte et des remontées négatives constantes des bénévoles seniors, la fédération d'associations a décidé d'entreprendre une refonte complète en 2023.",
+      objectifs: [
+        "Créer une interface accessible répondant aux critères WCAG 2.1 niveau AA",
+        "Réduire de 50% le taux d'abandon lors de la création de compte",
+        "Simplifier les parcours utilisateurs sans sacrifier les fonctionnalités avancées",
+        "Permettre un usage efficace sur tous les appareils, y compris les terminaux anciens",
+      ],
+      processus: {
+        recherche:
+          "Entretiens avec 15 utilisateurs représentatifs des différents profils, observation de sessions d'utilisation réelles, analyse des données d'usage existantes pour identifier les points de friction.",
+        ideation:
+          "Ateliers de co-conception avec des représentants d'associations, carte d'expérience utilisateur, priorisation des fonctionnalités par impact et fréquence d'usage.",
+        wireframes:
+          "Prototypes papier testés auprès de bénévoles seniors, maquettes interactives de complexité croissante, tests d'accessibilité précoces avec des utilisateurs de technologies d'assistance.",
+        developpement:
+          "Architecture front-end Angular avec approche progressive enhancement, mise en place d'un design system accessible, refonte de l'API backend pour simplifier les échanges de données.",
+        tests:
+          "Tests utilisateurs réguliers sur des incréments fonctionnels, suivi des métriques d'usage en production, itérations rapides basées sur les retours directs des utilisateurs.",
+      },
+      acteurs:
+        "Collaboration étroite entre la fédération d'associations (commanditaire), les bénévoles (utilisateurs finaux), l'équipe technique interne et notre équipe de conception-développement. Un comité d'utilisateurs représentatif a été impliqué à chaque étape clé du projet.",
+      resultats: {
+        personnels:
+          "Développement d'une expertise forte en accessibilité numérique et en conception pour des publics variés. Satisfaction de voir l'impact concret sur l'engagement des bénévoles.",
+        organisation:
+          "Réduction de 70% à 15% du taux d'abandon sur l'inscription, augmentation de 45% de l'engagement des bénévoles seniors sur la plateforme, économie de 30% sur les coûts de support utilisateurs.",
+      },
+      lendemains:
+        "La plateforme a été rapidement adoptée par l'ensemble des associations membres. Six mois après le lancement, un programme de formation a été mis en place pour maximiser l'utilisation des fonctionnalités avancées. Le code du design system a été open-sourcé et est aujourd'hui utilisé par d'autres organisations du secteur associatif.",
+      critique:
+        "Cette expérience m'a confirmé l'importance d'impliquer les utilisateurs finaux dès les premières étapes de conception. Si c'était à refaire, j'insisterais davantage sur la documentation utilisateur contextuelle, aspect qui a été sous-estimé initialement. La méthodologie de test avec les seniors est désormais un élément central de mon approche.",
+      competences: [
+        {
+          nom: "Conception UX/UI & wireframing",
+          slug: "conception-ux-ui-wireframing",
+        },
+        { nom: "Accessibilité (WCAG 2.x)", slug: "accessibilite-wcag" },
+        { nom: "Empathie active", slug: "empathie-active" },
+      ],
+    },
+    "gestion-collaborative": {
+      slug: "gestion-collaborative",
+      title: "Application de gestion collaborative",
+      image: "/images/projects/gestion-collaborative.jpg",
+      tags: ["SaaS", "Angular", "Agile"],
+      presentation:
+        "Conception et développement d'une application web de gestion de tâches et projets spécifiquement pensée pour les équipes distribuées et les structures à gouvernance partagée.",
+      contexte:
+        "Les outils traditionnels de gestion de projet sont souvent conçus pour des structures hiérarchiques classiques, laissant les organisations horizontales, coopératives et distribuées face à des outils inadaptés à leurs modes de fonctionnement. Ce projet est né de ce constat, à l'initiative d'un collectif de coopératives cherchant une alternative aux solutions existantes.",
+      objectifs: [
+        "Créer un outil adapté aux prises de décision collectives et à la gouvernance partagée",
+        "Permettre une visibilité claire de l'avancement pour des équipes géographiquement dispersées",
+        "Intégrer des mécanismes de délégation temporaire et de rotation des responsabilités",
+        "Garantir une adoption facile avec une courbe d'apprentissage minimale",
+      ],
+      processus: {
+        recherche:
+          "Analyse des flux de travail existants dans cinq coopératives partenaires, cartographie des irritants dans les outils actuellement utilisés, ateliers d'expression des besoins avec les futurs utilisateurs.",
+        ideation:
+          "Sessions de design thinking, prototypage rapide de différentes approches de visualisation des tâches et responsabilités, confrontation des concepts aux situations concrètes d'usage.",
+        wireframes:
+          "Création de wireframes interactifs, tests du découpage fonctionnel, validation des parcours principaux auprès des différents profils d'utilisateurs.",
+        developpement:
+          "Architecture modulaire basée sur Angular et une API GraphQL, organisation en feature teams, mise en place de tests automatisés dès le début du projet.",
+        tests:
+          "Déploiement continu avec tests automatisés, période beta avec un groupe restreint d'utilisateurs engagés, itérations hebdomadaires basées sur les retours.",
+      },
+      acteurs:
+        "Équipe pluridisciplinaire incluant des développeurs, designers, mais aussi des représentants des coopératives partenaires qui ont participé activement à la définition des fonctionnalités et aux tests. Un comité d'orientation stratégique composé de futurs utilisateurs a guidé les priorités de développement.",
+      resultats: {
+        personnels:
+          "Approfondissement de ma compréhension des dynamiques de groupes horizontaux et des mécanismes de prise de décision collective. Renforcement de mes compétences en architecture d'applications complexes.",
+        organisation:
+          "Gain de productivité moyen de 30% rapporté par les équipes utilisatrices, meilleure visibilité sur les projets transversaux, réduction significative du temps passé en réunions de coordination.",
+      },
+      lendemains:
+        "L'application est aujourd'hui utilisée par plus de 20 organisations et continue d'évoluer selon un modèle de développement communautaire. Une version cloud SaaS a été lancée en 2023 pour financer la maintenance et l'évolution de la solution, tout en conservant une version open-source auto-hébergeable.",
+      critique:
+        "Le projet a souffert initialement d'une trop grande ambition fonctionnelle. Nous avons dû recentrer le périmètre sur les besoins essentiels pour livrer dans les délais. La gestion de la complexité des permissions et des rôles dans un contexte de gouvernance fluide reste un défi permanent.",
+      competences: [
+        {
+          nom: "Développement front (HTML • CSS • TypeScript / Angular)",
+          slug: "developpement-front",
+        },
+        {
+          nom: "Gestion agile centrée utilisateur",
+          slug: "gestion-agile-centree-utilisateur",
+        },
+        { nom: "Sens critique & éthique", slug: "sens-critique-ethique" },
+      ],
+    },
+    "tableau-bord-accessible": {
+      slug: "tableau-bord-accessible",
+      title: "Tableau de bord analytique accessible",
+      image: "/images/projects/tableau-bord.jpg",
+      tags: ["Dataviz", "Accessibilité", "Frontend"],
+      presentation:
+        "Conception et développement d'une interface de visualisation de données complexes entièrement accessible, y compris pour les utilisateurs de technologies d'assistance.",
+      contexte:
+        "Une organisation environnementale disposait d'importantes données de surveillance écologique qu'elle souhaitait rendre accessibles au grand public et aux décideurs. Le défi était double : présenter des informations complexes de manière claire et intuitive, tout en garantissant que ces visualisations soient accessibles à tous, y compris aux personnes non-voyantes.",
+      objectifs: [
+        "Créer des visualisations de données interactives répondant aux critères d'accessibilité WCAG 2.1 AA",
+        "Permettre plusieurs niveaux de lecture adaptés à différents profils d'utilisateurs",
+        "Rendre les données exploitables par des technologies d'assistance",
+        "Maintenir la performance même avec des jeux de données volumineux",
+      ],
+      processus: {
+        recherche:
+          "Analyse des besoins spécifiques des utilisateurs de lecteurs d'écran face aux visualisations de données, benchmark des solutions existantes, consultation d'experts en accessibilité numérique.",
+        ideation:
+          "Exploration de différentes approches de présentation des données (visuelles, textuelles, sonores), conception de systèmes de navigation alternatifs, ateliers de co-création avec des utilisateurs de technologies d'assistance.",
+        wireframes:
+          "Prototypes centrés sur l'interaction avec les visualisations, tests précoces avec des utilisateurs non-voyants, itérations basées sur les retours d'usage réel.",
+        developpement:
+          "Création d'une bibliothèque de composants de visualisation accessibles basée sur D3.js et SVG, avec des alternatives textuelles générées dynamiquement, couche sémantique riche (ARIA).",
+        tests:
+          "Sessions de test avec différentes technologies d'assistance (NVDA, JAWS, VoiceOver), audit d'accessibilité complet, correction itérative des problèmes identifiés.",
+      },
+      acteurs:
+        "Collaboration entre data scientists, développeurs front-end, experts en accessibilité et utilisateurs finaux représentatifs des différents profils (experts environnementaux, décideurs publics, grand public, personnes en situation de handicap).",
+      resultats: {
+        personnels:
+          "Acquisition d'une expertise pointue en accessibilité des visualisations de données, développement de compétences en optimisation de performance pour des interactions complexes.",
+        organisation:
+          "Augmentation de 250% de l'engagement sur les données environnementales, utilisation des visualisations dans plusieurs rapports officiels, reconnaissance par la communauté de l'accessibilité numérique.",
+      },
+      lendemains:
+        "Le tableau de bord est aujourd'hui un outil de référence pour l'organisation et a inspiré d'autres projets similaires. La bibliothèque de composants accessibles a été open-sourcée et est maintenant utilisée dans plusieurs autres projets. Un programme de formation a été développé pour partager les bonnes pratiques en matière de visualisation de données accessibles.",
+      critique:
+        "L'équilibre entre richesse visuelle et accessibilité a été un défi constant. Certains compromis ont dû être faits, notamment sur des visualisations très complexes qui ont été simplifiées. Avec le recul, j'aurais intégré les experts en accessibilité encore plus tôt dans le processus de conception.",
+      competences: [
+        { nom: "Accessibilité (WCAG 2.x)", slug: "accessibilite-wcag" },
+        {
+          nom: "Développement front (HTML • CSS • TypeScript / Angular)",
+          slug: "developpement-front",
+        },
+        { nom: "Empathie active", slug: "empathie-active" },
+      ],
+    },
+    "plateforme-documentaire": {
+      slug: "plateforme-documentaire",
+      title: "Plateforme documentaire libre",
+      image: "/images/projects/plateforme-documentaire.jpg",
+      tags: ["Open Source", "Collaboration", "Architecture"],
+      presentation:
+        "Conception et développement d'un système de gestion documentaire open source répondant aux besoins spécifiques des organisations à but non lucratif, avec un focus sur la collaboration et le partage de connaissances.",
+      contexte:
+        "Les solutions de gestion documentaire existantes sont souvent soit trop complexes et coûteuses pour les petites structures, soit trop limitées pour répondre aux besoins de classification et de recherche avancés. Ce projet est né de la demande d'un consortium d'ONG ayant besoin de partager efficacement leurs ressources et bonnes pratiques.",
+      objectifs: [
+        "Créer une plateforme entièrement open source et auto-hébergeable",
+        "Permettre une organisation flexible des documents adaptée à différents contextes d'usage",
+        "Faciliter la collaboration inter-organisations tout en respectant les besoins de confidentialité",
+        "Garantir des performances optimales même avec une connectivité limitée",
+      ],
+      processus: {
+        recherche:
+          "Analyse des flux documentaires existants dans les organisations partenaires, identification des besoins communs et des spécificités, audit des solutions existantes et de leurs limitations.",
+        ideation:
+          "Sessions de conception collaborative, modélisation des structures de données adaptées aux différents cas d'usage, exploration des mécanismes de partage et de contrôle d'accès.",
+        wireframes:
+          "Prototypes interactifs des principales interfaces, tests d'usage avec des représentants des organisations, itérations basées sur les retours.",
+        developpement:
+          "Architecture modulaire basée sur une API REST et un frontend React, système d'extension pour personnaliser les fonctionnalités, travail approfondi sur la recherche full-text et les métadonnées.",
+        tests:
+          "Déploiements pilotes dans trois organisations, recueil structuré des retours, cycles d'amélioration itératifs basés sur l'usage réel.",
+      },
+      acteurs:
+        "Équipe distribuée composée de développeurs, d'experts en gestion de l'information et de représentants des organisations utilisatrices. Une communauté de contributeurs s'est progressivement formée autour du projet.",
+      resultats: {
+        personnels:
+          "Renforcement de mes compétences en architecture de systèmes distribués et en gestion de projet open source. Satisfaction de voir un projet réellement approprié par sa communauté d'utilisateurs.",
+        organisation:
+          "Réduction estimée à 60% du temps de recherche documentaire, meilleur partage des connaissances entre équipes et organisations, économies significatives par rapport aux solutions commerciales équivalentes.",
+      },
+      lendemains:
+        "La plateforme est aujourd'hui utilisée par plus de 30 organisations et continue d'évoluer grâce aux contributions de sa communauté. Un système de gouvernance partagée a été mis en place pour guider les évolutions futures. Des modules complémentaires ont été développés pour des besoins spécifiques (archivage long terme, intégration avec des outils de terrain).",
+      critique:
+        "Le projet a parfois souffert des limitations inhérentes au modèle de développement communautaire, notamment en termes de respect des délais. La documentation utilisateur a été négligée initialement, ce qui a freiné l'adoption. Avec le recul, j'aurais mis plus d'emphase sur les outils d'auto-formation dès le départ.",
+      competences: [
+        {
+          nom: "Gestion de projet client‑centré",
+          slug: "gestion-de-projet-client-centre",
+        },
+        { nom: "Autonomie responsable", slug: "autonomie-responsable" },
+        { nom: "Communication inclusive", slug: "communication-inclusive" },
+      ],
+    },
+    "service-public-numerique": {
+      slug: "service-public-numerique",
+      title: "Modernisation service public numérique",
+      image: "/images/projects/service-public.jpg",
+      tags: ["Service public", "Sobriété", "Accessibilité"],
+      presentation:
+        "Refonte complète d'un service numérique public selon une approche inclusive, sobre et centrée sur les besoins réels des citoyens, touchant des milliers d'utilisateurs quotidiens.",
+      contexte:
+        "Un service public numérique existant depuis plusieurs années présentait des problèmes d'accessibilité, d'expérience utilisateur et de performance. Les retours des usagers mettaient en évidence des difficultés d'usage, particulièrement pour les personnes peu familières avec le numérique ou en situation de handicap.",
+      objectifs: [
+        "Respecter les critères du RGAA (Référentiel Général d'Amélioration de l'Accessibilité)",
+        "Réduire de 50% le temps nécessaire pour compléter les démarches courantes",
+        "Diminuer l'empreinte carbone du service en appliquant les principes d'éco-conception",
+        "Créer une expérience inclusive adaptée à tous les niveaux de littératie numérique",
+      ],
+      processus: {
+        recherche:
+          "Analyse de données d'usage réel, entretiens avec des agents de terrain et des usagers aux profils variés, cartographie des parcours existants et identification des points de friction.",
+        ideation:
+          "Ateliers de co-conception impliquant agents publics et usagers, définition de personae représentatifs de la diversité des publics, exploration de solutions adaptées aux différents contextes d'usage.",
+        wireframes:
+          "Prototypes testés avec des panels d'usagers incluant des personnes en difficulté numérique, itérations basées sur les observations d'usage, validation par des experts en accessibilité.",
+        developpement:
+          "Approche progressive enhancement garantissant un fonctionnement sur tous les terminaux, optimisation drastique des performances, mise en place d'un design system respectant les normes RGAA.",
+        tests:
+          "Tests d'usage en conditions réelles avec des publics variés, tests automatisés d'accessibilité, mesure continue des performances et de l'empreinte carbone.",
+      },
+      acteurs:
+        "Collaboration étroite entre l'équipe technique, les agents publics de terrain, les experts métier et un panel représentatif d'usagers. Implication de spécialistes de l'accessibilité et de l'inclusion numérique tout au long du projet.",
+      resultats: {
+        personnels:
+          "Approfondissement de ma compréhension des enjeux d'accessibilité numérique et de sobriété. Développement d'une méthodologie de conception inclusive applicable à d'autres contextes.",
+        organisation:
+          "Réduction de 65% des demandes d'assistance, augmentation de 40% du taux de complétion des démarches en ligne, diminution de 70% de l'empreinte carbone du service.",
+      },
+      lendemains:
+        "Le service est aujourd'hui cité comme exemple de bonnes pratiques dans l'administration. Les composants développés ont été intégrés dans un design system public réutilisable. Une communauté de pratique s'est formée autour des méthodes d'inclusion numérique mises en œuvre dans le projet.",
+      critique:
+        "La prise en compte simultanée des contraintes d'accessibilité, de performance et d'éco-conception a parfois créé des tensions dans les choix de conception. Certains compromis ont dû être faits, notamment sur la richesse des interactions. Avec le recul, j'aurais davantage formalisé la méthodologie de priorisation des exigences parfois contradictoires.",
+      competences: [
+        { nom: "Accessibilité (WCAG 2.x)", slug: "accessibilite-wcag" },
+        {
+          nom: "Tests fonctionnels & itératifs",
+          slug: "tests-fonctionnels-iteratifs",
+        },
+        {
+          nom: "Gestion de projet client‑centré",
+          slug: "gestion-de-projet-client-centre",
+        },
+      ],
+    },
+  };
+
+  return Object.keys(projets).map((slug) => {
+    return {
+      params: { projet: slug },
+      props: { projetData: projets[slug] },
+    };
+  });
+}
+
+// Récupération des données du projet
+const { projetData } = Astro.props;
+---
+
+<DefaultLayout>
+  <article class="page-section">
+    <div class="project-header">
+      <div class="project-header-content">
+        <h1>{projetData.title}</h1>
+        <div class="tags">
+          {projetData.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+      <div class="project-image">
+        <img
+          src={projetData.image}
+          alt={`Image du projet ${projetData.title}`}
+        />
+      </div>
+    </div>
+
+    <div class="project-content">
+      <section class="section">
+        <h2>Présentation & définition</h2>
+        <p>{projetData.presentation}</p>
+      </section>
+
+      <section class="section">
+        <h2>Contexte & Problématique</h2>
+        <p>{projetData.contexte}</p>
+      </section>
+
+      <section class="section">
+        <h2>Objectifs & Enjeux</h2>
+        <ul class="objectives">
+          {projetData.objectifs.map((objectif: string) => <li>{objectif}</li>)}
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Processus</h2>
+        <div class="process">
+          <div class="detail-section">
+            <h3>Recherche utilisateurs</h3>
+            <p>{projetData.processus.recherche}</p>
+          </div>
+          <div class="detail-section">
+            <h3>Idéation</h3>
+            <p>{projetData.processus.ideation}</p>
+          </div>
+          <div class="detail-section">
+            <h3>Wireframes / prototypes</h3>
+            <p>{projetData.processus.wireframes}</p>
+          </div>
+          <div class="detail-section">
+            <h3>Développement</h3>
+            <p>{projetData.processus.developpement}</p>
+          </div>
+          <div class="detail-section">
+            <h3>Tests & itérations</h3>
+            <p>{projetData.processus.tests}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Acteurs & interactions</h2>
+        <p>{projetData.acteurs}</p>
+      </section>
+
+      <section class="section">
+        <h2>Résultats</h2>
+        <div class="results two-column-grid">
+          <div class="result-block">
+            <h3>Pour moi</h3>
+            <p>{projetData.resultats.personnels}</p>
+          </div>
+          <div class="result-block">
+            <h3>Pour l'organisation</h3>
+            <p>{projetData.resultats.organisation}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Lendemains du projet</h2>
+        <p>{projetData.lendemains}</p>
+      </section>
+
+      <section class="section">
+        <h2>Regard critique & apprentissages</h2>
+        <p>{projetData.critique}</p>
+      </section>
+
+      <section class="section">
+        <h2>Compétences liées</h2>
+        <div class="related-skills">
+          {
+            projetData.competences.map(
+              (competence: { nom: string; slug: string }) => (
+                <a href={`/competences/${competence.slug}`} class="skill-link">
+                  {competence.nom}
+                </a>
+              )
+            )
+          }
+        </div>
+      </section>
+    </div>
+
+    <div class="navigation">
+      <a href="/projets" class="btn btn-secondary">
+        &larr; Retour aux projets
+      </a>
+    </div>
+  </article>
+</DefaultLayout>
+
+<style>
+  .project-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  .project-header-content h1 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 2.2rem;
+    color: var(--color-primary);
+  }
+
+  .project-image {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+  }
+
+  .project-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .objectives {
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .objectives li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.5;
+  }
+
+  .process {
+    display: grid;
+    gap: var(--spacing-lg);
+  }
+
+  .detail-section h3 {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.2rem;
+  }
+
+  .results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .result-block h3 {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-xs);
+    font-size: 1.2rem;
+  }
+
+  .related-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .skill-link {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .skill-link:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .navigation {
+    margin-top: var(--spacing-2xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .project-header {
+      grid-template-columns: 1fr;
+    }
+
+    .project-header-content {
+      order: 2;
+    }
+
+    .project-image {
+      order: 1;
+    }
+
+    .results {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+</style>

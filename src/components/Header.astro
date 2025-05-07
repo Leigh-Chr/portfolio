@@ -1,0 +1,159 @@
+---
+import DropdownMenu from "./DropdownMenu.astro";
+
+// Définition des données pour les menus déroulants
+const competences = [
+  { label: "Empathie active", url: "/competences/empathie-active" },
+  {
+    label: "Communication inclusive",
+    url: "/competences/communication-inclusive",
+  },
+  {
+    label: "Gestion agile centrée utilisateur",
+    url: "/competences/gestion-agile-centree-utilisateur",
+  },
+  {
+    label: "Sens critique & éthique",
+    url: "/competences/sens-critique-ethique",
+  },
+  { label: "Autonomie responsable", url: "/competences/autonomie-responsable" },
+  {
+    label: "Conception UX/UI & wireframing",
+    url: "/competences/conception-ux-ui-wireframing",
+  },
+  { label: "Développement front", url: "/competences/developpement-front" },
+  { label: "Accessibilité (WCAG 2.x)", url: "/competences/accessibilite-wcag" },
+  {
+    label: "Gestion de projet client‑centré",
+    url: "/competences/gestion-de-projet-client-centre",
+  },
+  {
+    label: "Tests fonctionnels & itératifs",
+    url: "/competences/tests-fonctionnels-iteratifs",
+  },
+];
+
+const projets = [
+  { label: "Refonte portail associatif", url: "/projets/portail-associatif" },
+  {
+    label: "Application de gestion collaborative",
+    url: "/projets/gestion-collaborative",
+  },
+  {
+    label: "Tableau de bord analytique accessible",
+    url: "/projets/tableau-bord-accessible",
+  },
+  {
+    label: "Plateforme documentaire libre",
+    url: "/projets/plateforme-documentaire",
+  },
+  {
+    label: "Modernisation service public numérique",
+    url: "/projets/service-public-numerique",
+  },
+];
+---
+
+<header class="global-header">
+  <div class="header-content">
+    <a href="/" class="logo-container">
+      <div class="portrait">
+        <img src="/images/portrait.jpg" alt="Portrait de Virgil Chareyre" />
+      </div>
+      <h1 class="logo-title">Virgil CHAREYRE</h1>
+    </a>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/a-propos">À propos</a></li>
+        <DropdownMenu
+          title="Compétences"
+          url="/competences"
+          items={competences}
+        />
+        <DropdownMenu title="Projets" url="/projets" items={projets} />
+        <li><a href="/parcours">Parcours</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style is:global>
+  /* Header styles */
+  .global-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-background);
+    box-shadow: var(--box-shadow);
+    padding: var(--spacing-md) 0;
+  }
+
+  .header-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-title {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .portrait {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .main-nav a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+  }
+
+  .main-nav a:hover {
+    color: var(--color-primary);
+  }
+
+  /* Responsive header */
+  @media (max-width: 768px) {
+    .header-content {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    .main-nav ul {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

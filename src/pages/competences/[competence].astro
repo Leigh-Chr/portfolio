@@ -1,0 +1,420 @@
+---
+import DefaultLayout from "../../layouts/default-layout.astro";
+
+interface SkillRealization {
+  nom: string;
+  url: string;
+}
+
+interface SkillData {
+  title: string;
+  definition: string;
+  anecdote: string;
+  critique: string;
+  evolution: string;
+  realisations: SkillRealization[];
+}
+
+interface SkillDetail {
+  [key: string]: SkillData;
+}
+
+// Propriétés de la page
+const { skillData } = Astro.props;
+
+// Définition des compétences avec détails complets
+export function getStaticPaths() {
+  // Définition des slugs pour la correspondance avec la page d'index
+  const softSkills = [
+    { slug: "empathie-active", name: "Empathie active" },
+    { slug: "communication-inclusive", name: "Communication inclusive" },
+    {
+      slug: "gestion-agile-centree-utilisateur",
+      name: "Gestion agile centrée utilisateur",
+    },
+    { slug: "sens-critique-ethique", name: "Sens critique & éthique" },
+    { slug: "autonomie-responsable", name: "Autonomie responsable" },
+  ];
+
+  const technicalSkills = [
+    {
+      slug: "conception-ux-ui-wireframing",
+      name: "Conception UX/UI & wireframing",
+    },
+    {
+      slug: "developpement-front",
+      name: "Développement front (HTML • CSS • TypeScript / Angular)",
+    },
+    { slug: "accessibilite-wcag", name: "Accessibilité (WCAG 2.x)" },
+    {
+      slug: "gestion-de-projet-client-centre",
+      name: "Gestion de projet client‑centré",
+    },
+    {
+      slug: "tests-fonctionnels-iteratifs",
+      name: "Tests fonctionnels & itératifs",
+    },
+  ];
+
+  // Définition de toutes les compétences avec leur contenu détaillé
+  const skillsDetails: SkillDetail = {
+    "conception-ux-ui-wireframing": {
+      title: "Conception UX/UI & wireframing",
+      definition:
+        "Concevoir l'expérience utilisateur et l'interface d'un produit numérique, c'est bien plus que dessiner des écrans : c'est construire un dialogue entre l'humain et la machine. Cette compétence requiert de comprendre les attentes, anticiper les points de friction et proposer un chemin fluide qui s'adapte à tous les contextes d'usage, tout en respectant les contraintes d'accessibilité et d'éco-conception.",
+      anecdote:
+        "Lorsque j'ai rejoint la refonte du portail associatif en 2023, les bénévoles exprimaient des difficultés face à une interface trop technique. J'ai mis en place des ateliers d'observation et d'entretiens avec des utilisateurs aux profils variés : personnes âgées, primo-utilisateurs et personnes en situation de handicap. Ces sessions ont révélé que le vocabulaire employé créait une barrière plus forte que l'ergonomie elle-même. J'ai alors conçu un wireframe intégrant un système iconographique cohérent et des formulations inclusives, réduisant de 40% les appels d'assistance après déploiement.",
+      critique:
+        "Ma force principale réside dans l'observation et l'empathie utilisateur ; je continue à développer mes compétences en prototypage interactif haute-fidélité. J'ai parfois tendance à sur-simplifier les interfaces, ce qui peut limiter certaines fonctionnalités avancées.",
+      evolution:
+        "Je suis actuellement une formation certifiante en audit d'accessibilité RGAA, et je prévois d'intégrer davantage de tests utilisateurs systématiques directement dans mes processus de conception.",
+      realisations: [
+        {
+          nom: "Refonte portail associatif",
+          url: "/projets/portail-associatif",
+        },
+        {
+          nom: "Application de gestion collaborative",
+          url: "/projets/gestion-collaborative",
+        },
+        {
+          nom: "Refonte site départemental",
+          url: "/projets/site-departemental",
+        },
+      ],
+    },
+    "developpement-front": {
+      title: "Développement front (HTML • CSS • TypeScript / Angular)",
+      definition:
+        "Le développement front-end est l'art de transformer des concepts visuels et des parcours utilisateurs en interfaces fonctionnelles et accessibles. Cette compétence inclut la maîtrise des langages standards du web (HTML, CSS, JavaScript/TypeScript) et des frameworks modernes comme Angular pour créer des expériences réactives, performantes et adaptées à tous les appareils.",
+      anecdote:
+        "Sur le projet de plateforme de gestion documentaire en 2023, j'ai été confronté à un défi majeur : développer une interface riche capable de gérer des milliers de documents tout en respectant des contraintes strictes d'accessibilité. En adoptant une approche par composants avec Angular et en implémentant une stratégie de chargement progressif, j'ai réussi à maintenir des temps de réponse inférieurs à 300ms tout en assurant une compatibilité WCAG AA complète, même sur les vieux navigateurs encore utilisés par certains membres de la communauté.",
+      critique:
+        "Je maîtrise particulièrement bien la création d'interfaces accessibles et performantes, mais je dois encore approfondir mes connaissances en animations complexes et en optimisation pour les applications de très grande échelle. Mon code est parfois trop verbeux par souci de lisibilité.",
+      evolution:
+        "J'étudie actuellement les Web Components natifs pour réduire les dépendances aux frameworks, et je suis en train d'explorer les capacités de Svelte pour les projets légers nécessitant une empreinte minimale.",
+      realisations: [
+        {
+          nom: "Plateforme de gestion documentaire",
+          url: "/projets/gestion-documentaire",
+        },
+        {
+          nom: "Application intranet responsive",
+          url: "/projets/intranet-responsive",
+        },
+        { nom: "Mini-jeu éducatif", url: "/projets/mini-jeu-educatif" },
+      ],
+    },
+    "empathie-active": {
+      title: "Empathie active",
+      definition:
+        "L'empathie active est la capacité à se mettre à la place des autres de façon consciente et délibérée, dans le but de comprendre leurs besoins, leurs difficultés et leurs motivations. Dans la conception numérique, elle permet de dépasser ses propres biais pour créer des expériences véritablement inclusives. Cette compétence implique non seulement d'écouter, mais d'observer, de questionner sans présupposés, et d'intégrer ces apprentissages dans chaque étape du processus de création.",
+      anecdote:
+        "Lors d'un projet de refonte d'une plateforme associative en 2022, j'ai constaté que les bénévoles seniors abandonnaient la création de compte après la deuxième étape. Plutôt que de simplement « simplifier » l'interface selon mes critères, j'ai organisé des sessions d'observation où les utilisateurs verbalisaient leurs pensées. J'ai découvert que le problème n'était pas la complexité, mais l'angoisse liée à la gestion des mots de passe. J'ai alors conçu un système alternatif basé sur des liens sécurisés envoyés par email, réduisant de 80% le taux d'abandon tout en maintenant la sécurité nécessaire.",
+      critique:
+        "Ma capacité d'empathie est naturellement forte dans les domaines qui me sont familiers, mais je dois encore développer une approche plus systématique pour les publics dont les réalités sont éloignées de la mienne. Je dois également veiller à équilibrer cette empathie avec les contraintes techniques et économiques des projets.",
+      evolution:
+        "Je me forme actuellement aux méthodes d'enquête ethnographique appliquées au numérique, et je prévois de participer à des ateliers de simulation de handicaps sensoriels pour enrichir ma compréhension des enjeux d'accessibilité.",
+      realisations: [
+        {
+          nom: "Plateforme associative adaptée aux seniors",
+          url: "/projets/plateforme-associative",
+        },
+        {
+          nom: "Interface de gestion documentaire simplifiée",
+          url: "/projets/gestion-documentaire",
+        },
+        {
+          nom: "Application d'entraide de quartier",
+          url: "/projets/entraide-quartier",
+        },
+      ],
+    },
+    "communication-inclusive": {
+      title: "Communication inclusive",
+      definition:
+        "La communication inclusive est l'art d'adapter son discours et ses supports pour qu'ils soient compréhensibles et respectueux envers l'ensemble des publics visés, quels que soient leur genre, âge, origine, niveau d'éducation ou situation de handicap. Dans le contexte numérique, elle inclut le choix des mots, des images, mais aussi la structure des contenus et leur hiérarchisation. Cette compétence est fondamentale pour créer des interfaces qui n'excluent personne et qui facilitent la compréhension sans infantiliser.",
+      anecdote:
+        "Pour un site d'information locale en 2021, nous avions conçu une interface sobre avec un langage que nous pensions simple. Lors des tests, plusieurs personnes issues de l'immigration récente se sont senties perdues face à des expressions comme « à l'ordre du jour » ou « dépôt de dossier ». J'ai alors créé un glossaire contextuel qui apparaissait au survol des termes administratifs, ainsi qu'une option pour afficher les contenus en français simplifié. Cette fonctionnalité, initialement pensée pour un public spécifique, s'est révélée utile pour 34% des visiteurs, prouvant que l'accessibilité langagière bénéficie à tous.",
+      critique:
+        "Je maîtrise bien la simplification de contenus complexes, mais mon point faible reste la concision. Je dois travailler sur ma capacité à condenser l'information sans perdre en nuance, particulièrement pour les interfaces mobiles où l'espace est limité.",
+      evolution:
+        "Je m'implique dans un groupe de travail sur l'écriture inclusive technique, qui vise à créer un guide de bonnes pratiques pour la documentation développeur. J'envisage également de suivre une formation en FLE (Français Langue Étrangère) pour mieux comprendre les mécanismes d'acquisition linguistique.",
+      realisations: [
+        {
+          nom: "Guide administratif accessible",
+          url: "/projets/guide-administratif",
+        },
+        {
+          nom: "Refonte des notifications système",
+          url: "/projets/notifications-systeme",
+        },
+        {
+          nom: "Documentation utilisateur multiniveau",
+          url: "/projets/documentation-multiniveau",
+        },
+      ],
+    },
+    "gestion-agile-centree-utilisateur": {
+      title: "Gestion agile centrée utilisateur",
+      definition:
+        "La gestion agile centrée utilisateur combine les principes de l'agilité (itérations courtes, adaptabilité, collaboration) avec une focalisation constante sur les besoins réels des utilisateurs finaux. Cette approche place l'humain au cœur du processus de développement, en intégrant des retours utilisateurs à chaque étape et en ajustant continuellement les priorités en fonction de la valeur d'usage plutôt que des seules considérations techniques ou business. Elle nécessite d'équilibrer rigueur méthodologique et souplesse pragmatique.",
+      anecdote:
+        "En 2023, pour un projet de plateforme collaborative associative, j'ai mis en place un processus hybride inspiré de Scrum mais adapté à une équipe partiellement bénévole. Plutôt que de suivre rigidement les cérémonies, nous avons créé des « checkpoints utilisateurs » toutes les deux semaines, où 3-5 utilisateurs testaient les fonctionnalités en cours. Ces sessions étaient ouvertes à toute l'équipe, y compris les développeurs. Un bug critique d'accessibilité a ainsi été identifié et priorisé immédiatement, court-circuitant le processus habituel mais évitant plusieurs semaines de développement dans une direction problématique. Le projet a été livré avec seulement 10 jours de retard malgré un périmètre fluctuant, et avec un taux de satisfaction initial de 92%.",
+      critique:
+        "Mon approche de la gestion agile est parfois trop flexible, ce qui peut créer des incertitudes dans les équipes habituées à des cadres plus structurés. Je dois améliorer ma capacité à formaliser les processus sans perdre l'agilité qui fait leur valeur. De plus, j'ai tendance à sous-estimer l'importance de la documentation des décisions prises en cours de route.",
+      evolution:
+        "Je prépare actuellement une certification Product Owner pour consolider mes connaissances des aspects formels de l'agilité, tout en participant à une communauté de pratique sur la facilitation de rétrospectives à distance.",
+      realisations: [
+        {
+          nom: "Plateforme collaborative associative",
+          url: "/projets/plateforme-collaborative",
+        },
+        { nom: "Refonte itérative d'un CRM", url: "/projets/refonte-crm" },
+        {
+          nom: "Développement d'un outil de reporting participatif",
+          url: "/projets/reporting-participatif",
+        },
+      ],
+    },
+    "sens-critique-ethique": {
+      title: "Sens critique & éthique",
+      definition:
+        "Le sens critique et éthique dans le développement numérique est la capacité à évaluer les implications sociales, environnementales et politiques des choix techniques et de design. Cette compétence implique de questionner systématiquement la finalité des fonctionnalités, leurs potentiels effets secondaires, et la façon dont elles pourraient être détournées ou mal utilisées. Elle nécessite une veille constante sur les enjeux numériques contemporains et le courage de remettre en question des demandes qui sembleraient contraires à l'intérêt des utilisateurs ou de la société.",
+      anecdote:
+        "En 2022, travaillant sur une application de mise en relation locale, on m'a demandé d'implémenter un système de notation des utilisateurs « pour rassurer la communauté ». Après analyse, j'ai démontré les risques de discrimination et de biais que ce système comportait, notamment envers les nouveaux utilisateurs et certains groupes minoritaires. J'ai proposé une alternative basée sur un système de badges de confiance spécifiques à des actions vérifiables (identité vérifiée, participation à des événements, etc.) plutôt qu'un score global. Cette proposition a d'abord rencontré des résistances, mais les tests ont confirmé qu'elle générait plus de confiance tout en évitant la création d'une hiérarchie sociale problématique. Cette expérience a conduit l'organisation à adopter une charte éthique pour tous ses développements futurs.",
+      critique:
+        "Mon sens critique est parfois perçu comme un frein à l'efficacité ou à l'innovation. Je dois travailler sur ma façon de communiquer les enjeux éthiques de manière constructive, en proposant systématiquement des alternatives plutôt qu'en me limitant à identifier des problèmes. Par ailleurs, je dois élargir ma compréhension des enjeux éthiques au-delà de mon cadre culturel occidental.",
+      evolution:
+        "Je suis actuellement un MOOC sur l'éthique de l'IA et participe à un groupe de lecture mensuel sur la justice algorithmique. J'envisage également de me former à la facilitation de discussions éthiques dans les équipes techniques.",
+      realisations: [
+        {
+          nom: "Charte éthique de développement",
+          url: "/projets/charte-ethique",
+        },
+        {
+          nom: "Audit d'impact sociétal d'une application",
+          url: "/projets/audit-impact",
+        },
+        {
+          nom: "Système de mise en relation éthique",
+          url: "/projets/mise-en-relation-ethique",
+        },
+      ],
+    },
+    "autonomie-responsable": {
+      title: "Autonomie responsable",
+      definition:
+        "L'autonomie responsable est la capacité à travailler de manière indépendante tout en restant parfaitement aligné avec les objectifs collectifs et conscient de l'impact de ses décisions sur les autres. Cette compétence implique de savoir quand chercher de l'aide et quand décider seul, d'anticiper les besoins d'information des collaborateurs, et de documenter son travail pour faciliter la continuité même en son absence. Elle requiert un équilibre délicat entre initiative personnelle et conscience des interdépendances au sein d'une équipe ou d'un écosystème.",
+      anecdote:
+        "En 2021, j'ai été chargé de développer un module de visualisation de données pour une application de suivi environnemental, avec un briefing minimal et une équipe dispersée géographiquement. Plutôt que d'attendre des spécifications complètes, j'ai mis en place un processus de travail transparent : un journal de développement quotidien partagé, des prototypes fonctionnels dès la première semaine, et des questions claires lorsque j'arrivais à un carrefour décisionnel. Cette approche a permis de maintenir l'avancement malgré l'incertitude initiale. À mi-parcours, les priorités du projet ont radicalement changé suite à un événement externe. Grâce à la documentation continue et à la modularité de mon code, nous avons pu réorienter rapidement le développement sans perdre le travail déjà réalisé, livrant finalement deux semaines avant l'échéance.",
+      critique:
+        "Mon autonomie peut parfois m'amener à sous-communiquer sur mes choix techniques lorsque je suis absorbé par la résolution de problèmes. Je dois également améliorer ma capacité à déléguer certaines tâches plutôt que de tout prendre en charge par souci d'efficacité immédiate.",
+      evolution:
+        "Je mets actuellement en place un système personnel de documentation continue inspiré des méthodes de documentation as code. Je prévois également de suivre une formation sur le leadership situationnel pour mieux adapter mon degré d'autonomie aux différents contextes de projet.",
+      realisations: [
+        {
+          nom: "Module de visualisation environnementale",
+          url: "/projets/visualisation-environnementale",
+        },
+        {
+          nom: "Développement d'un système de monitoring",
+          url: "/projets/monitoring-systeme",
+        },
+        {
+          nom: "Refonte autonome d'une API critique",
+          url: "/projets/refonte-api",
+        },
+      ],
+    },
+    "accessibilite-wcag": {
+      title: "Accessibilité (WCAG 2.x)",
+      definition:
+        "L'accessibilité numérique consiste à concevoir et développer des interfaces utilisables par tous, y compris les personnes en situation de handicap temporaire ou permanent. Maîtriser les normes WCAG (Web Content Accessibility Guidelines), c'est savoir transformer des recommandations techniques en expériences inclusives concrètes. Cette compétence va au-delà de la simple conformité : elle implique de comprendre les contextes d'usage variés, de maîtriser les technologies d'assistance, et d'intégrer l'accessibilité comme une dimension fondamentale du développement, non comme une couche superficielle ajoutée après coup.",
+      anecdote:
+        "En 2022, j'ai été confronté à un défi majeur : rendre accessible un tableau de bord analytique complexe avec plus de 20 visualisations de données interactives. Plutôt que de simplement ajouter des attributs ARIA sur l'existant, j'ai repensé l'architecture de l'information en créant différentes couches de lecture : une vue synthétique, des vues détaillées, et des extractions tabulaires pour chaque graphique. J'ai ensuite travaillé avec un consultant non-voyant pour tester ces interfaces avec NVDA et JAWS. Cette collaboration a révélé que nos alternatives textuelles étaient trop descriptives et pas assez axées sur l'interprétation des données. Nous avons donc développé un système qui générait automatiquement des insights textuels à partir des données, bénéficiant ainsi à tous les utilisateurs, y compris ceux sans handicap visuel. Le tableau de bord a finalement obtenu une certification AA, et plusieurs fonctionnalités développées pour l'accessibilité ont été intégrées comme options standard pour tous les utilisateurs.",
+      critique:
+        "Bien que je maîtrise bien les aspects techniques de l'accessibilité, je dois approfondir ma connaissance des différents handicaps cognitifs. J'ai tendance à me concentrer sur les handicaps sensoriels et moteurs, négligeant parfois les enjeux liés aux troubles du spectre autistique ou aux difficultés d'apprentissage.",
+      evolution:
+        "Je suis en train de passer la certification IAAP (International Association of Accessibility Professionals) et je participe à un groupe de travail sur l'intégration de tests automatisés d'accessibilité dans les pipelines CI/CD.",
+      realisations: [
+        {
+          nom: "Tableau de bord analytique accessible",
+          url: "/projets/tableau-bord-accessible",
+        },
+        {
+          nom: "Refonte accessibilité d'une application critique",
+          url: "/projets/refonte-accessibilite",
+        },
+        {
+          nom: "Guide de rédaction de contenus accessibles",
+          url: "/projets/guide-redaction-accessible",
+        },
+      ],
+    },
+    "gestion-de-projet-client-centre": {
+      title: "Gestion de projet client‑centré",
+      definition:
+        "La gestion de projet client-centré place la valeur pour l'utilisateur final au cœur de toutes les décisions, depuis la définition du périmètre jusqu'à la livraison. Cette approche dépasse la simple gestion des attentes client pour créer une véritable collaboration basée sur la compréhension partagée des besoins réels des utilisateurs. Elle implique de savoir faciliter le dialogue entre parties prenantes aux objectifs parfois divergents, de transformer des besoins exprimés en solutions concrètes, et d'accompagner le changement avec pédagogie. Le tout en maintenant une vision claire des contraintes techniques, budgétaires et temporelles.",
+      anecdote:
+        "Pour un projet de refonte d'un portail citoyen en 2021, j'ai été confronté à un cahier des charges très technique focalisé sur des fonctionnalités, sans réelle vision utilisateur. Plutôt que de suivre ce document à la lettre, j'ai proposé d'organiser un atelier d'empathie où les décideurs et l'équipe technique ont incarné différents profils d'utilisateurs face à des scénarios concrets. Cet exercice a radicalement transformé la perception du projet : plusieurs fonctionnalités initialement prioritaires se sont révélées secondaires, tandis que des besoins fondamentaux n'étaient pas couverts. J'ai ensuite mis en place un comité utilisateurs représentatif qui a été consulté à chaque jalon important. Malgré les craintes initiales d'un processus plus long, cette approche a permis d'éviter deux cycles complets de développement sur des fonctionnalités qui n'auraient pas été utilisées, économisant finalement temps et budget tout en améliorant significativement la satisfaction des usagers.",
+      critique:
+        "Je dois encore améliorer ma capacité à formaliser et quantifier les bénéfices de l'approche centrée utilisateur pour convaincre les parties prenantes plus orientées vers les métriques business traditionnelles. Par ailleurs, ma volonté d'implication des utilisateurs peut parfois créer une sur-sollicitation de certains profils.",
+      evolution:
+        "Je me forme actuellement aux méthodes de conception basées sur les outcomes plutôt que les outputs, ainsi qu'aux techniques de facilitation à distance pour permettre une implication plus diversifiée des utilisateurs, indépendamment de leur localisation.",
+      realisations: [
+        { nom: "Refonte portail citoyen", url: "/projets/portail-citoyen" },
+        {
+          nom: "Transformation numérique d'une coopérative",
+          url: "/projets/transformation-cooperative",
+        },
+        {
+          nom: "Modernisation d'un service public numérique",
+          url: "/projets/service-public-numerique",
+        },
+      ],
+    },
+    "tests-fonctionnels-iteratifs": {
+      title: "Tests fonctionnels & itératifs",
+      definition:
+        "Les tests fonctionnels et itératifs constituent une approche systématique pour valider qu'un produit répond aux besoins réels des utilisateurs, tout en s'améliorant continuellement. Cette compétence va bien au-delà de la vérification technique : elle implique de concevoir des scénarios de test pertinents, d'observer les comportements utilisateurs sans biais, d'analyser les données qualitatives et quantitatives, et de transformer ces apprentissages en améliorations concrètes. L'aspect itératif garantit que chaque cycle de test-amélioration rapproche le produit de l'excellence opérationnelle et expérientielle.",
+      anecdote:
+        "En 2020, sur un projet d'application de suivi médical, nous avions développé ce que nous pensions être une interface intuitive pour la saisie des symptômes. Les premiers tests fonctionnels automatisés étaient tous au vert, mais j'ai insisté pour mettre en place des tests utilisateurs avec de vrais patients. La première session a révélé un problème majeur : dans des conditions de fatigue ou de stress, le système de catégorisation que nous avions conçu devenait parfaitement incompréhensible. Plutôt que de simplement ajuster l'interface, nous avons développé un protocole de test simulant des conditions d'usage dégradées (distraction, fatigue, écran à faible luminosité) et mis en place un cycle hebdomadaire de test-amélioration. Chaque itération était déployée en production dès validation, ce qui nous a permis de voir l'amélioration continue des métriques d'usage. En six semaines, le taux d'abandon a chuté de 68% à 12%, et le temps moyen de saisie a été divisé par trois. Cette expérience a transformé notre approche du testing, que nous avons ensuite systématisée sur tous nos projets.",
+      critique:
+        "Je dois encore développer ma maîtrise des outils d'automatisation de tests pour les interfaces complexes, notamment les applications à forte composante visuelle ou interactive. Par ailleurs, j'ai tendance à privilégier les tests qualitatifs au détriment des tests de charge et de performance.",
+      evolution:
+        "Je suis en train d'élargir mes compétences en intégrant les tests exploratoires dans notre méthodologie, et je me forme aux techniques de Behavior-Driven Development pour faciliter la collaboration entre équipes métier et technique autour des tests.",
+      realisations: [
+        { nom: "Application de suivi médical", url: "/projets/suivi-medical" },
+        {
+          nom: "Système de validation continue",
+          url: "/projets/validation-continue",
+        },
+        {
+          nom: "Framework de tests cross-platform",
+          url: "/projets/framework-tests",
+        },
+      ],
+    },
+  };
+
+  // Combine les slugs de toutes les compétences
+  const allSlugs = [
+    ...softSkills.map((s) => s.slug),
+    ...technicalSkills.map((s) => s.slug),
+  ];
+
+  return allSlugs.map((slug) => ({
+    params: { competence: slug },
+    props: {
+      skillData: skillsDetails[slug] || {
+        title: "Compétence en cours de rédaction",
+        definition: "Cette compétence sera bientôt détaillée.",
+        anecdote: "Des exemples concrets seront bientôt ajoutés.",
+        critique: "Une analyse de cette compétence sera bientôt disponible.",
+        evolution: "Les perspectives d'évolution seront bientôt détaillées.",
+        realisations: [],
+      },
+    },
+  }));
+}
+---
+
+<DefaultLayout>
+  <article class="skill-detail page-section">
+    <h1>{skillData.title}</h1>
+
+    <section class="section">
+      <h2>Définition contextualisée</h2>
+      <p>{skillData.definition}</p>
+    </section>
+
+    <section class="section">
+      <h2>Anecdote / preuve</h2>
+      <p>{skillData.anecdote}</p>
+    </section>
+
+    <section class="section">
+      <h2>Autocritique</h2>
+      <p>{skillData.critique}</p>
+    </section>
+
+    <section class="section">
+      <h2>Évolution</h2>
+      <p>{skillData.evolution}</p>
+    </section>
+
+    <section class="section">
+      <h2>Réalisations liées</h2>
+      {
+        skillData.realisations.length > 0 ? (
+          <ul class="related-projects">
+            {skillData.realisations.map((project: SkillRealization) => (
+              <li>
+                <a href={project.url}>{project.nom}</a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Aucune réalisation associée pour le moment.</p>
+        )
+      }
+    </section>
+
+    <div class="navigation">
+      <a href="/competences" class="btn btn-secondary">
+        &larr; Retour aux compétences
+      </a>
+    </div>
+  </article>
+</DefaultLayout>
+
+<style>
+  .skill-detail {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+  }
+
+  .section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+  }
+
+  .related-projects {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .related-projects a {
+    display: inline-block;
+    padding: var(--spacing-xs) 0;
+    font-weight: 500;
+  }
+
+  .navigation {
+    margin-top: var(--spacing-2xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .skill-detail {
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+  }
+</style>

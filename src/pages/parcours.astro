@@ -1,0 +1,398 @@
+---
+import DefaultLayout from "../layouts/default-layout.astro";
+
+// Définition du parcours
+const experiences = [
+  {
+    periode: "2023 → Aujourd'hui",
+    poste: "Alternance Développeur web",
+    organisation: "BH Technologies (Grenoble)",
+    details: {
+      description:
+        "Développement et maintenance d'applications web pour des clients du secteur associatif et de l'économie sociale et solidaire.",
+      responsabilites: [
+        "Conception et développement de solutions accessibles et éco-responsables",
+        "Participation aux ateliers de conception avec les clients",
+        "Maintenance et évolution des applications existantes",
+        "Mise en place de tests automatisés",
+      ],
+      technologies: ["Angular", "TypeScript", "NodeJS", "Cypress"],
+      projets: ["Portail associatif", "Tableau de bord analytique accessible"],
+    },
+  },
+  {
+    periode: "2022 (Juin → Sept.)",
+    poste: "Stage Communication & Dev web",
+    organisation: "BH Technologies",
+    details: {
+      description:
+        "Premier contact avec le milieu professionnel, mêlant missions de communication et découverte du développement web en contexte réel.",
+      responsabilites: [
+        "Refonte du site vitrine de l'entreprise",
+        "Création de contenus pour les réseaux sociaux",
+        "Intégration de maquettes en HTML/CSS",
+        "Documentation technique pour les clients",
+      ],
+      technologies: ["WordPress", "HTML/CSS", "Figma", "Adobe Suite"],
+      projets: [],
+    },
+  },
+  {
+    periode: "2023 – …",
+    poste: "Mastère Expert Ingénierie Logicielle",
+    organisation: "ISCOD",
+    details: {
+      description:
+        "Formation approfondie en conception et développement d'applications complexes, avec un accent sur l'architecture logicielle et les méthodologies avancées.",
+      competences: [
+        "Architecture de systèmes distribués",
+        "DevOps et CI/CD",
+        "Conception orientée domaine (DDD)",
+        "Management de projets complexes",
+        "Tests avancés et qualité logicielle",
+      ],
+      projets_academiques: [
+        "Application de gestion collaborative",
+        "Plateforme documentaire libre",
+      ],
+    },
+  },
+  {
+    periode: "2022-2023",
+    poste: "Bachelor Concepteur Développeur d'Applications",
+    organisation: "ISCOD",
+    details: {
+      description:
+        "Formation axée sur la maîtrise des technologies et méthodologies de développement web modernes, en alternance avec l'expérience professionnelle.",
+      competences: [
+        "Développement front-end et back-end",
+        "Conception et architectures web",
+        "UX/UI et accessibilité",
+        "Bases de données et API",
+        "Méthodologies agiles",
+      ],
+      projets_academiques: ["Service public numérique"],
+    },
+  },
+  {
+    periode: "2019-2022",
+    poste: "DUT MMI",
+    organisation: "Université Grenoble Alpes",
+    details: {
+      description:
+        "Formation pluridisciplinaire aux métiers du multimédia et de l'internet, avec une spécialisation progressive vers le développement web.",
+      competences: [
+        "Bases du développement web",
+        "Design graphique et ergonomie",
+        "Communication digitale",
+        "Production audiovisuelle",
+        "Gestion de projet web",
+      ],
+      projets_academiques: [
+        "Application web de gestion d'événements culturels",
+        "Webdocumentaire sur l'accessibilité numérique",
+      ],
+    },
+  },
+  {
+    periode: "2017-2019",
+    poste: "Bac STI2D",
+    organisation: "Lycée Les Catalins",
+    details: {
+      description:
+        "Spécialité Systèmes d'Information et Numérique (SIN), première approche technique des systèmes informatiques et réseaux.",
+      competences: [
+        "Algorithmique et programmation",
+        "Systèmes embarqués",
+        "Réseaux informatiques",
+        "Conception 3D",
+        "Projet technologique collaboratif",
+      ],
+      projets_academiques: [
+        "Système de monitoring environnemental connecté",
+        "Application mobile d'orientation pour le lycée",
+      ],
+    },
+  },
+];
+---
+
+<DefaultLayout>
+  <section class="page-section">
+    <h1>Parcours</h1>
+
+    <div class="intro">
+      <p>
+        Mon cheminement professionnel et académique, façonné par une passion
+        pour le développement web accessible et éthique, ainsi que par une
+        volonté constante d'apprendre et d'évoluer.
+      </p>
+    </div>
+
+    <div class="timeline">
+      {
+        experiences.map((experience, index) => (
+          <div class="timeline-item">
+            <div class="timeline-marker" />
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <div class="periode">{experience.periode}</div>
+                <h2>{experience.poste}</h2>
+                <div class="organisation">{experience.organisation}</div>
+              </div>
+              <div class="timeline-details">
+                <p class="description">{experience.details.description}</p>
+
+                {experience.details.responsabilites && (
+                  <div class="detail-section">
+                    <h3>Responsabilités</h3>
+                    <ul>
+                      {experience.details.responsabilites.map((resp) => (
+                        <li>{resp}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {experience.details.competences && (
+                  <div class="detail-section">
+                    <h3>Compétences acquises</h3>
+                    <ul>
+                      {experience.details.competences.map((comp) => (
+                        <li>{comp}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {experience.details.technologies && (
+                  <div class="detail-section">
+                    <h3>Technologies</h3>
+                    <div class="tags">
+                      {experience.details.technologies.map((tech) => (
+                        <span class="tag">{tech}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {experience.details.projets &&
+                  experience.details.projets.length > 0 && (
+                    <div class="detail-section">
+                      <h3>Projets professionnels</h3>
+                      <ul class="projects-list">
+                        {experience.details.projets.map((projet) => (
+                          <li>
+                            <a
+                              href={`/projets/${projet.toLowerCase().replace(/\s+/g, "-")}`}
+                            >
+                              {projet}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                {experience.details.projets_academiques &&
+                  experience.details.projets_academiques.length > 0 && (
+                    <div class="detail-section">
+                      <h3>Projets académiques</h3>
+                      <ul class="projects-list">
+                        {experience.details.projets_academiques.map(
+                          (projet) => (
+                            <li>{projet}</li>
+                          )
+                        )}
+                      </ul>
+                    </div>
+                  )}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</DefaultLayout>
+
+<style>
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-md) 0;
+  }
+
+  /* Ligne verticale */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    background-color: var(--color-primary-light);
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    margin-left: -2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+    padding-left: 60px;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    left: 20px;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  .timeline-content {
+    background-color: var(--color-background);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+  }
+
+  .timeline-header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .periode {
+    font-weight: bold;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    margin: var(--spacing-xs) 0;
+    font-size: 1.4rem;
+    color: var(--color-text);
+  }
+
+  .organisation {
+    font-style: italic;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-light);
+  }
+
+  .timeline-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-slow);
+  }
+
+  .timeline-content:hover .timeline-details,
+  .timeline-content:focus .timeline-details {
+    max-height: 1000px;
+  }
+
+  .description {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+  }
+
+  .detail-section {
+    margin-bottom: var(--spacing-md);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  ul {
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  li {
+    margin-bottom: calc(var(--spacing-xs) / 2);
+    line-height: 1.5;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing-xs) / 2);
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: calc(var(--spacing-xs) / 2) var(--spacing-xs);
+    background-color: var(--color-background-alt);
+    color: var(--color-secondary);
+    border-radius: 4px;
+  }
+
+  .projects-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .projects-list a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .timeline::before {
+      left: 20px;
+    }
+
+    .timeline-marker {
+      left: 10px;
+    }
+
+    .timeline-item {
+      padding-left: 40px;
+    }
+  }
+</style>
+
+<script>
+  // Rendre les éléments de la timeline interactifs
+  document.addEventListener("DOMContentLoaded", () => {
+    const timelineItems = document.querySelectorAll(".timeline-content");
+
+    timelineItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        // Basculer une classe active pour le focus mobile
+        item.classList.toggle("active");
+
+        // Retrouver les détails associés à cet élément
+        const details = item.querySelector(".timeline-details");
+
+        if (details) {
+          // Si les détails sont visibles, les masquer, sinon les afficher
+          if (
+            details instanceof HTMLElement &&
+            details.style.maxHeight &&
+            details.style.maxHeight !== "0px"
+          ) {
+            details.style.maxHeight = "0px";
+          } else if (details instanceof HTMLElement) {
+            details.style.maxHeight = `${details.scrollHeight}px`;
+          }
+        }
+      });
+    });
+  });
+</script>
