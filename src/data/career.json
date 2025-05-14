@@ -1,0 +1,38 @@
+[
+  {
+    "periode": "Septembre 2022 - Aujourd'hui",
+    "poste": "Alternance Développement web",
+    "organisation": "BH Technologies - Éclairage Public & Environnement",
+      "description": "En collaboration avec le reste de l'équipe SI, mon travail est de participer au développement des nouvelles plateformes web Syren et Luce servant à la gestion des déchets et de l'éclairage public."
+  },
+  {
+    "periode": "Juin 2022 - Septembre 2022",
+    "poste": "Stage Communication et Développement web",
+    "organisation": "BH Technologies - Éclairage Public & Environnement",
+      "description": "Ma mission principale fut de veiller à l'optimisation et la gestion du nouveau site web de l'entreprise ainsi que de contribuer au maintien et développement de l'image de marque de BH Technologies."
+  },
+  {
+    "periode": "2023 - Aujourd'hui",
+    "poste": "Mastère Expert en Ingénierie Logicielle",
+    "organisation": "ISCOD - Institut supérieur des compétences de demain",
+      "description": ""
+  },
+  {
+    "periode": "2022 - 2023",
+    "poste": "Bachelor Concepteur Développeur d'Applications",
+    "organisation": "ISCOD - Institut supérieur des compétences de demain",
+      "description": ""
+  },
+  {
+    "periode": "2019 - 2022",
+    "poste": "DUT MMI (Métiers du Multimédia et de l'Internet)",
+    "organisation": "Université Grenoble Alpes (UGA), Grenoble",
+      "description": ""
+  },
+  {
+    "periode": "2017 - 2019",
+    "poste": "BAC STI2D (Sciences et Technologies de l'Industrie et du Développement Durable)",
+    "organisation": "Lycée Les Catalins, Montélimar",
+      "description": ""
+  }
+] 

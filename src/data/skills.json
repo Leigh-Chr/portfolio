@@ -1,0 +1,143 @@
+[
+  {
+    "id": "empathie-active",
+    "name": "Empathie utilisateur & écoute active",
+    "type": "soft",
+    "definition": "Comprendre rapidement le contexte humain et adapter communication et rythme aux utilisateurs et coéquipiers.",
+    "proof": "Retour récurrent des collègues sur ma capacité à reformuler leurs besoins et à calmer les tensions.",
+    "self_review": "Niveau fort : utilisé à chaque atelier de cadrage. Je souhaite continuer à améliorer la conduite d'entretiens utilisateurs structurés.",
+    "evolution": "Formation courte à la méthodologie Jobs‑To‑Be‑Done prévue en 2025.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4"
+    ]
+  },
+  {
+    "id": "adaptabilite",
+    "name": "Adaptabilité professionnelle",
+    "type": "soft",
+    "definition": "Passer d'un rôle ou d'une stack à l'autre sans perte de qualité, même dans des environnements contraints.",
+    "proof": "Passage de Angular à SvelteKit sur Luce V4 sans délai grâce à auto‑apprentissage.",
+    "self_review": "Niveau fort ; je bascule régulièrement entre front, micro‑services et support client.",
+    "evolution": "Continuer à documenter mes process de montée en compétence.",
+    "projects": [
+      "luce-v4",
+      "syren-v3",
+      "luce-v3"
+    ]
+  },
+  {
+    "id": "exigence-qualite",
+    "name": "Exigence qualité & sens du détail",
+    "type": "soft",
+    "definition": "Livrer des interfaces soignées, claires et réellement utiles en refusant le travail bâclé.",
+    "proof": "Refonte du rapport IoT : mise en page précise > satisfaction interne.",
+    "self_review": "Niveau fort mais tendance au perfectionnisme, j'apprends à timeboxer.",
+    "evolution": "Lecture de 'Shape Up' pour équilibrer qualité et délai.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4",
+      "pmt",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "veille-techno",
+    "name": "Veille technologique & auto‑apprentissage",
+    "type": "soft",
+    "definition": "Surveiller en continu les évolutions front et tooling pour choisir la solution la plus pérenne.",
+    "proof": "Adoption proactive de Astro et SvelteKit dans mes projets perso et pro.",
+    "self_review": "Niveau fort – je consacre 2 h hebdo à la veille.",
+    "evolution": "Suivre les releases Angular >17 et SvelteKit.",
+    "projects": [
+      "luce-v4",
+      "pmt",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "design-ethique",
+    "name": "Design éthique & responsable",
+    "type": "soft",
+    "definition": "Décider en tenant compte de l'accessibilité, de l'inclusion et de la sobriété numérique.",
+    "proof": "Mise en place d'un audit a11y systématique sur les nouveaux écrans Luce V4.",
+    "self_review": "Niveau modéré, encore perfectible sur la mesure d'impact carbone.",
+    "evolution": "Prévoir un green audit outil type EcoIndex pour la release finale.",
+    "projects": [
+      "luce-v4",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "ux-recherche",
+    "name": "Recherche utilisateur & conception UX",
+    "type": "tech",
+    "definition": "Identifier les besoins, rédiger personas et prototyper des solutions avant développement.",
+    "proof": "Workshops avec responsables déchets pour Syren V3 (story‑mapping, wireframes).",
+    "self_review": "Niveau fort.",
+    "evolution": "Approfondir les tests d'utilisabilité modérés à distance.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4",
+      "pmt"
+    ]
+  },
+  {
+    "id": "front-end",
+    "name": "Développement Front-End",
+    "type": "tech",
+    "definition": "Construire des UI responsives, performantes et maintenables avec les standards modernes (HTML, CSS, TypeScript) et frameworks adaptés (Angular, Svelte).",
+    "proof": "Intégration de la nouvelle carte temps‑réel dans Syren V3 (Angular).",
+    "self_review": "Niveau fort.",
+    "evolution": "Poursuivre la montée en compétences SvelteKit et animations accessibles.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4",
+      "pmt",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "accessibilite",
+    "name": "Accessibilité numérique",
+    "type": "tech",
+    "definition": "Garantir que chaque interface est utilisable par le plus grand nombre, selon les normes WCAG 2.x.",
+    "proof": "Corrections contraste + ARIA sur Syren V3 carte conteneurs.",
+    "self_review": "Niveau modéré – besoin de pratiquer davantage les audits complets.",
+    "evolution": "Suivre formation Opquast et viser >95/100.",
+    "projects": [
+      "syren-v3",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "architecture-api",
+    "name": "Architecture d'API",
+    "type": "tech",
+    "definition": "Concevoir des endpoints clairs et scalables, orchestrés en micro‑services. Expérience avec REST et NestJS.",
+    "proof": "Participation à la refonte micro‑services NestJS sur Luce V4.",
+    "self_review": "Niveau modéré.",
+    "evolution": "Étudier gRPC et Event‑Driven pour V5.",
+    "projects": [
+      "luce-v4",
+      "pmt"
+    ]
+  },
+  {
+    "id": "ci-cd",
+    "name": "Tests automatisés & CI/CD",
+    "type": "tech",
+    "definition": "Mettre en place pipelines et tests pour sécuriser chaque livraison, notamment avec GitLab CI.",
+    "proof": "Pipeline GitLab CI sur Project Management Tool (build, tests, deploy Railway).",
+    "self_review": "Niveau débutant en progression.",
+    "evolution": "Automatiser E2E sur Luce V4, intégrer Sentry.",
+    "projects": [
+      "pmt",
+      "portfolio-v1"
+    ]
+  }
+]

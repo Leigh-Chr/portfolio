@@ -1,0 +1,98 @@
+[
+  {
+    "id": "syren-v3",
+    "title": "Syren V3 – Gestion des déchets",
+    "summary": "Application web Angular/Nest pour suivre conteneurs et accès usagers (déchets).",
+    "context": "Alternance chez BH Technologies.",
+    "problem": "Rationaliser la gestion de milliers de conteneurs et badges usagers pour plusieurs dizaines de collectivités.",
+    "objectives": "Fournir une interface cartographique réactive et un back-office clair pour réduire les appels hotline.",
+    "process": "Ateliers utilisateurs, wireframes Penpot, dev Angular 15 + Nest, itérations Scrum.",
+    "results": "Solution déployée auprès de >30 collectivités ; support réduit (indicateurs confidentiels).",
+    "learned": "Approfondi RxJS avancé et audit a11y sur composants carte.",
+    "skills": [
+      "adaptabilite",
+      "empathie-active",
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end",
+      "accessibilite"
+    ]
+  },
+  {
+    "id": "luce-v3",
+    "title": "Luce V3 – Gestion de l’éclairage public",
+    "summary": "Plateforme Angular/Nest pour piloter des dizaines de milliers de points lumineux.",
+    "context": "Alternance chez BH Technologies.",
+    "problem": "Permettre aux collectivités de superviser et programmer leur parc d’éclairage à distance.",
+    "objectives": "Remplacer la solution legacy et gagner de nouveaux marchés.",
+    "process": "Refonte incrémentale du front Angular, création de dashboards.",
+    "results": "Couverture portée à >40 000 points lumineux (KPI internes confidentiels).",
+    "learned": "Meilleure gestion d’équipe multi‑module.",
+    "skills": [
+      "adaptabilite",
+      "empathie-active",
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end"
+    ]
+  },
+  {
+    "id": "luce-v4",
+    "title": "Luce V4 – Refonte SvelteKit + micro‑services",
+    "summary": "Nouvelle architecture front SvelteKit et back Nest micro‑services, Postgres.",
+    "context": "Alternance chez BH Technologies.",
+    "problem": "Limites techniques de la V3 (performance et compatibilité V2).",
+    "objectives": "Diviser le temps de chargement, moderniser l’UX et faciliter la scalabilité.",
+    "process": "Migration pilotée par roadmap, création design‑system, découpe API.",
+    "results": "Temps de chargement <3 s sur 40 k points lumineux ; bêta en production progressive.",
+    "learned": "Découplage front/back, gestion feature flags.",
+    "skills": [
+      "adaptabilite",
+      "empathie-active",
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end",
+      "architecture-api"
+    ]
+  },
+  {
+    "id": "pmt",
+    "title": "Project Management Tool – étude de cas",
+    "summary": "Application de gestion de projet full‑stack Angular + Spring Boot.",
+    "context": "Étude de cas académique (2025).",
+    "problem": "Fournir une plateforme collaborative simple pour planifier tâches et sprints.",
+    "objectives": "Mener un projet complet seul : conception, dev, CI/CD, déploiement Railway.",
+    "process": "Phase de recherche UX, modélisation UML, dev Angular 17, Spring Boot 3, pipeline GitLab.",
+    "results": "Application fonctionnelle validée par le jury ; démo publique.",
+    "learned": "Montée en compétence CI/CD et Spring Security.",
+    "skills": [
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end",
+      "architecture-api",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "portfolio-v1",
+    "title": "Portfolio v1 – Site personnel",
+    "summary": "Vitrine développée sous Astro pour présenter compétences et projets.",
+    "context": "Projet personnel (livrable alternance).",
+    "problem": "Centraliser mon identité pro, hébergement statique rapide.",
+    "objectives": "Score Lighthouse 95+, accessibilité AAA, déploiement simple.",
+    "process": "Conception structure, intégration Astro/Markdown, CI GitHub Pages.",
+    "results": "Mise en ligne prévue Q3 2025 ; base durable pour site perso.",
+    "learned": "Découverte Astro Islands, optimisation images.",
+    "skills": [
+      "front-end",
+      "exigence-qualite",
+      "veille-techno",
+      "accessibilite",
+      "ci-cd"
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "email": {
+    "address": "virgil.07@hotmail.fr",
+    "label": "Email",
+    "url": "mailto:virgil.07@hotmail.fr",
+    "icon": "mail"
+  },
+  "linkedin": {
+    "username": "Virgil CHAREYRE",
+    "label": "LinkedIn",
+    "url": "https://www.linkedin.com/in/virgil-chareyre/",
+    "icon": "linkedin"
+  },
+  "github": {
+    "username": "Virgil_CHAREYRE",
+    "label": "GitHub",
+    "url": "https://github.com/Leigh-Chr",
+    "icon": "github"
+  }
+} 
