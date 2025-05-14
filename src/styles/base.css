@@ -1,6 +1,4 @@
-/* Variables globales */
 :root {
-  /* Palette de couleurs */
   --color-primary: #cc0041;
   --color-primary-dark: #990024;
   --color-primary-light: #ff4d74;
@@ -16,13 +14,11 @@
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   --box-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
 
-  /* Typographie */
   --font-family-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   --font-family-mono: "JetBrains Mono", Consolas, Monaco, "Andale Mono",
     "Ubuntu Mono", monospace;
 
-  /* Espacement */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
@@ -30,17 +26,14 @@
   --spacing-xl: 2rem;
   --spacing-2xl: 3rem;
 
-  /* Largeurs maximales */
   --max-width: 1200px;
   --content-width: 800px;
 
-  /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-medium: 0.3s ease;
   --transition-slow: 0.5s ease;
 }
 
-/* Styles de base */
 html {
   font-family: var(--font-family-sans);
   color: var(--color-text);
@@ -64,7 +57,6 @@ main {
   width: 100%;
 }
 
-/* Styles typographiques */
 h1,
 h2,
 h3,
@@ -128,14 +120,12 @@ strong {
   font-weight: 600;
 }
 
-/* Structure de page commune */
 .page-section {
   max-width: var(--content-width);
   margin: 0 auto;
   padding: var(--spacing-xl) var(--spacing-md);
 }
 
-/* Composants communs */
 .btn {
   display: inline-block;
   padding: var(--spacing-sm) var(--spacing-lg);
@@ -170,7 +160,6 @@ strong {
   text-decoration: none;
 }
 
-/* Sections de page */
 .section {
   margin-bottom: var(--spacing-2xl);
 }
@@ -181,7 +170,6 @@ strong {
   font-size: 1.5rem;
 }
 
-/* Intros de page */
 .intro {
   font-size: 1.2rem;
   line-height: 1.6;
@@ -192,7 +180,6 @@ strong {
   text-align: center;
 }
 
-/* Introduction avec contenu mis en avant */
 .intro-featured {
   font-size: 1.25rem;
   margin-bottom: var(--spacing-xl);
@@ -203,7 +190,6 @@ strong {
   line-height: 1.6;
 }
 
-/* Navigation entre pages */
 .navigation {
   margin-top: var(--spacing-2xl);
   display: flex;
@@ -211,7 +197,6 @@ strong {
   gap: var(--spacing-md);
 }
 
-/* Grilles */
 .two-column-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -226,7 +211,6 @@ strong {
   }
 }
 
-/* Cartes et éléments cliquables */
 .card {
   background-color: var(--color-background);
   border-radius: var(--border-radius);
@@ -240,7 +224,17 @@ strong {
   box-shadow: var(--box-shadow-hover);
 }
 
-/* Projet cards - Styles centralisés */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .project-card {
   display: block;
   border-radius: var(--border-radius);
@@ -251,6 +245,9 @@ strong {
   color: var(--color-text);
   background-color: var(--color-background);
   height: 100%;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+  animation-fill-mode: both;
 }
 
 .project-card:hover {
@@ -295,7 +292,55 @@ strong {
   line-height: 1.5;
 }
 
-/* Composants d'image */
+.content-card {
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  box-shadow: var(--box-shadow);
+  border-left: 4px solid var(--color-primary);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+  animation-fill-mode: both;
+}
+
+.content-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .content-grid {
+    gap: var(--spacing-md);
+  }
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--color-background-alt);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 4px 12px;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-xs);
+  border: 1px solid var(--color-border);
+}
+
 .featured-image {
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -308,7 +353,6 @@ strong {
   display: block;
 }
 
-/* Styles pour les icônes */
 .icon {
   width: 24px;
   height: 24px;
@@ -318,7 +362,6 @@ strong {
   color: var(--color-primary);
 }
 
-/* Styles pour les réseaux sociaux */
 .social-links {
   display: flex;
   gap: var(--spacing-md);
@@ -333,7 +376,6 @@ strong {
   color: var(--color-primary);
 }
 
-/* Styles pour les tags - Centralisés */
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -348,9 +390,10 @@ strong {
   color: var(--color-secondary);
   border-radius: var(--border-radius);
   display: inline-block;
+  margin-right: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
 }
 
-/* Styles pour les compétences */
 .skills-tags {
   display: flex;
   flex-wrap: wrap;
@@ -391,7 +434,6 @@ strong {
   transform: translateY(-2px);
 }
 
-/* Styles pour les liens de compétences associées */
 .related-skills {
   display: flex;
   flex-wrap: wrap;
@@ -414,7 +456,6 @@ strong {
   text-decoration: none;
 }
 
-/* Sections de détail */
 .detail-section {
   margin-bottom: var(--spacing-md);
 }
@@ -425,7 +466,6 @@ strong {
   margin-bottom: var(--spacing-xs);
 }
 
-/* Légendes et explications */
 .legend {
   display: flex;
   justify-content: center;
@@ -455,7 +495,6 @@ strong {
   border: 1px solid var(--color-border);
 }
 
-/* Timeline styles */
 .timeline {
   position: relative;
   max-width: 800px;
@@ -496,16 +535,8 @@ strong {
   padding: var(--spacing-md);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-  cursor: pointer;
 }
 
-.timeline-content:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow-hover);
-}
-
-/* Mise en page responsive */
 @media (max-width: 768px) {
   :root {
     font-size: 14px;
