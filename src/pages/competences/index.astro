@@ -1,25 +1,20 @@
 ---
 import DefaultLayout from "../../layouts/default-layout.astro";
+import skills from "../../data/skills.json";
 
-// Définition des compétences avec leur niveau d'affinité
-const softSkills = [
-  { name: "Empathie active", affinity: "forte" },
-  { name: "Communication inclusive", affinity: "forte" },
-  { name: "Gestion agile centrée utilisateur", affinity: "forte" },
-  { name: "Sens critique & éthique", affinity: "forte" },
-  { name: "Autonomie responsable", affinity: "modérée" },
-];
+const softSkills = skills.filter((skill) => skill.type === "soft");
+const technicalSkills = skills.filter((skill) => skill.type === "tech");
 
-const technicalSkills = [
-  { name: "Conception UX/UI & wireframing", affinity: "forte" },
-  {
-    name: "Développement front (HTML • CSS • TypeScript / Angular)",
-    affinity: "forte",
-  },
-  { name: "Accessibilité (WCAG 2.x)", affinity: "forte" },
-  { name: "Gestion de projet client‑centré", affinity: "modérée" },
-  { name: "Tests fonctionnels & itératifs", affinity: "modérée" },
-];
+interface Skill {
+  id: string;
+  name: string;
+  type: string;
+  definition: string;
+  proof: string;
+  self_review: string;
+  evolution: string;
+  projects: string[];
+}
 ---
 
 <DefaultLayout>
@@ -41,13 +36,7 @@ const technicalSkills = [
         <div class="skills-tags">
           {
             softSkills.map((skill) => (
-              <a
-                href={`/competences/${skill.name
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")
-                  .replace(/[^\w-]/g, "")}`}
-                class={`tag tag-${skill.affinity}`}
-              >
+              <a href={`/competences/${skill.id}`} class="tag">
                 {skill.name}
               </a>
             ))
@@ -60,29 +49,12 @@ const technicalSkills = [
         <div class="skills-tags">
           {
             technicalSkills.map((skill) => (
-              <a
-                href={`/competences/${skill.name
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")
-                  .replace(/[^\w-]/g, "")}`}
-                class={`tag tag-${skill.affinity}`}
-              >
+              <a href={`/competences/${skill.id}`} class="tag">
                 {skill.name}
               </a>
             ))
           }
         </div>
-      </div>
-    </div>
-
-    <div class="legend">
-      <div class="legend-item">
-        <span class="tag-sample tag-forte"></span>
-        <span>Affinité forte</span>
-      </div>
-      <div class="legend-item">
-        <span class="tag-sample tag-modérée"></span>
-        <span>Affinité modérée</span>
       </div>
     </div>
   </section>
@@ -110,58 +82,14 @@ const technicalSkills = [
     font-size: 1rem;
     font-weight: 500;
     transition: all var(--transition-fast);
-  }
-
-  .tag-forte {
     background-color: var(--color-primary);
     color: white;
   }
 
-  .tag-forte:hover {
+  .tag:hover {
     background-color: var(--color-primary-dark);
     color: white;
     text-decoration: none;
     transform: translateY(-2px);
-  }
-
-  .tag-modérée {
-    background-color: var(--color-background-alt);
-    color: var(--color-secondary);
-    border: 1px solid var(--color-border);
-  }
-
-  .tag-modérée:hover {
-    background-color: var(--color-border);
-    text-decoration: none;
-    transform: translateY(-2px);
-  }
-
-  .legend {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-  }
-
-  .tag-sample {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  .tag-sample.tag-forte {
-    background-color: var(--color-primary);
-  }
-
-  .tag-sample.tag-modérée {
-    background-color: var(--color-background-alt);
-    border: 1px solid var(--color-border);
   }
 </style>
