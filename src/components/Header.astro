@@ -1,64 +1,28 @@
 ---
 import DropdownMenu from "./DropdownMenu.astro";
+import skills from "../data/skills.json";
+import projects from "../data/projects.json";
 
-// Définition des données pour les menus déroulants
-const competences = [
-  { label: "Empathie active", url: "/competences/empathie-active" },
-  {
-    label: "Communication inclusive",
-    url: "/competences/communication-inclusive",
-  },
-  {
-    label: "Gestion agile centrée utilisateur",
-    url: "/competences/gestion-agile-centree-utilisateur",
-  },
-  {
-    label: "Sens critique & éthique",
-    url: "/competences/sens-critique-ethique",
-  },
-  { label: "Autonomie responsable", url: "/competences/autonomie-responsable" },
-  {
-    label: "Conception UX/UI & wireframing",
-    url: "/competences/conception-ux-ui-wireframing",
-  },
-  { label: "Développement front", url: "/competences/developpement-front" },
-  { label: "Accessibilité (WCAG 2.x)", url: "/competences/accessibilite-wcag" },
-  {
-    label: "Gestion de projet client‑centré",
-    url: "/competences/gestion-de-projet-client-centre",
-  },
-  {
-    label: "Tests fonctionnels & itératifs",
-    url: "/competences/tests-fonctionnels-iteratifs",
-  },
-];
+// Utilisation des données JSON pour créer les menus déroulants
+const competences = skills.map((skill) => ({
+  label: skill.name,
+  url: `/competences/${skill.id}`,
+}));
 
-const projets = [
-  { label: "Refonte portail associatif", url: "/projets/portail-associatif" },
-  {
-    label: "Application de gestion collaborative",
-    url: "/projets/gestion-collaborative",
-  },
-  {
-    label: "Tableau de bord analytique accessible",
-    url: "/projets/tableau-bord-accessible",
-  },
-  {
-    label: "Plateforme documentaire libre",
-    url: "/projets/plateforme-documentaire",
-  },
-  {
-    label: "Modernisation service public numérique",
-    url: "/projets/service-public-numerique",
-  },
-];
+const projets = projects.map((project) => ({
+  label: project.title,
+  url: `/projets/${project.id}`,
+}));
 ---
 
 <header class="global-header">
   <div class="header-content">
     <a href="/" class="logo-container">
       <div class="portrait">
-        <img src="/images/portrait.jpg" alt="Portrait de Virgil Chareyre" />
+        <img
+          src="https://placehold.co/100x100"
+          alt="Portrait de Virgil Chareyre"
+        />
       </div>
       <h1 class="logo-title">Virgil CHAREYRE</h1>
     </a>
