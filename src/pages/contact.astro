@@ -16,7 +16,7 @@ const { email, linkedin, github } = contactsData;
 const contactsList = [email, linkedin, github] as ContactItem[];
 ---
 
-<DefaultLayout>
+<DefaultLayout title="Contact – Virgil CHAREYRE">
   <section class="page-section">
     <h1>Contact</h1>
 
@@ -76,10 +76,6 @@ const contactsList = [email, linkedin, github] as ContactItem[];
     box-shadow: var(--box-shadow);
     width: 100%;
     max-width: 600px;
-  }
-
-  .contact-card:hover {
-    box-shadow: var(--box-shadow);
   }
 
   .contact-info {

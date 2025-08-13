@@ -17,7 +17,7 @@ interface Skill {
 }
 ---
 
-<DefaultLayout>
+<DefaultLayout title="Compétences – Virgil CHAREYRE">
   <section class="page-section">
     <h1>Compétences</h1>
 
@@ -36,7 +36,7 @@ interface Skill {
         <div class="skills-tags">
           {
             softSkills.map((skill) => (
-              <a href={`/competences/${skill.id}`} class="tag">
+              <a href={`/competences/${skill.id}`} class="skill-tag soft-skill">
                 {skill.name}
               </a>
             ))
@@ -49,7 +49,7 @@ interface Skill {
         <div class="skills-tags">
           {
             technicalSkills.map((skill) => (
-              <a href={`/competences/${skill.id}`} class="tag">
+              <a href={`/competences/${skill.id}`} class="skill-tag tech-skill">
                 {skill.name}
               </a>
             ))
@@ -59,37 +59,3 @@ interface Skill {
     </div>
   </section>
 </DefaultLayout>
-
-<style>
-  .skills-category h2 {
-    margin-top: 0;
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .skills-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
-  }
-
-  .tag {
-    display: inline-block;
-    padding: var(--spacing-xs) var(--spacing-md);
-    border-radius: var(--border-radius-pill);
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all var(--transition-fast);
-    background-color: var(--color-primary);
-    color: white;
-  }
-
-  .tag:hover {
-    background-color: var(--color-primary-dark);
-    color: white;
-    text-decoration: none;
-    transform: translateY(-2px);
-  }
-</style>

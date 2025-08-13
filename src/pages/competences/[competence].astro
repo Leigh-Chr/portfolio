@@ -34,7 +34,7 @@ export function getStaticPaths() {
 }
 ---
 
-<DefaultLayout>
+<DefaultLayout title={`${skill.name} – Virgil CHAREYRE`}>
   <article class="skill-detail page-section">
     <h1>{skill.name}</h1>
 
@@ -96,16 +96,6 @@ export function getStaticPaths() {
     text-align: center;
   }
 
-  .section {
-    margin-bottom: var(--spacing-xl);
-  }
-
-  .section h2 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: var(--color-primary);
-  }
-
   .related-projects {
     list-style-type: none;
     padding: 0;
@@ -124,11 +114,5 @@ export function getStaticPaths() {
     margin-top: var(--spacing-2xl);
     display: flex;
     justify-content: center;
-  }
-
-  @media (max-width: 768px) {
-    .skill-detail {
-      padding: var(--spacing-lg) var(--spacing-sm);
-    }
   }
 </style>

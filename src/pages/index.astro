@@ -15,10 +15,13 @@ const { email, linkedin, github } = contactsData;
 const socialLinks = [linkedin, github] as SocialItem[];
 ---
 
-<DefaultLayout>
+<DefaultLayout title="Accueil – Virgil CHAREYRE">
   <section class="hero">
     <div class="hero-content">
-      <div class="tagline">« Code libre, esprit libre »</div>
+      <div class="tagline">
+        <span class="typing-text">« Code libre, esprit libre »</span>
+        <span class="cursor">|</span>
+      </div>
       <div class="value-proposition">
         <p>
           Développeur‑concepteur engagé, mon souhait est d'accompagner vers un
@@ -80,6 +83,40 @@ const socialLinks = [linkedin, github] as SocialItem[];
     margin-bottom: var(--spacing-xl);
   }
 
+  .typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(25, end) 0.5s both;
+    display: inline-block;
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+    margin-left: 2px;
+    color: var(--color-coral);
+    font-weight: 300;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
   .value-proposition {
     font-size: 1.5rem;
     line-height: 1.4;
@@ -108,20 +145,6 @@ const socialLinks = [linkedin, github] as SocialItem[];
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-md);
-  }
-
-  .social-links {
-    display: flex;
-    gap: var(--spacing-md);
-  }
-
-  .social-links a {
-    color: var(--color-text-light);
-    transition: color var(--transition-fast);
-  }
-
-  .social-links a:hover {
-    color: var(--color-primary);
   }
 
   @media (max-width: 768px) {
