@@ -3,6 +3,8 @@ import DefaultLayout from "../../layouts/default-layout.astro";
 import projects from "../../data/projects.json";
 import skills from "../../data/skills.json";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 interface Project {
   id: string;
   title: string;
@@ -105,7 +107,7 @@ export function getStaticPaths() {
     </div>
 
     <div class="navigation">
-      <a href="/projets" class="btn btn-secondary">
+      <a href={`${baseUrl}projets`} class="btn btn-secondary">
         &larr; Retour aux projets
       </a>
     </div>

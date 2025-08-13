@@ -3,6 +3,8 @@ import DefaultLayout from "../layouts/default-layout.astro";
 import contactsData from "../data/contacts.json";
 import { icons } from "../data/icons";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 type SocialItem = {
   username?: string;
   label: string;
@@ -30,8 +32,8 @@ const socialLinks = [linkedin, github] as SocialItem[];
         </p>
       </div>
       <div class="cta-buttons">
-        <a href="/projets" class="btn btn-primary">Voir mes projets</a>
-        <a href="/competences" class="btn btn-secondary"
+        <a href={`${baseUrl}projets`} class="btn btn-primary">Voir mes projets</a>
+        <a href={`${baseUrl}competences`} class="btn btn-secondary"
           >Découvrir mes compétences</a
         >
       </div>

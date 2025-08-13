@@ -5,22 +5,24 @@ import projects from "../data/projects.json";
 import { Image } from "astro:assets";
 import portrait from "../../assets/images/portrait.jpg";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 // Map data to dropdown menu items
 const competences = skills.map((skill) => ({
   label: skill.name,
-  url: `/competences/${skill.id}`,
+  url: `${baseUrl}competences/${skill.id}`,
 }));
 
 const projets = projects.map((project) => ({
   label: project.title,
-  url: `/projets/${project.id}`,
+  url: `${baseUrl}projets/${project.id}`,
 }));
 ---
 
 <header class="global-header">
   <div class="header-container">
     <div class="header-content">
-      <a href="/" class="logo-container">
+      <a href={baseUrl} class="logo-container">
         <div class="portrait">
           <Image
             src={portrait}
@@ -36,14 +38,14 @@ const projets = projects.map((project) => ({
         <ul>
           <li>
             <a
-              href="/"
+              href={baseUrl}
               aria-current={Astro.url.pathname === "/" ? "page" : undefined}
               >Accueil</a
             >
           </li>
           <li>
             <a
-              href="/a-propos"
+              href={`${baseUrl}a-propos`}
               aria-current={Astro.url.pathname === "/a-propos"
                 ? "page"
                 : undefined}>À propos</a
@@ -51,19 +53,19 @@ const projets = projects.map((project) => ({
           </li>
           <DropdownMenu
             title="Compétences"
-            url="/competences"
+            url={`${baseUrl}competences`}
             items={competences}
             current={Astro.url.pathname.startsWith("/competences")}
           />
           <DropdownMenu
             title="Projets"
-            url="/projets"
+            url={`${baseUrl}projets`}
             items={projets}
             current={Astro.url.pathname.startsWith("/projets")}
           />
           <li>
             <a
-              href="/parcours"
+              href={`${baseUrl}parcours`}
               aria-current={Astro.url.pathname === "/parcours"
                 ? "page"
                 : undefined}>Parcours</a
@@ -71,7 +73,7 @@ const projets = projects.map((project) => ({
           </li>
           <li>
             <a
-              href="/contact"
+              href={`${baseUrl}contact`}
               aria-current={Astro.url.pathname === "/contact"
                 ? "page"
                 : undefined}>Contact</a
