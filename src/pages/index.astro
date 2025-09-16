@@ -1,0 +1,371 @@
+---
+import DefaultLayout from "@/layouts/default-layout.astro";
+import SocialLinks from "@/components/molecules/social-links.astro";
+import { Image } from "astro:assets";
+import contactsData from "@/data/contacts.json";
+import { getProjectsUrl, getCompetencesUrl } from "@/utils/urls";
+import portrait from "../../assets/images/portrait-professionnel.png";
+
+const { email } = contactsData;
+---
+
+<DefaultLayout title="Accueil – Virgil CHAREYRE">
+  <div class="hero-container">
+    <section class="hero">
+      <div class="hero__content">
+        <div class="hero__portrait" data-scroll-animate data-delay="50">
+          <Image
+            src={portrait}
+            alt="Portrait professionnel de Virgil CHAREYRE"
+            width={320}
+            height={320}
+            class="hero__portrait-image"
+            loading="eager"
+          />
+        </div>
+        <div class="hero__text">
+          <div
+            class="hero__tagline"
+            transition:name="hero-tagline"
+            data-scroll-animate="punk-zoom"
+          >
+            « CODE LIBRE, ESPRIT LIBRE »
+          </div>
+          <div class="hero__description" data-scroll-animate data-delay="100">
+            <p>
+              Développeur‑concepteur engagé, mon souhait est d'accompagner vers
+              un web plus libre : expériences accessibles, éco‑responsables et
+              transparentes.
+            </p>
+            <div class="hero__actions" data-scroll-animate data-delay="200">
+              <a
+                href={getCompetencesUrl()}
+                class="btn btn--primary"
+                data-astro-prefetch="hover"
+              >
+                Découvrir mes compétences
+              </a>
+              <a
+                href={getProjectsUrl()}
+                class="btn btn--secondary"
+                data-astro-prefetch="hover"
+              >
+                Voir mes projets
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</DefaultLayout>
+
+<style>
+  .hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 0 var(--space-md);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero {
+    padding: var(--space-xl) 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* Hero adaptatif pour grands écrans - Plus modéré */
+  @media (min-width: 1400px) {
+    .hero {
+      max-width: 1400px;
+      padding: var(--space-xl) 0;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .hero {
+      max-width: 1600px;
+      padding: var(--space-2xl) 0;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero {
+      max-width: 1800px;
+      padding: var(--space-2xl) 0;
+    }
+  }
+
+  .hero__content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    flex-direction: column;
+  }
+
+  /* Espacement adaptatif pour grands écrans - Plus modéré */
+  @media (min-width: 1400px) {
+    .hero__content {
+      gap: var(--space-xl);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .hero__content {
+      gap: var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero__content {
+      gap: var(--space-2xl);
+    }
+  }
+
+  .hero__text {
+    text-align: center;
+    flex: 1;
+  }
+
+  .hero__portrait {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .hero__portrait-image {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+    border-radius: 50%;
+    box-shadow: 0 12px 30px oklch(from var(--color-primary) l c h / 0.3);
+    transition: transform var(--transition-fast);
+
+    /* Masque en dégradé sur le bas de l'image */
+    mask: linear-gradient(
+      to bottom,
+      black 0%,
+      black 50%,
+      rgba(0, 0, 0, 0.7) 70%,
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(
+      to bottom,
+      black 0%,
+      black 50%,
+      rgba(0, 0, 0, 0.7) 70%,
+      transparent 100%
+    );
+  }
+  .hero__tagline {
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-hero);
+    font-weight: var(--font-weight-normal);
+    transform: skew(-7deg);
+    text-wrap: nowrap;
+    color: var(--color-primary);
+    margin-bottom: var(--space-xl);
+    line-height: 0.9;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 20px var(--color-focus);
+    position: relative;
+    animation: punk-pulse 4s var(--easing-smooth) infinite;
+    /* Gradient textuel simple et efficace */
+    background: linear-gradient(
+      45deg,
+      var(--color-primary) 0%,
+      oklch(from var(--color-primary) l calc(c + 0.1) h) 50%,
+      var(--color-primary) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes punk-pulse {
+    0%,
+    100% {
+      text-shadow: 0 0 20px var(--color-focus);
+    }
+    50% {
+      text-shadow: 0 0 40px var(--color-hover);
+    }
+  }
+
+  .hero__description {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-on-surface);
+    margin-bottom: var(--space-xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Description plus large sur grands écrans - Utilise les variables */
+  @media (min-width: 1400px) {
+    .hero__description {
+      max-width: 650px;
+      font-size: var(--font-size-medium);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .hero__description {
+      max-width: 700px;
+      font-size: var(--font-size-large);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .hero__description {
+      max-width: 750px;
+      font-size: var(--font-size-large);
+    }
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Layout côte à côte sur grands écrans */
+  @media (min-width: 768px) {
+    .hero__content {
+      flex-direction: row;
+    }
+
+    .hero__text {
+      text-align: left;
+    }
+
+    .hero__tagline {
+      text-align: center;
+    }
+
+    .hero__actions {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__portrait-image {
+      width: 320px;
+      height: 320px;
+    }
+
+    .hero__portrait-background {
+      width: 340px;
+      height: 340px;
+    }
+  }
+
+  /* Tailles moyennes pour tablettes */
+  @media (max-width: 768px) {
+    .hero__portrait-image {
+      width: 220px;
+      height: 220px;
+    }
+
+    .hero__portrait-background {
+      width: 240px;
+      height: 240px;
+    }
+  }
+
+  /* Responsive Hero - Solution ultime */
+  @media (max-width: 420px) {
+    .hero__tagline {
+      font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+      transform: skew(-5deg);
+      letter-spacing: -0.02em;
+    }
+
+    .hero__portrait-image {
+      width: 180px;
+      height: 180px;
+    }
+
+    .hero__portrait-background {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 340px) {
+    .hero__tagline {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      transform: skew(-3deg);
+    }
+
+    .hero__portrait-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .hero__portrait-background {
+      width: 170px;
+      height: 170px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero__actions {
+      flex-direction: column;
+      gap: var(--space-sm);
+      width: 100%;
+    }
+
+    .hero__actions .btn {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero__actions {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  /* Accessibilité : désactiver les effets pour prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__tagline {
+      animation: none;
+      text-shadow: 3px 3px 0px var(--color-disabled);
+    }
+
+    .hero__portrait-background {
+      animation: none;
+      transform: translate(-50%, -50%) rotate(15deg);
+      border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+    }
+
+    .hero__portrait-image {
+      transition: none;
+      /* Préserver le masque en dégradé même avec reduced-motion */
+      mask: linear-gradient(
+        to bottom,
+        black 0%,
+        black 50%,
+        rgba(0, 0, 0, 0.7) 70%,
+        transparent 100%
+      );
+      -webkit-mask: linear-gradient(
+        to bottom,
+        black 0%,
+        black 50%,
+        rgba(0, 0, 0, 0.7) 70%,
+        transparent 100%
+      );
+    }
+  }
+</style>

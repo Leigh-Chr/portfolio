@@ -1,0 +1,357 @@
+---
+import DefaultLayout from "@/layouts/default-layout.astro";
+import projects from "@/data/projects.json";
+import skills from "@/data/skills.json";
+import { getProjectsUrl } from "@/utils/urls";
+import { techIcons } from "@/data/tech-icons";
+import IconHybrid from "@/components/atoms/icon-hybrid.astro";
+
+interface Project {
+  id: string;
+  title: string;
+  summary: string;
+  context: string;
+  problem: string;
+  objectives: string;
+  process: string;
+  results?: string;
+  learned?: string;
+  actors?: string;
+  results_personal?: string;
+  results_company?: string;
+  aftermath_immediate?: string;
+  aftermath_distance?: string;
+  aftermath_today?: string;
+  critical_review?: string;
+  skills: string[];
+  tags?: string[];
+}
+
+const { projet } = Astro.params;
+
+const projectData = projects.find((p) => p.id === projet) as
+  | Project
+  | undefined;
+
+const project: Project = projectData || {
+  id: "inconnu",
+  title: "Projet en cours de rédaction",
+  summary: "Ce projet sera détaillé prochainement.",
+  context: "Contexte à venir.",
+  problem: "Problématique à définir.",
+  objectives: "Objectifs à préciser.",
+  process: "Processus à décrire.",
+  results: "Résultats à analyser.",
+  learned: "Apprentissage à documenter.",
+  skills: [],
+};
+
+const relatedSkills = skills.filter((skill) =>
+  project.skills.includes(skill.id)
+);
+
+// Mapping des technologies par projet
+const projectTechnologies: Record<
+  string,
+  Array<{ name: string; icon: string }>
+> = {
+  "syren-v3": [
+    { name: "Angular", icon: techIcons.Angular },
+    { name: "NestJS", icon: techIcons.NestJS },
+    { name: "TypeScript", icon: techIcons.TypeScript },
+    { name: "RxJS", icon: techIcons.RxJS },
+  ],
+  "luce-v3": [
+    { name: "Angular", icon: techIcons.Angular },
+    { name: "NestJS", icon: techIcons.NestJS },
+    { name: "TypeScript", icon: techIcons.TypeScript },
+    { name: "PostgreSQL", icon: techIcons.PostgreSQL },
+  ],
+  "luce-v4": [
+    { name: "SvelteKit", icon: techIcons.SvelteKit },
+    { name: "NestJS", icon: techIcons.NestJS },
+    { name: "TypeScript", icon: techIcons.TypeScript },
+    { name: "PostgreSQL", icon: techIcons.PostgreSQL },
+    { name: "Micro-services", icon: techIcons["Micro-services"] },
+  ],
+  pmt: [
+    { name: "Angular", icon: techIcons.Angular },
+    { name: "Spring Boot", icon: techIcons["Spring Boot"] },
+    { name: "Java", icon: techIcons.Java },
+    { name: "GitLab CI", icon: techIcons["GitLab CI"] },
+    { name: "Railway", icon: techIcons.Railway },
+  ],
+  "portfolio-v1": [
+    { name: "Astro", icon: techIcons.Astro },
+    { name: "TypeScript", icon: techIcons.TypeScript },
+    { name: "CSS", icon: techIcons.CSS },
+    { name: "GitHub Pages", icon: techIcons["GitHub Pages"] },
+  ],
+};
+
+const technologies = projectTechnologies[project.id] || [];
+
+export async function getStaticPaths() {
+  const { default: projects } = await import("../../data/projects.json");
+  return projects.map((project: Project) => ({
+    params: { projet: project.id },
+    props: { project },
+  }));
+}
+---
+
+<DefaultLayout title={`${project.title} – Virgil CHAREYRE`}>
+  <div class="container">
+    {
+      project.id !== "inconnu" ? (
+        <>
+          <header class="page-header">
+            <h1 class="page-header__title" data-scroll-animate="punk-zoom">
+              {project.title}
+            </h1>
+            {project.tags && (
+              <div class="tags" data-scroll-animate data-delay="150">
+                {project.tags.map((tag) => (
+                  <span class="tag tag--default">{tag}</span>
+                ))}
+              </div>
+            )}
+          </header>
+
+          <div class="content">
+            <section class="section" data-scroll-animate data-delay="200">
+              <h2 class="section__title">Présentation & définition</h2>
+              <p>{project.summary}</p>
+            </section>
+
+            <section class="section" data-scroll-animate data-delay="250">
+              <h2 class="section__title">Contexte & Problématique</h2>
+              <p>{project.context}</p>
+              <p>{project.problem}</p>
+            </section>
+
+            <section class="section" data-scroll-animate data-delay="300">
+              <h2 class="section__title">Objectifs & Enjeux</h2>
+              <p>{project.objectives}</p>
+            </section>
+
+            <section class="section" data-scroll-animate data-delay="350">
+              <h2 class="section__title">Processus</h2>
+              <p>{project.process}</p>
+            </section>
+
+            {technologies.length > 0 && (
+              <section class="section" data-scroll-animate data-delay="400">
+                <h2 class="section__title">Technologies utilisées</h2>
+                <div class="technologies">
+                  {technologies.map((tech) => (
+                    <div class="technology surface--static">
+                      <span class="technology__icon">
+                        <IconHybrid name={tech.icon} size={20} />
+                      </span>
+                      <span class="technology__name">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {project.actors && (
+              <section class="section" data-scroll-animate data-delay="400">
+                <h2 class="section__title">Acteurs & Interactions</h2>
+                <p>{project.actors}</p>
+              </section>
+            )}
+
+            <section class="section" data-scroll-animate data-delay="400">
+              <h2 class="section__title">Résultats</h2>
+              {project.results_personal && project.results_company ? (
+                <>
+                  <h3 class="subsection__title">Pour moi</h3>
+                  <p>{project.results_personal}</p>
+                  <h3 class="subsection__title">Pour l'entreprise</h3>
+                  <p>{project.results_company}</p>
+                </>
+              ) : (
+                <p>{project.results}</p>
+              )}
+            </section>
+
+            {(project.aftermath_immediate ||
+              project.aftermath_distance ||
+              project.aftermath_today) && (
+              <section class="section" data-scroll-animate data-delay="400">
+                <h2 class="section__title">Lendemains du projet</h2>
+                {project.aftermath_immediate && (
+                  <>
+                    <h3 class="subsection__title">Immédiat</h3>
+                    <p>{project.aftermath_immediate}</p>
+                  </>
+                )}
+                {project.aftermath_distance && (
+                  <>
+                    <h3 class="subsection__title">À distance</h3>
+                    <p>{project.aftermath_distance}</p>
+                  </>
+                )}
+                {project.aftermath_today && (
+                  <>
+                    <h3 class="subsection__title">Aujourd'hui</h3>
+                    <p>{project.aftermath_today}</p>
+                  </>
+                )}
+              </section>
+            )}
+
+            <section class="section" data-scroll-animate data-delay="400">
+              <h2 class="section__title">Apprentissages</h2>
+              <p>{project.learned}</p>
+            </section>
+
+            {project.critical_review && (
+              <section class="section" data-scroll-animate data-delay="400">
+                <h2 class="section__title">Regard critique</h2>
+                <p>{project.critical_review}</p>
+              </section>
+            )}
+
+            {relatedSkills.length > 0 && (
+              <section class="section" data-scroll-animate data-delay="400">
+                <h2 class="section__title">Compétences liées</h2>
+                <div class="skills-list">
+                  {relatedSkills.map((skill) => (
+                    <a
+                      href={`/competences/${skill.id}`}
+                      class="skill-link"
+                      aria-label={`Voir la compétence ${skill.name}`}
+                    >
+                      {skill.name}
+                    </a>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+
+          <a
+            href={getProjectsUrl()}
+            class="back-link"
+            aria-label="Retour à la liste des projets"
+            data-scroll-animate
+            data-delay="400"
+          >
+            ← Retour aux projets
+          </a>
+        </>
+      ) : (
+        <p>Contenu en cours de rédaction.</p>
+      )
+    }
+  </div>
+</DefaultLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .tags {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section__title {
+    margin-bottom: var(--space-lg);
+    color: var(--color-primary);
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .subsection__title {
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-lg);
+    color: var(--color-on-background);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .skills-list {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .technologies {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-md);
+  }
+
+  .technology {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    border-radius: var(--border-radius);
+    padding: var(--space-sm) var(--space-md);
+    transition: all var(--transition-fast);
+    will-change: transform, box-shadow, border-color;
+  }
+
+  .technology__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
+  .technology__name {
+    font-size: var(--font-size-caption);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-on-surface);
+  }
+
+  .skill-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .skill-link:hover {
+    color: var(--color-primary-variant);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-on-surface);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-fast);
+    will-change: transform, box-shadow, border-color;
+    margin-top: var(--space-xl);
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+    transform: translate3d(-4px, 0, 0);
+  }
+</style>

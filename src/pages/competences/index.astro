@@ -1,0 +1,152 @@
+---
+import DefaultLayout from "@/layouts/default-layout.astro";
+import SkillCard from "@/components/molecules/skill-card.astro";
+import { getSoftSkills, getTechnicalSkills } from "@/utils/data";
+
+const softSkills = getSoftSkills();
+const technicalSkills = getTechnicalSkills();
+---
+
+<DefaultLayout title="Compétences – Virgil CHAREYRE">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-header__title" data-scroll-animate="punk-zoom">
+        Compétences
+      </h1>
+      <p class="page-header__description" data-scroll-animate data-delay="100">
+        Mon profil combine compétences relationnelles et techniques pour créer
+        des expériences numériques inclusives et efficaces. J'aborde chaque
+        projet avec une double vision : celle d'un artisan attentif aux détails
+        techniques et celle d'un médiateur qui place l'humain au centre.
+      </p>
+    </header>
+
+    <div class="grid grid--2">
+      <div class="skills-column" data-scroll-animate data-delay="150">
+        <h2 class="skills-column__title">Soft skills</h2>
+        <div class="skills-column__content">
+          {
+            softSkills.map((skill, index) => (
+              <div data-scroll-animate data-delay={200 + index * 50}>
+                <SkillCard id={skill.id} name={skill.name} type={skill.type} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="skills-column" data-scroll-animate data-delay="200">
+        <h2 class="skills-column__title">Compétences techniques</h2>
+        <div class="skills-column__content">
+          {
+            technicalSkills.map((skill, index) => (
+              <div data-scroll-animate data-delay={250 + index * 50}>
+                <SkillCard id={skill.id} name={skill.name} type={skill.type} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</DefaultLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__description {
+    font-size: var(--font-size-base);
+    color: var(--color-on-surface);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Description plus large sur grands écrans - Utilise les variables */
+  @media (min-width: 1400px) {
+    .page-header__description {
+      max-width: 650px;
+      font-size: var(--font-size-medium);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .page-header__description {
+      max-width: 700px;
+      font-size: var(--font-size-large);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .page-header__description {
+      max-width: 750px;
+      font-size: var(--font-size-large);
+    }
+  }
+
+  .grid {
+    display: grid;
+    gap: var(--space-lg);
+    perspective: 1000px;
+  }
+
+  .skills-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .skills-column__title {
+    margin: 0 0 var(--space-md) 0;
+    color: var(--color-primary);
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+  }
+
+  .skills-column__content {
+    display: grid;
+    gap: var(--space-lg);
+    perspective: 1000px;
+  }
+
+  .grid--2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Responsive Grilles - Solution ultime */
+  @media (min-width: 1024px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Grilles optimisées pour grands écrans - 2 colonnes fixes */
+  @media (min-width: 1400px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>

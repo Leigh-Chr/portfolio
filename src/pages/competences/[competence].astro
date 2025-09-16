@@ -1,0 +1,193 @@
+---
+import DefaultLayout from "@/layouts/default-layout.astro";
+import { getRelatedProjects } from "@/utils/data";
+import { getCompetencesUrl, getProjectUrl } from "@/utils/urls";
+import { skillIcons } from "@/data/skill-icons";
+import IconSvg from "@/components/atoms/icon-svg.astro";
+
+export async function getStaticPaths() {
+  const { default: skills } = await import("../../data/skills.json");
+  return skills.map(
+    (skill: {
+      id: string;
+      name: string;
+      type: string;
+      definition: string;
+      proof: string;
+      self_review: string;
+      evolution: string;
+      projects: string[];
+    }) => ({
+      params: { competence: skill.id },
+      props: { skill },
+    })
+  );
+}
+
+const { skill } = Astro.props;
+
+const relatedProjects = getRelatedProjects(skill.id).map(
+  (project: { id: string; title: string }) => ({
+    id: project.id,
+    name: project.title,
+    url: getProjectUrl(project.id),
+  })
+);
+
+const skillIconSvg = skillIcons[skill.id as keyof typeof skillIcons];
+---
+
+<DefaultLayout title={`${skill.name} – Virgil CHAREYRE`}>
+  <div class="container">
+    {
+      skill.id !== "inconnu" ? (
+        <>
+          <header class="page-header">
+            <h1 class="page-header__title" data-scroll-animate="punk-zoom">
+              <span class="page-header__icon">
+                {skillIconSvg && <IconSvg name={skillIconSvg} size={48} />}
+              </span>
+              {skill.name}
+            </h1>
+            <p
+              class="page-header__description"
+              data-scroll-animate
+              data-delay="150"
+            >
+              {skill.definition}
+            </p>
+          </header>
+
+          <section class="section" data-scroll-animate data-delay="200">
+            <h2 class="section__title">Définition</h2>
+            <p>{skill.definition}</p>
+          </section>
+
+          <section class="section" data-scroll-animate data-delay="250">
+            <h2 class="section__title">Preuves</h2>
+            <p>{skill.proof}</p>
+          </section>
+
+          <section class="section" data-scroll-animate data-delay="300">
+            <h2 class="section__title">Auto-évaluation</h2>
+            <p>{skill.self_review}</p>
+          </section>
+
+          <section class="section" data-scroll-animate data-delay="350">
+            <h2 class="section__title">Évolution</h2>
+            <p>{skill.evolution}</p>
+          </section>
+
+          {relatedProjects.length > 0 && (
+            <section class="section" data-scroll-animate data-delay="400">
+              <h2 class="section__title">Projets liés</h2>
+              <ul class="projects-list">
+                {relatedProjects.map((project) => (
+                  <li>
+                    <a
+                      href={project.url}
+                      aria-label={`Voir le projet ${project.name}`}
+                    >
+                      {project.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          <a
+            href={getCompetencesUrl()}
+            class="back-link"
+            aria-label="Retour à la liste des compétences"
+            data-scroll-animate
+            data-delay="400"
+          >
+            ← Retour
+          </a>
+        </>
+      ) : (
+        <p>Contenu en cours de rédaction.</p>
+      )
+    }
+  </div>
+</DefaultLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    justify-content: center;
+  }
+
+  .page-header__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    transition: all var(--transition-fast);
+    will-change: transform, color;
+  }
+
+  .page-header__description {
+    font-size: var(--font-size-base);
+    color: var(--color-on-surface);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section__title {
+    margin-bottom: var(--space-lg);
+    color: var(--color-primary);
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .projects-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .projects-list li {
+    margin-bottom: var(--space-sm);
+  }
+
+  .projects-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .projects-list a:hover {
+    color: var(--color-primary-variant);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-on-surface);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-fast);
+    will-change: transform, box-shadow, border-color;
+    margin-top: var(--space-xl);
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+    transform: translate3d(-4px, 0, 0);
+  }
+</style>

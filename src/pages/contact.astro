@@ -1,0 +1,88 @@
+---
+import DefaultLayout from "@/layouts/default-layout.astro";
+import ContactInfo from "@/components/molecules/contact-info.astro";
+---
+
+<DefaultLayout title="Contact – Virgil CHAREYRE">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-header__title" data-scroll-animate="punk-zoom">
+        Contact
+      </h1>
+      <p class="page-header__description" data-scroll-animate data-delay="100">
+        Vous avez un projet à discuter, une question sur mon parcours ou
+        simplement envie d'échanger sur le développement web éthique ? N'hésitez
+        pas à me contacter.
+      </p>
+    </header>
+
+    <div class="content">
+      <section class="section" data-scroll-animate data-delay="150">
+        <ContactInfo />
+      </section>
+
+      <section class="section" data-scroll-animate data-delay="200">
+        <h2 class="section__title">Disponibilité</h2>
+        <div class="availability-info surface--static">
+          <p>
+            Je suis actuellement en alternance chez BH Technologies jusqu'en
+            septembre 2025.
+          </p>
+          <p>
+            Je reste néanmoins disponible pour des échanges ou des projets
+            ponctuels, particulièrement dans le domaine associatif.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</DefaultLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__description {
+    font-size: var(--font-size-base);
+    color: var(--color-on-surface);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section__title {
+    margin-bottom: var(--space-lg);
+    color: var(--color-primary);
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .availability-info {
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    transition: all var(--transition-fast);
+  }
+
+  .availability-info p {
+    margin-bottom: var(--space-md);
+  }
+
+  .availability-info p:last-child {
+    margin-bottom: 0;
+  }
+</style>

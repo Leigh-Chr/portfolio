@@ -1,0 +1,237 @@
+---
+import IconSvg from "@/components/atoms/icon-svg.astro";
+import DefaultLayout from "@/layouts/default-layout.astro";
+---
+
+<DefaultLayout title="À propos – Virgil CHAREYRE">
+  <div class="container">
+    <header class="page-header">
+      <div class="page-header__content">
+        <div class="page-header__text">
+          <h1 class="page-header__title" data-scroll-animate="punk-zoom">
+            À propos
+          </h1>
+          <p
+            class="page-header__description"
+            data-scroll-animate
+            data-delay="100"
+          >
+            Expert humain, conscient et responsable dans le développement web.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="section" data-scroll-animate data-delay="150">
+        <h2 class="section__title">
+          <span class="section__icon">
+            <IconSvg name="sparkles" size={24} />
+          </span>
+          Mes valeurs
+        </h2>
+        <p>
+          En tant qu'expert humain, conscient et responsable, je crois en un web
+          accessible à tous, où la technologie sert l'humain et non l'inverse.
+          Mon approche combine rigueur technique et empathie utilisateur pour
+          créer des expériences numériques qui ont du sens.
+        </p>
+        <ul class="values-list">
+          <li class="surface--static">
+            <strong>Accessibilité</strong> : Un web pour tous, sans exception
+          </li>
+          <li class="surface--static">
+            <strong>Éthique</strong> : Des choix technologiques responsables
+          </li>
+          <li class="surface--static">
+            <strong>Transparence</strong> : Code ouvert et processus clairs
+          </li>
+          <li class="surface--static">
+            <strong>Humilité</strong> : Apprentissage continu et remise en question
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" data-scroll-animate data-delay="200">
+        <h2 class="section__title">
+          <span class="section__icon">
+            <IconSvg name="flag" size={24} />
+          </span>
+          Mon projet professionnel
+        </h2>
+        <p>
+          Mon objectif est de devenir un développeur‑concepteur expert en
+          accessibilité numérique et en développement éthique. Je souhaite
+          accompagner les organisations vers un web plus inclusif, en combinant
+          mes compétences techniques (Angular, SvelteKit, architecture API) avec
+          ma passion pour l'UX et l'accessibilité.
+        </p>
+        <p>
+          À terme, je vise à créer ma propre structure dédiée au conseil en
+          accessibilité numérique et au développement d'applications web
+          éthiques, particulièrement pour le secteur associatif et les
+          entreprises engagées socialement.
+        </p>
+      </section>
+
+      <section class="section" data-scroll-animate data-delay="250">
+        <h2 class="section__title">
+          <span class="section__icon">
+            <IconSvg name="star" size={24} />
+          </span>
+          Mes principales qualités humaines
+        </h2>
+        <p>
+          Mes collègues et collaborateurs reconnaissent en moi plusieurs
+          qualités qui facilitent le travail en équipe et la réussite des
+          projets :
+        </p>
+        <ul class="values-list">
+          <li class="surface--static">
+            <strong>Empathie active</strong> : Capacité à comprendre rapidement les
+            besoins des utilisateurs et à reformuler les attentes des équipes
+          </li>
+          <li class="surface--static">
+            <strong>Adaptabilité</strong> : Facilité à basculer entre différentes
+            technologies et rôles selon les besoins du projet
+          </li>
+          <li class="surface--static">
+            <strong>Exigence qualité</strong> : Attention aux détails et refus du
+            travail bâclé, tout en apprenant à timeboxer efficacement
+          </li>
+          <li class="surface--static">
+            <strong>Curiosité technique</strong> : Veille technologique constante
+            et auto‑apprentissage pour rester à la pointe
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" data-scroll-animate data-delay="300">
+        <h2 class="section__title">
+          <span class="section__icon">
+            <IconSvg name="paint-brush" size={24} />
+          </span>
+          Mes principaux centres d'intérêt
+        </h2>
+        <p>
+          Au‑delà du développement web, je nourris ma créativité et ma réflexion
+          à travers plusieurs passions :
+        </p>
+        <ul class="values-list">
+          <li class="surface--static">
+            <strong>Accessibilité numérique</strong> : Veille sur les standards WCAG,
+            participation aux communautés a11y
+          </li>
+          <li class="surface--static">
+            <strong>Open Source</strong> : Contribution à des projets libres et promotion
+            des licences ouvertes
+          </li>
+          <li class="surface--static">
+            <strong>Design éthique</strong> : Réflexion sur l'impact social et environnemental
+            du numérique
+          </li>
+          <li class="surface--static">
+            <strong>Veille technologique</strong> : Exploration des nouvelles frameworks,
+            patterns architecturaux et bonnes pratiques
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</DefaultLayout>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .page-header__text {
+    text-align: left;
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__description {
+    font-size: var(--font-size-base);
+    color: var(--color-on-surface);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .section {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section__title {
+    margin-bottom: var(--space-lg);
+    color: var(--color-primary);
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .section__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+  }
+
+  .values-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .values-list li {
+    margin-bottom: var(--space-md);
+    padding: var(--space-lg);
+    border-radius: var(--border-radius);
+  }
+
+  .values-list strong {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .page-header__content {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      text-align: center;
+    }
+
+    .page-header__text {
+      text-align: center;
+    }
+
+    .page-header__portrait {
+      width: 150px;
+      height: 150px;
+    }
+
+    .section__title {
+      font-size: var(--font-size-subtitle);
+    }
+
+    .values-list {
+      gap: var(--space-sm);
+    }
+  }
+</style>

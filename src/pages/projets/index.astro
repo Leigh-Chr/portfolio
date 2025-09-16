@@ -1,0 +1,114 @@
+---
+import DefaultLayout from "@/layouts/default-layout.astro";
+import ProjectCard from "@/components/molecules/project-card.astro";
+import projects from "@/data/projects.json";
+---
+
+<DefaultLayout title="Projets – Virgil CHAREYRE">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-header__title" data-scroll-animate="punk-zoom">
+        Projets
+      </h1>
+      <p class="page-header__description" data-scroll-animate data-delay="100">
+        Sélection de projets représentatifs de ma démarche et de mes valeurs,
+        chacun illustrant différentes facettes de mon approche du développement
+        web.
+      </p>
+    </header>
+
+    <div class="grid grid--2">
+      {
+        projects.map((project, index) => (
+          <div data-scroll-animate data-delay={150 + index * 50}>
+            <ProjectCard
+              id={project.id}
+              title={project.title}
+              summary={project.summary}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</DefaultLayout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .page-header__title {
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__description {
+    font-size: var(--font-size-base);
+    color: var(--color-on-surface);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Description plus large sur grands écrans - Utilise les variables */
+  @media (min-width: 1400px) {
+    .page-header__description {
+      max-width: 650px;
+      font-size: var(--font-size-medium);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .page-header__description {
+      max-width: 700px;
+      font-size: var(--font-size-large);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .page-header__description {
+      max-width: 750px;
+      font-size: var(--font-size-large);
+    }
+  }
+
+  .grid {
+    display: grid;
+    gap: var(--space-lg);
+    perspective: 1000px;
+  }
+
+  .grid--2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Responsive Grilles - Solution ultime */
+  @media (min-width: 1024px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Grilles optimisées pour grands écrans - 2 colonnes fixes */
+  @media (min-width: 1400px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .grid--2 {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>
