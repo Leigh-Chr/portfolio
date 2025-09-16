@@ -1,0 +1,88 @@
+---
+import CursorTrail from "@/components/atoms/cursor-trail.astro";
+import ScrollAnimator from "@/components/atoms/scroll-animator.astro";
+import Header from "@/components/organisms/header.astro";
+import SEO from "@/components/templates/seo.astro";
+import "@/styles/base.css";
+import "@/styles/reset.css";
+import { ClientRouter } from "astro:transitions";
+import portrait from "../../assets/images/portrait-professionnel.jpg";
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+}
+
+const { title, description, keywords, ogImage } = Astro.props;
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="var(--color-primary)" />
+    <title>{title ?? "Virgil CHAREYRE"}</title>
+
+    <!-- Preload des ressources critiques -->
+    <link rel="preload" href={portrait.src} as="image" type="image/webp" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap"
+      as="style"
+    />
+
+    <!-- DNS prefetch pour les ressources externes -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+    <!-- Connexions préétablies -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- CSS des polices -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <SEO
+      title={title}
+      description={description}
+      keywords={keywords}
+      ogImage={ogImage}
+    />
+    <ClientRouter />
+  </head>
+  <body class="scanlines">
+    <!-- Reflet d'écran pour effet CRT réaliste -->
+    <div class="screen-reflection" transition:persist="screen-reflection"></div>
+
+    <CursorTrail
+      lerpFactor={0.04}
+      opacity={0.6}
+      interactiveSelector='a, button, [role="button"]'
+      storageKey="cursorPosition"
+      transition:persist="cursor-trail"
+    />
+
+    <!-- Système d'animations au scroll intelligent -->
+    <ScrollAnimator />
+
+    <div class="page-wrapper">
+      <Header transition:persist="header" />
+      <main transition:name="main-content" class="main-content">
+        <slot />
+      </main>
+    </div>
+
+    <style>
+      .main-content {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </body>
+</html>
