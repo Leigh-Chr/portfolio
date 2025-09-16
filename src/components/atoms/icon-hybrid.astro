@@ -1,0 +1,40 @@
+---
+import IconSvg from "./icon-svg.astro";
+import IconLocal from "./icon-local.astro";
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+  isLocal?: boolean;
+}
+
+const { name, size = 24, class: className = "", isLocal = false } = Astro.props;
+
+// Liste des icônes locales disponibles
+const localIcons = [
+  "angular",
+  "svelte",
+  "nest",
+  "typescript",
+  "postgresql",
+  "spring-boot",
+  "java",
+  "gitlab",
+  "railway",
+  "astro",
+  "github",
+  "rxjs",
+];
+
+// Détermine si on doit utiliser l'icône locale
+const useLocal = isLocal || localIcons.includes(name);
+---
+
+{
+  useLocal ? (
+    <IconLocal name={name} size={size} class={className} />
+  ) : (
+    <IconSvg name={name} size={size} class={className} />
+  )
+}

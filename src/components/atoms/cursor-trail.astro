@@ -1,0 +1,343 @@
+---
+export interface Props {
+  /** Facteur d'interpolation pour l'effet de traînée (0.01-0.5) */
+  lerpFactor?: number;
+  /** Opacité par défaut du curseur */
+  opacity?: number;
+  /** Sélecteur CSS pour les éléments interactifs */
+  interactiveSelector?: string;
+  /** Clé de stockage pour la persistance */
+  storageKey?: string;
+}
+
+const {
+  lerpFactor = 0.04,
+  opacity = 0.6,
+  interactiveSelector = 'a, button, .btn, .social-link, .nav__link, .card, .contact-item, .tag, [role="button"]',
+  storageKey = "cursorPosition",
+} = Astro.props;
+---
+
+<!-- Curseur traînée punk -->
+<div class="cursor-trail" id="cursor-trail"></div>
+
+<style>
+  /* === CURSEUR TRAÎNÉE PUNK === */
+  /* Curseur traînée qui suit le mouvement de la souris */
+  .cursor-trail {
+    position: fixed;
+    top: -10px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(
+      circle,
+      var(--color-primary) 0%,
+      transparent 70%
+    );
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 200; /* Nouvelle hiérarchie : curseur personnalisé (au-dessus du contenu) */
+    opacity: 0.6;
+    transition:
+      width var(--transition-fast),
+      height var(--transition-fast),
+      opacity var(--transition-fast),
+      border-width var(--transition-fast),
+      box-shadow var(--transition-fast);
+    mix-blend-mode: screen;
+  }
+
+  /* Effet de traînée avec pseudo-éléments */
+  .cursor-trail::before,
+  .cursor-trail::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle,
+      var(--color-primary) 0%,
+      transparent 70%
+    );
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: all var(--transition-fast);
+    animation: trail-pulse 2s infinite;
+    transform-origin: center center;
+  }
+
+  .cursor-trail::after {
+    animation-delay: 1s;
+    opacity: 0.2;
+  }
+
+  /* === ÉTATS DU CURSEUR === */
+
+  /* État HOVER - Curseur plus grand et plus lumineux */
+  .cursor-trail.hover {
+    width: 32px;
+    height: 32px;
+    opacity: 0.8;
+    background: radial-gradient(
+      circle,
+      var(--color-primary) 0%,
+      transparent 60%
+    );
+    border-width: 3px;
+    box-shadow: 0 0 20px var(--color-primary);
+  }
+
+  .cursor-trail.hover::before,
+  .cursor-trail.hover::after {
+    width: 120%;
+    height: 120%;
+    top: -10%;
+    left: -10%;
+    opacity: 0.4;
+    animation: trail-pulse 1.5s infinite;
+  }
+
+  /* État PRESSED - Curseur contracté et intense */
+  .cursor-trail.pressed {
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+    background: radial-gradient(
+      circle,
+      var(--color-primary) 0%,
+      transparent 50%
+    );
+    border-width: 4px;
+    box-shadow: 0 0 30px var(--color-primary);
+    transform: scale(0.8);
+  }
+
+  .cursor-trail.pressed::before,
+  .cursor-trail.pressed::after {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    opacity: 0.6;
+    animation: trail-pulse 0.8s infinite;
+  }
+
+  /* État DRAG - Curseur étiré et directionnel */
+  .cursor-trail.drag {
+    width: 24px;
+    height: 24px;
+    opacity: 0.9;
+    background: radial-gradient(
+      circle,
+      var(--color-primary) 0%,
+      transparent 65%
+    );
+    border-width: 2px;
+    box-shadow: 0 0 15px var(--color-primary);
+    transform: scale(1.2);
+  }
+
+  .cursor-trail.drag::before,
+  .cursor-trail.drag::after {
+    width: 110%;
+    height: 110%;
+    top: -5%;
+    left: -5%;
+    opacity: 0.5;
+    animation: trail-pulse 1.2s infinite;
+  }
+
+  /* === ANIMATIONS SPÉCIFIQUES === */
+
+  @keyframes trail-pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.1;
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script define:vars={{ lerpFactor, opacity, interactiveSelector, storageKey }}>
+  // Curseur traînée qui suit le mouvement de la souris
+  let cursorTrail;
+  let isPressed = false;
+  let isDragging = false;
+  let animationId;
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  // Fonction d'interpolation linéaire
+  function lerp(start, end, factor) {
+    return start + (end - start) * factor;
+  }
+
+  // Fonction d'animation avec requestAnimationFrame
+  function animate() {
+    if (!cursorTrail) return;
+
+    // Interpolation des positions actuelles vers les positions cibles
+    currentX = lerp(currentX, targetX, lerpFactor);
+    currentY = lerp(currentY, targetY, lerpFactor);
+
+    // Application des nouvelles positions avec translate3d pour l'accélération matérielle
+    cursorTrail.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+    // Sauvegarder la position périodiquement (toutes les 10 frames pour éviter trop d'écritures)
+    if (Math.random() < 0.1) {
+      sessionStorage.setItem(
+        storageKey,
+        JSON.stringify({ x: currentX, y: currentY })
+      );
+    }
+
+    // Demande d'une nouvelle frame d'animation
+    animationId = requestAnimationFrame(animate);
+  }
+
+  // Gestion des états du curseur
+  function updateCursorState() {
+    if (!cursorTrail) return;
+
+    cursorTrail.classList.remove("hover", "pressed", "drag");
+
+    if (isDragging) {
+      cursorTrail.classList.add("drag");
+    } else if (isPressed) {
+      cursorTrail.classList.add("pressed");
+    }
+  }
+
+  // Fonction d'initialisation du curseur
+  function initCursor() {
+    cursorTrail = document.getElementById("cursor-trail");
+    if (!cursorTrail) return;
+
+    // Récupérer la position sauvegardée ou initialiser à (0,0)
+    const savedPosition = sessionStorage.getItem(storageKey);
+    const initialPos = savedPosition
+      ? JSON.parse(savedPosition)
+      : { x: 0, y: 0 };
+
+    // Position cible du curseur
+    targetX = initialPos.x;
+    targetY = initialPos.y;
+
+    // Position actuelle du curseur
+    currentX = initialPos.x;
+    currentY = initialPos.y;
+
+    // Initialiser la position du curseur à la position sauvegardée
+    cursorTrail.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+    // Démarrage de l'animation
+    animate();
+  }
+
+  // Fonction de nettoyage
+  function cleanup() {
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  }
+
+  // Event listeners pour les interactions
+  function setupEventListeners() {
+    // Mise à jour de la position cible lors du mouvement de la souris
+    document.addEventListener("mousemove", (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
+
+    // Détection des éléments interactifs au hover
+    document.addEventListener("mouseover", (e) => {
+      const target = e.target;
+      if (target.matches(interactiveSelector)) {
+        cursorTrail?.classList.add("hover");
+      }
+    });
+
+    document.addEventListener("mouseout", (e) => {
+      const target = e.target;
+      if (target.matches(interactiveSelector)) {
+        cursorTrail?.classList.remove("hover");
+      }
+    });
+
+    // Gestion du clic
+    document.addEventListener("mousedown", () => {
+      isPressed = true;
+      updateCursorState();
+    });
+
+    document.addEventListener("mouseup", () => {
+      isPressed = false;
+      updateCursorState();
+    });
+
+    // Gestion du drag (optionnel, pour les éléments draggables)
+    document.addEventListener("dragstart", () => {
+      isDragging = true;
+      updateCursorState();
+    });
+
+    document.addEventListener("dragend", () => {
+      isDragging = false;
+      updateCursorState();
+    });
+
+    // Masquer la traînée quand la souris quitte la fenêtre
+    document.addEventListener("mouseleave", () => {
+      cursorTrail?.style.setProperty("opacity", "0");
+      cursorTrail?.classList.remove("hover", "pressed", "drag");
+    });
+
+    document.addEventListener("mouseenter", () => {
+      cursorTrail?.style.setProperty("opacity", opacity.toString());
+      updateCursorState();
+    });
+
+    // Nettoyer les ressources avant le déchargement de la page
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem(
+        storageKey,
+        JSON.stringify({ x: currentX, y: currentY })
+      );
+    });
+  }
+
+  // Initialisation au chargement de la page
+  function initialize() {
+    cleanup();
+    initCursor();
+    setupEventListeners();
+  }
+
+  // Initialisation immédiate
+  initialize();
+
+  // Réinitialisation lors des transitions de page Astro
+  document.addEventListener("astro:page-load", () => {
+    initialize();
+  });
+
+  // Nettoyage lors des transitions
+  document.addEventListener("astro:before-preparation", () => {
+    cleanup();
+  });
+</script>

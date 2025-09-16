@@ -1,0 +1,72 @@
+---
+// Import obsolète supprimé - effets uniformes maintenant
+
+interface Props {
+  variant?: "default" | "primary" | "secondary";
+}
+
+const { variant = "default" } = Astro.props;
+const tagClass = `tag tag--${variant} surface--static`;
+// Système de rotation obsolète supprimé
+---
+
+<span class={tagClass}>
+  <slot />
+</span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius-full);
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-caption);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-on-surface);
+    transition: all var(--transition-fast);
+    will-change: transform, box-shadow, border-color;
+    text-transform: lowercase;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tag--primary {
+    background: var(--color-primary);
+    color: var(--color-on-background);
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 15px oklch(from var(--color-primary) l c h / 0.3);
+  }
+
+  .tag--primary:hover {
+    background: var(--color-primary-variant);
+    color: var(--color-on-background);
+    border-color: var(--color-primary-variant);
+    box-shadow: 0 8px 25px oklch(from var(--color-primary) l c h / 0.4);
+  }
+
+  .tag--secondary {
+    background: var(--color-primary-variant);
+    color: var(--color-on-background);
+    border-color: var(--color-primary-variant);
+    box-shadow: 0 4px 15px oklch(from var(--color-primary-variant) l c h / 0.3);
+  }
+
+  .tag--secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-on-background);
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 25px oklch(from var(--color-primary) l c h / 0.4);
+  }
+
+  /* Effet hover uniforme et subtil */
+  .tag:hover {
+    transform: translate3d(0, -3px, 0) scale(1.05);
+  }
+
+  /* Effet de glow subtil pour les tags par défaut */
+  .tag:not(.tag--primary):not(.tag--secondary):hover {
+    box-shadow: 0 8px 25px oklch(from var(--color-border) l c h / 0.3);
+    border-color: oklch(from var(--color-border) l calc(c + 0.1) h);
+  }
+</style>

@@ -1,0 +1,13 @@
+---
+import { icons } from "@/data/icons";
+
+interface Props {
+  name: keyof typeof icons;
+  size?: number;
+  ariaLabel?: string;
+}
+
+const { name, size = 24, ariaLabel } = Astro.props;
+---
+
+<span set:html={icons[name]} aria-label={ariaLabel} />

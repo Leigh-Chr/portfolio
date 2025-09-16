@@ -1,0 +1,142 @@
+---
+// Composant d'animation au scroll intelligent intégré aux View Transitions Astro
+// Utilise Intersection Observer pour déclencher les animations au scroll
+---
+
+<script>
+  class ScrollAnimator {
+    private observer: IntersectionObserver | null = null;
+
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      // Vérifier que Intersection Observer est supporté
+      if (!("IntersectionObserver" in window)) {
+        this.fallbackAnimation();
+        return;
+      }
+
+      // Configuration optimisée de l'Intersection Observer
+      this.observer = new IntersectionObserver(
+        this.handleIntersection.bind(this),
+        {
+          threshold: 0.2, // Déclenche à 20% de visibilité pour plus de réactivité
+          rootMargin: "50px", // Marge de 50px pour déclenchement anticipé optimisé
+          root: null, // Viewport par défaut
+        }
+      );
+
+      // Observer tous les éléments avec data-scroll-animate
+      if (this.observer) {
+        this.observeElements();
+      }
+    }
+
+    observeElements() {
+      const elements = document.querySelectorAll("[data-scroll-animate]");
+      elements.forEach((el: Element) => {
+        this.observer?.observe(el);
+      });
+    }
+
+    handleIntersection(entries: IntersectionObserverEntry[]) {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.isIntersecting) {
+          const element = entry.target as HTMLElement;
+          const delay = parseInt(element.dataset.delay || "0");
+          const priority = this.getAnimationPriority(element);
+
+          // Déclencher l'animation selon la priorité et le délai
+          this.scheduleAnimation(element, delay, priority);
+
+          // Arrêter d'observer après animation pour optimiser les performances
+          this.observer?.unobserve(entry.target);
+        }
+      });
+    }
+
+    // Déterminer la priorité d'animation selon le type d'élément
+    getAnimationPriority(element: HTMLElement): number {
+      if (element.hasAttribute("data-scroll-animate")) {
+        const animationType = element.getAttribute("data-scroll-animate");
+
+        // Priorité 1 : Titres principaux (punk-zoom)
+        if (animationType === "punk-zoom") return 1;
+
+        // Priorité 2 : Descriptions
+        if (element.classList.contains("page-header__description")) return 2;
+
+        // Priorité 3 : Sections principales
+        if (element.classList.contains("section")) return 3;
+
+        // Priorité 4 : Navigation et éléments secondaires
+        if (
+          element.classList.contains("nav__list") ||
+          element.classList.contains("contact-info") ||
+          element.classList.contains("social-links")
+        )
+          return 4;
+
+        // Priorité 5 : Liens de retour et éléments finaux
+        if (element.classList.contains("back-link")) return 5;
+      }
+
+      return 6; // Priorité par défaut
+    }
+
+    // Programmer l'animation avec délai et priorité optimisés
+    scheduleAnimation(element: HTMLElement, delay: number, priority: number) {
+      const baseDelay = delay;
+      const priorityDelay = priority * 25; // 25ms par niveau de priorité (réduit de 50ms)
+      const totalDelay = baseDelay + priorityDelay;
+
+      setTimeout(() => {
+        element.classList.add("animate-in");
+      }, totalDelay);
+    }
+
+    fallbackAnimation() {
+      // Fallback pour navigateurs sans Intersection Observer
+      const elements = document.querySelectorAll("[data-scroll-animate]");
+      elements.forEach((el: Element) => {
+        el.classList.add("animate-in");
+      });
+    }
+
+    // Méthode pour ajouter dynamiquement de nouveaux éléments
+    addElement(element: Element) {
+      if (this.observer && element.hasAttribute("data-scroll-animate")) {
+        this.observer.observe(element);
+      }
+    }
+
+    // Nettoyer l'observer pour éviter les fuites mémoire
+    destroy() {
+      if (this.observer) {
+        this.observer.disconnect();
+        this.observer = null;
+      }
+    }
+  }
+
+  // Instance globale pour éviter les doublons
+  let scrollAnimatorInstance: ScrollAnimator | null = null;
+
+  // Initialiser le ScrollAnimator quand le DOM est prêt
+  document.addEventListener("DOMContentLoaded", () => {
+    if (scrollAnimatorInstance) {
+      scrollAnimatorInstance.destroy();
+    }
+    scrollAnimatorInstance = new ScrollAnimator();
+  });
+
+  // Réinitialiser après les View Transitions Astro
+  document.addEventListener("astro:page-load", () => {
+    if (scrollAnimatorInstance) {
+      scrollAnimatorInstance.destroy();
+    }
+    scrollAnimatorInstance = new ScrollAnimator();
+  });
+</script>
