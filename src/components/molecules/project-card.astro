@@ -1,0 +1,129 @@
+---
+import { getProjectUrl } from "@/utils/urls";
+// Import obsolète supprimé - effets uniformes maintenant
+import { projectIcons } from "@/data/project-icons";
+import IconSvg from "@/components/atoms/icon-svg.astro";
+
+interface Props {
+  id: string;
+  title: string;
+  summary: string;
+}
+
+const { id, title, summary } = Astro.props;
+// Système de rotation obsolète supprimé
+
+const iconSvg = projectIcons[id as keyof typeof projectIcons];
+---
+
+<article
+  class="card card--project surface surface--card-scale"
+  transition:name={`project-card-${id}`}
+>
+  <div class="card__icon">
+    {iconSvg && <IconSvg name={iconSvg} size={56} />}
+  </div>
+  <div class="card__content">
+    <h3 class="card__title">
+      <a
+        href={getProjectUrl(id)}
+        data-astro-prefetch="hover"
+        aria-label={`Voir le projet ${title} - ${summary}`}
+      >
+        {title}
+      </a>
+    </h3>
+    <p class="card__summary">{summary}</p>
+  </div>
+  <div class="card__actions">
+    <a
+      href={getProjectUrl(id)}
+      class="btn btn--secondary"
+      data-astro-prefetch="hover"
+      aria-label={`Voir le projet ${title} en détail`}
+    >
+      Voir le projet
+    </a>
+  </div>
+</article>
+
+<style>
+  .card {
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    display: block;
+  }
+
+  .card--project {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    height: 100%;
+  }
+
+  .card__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+    color: var(--color-primary);
+    transition: all var(--transition-fast);
+    will-change: transform, color;
+  }
+
+  .card--project:hover .card__icon {
+    color: var(--color-primary-variant);
+    transform: scale(1.1) rotate(3deg);
+  }
+
+  .card__title {
+    margin: 0 0 var(--space-sm) 0;
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .card__title a {
+    color: var(--color-on-background);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .card__title a:hover {
+    color: var(--color-primary);
+  }
+
+  .card__title a:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--border-radius);
+  }
+
+  .card__summary {
+    color: var(--color-on-surface);
+    margin: 0;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .card__actions {
+    margin-top: auto;
+  }
+
+  /* Effet de pulsation subtile sur le bouton */
+  .card__actions .btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Responsive Cards - Solution ultime */
+  @media (max-width: 480px) {
+    .card {
+      padding: var(--space-md);
+    }
+
+    .card__title {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>

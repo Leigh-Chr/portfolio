@@ -1,0 +1,151 @@
+---
+import Icon from "@/components/atoms/icon.astro";
+import { Image } from "astro:assets";
+import { baseUrl } from "@/utils/urls";
+// Import obsolète supprimé - effets uniformes maintenant
+import portrait from "../../../assets/images/portrait-professionnel.jpg";
+
+// Système de rotation obsolète supprimé
+---
+
+<a href={baseUrl} class="logo">
+  <Image
+    src={portrait}
+    alt="Portrait de Virgil CHAREYRE"
+    width={50}
+    height={50}
+    class="logo__portrait"
+    loading="eager"
+  />
+  <div>
+    <h1>Virgil CHAREYRE</h1>
+    <p>Développeur‑concepteur</p>
+  </div>
+</a>
+
+<style>
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--transition-fast);
+    will-change: transform, box-shadow;
+  }
+
+  .logo:hover {
+    transform: translate3d(0, -1px, 0);
+  }
+
+  .logo__portrait {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius-full);
+    border: 2px solid var(--glass-border);
+    object-fit: cover;
+    transition: all var(--transition-fast);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: var(--glass-backdrop);
+    -webkit-backdrop-filter: var(--glass-backdrop);
+    position: relative;
+  }
+
+  .logo:hover .logo__portrait {
+    border: 2px solid var(--glass-border-hover);
+    box-shadow: var(--glass-shadow-hover);
+    transform: scale(1.05);
+  }
+
+  .logo h1 {
+    margin: 0;
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-on-background);
+    transition: color var(--transition-fast);
+  }
+
+  .logo p {
+    margin: 0;
+    font-size: var(--font-size-caption);
+    color: var(--color-on-surface);
+    transition: color var(--transition-fast);
+  }
+
+  .logo:hover h1 {
+    color: var(--color-primary);
+  }
+
+  .logo:hover p {
+    color: var(--color-on-background);
+  }
+
+  .logo:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--border-radius);
+  }
+
+  /* Effet de glow subtil pour le logo */
+  .logo:hover {
+    transform: translate3d(0, -2px, 0);
+  }
+
+  /* Responsive Logo - Solution ultime */
+  @media (max-width: 480px) {
+    .logo__portrait {
+      width: 40px;
+      height: 40px;
+    }
+
+    .logo h1 {
+      font-size: var(--font-size-base);
+    }
+
+    .logo p {
+      font-size: var(--font-size-caption);
+    }
+  }
+
+  /* Logo ultra-compact pour très petits écrans */
+  @media (max-width: 359px) {
+    .logo {
+      gap: var(--space-sm);
+    }
+
+    .logo__portrait {
+      width: 35px;
+      height: 35px;
+    }
+
+    .logo h1 {
+      font-size: var(--font-size-caption);
+      line-height: 1.2;
+    }
+
+    .logo p {
+      font-size: var(--font-size-small);
+      line-height: 1.2;
+    }
+  }
+
+  /* Logo compact pour tablettes */
+  @media (max-width: 1199px) and (min-width: 768px) {
+    .logo {
+      gap: var(--space-sm);
+    }
+
+    .logo__portrait {
+      width: 45px;
+      height: 45px;
+    }
+
+    .logo h1 {
+      font-size: var(--font-size-base);
+    }
+
+    .logo p {
+      font-size: var(--font-size-caption);
+    }
+  }
+</style>

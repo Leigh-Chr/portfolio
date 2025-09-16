@@ -1,0 +1,84 @@
+---
+import contactsData from "@/data/contacts.json";
+import Icon from "@/components/atoms/icon.astro";
+// Import obsolète supprimé - effets uniformes maintenant
+
+type SocialItem = {
+  username?: string;
+  label: string;
+  url: string;
+  icon: "mail" | "linkedin" | "github" | "twitter";
+};
+
+const { linkedin, github } = contactsData;
+const socialLinks = [linkedin, github] as SocialItem[];
+---
+
+<div class="social-links">
+  {
+    socialLinks.map((social, index) => {
+      // Système de rotation obsolète supprimé
+
+      return (
+        <a
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Suivre sur ${social.label}${social.username ? ` : ${social.username}` : ""}`}
+          class="social-link surface"
+          data-scroll-animate
+          data-delay={50 + index * 50}
+        >
+          <Icon name={social.icon} />
+        </a>
+      );
+    })
+  }
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--border-radius);
+    color: var(--color-on-surface);
+    text-decoration: none;
+    font-size: var(--font-size-subtitle);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .social-link:hover {
+    background: oklch(from var(--color-primary) l calc(c + 0.1) h);
+    color: var(--color-on-background);
+    border-color: oklch(from var(--color-primary) l calc(c + 0.1) h);
+    transform: translate3d(0, -4px, 0) scale(1.1) rotate(3deg);
+    box-shadow: 0 8px 25px oklch(from var(--color-primary) l c h / 0.4);
+  }
+
+  .social-link:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--border-radius);
+    background: var(--color-primary);
+    color: var(--color-on-background);
+    border-color: var(--color-primary);
+  }
+
+  /* Effet de glow subtil au repos */
+  .social-link {
+    box-shadow: 0 2px 8px oklch(from var(--color-border) l c h / 0.1);
+  }
+
+  .social-link:hover {
+    box-shadow: 0 8px 25px oklch(from var(--color-primary) l c h / 0.4);
+  }
+</style>
