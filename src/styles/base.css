@@ -1,0 +1,752 @@
+/* ==========================================================================
+   SYSTÈME DE DESIGN SIMPLIFIÉ & ACCESSIBLE
+   ========================================================================== */
+
+/* ===== 0. HIÉRARCHIE Z-INDEX ===== */
+/*
+ * HIÉRARCHIE Z-INDEX OPTIMISÉE :
+ * 
+ * 1-50   : CONTENU PRINCIPAL (texte, images, composants)
+ * 50     : CURSEUR PERSONNALISÉ (au-dessus du contenu)
+ * 100    : NAVIGATION (header, navigation)
+ * 150    : OVERLAYS (menus mobiles, modales)
+ * 200    : CONTRÔLES (bouton hamburger, interactions critiques)
+ * 999    : REFLET CRT (effet de reflet d'écran)
+ * 1000+  : EFFETS CRT (scanlines: 1000, texture: 1001, ombres: 1002)
+ */
+
+/* ===== 1. VARIABLES CSS ===== */
+:root {
+  /* COULEUR DE BASE UNIQUE - Modifier uniquement celle-ci pour tout changer */
+  --color-primary: oklch(0.80 0.4 380);
+
+  /* Couleurs fonctionnelles principales */
+  --color-background: oklch(from var(--color-primary) 0.12 calc(c * 0.02) h);
+  --color-surface: oklch(from var(--color-primary) 0.45 calc(c * 0.02) h);
+  --color-border: oklch(from var(--color-primary) 0.25 calc(c * 0.02) h);
+
+  /* Couleurs de texte */
+  --color-on-background: oklch(from var(--color-primary) 1 calc(c * 0.02) h);
+  --color-on-surface: oklch(from var(--color-primary) 1 calc(c * 0.02) h);
+
+  /* Variantes de la couleur primaire */
+  --color-primary-variant: oklch(from var(--color-primary) l calc(c - 0.05) h);
+
+  /* États et interactions */
+  --color-hover: oklch(from var(--color-primary) l c h / 0.8);
+  --color-focus: oklch(from var(--color-primary) l c h / 0.4);
+  --color-disabled: oklch(from var(--color-primary) l c h / 0.3);
+
+  /* Effets subtils */
+  --color-effect-subtle: oklch(from var(--color-primary) 1 calc(c * 0.02) h / 0.03);
+  
+  /* Couleurs de base pour calculs dynamiques */
+  --color-reflection-base: var(--color-on-background);
+  --color-shadow-base: var(--color-primary);
+  
+  /* ===== SYSTÈME GLASSMORPHISME MODERNE ===== */
+  /* Gradients subtils pour glassmorphisme - Plus transparents pour la lisibilité */
+  --glass-bg-primary: linear-gradient(
+    135deg,
+    oklch(from var(--color-surface) l c h / 0.3) 0%,
+    oklch(from var(--color-surface) l calc(c + 0.03) h / 0.25) 50%,
+    oklch(from var(--color-surface) l calc(c - 0.02) h / 0.28) 100%
+  );
+  
+  /* Gradient pour header/navigation plus subtil */
+  --glass-bg-header: linear-gradient(
+    180deg,
+    oklch(from var(--color-background) l c h / 0.4) 0%,
+    oklch(from var(--color-background) l c h / 0.38) 100%
+  );
+  
+  /* Bordures glassmorphisme */
+  --glass-border: 1px solid oklch(from var(--color-border) l c h / 0.2);
+  --glass-border-hover: 1px solid oklch(from var(--color-primary) l c h / 0.3);
+  
+  /* Ombres glassmorphisme - Plus subtiles et raffinées */
+  --glass-shadow: 
+    0 4px 20px oklch(from var(--color-primary) l c h / 0.04),
+    0 1px 4px oklch(from var(--color-primary) l c h / 0.02),
+    inset 0 1px 0 oklch(from var(--color-on-background) l c h / 0.05);
+  
+  --glass-shadow-hover: 
+    0 8px 32px oklch(from var(--color-primary) l c h / 0.08),
+    0 2px 8px oklch(from var(--color-primary) l c h / 0.04),
+    inset 0 1px 0 oklch(from var(--color-on-background) l c h / 0.08);
+  
+  /* Ombres pour header/navigation */
+  --glass-shadow-header: 
+    0 2px 12px oklch(from var(--color-primary) l c h / 0.03),
+    0 1px 3px oklch(from var(--color-primary) l c h / 0.015);
+  
+  /* Backdrop filter pour glassmorphisme - Plus subtil */
+  --glass-backdrop: blur(8px) saturate(1.1);
+  --glass-backdrop-header: blur(6px) saturate(1.05);
+  
+  /* Typographie */
+  --font-family-display: "Bebas Neue", sans-serif;
+  --font-family-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: "Courier Prime", "Courier New", monospace;
+  
+  /* Optimisation des polices */
+  --font-display: swap;
+  
+  /* ===== SYSTÈME TYPOGRAPHIQUE COHÉRENT ===== */
+  /* Hiérarchie claire et progressive des tailles de police */
+  --font-size-hero: clamp(2.5rem, 7vw, 5rem);        /* Titre principal hero */
+  --font-size-display: clamp(2rem, 5vw, 3.5rem);     /* Titres de page (h1) */
+  --font-size-title: clamp(1.5rem, 4vw, 2.5rem);     /* Titres de section (h2) */
+  --font-size-subtitle: clamp(1.25rem, 3vw, 1.75rem); /* Sous-titres (h3) */
+  --font-size-large: clamp(1.25rem, 3.2vw, 1.375rem); /* Texte important */
+  --font-size-medium: clamp(1.125rem, 2.8vw, 1.25rem); /* Texte standard */
+  --font-size-base: clamp(1rem, 2.5vw, 1.125rem);     /* Texte de base */
+  --font-size-caption: clamp(0.875rem, 2vw, 1rem);    /* Légendes, métadonnées */
+  --font-size-small: clamp(0.75rem, 1.8vw, 0.875rem); /* Texte secondaire */
+  
+  /* Poids de police essentiels */
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Espacements simplifiés - Responsive */
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  
+  /* Bordures modernisées */
+  --border-radius: 0.5rem;
+  --border-radius-full: 50%;
+  
+  /* ===== SYSTÈME DE TIMING UNIFIÉ ===== */
+  /* Variables de timing cohérentes pour toutes les animations */
+  --timing-fast: 0.2s;      /* Hover, focus, interactions rapides */
+  --timing-normal: 0.4s;    /* Scroll animations, apparitions */
+  --timing-slow: 0.6s;      /* View transitions, changements majeurs */
+  
+  /* Easing functions optimisées */
+  --easing-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* Fluide et naturel */
+  --easing-punk: cubic-bezier(0.4, 0, 0.2, 1);             /* Style punk cohérent */
+  
+  /* Transitions unifiées - Utilisation cohérente */
+  --transition-fast: var(--timing-fast) var(--easing-smooth);
+  --transition-normal: var(--timing-normal) var(--easing-smooth);
+  --transition-slow: var(--timing-slow) var(--easing-punk);
+  
+  /* Focus modernisé */
+  --focus-ring: 0.125rem solid var(--color-primary);
+  --focus-offset: 0.125rem;
+}
+
+/* ===== 2. BASE & RESET ===== */
+html {
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  color: var(--color-on-background);
+  background: linear-gradient(
+    135deg,
+    var(--color-background) 0%,
+    oklch(from var(--color-background) l calc(c + 0.02) h) 25%,
+    var(--color-background) 50%,
+    oklch(from var(--color-background) l calc(c - 0.02) h) 75%,
+    var(--color-background) 100%
+  );
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+/* Typographie de base */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-display);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-on-background);
+  margin-bottom: var(--space-md);
+}
+
+h1 {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: var(--font-size-subtitle);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin-bottom: var(--space-lg);
+  line-height: 1.7;
+  color: var(--color-on-surface);
+}
+
+/* ===== 3. LAYOUT & STRUCTURE ===== */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Container adaptatif pour grands écrans */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1400px;
+    padding: 3rem 2rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1600px;
+    padding: 4rem 2.5rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1800px;
+    padding: 5rem 3rem;
+  }
+}
+
+
+
+
+/* ===== 4. EFFETS CRT ===== */
+/* Scanlines punk optimisées */
+.scanlines::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--color-effect-subtle) 2px,
+    var(--color-effect-subtle) 4px
+  );
+  pointer-events: none;
+  z-index: 1000; /* Nouvelle hiérarchie : scanlines CRT (tout en haut) */
+}
+
+/* Texture de scratches statique */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/portfolio/assets/images/scratches.png');
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 1001; /* Nouvelle hiérarchie : texture scratches CRT (au-dessus des scanlines) */
+  opacity: 0.20;
+}
+
+/* Reflet d'écran pour effet CRT réaliste */
+.screen-reflection {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999; /* Juste en dessous des ombres d'écran (1002) */
+  
+  /* Gradient de reflet diagonal diffus et subtil */
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 25%,
+    oklch(from var(--color-reflection-base) l c h / 0.025) 30%,
+    oklch(from var(--color-reflection-base) l c h / 0.04) 35%,
+    oklch(from var(--color-reflection-base) l c h / 0.06) 40%,
+    oklch(from var(--color-reflection-base) l c h / 0.09) 45%,
+    oklch(from var(--color-reflection-base) l c h / 0.06) 50%,
+    oklch(from var(--color-reflection-base) l c h / 0.04) 55%,
+    oklch(from var(--color-reflection-base) l c h / 0.025) 60%,
+    transparent 65%,
+    transparent 100%
+  );
+}
+
+/* ===== 5. RESPONSIVE CRT ===== */
+
+.screen-reflection {
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 25%,
+    oklch(from var(--color-reflection-base) l c h / 0.025) 30%,
+    oklch(from var(--color-reflection-base) l c h / 0.04) 35%,
+    oklch(from var(--color-reflection-base) l c h / 0.06) 40%,
+    oklch(from var(--color-reflection-base) l c h / 0.09) 45%,
+    oklch(from var(--color-reflection-base) l c h / 0.06) 50%,
+    oklch(from var(--color-reflection-base) l c h / 0.04) 55%,
+    oklch(from var(--color-reflection-base) l c h / 0.025) 60%,
+    transparent 65%,
+    transparent 100%
+  );
+}
+
+/* Tablette - Ombres équilibre */
+@media (max-width: 1024px) {
+  .screen-reflection {
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 30%,
+      oklch(from var(--color-reflection-base) l c h / 0.015) 35%,
+      oklch(from var(--color-reflection-base) l c h / 0.02) 40%,
+      oklch(from var(--color-reflection-base) l c h / 0.04) 45%,
+      oklch(from var(--color-reflection-base) l c h / 0.03) 50%,
+      oklch(from var(--color-reflection-base) l c h / 0.04) 55%,
+      oklch(from var(--color-reflection-base) l c h / 0.02) 60%,
+      oklch(from var(--color-reflection-base) l c h / 0.015) 65%,
+      transparent 70%,
+      transparent 100%
+    );
+  }
+}
+
+/* Mobile - Ombres légères */
+@media (max-width: 768px) {
+  .screen-reflection {
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 35%,
+      oklch(from var(--color-reflection-base) l c h / 0.01) 40%,
+      oklch(from var(--color-reflection-base) l c h / 0.02) 45%,
+      oklch(from var(--color-reflection-base) l c h / 0.025) 50%,
+      oklch(from var(--color-reflection-base) l c h / 0.03) 52%,
+      oklch(from var(--color-reflection-base) l c h / 0.025) 55%,
+      oklch(from var(--color-reflection-base) l c h / 0.02) 60%,
+      oklch(from var(--color-reflection-base) l c h / 0.01) 65%,
+      transparent 70%,
+      transparent 100%
+    );
+  }
+}
+
+/* Petit mobile - Ombres minimales */
+@media (max-width: 480px) {
+  .screen-reflection {
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 40%,
+      oklch(from var(--color-reflection-base) l c h / 0.01) 45%,
+      oklch(from var(--color-reflection-base) l c h / 0.02) 50%,
+      oklch(from var(--color-reflection-base) l c h / 0.03) 52%,
+      oklch(from var(--color-reflection-base) l c h / 0.04) 54%,
+      oklch(from var(--color-reflection-base) l c h / 0.03) 56%,
+      oklch(from var(--color-reflection-base) l c h / 0.02) 58%,
+      oklch(from var(--color-reflection-base) l c h / 0.01) 60%,
+      transparent 65%,
+      transparent 100%
+    );
+  }
+}
+
+/* ===== 6. VIEW TRANSITIONS ===== */
+/* Animation punk personnalisée pour les transitions de page */
+::view-transition-old(main-content) {
+  animation: punk-slide-out var(--timing-slow) var(--easing-punk);
+}
+
+::view-transition-new(main-content) {
+  animation: punk-slide-in var(--timing-slow) var(--easing-punk);
+}
+
+/* Optimisation des transitions pour la performance */
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--timing-slow);
+  animation-timing-function: var(--easing-punk);
+  will-change: transform, opacity;
+}
+
+/* ===== 6.1. ANIMATIONS SCROLL INTELLIGENTES ===== */
+/* Système d'animations au scroll optimisé et fluide */
+
+/* État initial des éléments animés - Optimisé GPU */
+[data-scroll-animate] {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: all var(--transition-normal);
+  will-change: transform, opacity;
+}
+
+/* État animé des éléments */
+[data-scroll-animate].animate-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Variantes d'animation punk cohérentes et optimisées */
+[data-scroll-animate="punk-fade"] {
+  transform: translate3d(0, 20px, 0) skew(-1deg);
+}
+
+[data-scroll-animate="punk-fade"].animate-in {
+  transform: translate3d(0, 0, 0) skew(0deg);
+}
+
+[data-scroll-animate="punk-slide-left"] {
+  transform: translate3d(30px, 0, 0) skew(-0.5deg);
+}
+
+[data-scroll-animate="punk-slide-left"].animate-in {
+  transform: translate3d(0, 0, 0) skew(0deg);
+}
+
+[data-scroll-animate="punk-zoom"] {
+  transform: translate3d(0, 0, 0) scale(0.9) skew(-0.5deg);
+}
+
+[data-scroll-animate="punk-zoom"].animate-in {
+  transform: translate3d(0, 0, 0) scale(1) skew(0deg);
+}
+
+/* Délais progressifs optimisés - Plus rapides et fluides */
+[data-scroll-animate][data-delay="50"] { transition-delay: 0.05s; }
+[data-scroll-animate][data-delay="100"] { transition-delay: 0.1s; }
+[data-scroll-animate][data-delay="150"] { transition-delay: 0.15s; }
+[data-scroll-animate][data-delay="200"] { transition-delay: 0.2s; }
+[data-scroll-animate][data-delay="250"] { transition-delay: 0.25s; }
+[data-scroll-animate][data-delay="300"] { transition-delay: 0.3s; }
+[data-scroll-animate][data-delay="350"] { transition-delay: 0.35s; }
+[data-scroll-animate][data-delay="400"] { transition-delay: 0.4s; }
+
+/* Respect des préférences utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-animate] {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@keyframes punk-slide-out {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skew(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate3d(-10px, 0, 0) skew(-1deg) scale(0.98);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-30px, 0, 0) skew(-2deg) scale(0.95);
+    filter: blur(1px);
+  }
+}
+
+@keyframes punk-slide-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(30px, 0, 0) skew(2deg) scale(0.95);
+    filter: blur(1px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate3d(10px, 0, 0) skew(1deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skew(0deg) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* Animation punk simplifiée pour la hero section */
+::view-transition-old(hero-tagline) {
+  animation: punk-hero-out var(--timing-slow) var(--easing-punk);
+}
+
+::view-transition-new(hero-tagline) {
+  animation: punk-hero-in var(--timing-slow) var(--easing-punk);
+}
+
+@keyframes punk-hero-out {
+  0% {
+    opacity: 1;
+    transform: skew(-7deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: skew(-10deg) scale(0.9);
+    filter: blur(1px);
+  }
+}
+
+@keyframes punk-hero-in {
+  0% {
+    opacity: 0;
+    transform: skew(-10deg) scale(0.9);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: skew(-7deg) scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* ===== 7. LIENS & INTERACTIONS ===== */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-variant);
+}
+
+a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--border-radius);
+}
+
+/* ===== 8. UTILITAIRES ===== */
+/* Accents punk subtils */
+.punk-accent {
+  font-family: var(--font-family-mono);
+  font-weight: 600;
+  color: var(--color-primary);
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* ===== 9. SYSTÈME DE SURFACE MODERNE ===== */
+/* Classe de base pour surfaces interactives avec effets complets */
+.surface {
+  background: var(--glass-bg-primary);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  will-change: transform, box-shadow, border-color;
+}
+
+/* Classe pour surfaces statiques (sans animations hover) */
+.surface--static {
+  background: var(--glass-bg-primary);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Variante pour header/navigation */
+.surface--header {
+  background: var(--glass-bg-header);
+  backdrop-filter: var(--glass-backdrop-header);
+  -webkit-backdrop-filter: var(--glass-backdrop-header);
+  box-shadow: var(--glass-shadow-header);
+}
+
+/* Effets hover pour surfaces interactives */
+.surface:hover {
+  border: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translate3d(0, -2px, 0);
+}
+
+/* Variante hover pour cartes avec scale */
+.surface--card-scale:hover {
+  transform: translate3d(0, -4px, 0) scale(1.02);
+}
+
+/* Pseudo-élément décoratif en arrière-plan pour surfaces interactives */
+.surface::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    var(--color-primary),
+    transparent,
+    var(--color-primary-variant),
+    transparent
+  );
+  border-radius: calc(var(--border-radius) + 2px);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.surface:hover::before {
+  opacity: 0.1;
+}
+
+/* Pseudo-élément pour effet de brillance sur surfaces interactives */
+.surface::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(from var(--color-on-background) l c h / 0.1) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s var(--easing-smooth);
+  pointer-events: none;
+  border-radius: var(--border-radius);
+}
+
+.surface:hover::after {
+  left: 100%;
+}
+
+/* ===== 9. PRÉFÉRENCES UTILISATEUR ===== */
+/* Respect des préférences d'accessibilité pour les View Transitions */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(main-content),
+  ::view-transition-new(main-content),
+  ::view-transition-old(hero-tagline),
+  ::view-transition-new(hero-tagline) {
+    animation: none !important;
+  }
+  
+  /* Désactiver toutes les animations CSS pour les utilisateurs sensibles */
+  *:not(.scanlines::before),
+  *:not(.scanlines::before)::before,
+  *:not(.scanlines::before)::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Contraste élevé */
+@media (prefers-contrast: high) {
+  :root {
+    --color-on-surface: var(--color-on-background);
+    --color-border: var(--color-on-background);
+    --focus-ring: 0.25rem solid var(--color-on-background);
+    --focus-offset: 0.375rem;
+  }
+  
+  /* Améliorer la visibilité des éléments interactifs */
+  .btn, .nav__link, a {
+    border: 2px solid var(--color-on-background);
+  }
+}
+
+/* ===== 10. RESPONSIVE GÉNÉRAL ===== */
+/* Breakpoints optimisés et cohérents */
+
+/* Petit mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem 0.75rem;
+  }
+  
+  main {
+    padding-top: var(--space-md);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+  
+  main {
+    padding-top: var(--space-lg);
+  }
+}
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .container {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* ===== 11. SYSTÈME D'ESPACEMENT RESPONSIVE ===== */
+/* Espacements adaptatifs pour grands écrans - Plus modérés */
+
+@media (min-width: 1400px) {
+  :root {
+    --space-lg: 1.75rem;
+    --space-xl: 2.25rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --space-lg: 2rem;
+    --space-xl: 2.5rem;
+    --space-2xl: 3.5rem;
+    --space-3xl: 4.5rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --space-lg: 2.25rem;
+    --space-xl: 2.75rem;
+    --space-2xl: 4rem;
+    --space-3xl: 5rem;
+  }
+}
