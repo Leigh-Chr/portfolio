@@ -1,0 +1,164 @@
+---
+// Import obsolète supprimé - effets uniformes maintenant
+import IconSvg from "@/components/atoms/icon-svg.astro";
+
+interface Props {
+  items: Array<{
+    periode: string;
+    poste?: string;
+    organisation: string;
+    description?: string;
+  }>;
+}
+
+const { items } = Astro.props;
+
+// Mapping des logos par organisation (icônes Heroicons)
+const organizationLogos: Record<string, string> = {
+  "BH Technologies - Éclairage Public & Environnement": "building-office",
+  "ISCOD - Institut supérieur des compétences de demain": "academic-cap",
+  "Université Grenoble Alpes (UGA), Grenoble": "building-library",
+  "Lycée Les Catalins, Montélimar": "book-open",
+};
+
+const getLogo = (organization: string) =>
+  organizationLogos[organization] || "building-office";
+---
+
+<div class="timeline">
+  {
+    items.map((item, index) => {
+      // Système de rotation obsolète supprimé
+
+      return (
+        <div
+          class="timeline__item"
+          data-scroll-animate
+          data-delay={150 + index * 100}
+        >
+          <div class="timeline__content surface--static">
+            <div class="timeline__header">
+              <div class="timeline__logo">
+                <IconSvg name={getLogo(item.organisation)} size={32} />
+              </div>
+              <div class="timeline__info">
+                <div class="timeline__period">{item.periode}</div>
+                {item.poste && <h3 class="timeline__title">{item.poste}</h3>}
+                <div class="timeline__organization">{item.organisation}</div>
+              </div>
+            </div>
+            {item.description && (
+              <p class="timeline__description">{item.description}</p>
+            )}
+          </div>
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-primary);
+  }
+
+  .timeline__item {
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: var(--space-xl);
+  }
+
+  .timeline__item::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    border: 3px solid var(--color-background);
+  }
+
+  .timeline__content {
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    transition: all var(--transition-fast);
+    will-change: transform, box-shadow;
+  }
+
+  .timeline__header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+  }
+
+  .timeline__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-primary);
+    transition: all var(--transition-fast);
+    will-change: transform, box-shadow;
+  }
+
+  .timeline__info {
+    flex: 1;
+  }
+
+  .timeline__description {
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+  }
+
+  .timeline__period {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-caption);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline__title {
+    color: var(--color-on-background);
+    margin-bottom: var(--space-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .timeline__organization {
+    color: var(--color-on-surface);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-sm);
+  }
+
+  @media (max-width: 768px) {
+    .timeline::before {
+      left: 10px;
+    }
+
+    .timeline__item {
+      padding-left: 40px;
+    }
+
+    .timeline__item::before {
+      left: 1px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+</style>

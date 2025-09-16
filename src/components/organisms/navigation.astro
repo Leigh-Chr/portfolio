@@ -1,0 +1,147 @@
+---
+import {
+  getCompetencesUrl,
+  getProjectsUrl,
+  getAboutUrl,
+  getContactUrl,
+  getParcoursUrl,
+} from "@/utils/urls";
+// Import obsolète supprimé - effets uniformes maintenant
+
+interface Props {
+  class?: string;
+  "aria-label"?: string;
+}
+
+const { class: className = "", "aria-label": ariaLabel } = Astro.props;
+---
+
+<nav class={`nav ${className}`} aria-label={ariaLabel}>
+  <ul class="nav__list">
+    {
+      [
+        { href: getAboutUrl(), text: "À propos" },
+        { href: getCompetencesUrl(), text: "Compétences" },
+        { href: getProjectsUrl(), text: "Projets" },
+        { href: getParcoursUrl(), text: "Parcours" },
+        { href: getContactUrl(), text: "Contact" },
+      ].map((link, index) => {
+        const currentPath = Astro.url.pathname;
+        // On considère la page courante si le chemin commence par le href du lien (pour inclure les routes enfants)
+        const isCurrentPage =
+          currentPath === link.href ||
+          (link.href !== "/" && currentPath.startsWith(link.href + "/"));
+
+        return (
+          <li data-scroll-animate data-delay={50 + index * 25}>
+            <a
+              href={link.href}
+              class="nav__link"
+              data-astro-prefetch="hover"
+              aria-current={isCurrentPage ? "page" : undefined}
+            >
+              {link.text}
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
+
+<style>
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    display: flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius);
+    color: var(--color-on-surface);
+    text-decoration: none;
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-fast);
+    position: relative;
+    will-change: transform, color, background;
+  }
+
+  .nav__link[aria-current="page"] {
+    color: var(--color-on-background);
+    background: var(--color-primary);
+  }
+
+  .nav__link[aria-current="page"]:hover {
+    background: var(--color-primary-variant);
+  }
+
+  .nav__link:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--border-radius);
+  }
+
+  /* ===== RESPONSIVE INTELLIGENT ===== */
+
+  /* Tablette - Navigation compacte */
+  @media (max-width: 1199px) and (min-width: 768px) {
+    .nav__list {
+      gap: var(--space-md);
+    }
+
+    .nav__link {
+      padding: var(--space-sm) var(--space-sm);
+      font-size: var(--font-size-caption);
+    }
+  }
+
+  /* Mobile - Navigation verticale */
+  @media (max-width: 767px) {
+    .nav__list {
+      flex-direction: column;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+
+    .nav__link {
+      padding: var(--space-sm) var(--space-md);
+      font-size: var(--font-size-base);
+      width: 100%;
+      max-width: 200px;
+      text-align: center;
+    }
+  }
+
+  /* Très petit mobile - Navigation verticale compacte */
+  @media (max-width: 479px) {
+    .nav__list {
+      gap: var(--space-sm);
+    }
+
+    .nav__link {
+      padding: var(--space-sm) var(--space-md);
+      font-size: var(--font-size-caption);
+      max-width: 150px;
+    }
+  }
+
+  /* ===== ANIMATIONS ET TRANSITIONS ===== */
+
+  .nav__list {
+    transition:
+      gap var(--transition-fast),
+      flex-direction var(--transition-fast);
+  }
+
+  .nav__link {
+    transition: all var(--transition-fast);
+  }
+</style>
