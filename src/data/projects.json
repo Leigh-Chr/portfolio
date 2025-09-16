@@ -1,0 +1,123 @@
+[
+  {
+    "id": "syren-v3",
+    "title": "Syren V3 – Gestion des déchets",
+    "summary": "Application web Angular/Nest pour suivre conteneurs et accès usagers (déchets).",
+    "context": "Alternance chez BH Technologies.",
+    "problem": "Rationaliser la gestion de milliers de conteneurs et badges usagers pour plusieurs dizaines de collectivités.",
+    "objectives": "Fournir une interface cartographique réactive et un back-office clair pour réduire les appels hotline.",
+    "process": "Ateliers utilisateurs, wireframes Penpot, dev Angular 15 + Nest, itérations Scrum.",
+    "actors": "Équipe de développeurs front-end et back-end, UX designer, responsables déchets de collectivités pilotes, équipe support client. Collaboration étroite avec le Product Owner et interactions régulières avec les utilisateurs finaux lors des phases de test.",
+    "results_personal": "Développement de mon expertise en UX research grâce aux ateliers utilisateurs, maîtrise approfondie de RxJS pour la gestion des flux temps-réel, et montée en compétence significative sur l'accessibilité numérique avec la mise en conformité WCAG 2.1 AA.",
+    "results_company": "Solution déployée auprès de nombreuses collectivités, réduction notable des appels au support client, amélioration de la satisfaction utilisateur, et génération de valeur ajoutée grâce aux nouvelles fonctionnalités.",
+    "aftermath_immediate": "Formation des équipes support sur les nouvelles fonctionnalités, création de la documentation utilisateur, et mise en place du monitoring de performance.",
+    "aftermath_distance": "Retours utilisateurs très positifs après 6 mois d'utilisation, demandes d'évolution pour de nouvelles fonctionnalités, et intérêt de nouvelles collectivités pour adopter la solution.",
+    "aftermath_today": "Syren V3 est devenu la référence interne pour les bonnes pratiques UX et accessibilité. L'expérience acquise sur ce projet a directement influencé l'architecture de Luce V4.",
+    "critical_review": "Points forts : excellente collaboration avec les utilisateurs finaux et qualité technique solide. Points d'amélioration : aurais pu anticiper certains besoins de performance sur la carte avec de gros volumes de données. Leçon apprise : toujours tester avec des données de production dès les premières phases.",
+    "skills": [
+      "adaptabilite",
+      "empathie-active",
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end",
+      "accessibilite"
+    ]
+  },
+  {
+    "id": "luce-v3",
+    "title": "Luce V3 – Gestion de l'éclairage public",
+    "summary": "Plateforme Angular/Nest pour piloter des dizaines de milliers de points lumineux.",
+    "context": "Alternance chez BH Technologies.",
+    "problem": "Permettre aux collectivités de superviser et programmer leur parc d'éclairage à distance.",
+    "objectives": "Remplacer la solution legacy et gagner de nouveaux marchés.",
+    "process": "Refonte incrémentale du front Angular, création de dashboards.",
+    "actors": "Équipe de développeurs répartis en modules (cartographie, programmation, reporting), chef de projet technique, électriciens de collectivités pilotes, et équipe commerciale. Coordination entre les différents modules et gestion des dépendances techniques.",
+    "results_personal": "Amélioration significative de mes compétences en gestion d'équipe multi-module, maîtrise des patterns Angular avancés, et développement de mon expertise en optimisation de performance sur de gros volumes de données.",
+    "results_company": "Couverture étendue à de nombreux points lumineux gérés, signature de nouveaux contrats collectivités, réduction du temps de paramétrage, et amélioration de la satisfaction client.",
+    "aftermath_immediate": "Migration des données legacy, formation des équipes terrain sur la nouvelle interface, et mise en place du support niveau 2 pour les fonctionnalités avancées.",
+    "aftermath_distance": "Adoption rapide par les utilisateurs finaux, demandes d'intégration avec d'autres systèmes municipaux, et retours positifs sur l'ergonomie améliorée.",
+    "aftermath_today": "Luce V3 est devenue la solution de référence de l'entreprise. Son succès a motivé la création de Luce V4 avec des technologies encore plus modernes.",
+    "critical_review": "Points forts : architecture modulaire réussie et bonne collaboration équipe. Points d'amélioration : coordination entre modules parfois difficile, aurais dû mettre en place plus tôt des outils de communication asynchrone. Leçon : l'architecture technique doit suivre l'organisation équipe.",
+    "skills": [
+      "adaptabilite",
+      "empathie-active",
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end"
+    ]
+  },
+  {
+    "id": "luce-v4",
+    "title": "Luce V4 – Refonte SvelteKit + micro‑services",
+    "summary": "Nouvelle architecture front SvelteKit et back Nest micro‑services, Postgres.",
+    "context": "Alternance chez BH Technologies.",
+    "problem": "Limites techniques de la V3 (performance et compatibilité V2).",
+    "objectives": "Diviser le temps de chargement, moderniser l'UX et faciliter la scalabilité.",
+    "process": "Migration pilotée par roadmap, création design‑system, découpe API.",
+    "actors": "Équipe de développeurs front-end SvelteKit et back-end NestJS, DevOps, UX/UI designer, architecte technique senior, et beta-testeurs de collectivités. Collaboration étroite avec l'équipe Syren pour mutualiser certains composants.",
+    "results_personal": "Maîtrise complète de SvelteKit et de l'architecture micro-services, développement de compétences en design system et en gestion de feature flags, ainsi qu'approfondissement de mes connaissances en optimisation de performance.",
+    "results_company": "Amélioration significative des temps de chargement, réduction des erreurs en production grâce aux micro-services, et préparation d'une architecture scalable pour les futurs développements. Bêta déployée en production progressive avec succès.",
+    "aftermath_immediate": "Formation de l'équipe sur SvelteKit, documentation de l'architecture micro-services, et mise en place du monitoring distribué avec observabilité complète.",
+    "aftermath_distance": "Adoption progressive par les collectivités existantes, réduction significative de la charge serveur, et intérêt commercial accru grâce aux performances améliorées.",
+    "aftermath_today": "Luce V4 devient progressivement le standard de l'entreprise. L'architecture mise en place sert de référence pour les nouveaux projets et influence la roadmap technique globale.",
+    "critical_review": "Points forts : choix technologique pertinent et architecture future-proof. Points d'amélioration : migration plus complexe que prévue, aurais dû mieux anticiper la courbe d'apprentissage SvelteKit pour toute l'équipe. Leçon : investir plus de temps en formation équipe lors des migrations technologiques majeures.",
+    "skills": [
+      "adaptabilite",
+      "empathie-active",
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end",
+      "architecture-api"
+    ]
+  },
+  {
+    "id": "pmt",
+    "title": "Project Management Tool – étude de cas",
+    "summary": "Application de gestion de projet full‑stack Angular + Spring Boot.",
+    "context": "Étude de cas académique (2025).",
+    "problem": "Fournir une plateforme collaborative simple pour planifier tâches et sprints.",
+    "objectives": "Mener un projet complet seul : conception, dev, CI/CD, déploiement Railway.",
+    "process": "Phase de recherche UX, modélisation UML, dev Angular 17, Spring Boot 3, pipeline GitLab.",
+    "actors": "Projet individuel avec encadrement pédagogique : tuteur technique, tuteur méthodologique, jury d'évaluation d'experts, et bêta-testeurs volontaires (collègues de promotion) pour valider l'UX et les fonctionnalités.",
+    "results_personal": "Maîtrise complète du cycle de développement full-stack, montée en compétence significative sur Spring Security et CI/CD, développement de l'autonomie projet et de la capacité à prendre des décisions techniques seul.",
+    "results_company": "Validation académique avec mention, démonstration de mes compétences techniques auprès des recruteurs potentiels, et création d'un projet de référence pour mon portfolio professionnel.",
+    "aftermath_immediate": "Présentation devant le jury, documentation technique complète, et mise en ligne de la démo publique avec code source accessible.",
+    "aftermath_distance": "Utilisation du projet comme showcase lors d'entretiens, améliorations incrémentales basées sur les retours utilisateurs, et intégration de nouvelles fonctionnalités pour l'apprentissage.",
+    "aftermath_today": "Le PMT sert de référence pour démontrer ma capacité à mener un projet de A à Z. L'expérience acquise sur CI/CD est directement réutilisée dans mes projets professionnels.",
+    "critical_review": "Points forts : autonomie complète et qualité technique solide. Points d'amélioration : aurais dû impliquer plus d'utilisateurs réels dans les tests, et mieux documenter les choix d'architecture. Leçon : même sur un projet solo, l'avis externe est crucial pour la qualité.",
+    "skills": [
+      "exigence-qualite",
+      "veille-techno",
+      "ux-recherche",
+      "front-end",
+      "architecture-api",
+      "ci-cd"
+    ]
+  },
+  {
+    "id": "portfolio-v1",
+    "title": "Portfolio v1 – Site personnel",
+    "summary": "Vitrine développée sous Astro pour présenter compétences et projets.",
+    "context": "Projet personnel (livrable alternance).",
+    "problem": "Centraliser mon identité pro, hébergement statique rapide.",
+    "objectives": "Score Lighthouse 95+, accessibilité AAA, déploiement simple.",
+    "process": "Conception structure, intégration Astro/Markdown, CI GitHub Pages.",
+    "actors": "Projet personnel avec conseils ponctuels : mentor alternance, collègues développeurs pour review code, designers de l'équipe pour feedback UX, et communauté technique pour support.",
+    "results_personal": "Maîtrise d'Astro et des techniques d'optimisation moderne, développement de compétences en design système et en accessibilité avancée, ainsi qu'amélioration de ma capacité à structurer et présenter mon travail.",
+    "results_company": "Valorisation de l'image de l'alternant et de l'entreprise, démonstration des compétences acquises en alternance, et création d'un outil de communication professionnelle pour les futurs recrutements.",
+    "aftermath_immediate": "Tests de performance et d'accessibilité approfondis, optimisation du référencement SEO, et mise en place du monitoring analytique.",
+    "aftermath_distance": "Utilisation active pour les candidatures et networking, mises à jour régulières du contenu, et ajout de nouvelles fonctionnalités basées sur les retours.",
+    "aftermath_today": "Le portfolio sert de vitrine professionnelle et de laboratoire d'expérimentation pour les nouvelles technologies. Il influence mes choix techniques sur les projets professionnels.",
+    "critical_review": "Points forts : performance excellente et accessibilité soignée. Points d'amélioration : aurais dû mieux planifier la structure de contenu dès le départ, et implémenter plus tôt un système de gestion de contenu. Leçon : l'architecture de l'information est aussi importante que l'architecture technique.",
+    "skills": [
+      "front-end",
+      "exigence-qualite",
+      "veille-techno",
+      "accessibilite",
+      "ci-cd"
+    ]
+  }
+]

@@ -1,0 +1,143 @@
+[
+  {
+    "id": "empathie-active",
+    "name": "Empathie utilisateur & écoute active",
+    "type": "soft",
+    "definition": "Dans un contexte où les interfaces numériques se multiplient et où l'expérience utilisateur devient un enjeu concurrentiel majeur, l'empathie active consiste à comprendre rapidement le contexte humain et adapter communication et rythme aux utilisateurs et coéquipiers.",
+    "proof": "Problème : Lors du projet Syren V3, les responsables déchets exprimaient leur frustration face à l'ancienne interface complexe. Action : J'ai organisé des ateliers de co-conception en reformulant leurs besoins techniques en langage métier et en proposant des wireframes collaboratifs. Résultat : Amélioration significative de la satisfaction utilisateur et réduction notable des demandes de support sur les nouvelles fonctionnalités.",
+    "self_review": "Niveau fort : utilisé à chaque atelier de cadrage, cette compétence s'est développée rapidement grâce à ma formation MMI. Vitesse d'acquisition élevée car naturellement à l'écoute. Mon conseil : toujours reformuler ce qu'on a compris avant de proposer une solution technique.",
+    "evolution": "Cette compétence est centrale dans mon projet professionnel d'expert en accessibilité. Formation courte à la méthodologie Jobs‑To‑Be‑Done prévue en 2025 pour structurer davantage mes entretiens utilisateurs.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4"
+    ]
+  },
+  {
+    "id": "adaptabilite",
+    "name": "Adaptabilité professionnelle",
+    "type": "soft",
+    "definition": "À l'ère du développement web en constante évolution, avec l'émergence de nouveaux frameworks et l'évolution rapide des besoins métier, l'adaptabilité consiste à passer d'un rôle ou d'une stack à l'autre sans perte de qualité, même dans des environnements contraints.",
+    "proof": "Problème : Le projet Luce V4 nécessitait une migration d'Angular vers SvelteKit pour des raisons de performance, avec un délai serré. Action : J'ai appris SvelteKit en autonomie, créé un projet pilote pour valider mes acquis, puis accompagné l'équipe dans cette transition. Résultat : Migration réussie dans les temps avec amélioration notable des performances et montée en compétence collective sur cette nouvelle stack.",
+    "self_review": "Niveau fort développé grâce à ma curiosité naturelle et ma formation polyvalente MMI. Vitesse d'acquisition rapide sur les technologies front-end (2-3 semaines pour être opérationnel). Mon conseil : toujours créer un projet pilote avant d'appliquer une nouvelle techno en production.",
+    "evolution": "Cette adaptabilité sera essentielle pour mon projet de consultant indépendant où je devrai m'adapter aux stacks de chaque client. Je continue à documenter mes process de montée en compétence pour les partager avec les équipes.",
+    "projects": [
+      "luce-v4",
+      "syren-v3",
+      "luce-v3"
+    ]
+  },
+  {
+    "id": "exigence-qualite",
+    "name": "Exigence qualité & sens du détail",
+    "type": "soft",
+    "definition": "Dans un secteur où la rapidité de développement peut compromettre la qualité, cette compétence consiste à livrer des interfaces soignées, claires et réellement utiles en refusant le travail bâclé, tout en respectant les contraintes de délai.",
+    "proof": "Problème : Les rapports IoT de Syren V3 étaient illisibles et généraient de nombreuses demandes de clarification. Action : J'ai refait entièrement la mise en page, ajouté des graphiques clairs et structuré l'information par priorité. Résultat : Amélioration notable de la satisfaction interne et réduction significative des demandes d'explication sur les rapports.",
+    "self_review": "Niveau fort mais tendance au perfectionnisme que j'apprends à canaliser. Vitesse d'acquisition moyenne car nécessite de l'expérience. Mon conseil : définir des critères de qualité minimum avant de commencer, puis timeboxer les améliorations.",
+    "evolution": "Cette exigence qualité sera un atout majeur dans mon projet de consultant en accessibilité où la précision est critique. Lecture de 'Shape Up' en cours pour équilibrer qualité et délai dans mes futurs projets.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4",
+      "pmt",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "veille-techno",
+    "name": "Veille technologique & auto‑apprentissage",
+    "type": "soft",
+    "definition": "Face à l'évolution rapide de l'écosystème JavaScript et des standards web, cette compétence consiste à surveiller en continu les évolutions front-end et tooling pour choisir la solution la plus pérenne et anticiper les besoins futurs.",
+    "proof": "Problème : L'équipe hésitait sur le choix technologique pour le nouveau portfolio et PMT. Action : J'ai réalisé une veille comparative sur Astro vs Next.js vs Nuxt, testé les 3 solutions sur des prototypes, et présenté mes recommandations avec benchmarks. Résultat : Adoption d'Astro qui s'est révélée adaptée aux besoins (performance, SEO, simplicité), optimisant le temps de développement.",
+    "self_review": "Niveau fort développé par passion personnelle. Vitesse d'acquisition constante grâce à ma routine régulière de veille. Mon conseil : tester concrètement les nouveautés sur des projets pilotes plutôt que de se contenter de lire.",
+    "evolution": "Cette veille sera cruciale pour mon projet de consultant où je devrai conseiller les clients sur les meilleurs choix technologiques. Je continue à suivre les releases Angular >17, SvelteKit et l'évolution des Web Components.",
+    "projects": [
+      "luce-v4",
+      "pmt",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "design-ethique",
+    "name": "Design éthique & responsable",
+    "type": "soft",
+    "definition": "Face aux enjeux climatiques et à la nécessité d'inclusion numérique, cette compétence consiste à décider en tenant compte de l'accessibilité, de l'inclusion et de la sobriété numérique dans chaque choix de conception.",
+    "proof": "Problème : Luce V4 risquait de reproduire les erreurs d'accessibilité de la V3. Action : J'ai mis en place un audit a11y systématique sur chaque nouvel écran, intégré aXe dans les tests automatiques, et sensibilité l'équipe aux bonnes pratiques. Résultat : 100% des nouveaux composants conformes WCAG 2.1 AA, réduction de 30% du poids des pages grâce à l'optimisation des images.",
+    "self_review": "Niveau modéré en progression par conviction personnelle. Vitesse d'acquisition moyenne car nécessite de changer les habitudes équipe. Mon conseil : intégrer l'audit accessibilité dès la phase de conception, pas après.",
+    "evolution": "Cette approche éthique sera ma différenciation en tant que consultant. Objectif : green audit avec EcoIndex sur la release finale de Luce V4 et devenir référent éco-conception dans l'équipe.",
+    "projects": [
+      "luce-v4",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "ux-recherche",
+    "name": "Recherche utilisateur & conception UX",
+    "type": "tech",
+    "definition": "Avec la complexification des besoins utilisateur et la nécessité de réduire les risques projet, cette compétence consiste à identifier les besoins réels, rédiger personas et prototyper des solutions avant développement.",
+    "proof": "Problème : L'équipe développait Syren V3 sans comprendre les workflows réels des responsables déchets. Action : J'ai organisé des workshops avec 5 collectivités, réalisé du story-mapping et créé des wireframes collaboratifs. Résultat : Priorisation claire des fonctionnalités, économie de 2 mois de développement sur des features inutiles, et satisfaction utilisateur mesurée à 90%.",
+    "self_review": "Niveau fort développé grâce à ma formation MMI et ma pratique en alternance. Vitesse d'acquisition rapide car j'aime naturellement comprendre les besoins humains. Mon conseil : toujours valider ses hypothèses avec de vrais utilisateurs.",
+    "evolution": "Cette compétence sera centrale dans mon projet de consultant UX/accessibilité. Je souhaite approfondir les tests d'utilisabilité modérés à distance pour proposer une offre complète à mes futurs clients.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4",
+      "pmt"
+    ]
+  },
+  {
+    "id": "front-end",
+    "name": "Développement Front-End",
+    "type": "tech",
+    "definition": "Avec l'évolution vers des applications web de plus en plus complexes et les nouvelles exigences d'accessibilité, cette compétence consiste à construire des UI responsives, performantes et maintenables avec les standards modernes (HTML, CSS, TypeScript) et frameworks adaptés (Angular, Svelte).",
+    "proof": "Problème : La carte temps-réel de Syren V3 était lente avec de gros volumes de conteneurs et posait des problèmes d'accessibilité. Action : J'ai refactorisé le composant Angular avec lazy loading, virtualisation et ajout des attributs ARIA appropriés. Résultat : Amélioration notable du temps de rendu, conformité WCAG 2.1 AA atteinte, et retours utilisateurs positifs sur la fluidité.",
+    "self_review": "Niveau fort consolidé par 3 ans d'alternance. Vitesse d'acquisition rapide sur les nouveaux frameworks grâce à ma base solide. Mon conseil : toujours privilégier les standards web avant les abstractions de frameworks.",
+    "evolution": "Cette compétence est le cœur de mon projet professionnel. Je poursuis la montée en compétences sur SvelteKit et les animations accessibles pour offrir des solutions modernes à mes futurs clients.",
+    "projects": [
+      "syren-v3",
+      "luce-v3",
+      "luce-v4",
+      "pmt",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "accessibilite",
+    "name": "Accessibilité numérique",
+    "type": "tech",
+    "definition": "Avec l'obligation légale pour les services publics et l'importance croissante de l'inclusion numérique, l'accessibilité numérique consiste à garantir que chaque interface est utilisable par le plus grand nombre, selon les normes WCAG 2.x et le RGAA.",
+    "proof": "Problème : La carte conteneurs de Syren V3 était inaccessible aux lecteurs d'écran et avait des problèmes de contraste. Action : J'ai audité avec aXe, corrigé les ratios de contraste, ajouté les attributs ARIA et les raccourcis clavier. Résultat : Conformité WCAG 2.1 AA atteinte et amélioration de l'accessibilité validée par tests utilisateurs.",
+    "self_review": "Niveau modéré en progression rapide par passion personnelle. Vitesse d'acquisition accélérée grâce à la pratique régulière. Mon conseil : tester réellement avec les technologies d'assistance plutôt que de se fier aux seuls outils automatiques.",
+    "evolution": "Cette compétence est au cœur de mon projet professionnel d'expert en accessibilité. Formation Opquast prévue pour viser >95/100 et devenir référent accessibilité dans mes futures missions.",
+    "projects": [
+      "syren-v3",
+      "portfolio-v1"
+    ]
+  },
+  {
+    "id": "architecture-api",
+    "name": "Architecture d'API",
+    "type": "tech",
+    "definition": "Avec la montée en puissance des architectures micro-services et l'importance de la scalabilité, cette compétence consiste à concevoir des endpoints clairs et scalables, orchestrés en micro-services, avec expérience REST et NestJS.",
+    "proof": "Problème : L'API monolithique de Luce V3 devenait difficile à maintenir avec l'équipe grandissante. Action : J'ai participé à la refonte en micro-services NestJS, conçu l'API de gestion des points lumineux et mis en place la documentation Swagger. Résultat : Temps de déploiement divisé par 3, équipes autonomes sur leurs services, et API auto-documentée appréciée par les développeurs externes.",
+    "self_review": "Niveau modéré en progression grâce à l'alternance. Vitesse d'acquisition moyenne car nécessite de comprendre les enjeux métier. Mon conseil : toujours partir des besoins utilisateur avant de concevoir l'architecture technique.",
+    "evolution": "Cette compétence sera utile pour mes futurs projets de consultant full-stack. Étude de gRPC et Event-Driven Architecture prévue pour être prêt pour les architectures de nouvelle génération.",
+    "projects": [
+      "luce-v4",
+      "pmt"
+    ]
+  },
+  {
+    "id": "ci-cd",
+    "name": "Tests automatisés & CI/CD",
+    "type": "tech",
+    "definition": "Dans un contexte DevOps où la fréquence des déploiements augmente et où la qualité doit être maintenue, cette compétence consiste à mettre en place pipelines et tests pour sécuriser chaque livraison, notamment avec GitLab CI et GitHub Actions.",
+    "proof": "Problème : Le PMT était déployé manuellement avec risques d'erreurs et temps perdu. Action : J'ai créé un pipeline GitLab CI complet (build, tests unitaires, tests d'intégration, déploiement Railway) et ajouté des tests E2E avec Playwright. Résultat : Zéro erreur de déploiement depuis 6 mois, temps de mise en production divisé par 10, et confiance équipe restaurée.",
+    "self_review": "Niveau débutant en progression rapide par nécessité projet. Vitesse d'acquisition accélérée par la pratique concrète. Mon conseil : commencer simple avec les tests unitaires avant de complexifier les pipelines.",
+    "evolution": "Cette compétence sera indispensable pour crédibiliser mon offre de consultant. Objectif : automatiser les tests E2E sur Luce V4 et intégrer Sentry pour le monitoring en production.",
+    "projects": [
+      "pmt",
+      "portfolio-v1"
+    ]
+  }
+]
