@@ -3,6 +3,7 @@ type: 'education'
 title: "DUT Métiers du Multimédia et de l'Internet"
 organization: 'Université Grenoble Alpes'
 logo: '/images/logos/iut-grenoble.svg'
+website: 'https://iut1.univ-grenoble-alpes.fr'
 location: 'Grenoble, France'
 startDate: '2019-09'
 endDate: '2022-06'

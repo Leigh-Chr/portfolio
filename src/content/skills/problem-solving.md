@@ -11,7 +11,7 @@ summary: 'Approche méthodique pour analyser, décomposer et résoudre des probl
 
 ## Ma Définition
 
-La résolution de problèmes est le quotidien du développeur. Chaque bug à corriger, chaque fonctionnalité à implémenter est un puzzle à résoudre. Face à un problème complexe, ma méthode est toujours la même : d'abord comprendre et reproduire le problème de manière isolée, puis le décomposer en sous-problèmes plus simples.
+La résolution de problèmes est le quotidien du développeur. L'émergence des outils d'IA assistée comme GitHub Copilot et Claude transforme l'approche du debugging en 2024 : ces assistants aident à identifier des patterns d'erreurs, suggèrent des solutions et accélèrent la recherche. Parallèlement, les pratiques d'observabilité (OpenTelemetry, distributed tracing) permettent de diagnostiquer des problèmes complexes dans les architectures distribuées. Chaque bug à corriger, chaque fonctionnalité à implémenter est un puzzle à résoudre. Face à un problème complexe, ma méthode est toujours la même : d'abord comprendre et reproduire le problème de manière isolée, puis le décomposer en sous-problèmes plus simples.
 
 ## Mes éléments de preuve
 
@@ -21,11 +21,11 @@ Dans le contexte IoT de BH Technologies, les problèmes sont souvent multicouche
 
 ### Refonte des rapports Syren V3
 
-Les rapports IoT de Syren V3 étaient illisibles et généraient de nombreuses demandes de clarification. J'ai analysé le problème en observant comment les utilisateurs les consultaient, puis j'ai refait entièrement la mise en page : graphiques clairs, information structurée par priorité, exports PDF propres. Résultat : amélioration notable de la satisfaction et réduction significative des demandes d'explication.
+Les rapports IoT de **[Syren V3](/projects/syren-platform)** étaient illisibles et généraient de nombreuses demandes de clarification. J'ai analysé le problème en observant comment les utilisateurs les consultaient, puis j'ai refait entièrement la mise en page : graphiques clairs, information structurée par priorité, exports PDF propres. Résultat : amélioration notable de la satisfaction et réduction significative des demandes d'explication.
 
 ### Implémentation des RRULE dans AppStandard
 
-Sur AppStandard, j'ai dû implémenter le parsing des règles de récurrence (RRULE) du standard RFC 5545. Ces règles peuvent être extrêmement complexes (récurrences avec exceptions, fuseaux horaires, limites). J'ai décomposé le problème en sous-parsers, écrit des tests exhaustifs, et itéré jusqu'à gérer tous les cas edge. Cette approche méthodique a permis de créer un parser robuste qui gère les fichiers .ics de Google, Apple et Outlook.
+Sur **[AppStandard](/projects/appstandard)**, j'ai dû implémenter le parsing des règles de récurrence (RRULE) du standard RFC 5545. Ces règles peuvent être extrêmement complexes (récurrences avec exceptions, fuseaux horaires, limites). J'ai décomposé le problème en sous-parsers, écrit des tests exhaustifs, et itéré jusqu'à gérer tous les cas edge. Cette approche méthodique a permis de créer un parser robuste qui gère les fichiers .ics de Google, Apple et Outlook.
 
 ## Mon autocritique
 

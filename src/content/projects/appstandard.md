@@ -54,18 +54,31 @@ Le projet représente plus de 216 000 lignes de TypeScript, organisées en monor
 
 **Phase 5 - Infrastructure** : Backend Node.js, PostgreSQL, pipeline CI/CD GitHub Actions, et déploiement Docker avec docker-compose pour le self-hosting.
 
-## Compétences mobilisées
+## Acteurs – les interactions
 
-Ce projet m'a permis de mobiliser et développer des compétences variées : lecture et implémentation de spécifications techniques (RFC), architecture logicielle à grande échelle (monorepo), développement frontend moderne (React 19), et gestion d'infrastructure (Docker, CI/CD).
+Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son évolution :
+
+- **Communauté open source** : Retours et suggestions via les issues GitHub, contributions potentielles sur les parsers RFC
+- **Utilisateurs beta** : Tests des applications en conditions réelles, retours sur l'ergonomie et les bugs rencontrés avec différents fichiers .ics/.vcf
+- **Communauté RFC/iCalendar** : Échanges sur les forums spécialisés pour clarifier les ambiguïtés des spécifications
+- **Écosystème NPM** : Publication des packages pour réutilisation par d'autres développeurs
 
 ## Résultats
+
+### Pour moi
 
 - Maîtrise approfondie de TypeScript à grande échelle (216k+ lignes)
 - Expertise sur les standards ouverts RFC 5545 et RFC 6350
 - Compétences en architecture monorepo et publication de packages NPM
 - Montée en compétence sur React 19 et les dernières pratiques frontend
-- Trois applications fonctionnelles et interopérables
-- Packages NPM publiés et réutilisables par la communauté
+- Capacité à lire et implémenter des spécifications techniques complexes
+
+### Pour la communauté
+
+- Trois applications fonctionnelles et interopérables disponibles en open source
+- Packages NPM publiés et réutilisables (parsers RFC 5545, RFC 6350)
+- Documentation technique complète pour faciliter les contributions
+- Alternative open source et respectueuse de la vie privée aux solutions propriétaires
 
 ## Lendemains du projet
 

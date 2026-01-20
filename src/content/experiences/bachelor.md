@@ -3,6 +3,7 @@ type: 'education'
 title: "Bachelor Concepteur Développeur d'Applications"
 organization: 'ISCOD'
 logo: '/images/logos/iscod.jpg'
+website: 'https://www.iscod.fr'
 location: 'Formation à distance'
 startDate: '2022-09'
 endDate: '2023-09'

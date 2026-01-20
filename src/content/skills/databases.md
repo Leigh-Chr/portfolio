@@ -11,13 +11,13 @@ summary: 'Conception et optimisation de bases de données relationnelles et NoSQ
 
 ## Ma Définition
 
-La gestion des données est au cœur des plateformes IoT que je développe chez BH Technologies. Les capteurs de déchets et les luminaires connectés génèrent un volume important de données qu'il faut stocker, interroger et analyser efficacement. Le choix entre SQL et NoSQL dépend toujours du cas d'usage : cohérence ACID vs flexibilité, requêtes complexes vs performance en lecture, schéma fixe vs évolutif.
+La gestion des données est au cœur des plateformes IoT que je développe chez BH Technologies. PostgreSQL 16 et 17 (2023-2024) ont apporté des améliorations significatives en termes de parallélisation des requêtes et de gestion du JSON, renforçant sa position de base de données relationnelle de référence. Parallèlement, l'essor des bases vectorielles (pgvector) pour l'IA générative et des solutions edge computing transforment le paysage du stockage de données. Les capteurs de déchets et les luminaires connectés génèrent un volume important de données qu'il faut stocker, interroger et analyser efficacement. Le choix entre SQL et NoSQL dépend toujours du cas d'usage : cohérence ACID vs flexibilité, requêtes complexes vs performance en lecture, schéma fixe vs évolutif.
 
 ## Mes éléments de preuve
 
 ### PostgreSQL pour les plateformes Syren et Luce
 
-En SQL, je travaille principalement avec PostgreSQL pour les données structurées : utilisateurs, configurations, historiques de mesures. Je maîtrise la conception de schémas normalisés, l'écriture de requêtes optimisées avec jointures et agrégations, et l'utilisation d'index pour améliorer les performances. Les migrations de base de données avec TypeORM font partie de mon quotidien pour faire évoluer les schémas de manière contrôlée.
+En SQL, je travaille principalement avec PostgreSQL pour les données structurées sur **[Syren](/projects/syren-platform)** et **[Luce](/projects/luce-platform)** : utilisateurs, configurations, historiques de mesures. Je maîtrise la conception de schémas normalisés, l'écriture de requêtes optimisées avec jointures et agrégations, et l'utilisation d'index pour améliorer les performances. Les migrations de base de données avec TypeORM font partie de mon quotidien pour faire évoluer les schémas de manière contrôlée.
 
 ### Redis et MongoDB pour les besoins spécifiques
 
@@ -25,7 +25,7 @@ Le NoSQL trouve sa place pour les données moins structurées ou les besoins de 
 
 ### Architecture multi-domaine sur AppStandard
 
-Mon projet personnel **AppStandard** pousse cette expertise plus loin avec une architecture de base de données multi-domaine (Calendar, Tasks, Contacts). Chaque domaine a son propre schéma optimisé, tout en partageant des tables communes pour les utilisateurs et l'authentification.
+Mon projet personnel **[AppStandard](/projects/appstandard)** pousse cette expertise plus loin avec une architecture de base de données multi-domaine (Calendar, Tasks, Contacts). Chaque domaine a son propre schéma optimisé, tout en partageant des tables communes pour les utilisateurs et l'authentification.
 
 ## Mon autocritique
 

@@ -12,7 +12,7 @@ summary: 'Capacité à identifier, apprendre et adopter de nouvelles technologie
 
 ## Ma Définition
 
-La veille technologique est la pratique consistant à surveiller activement l'évolution des technologies, outils et pratiques du développement logiciel. Dans un domaine où les frameworks et les standards évoluent constamment, cette compétence est essentielle pour maintenir la pertinence technique et proposer des solutions modernes.
+La veille technologique est la pratique consistant à surveiller activement l'évolution des technologies, outils et pratiques du développement logiciel. L'année 2024 a été particulièrement dense : explosion de l'IA générative avec Claude, GPT-4 et les modèles open source (Llama, Mistral), sorties majeures de frameworks (Svelte 5, React 19, Angular 18), et émergence de nouvelles pratiques comme le "vibe coding" assisté par IA. Dans un domaine où les frameworks et les standards évoluent constamment, cette compétence est essentielle pour maintenir la pertinence technique et proposer des solutions modernes.
 
 Cette veille ne se limite pas à lire des articles : elle implique d'expérimenter les technologies prometteuses, d'évaluer leur maturité et leur adéquation aux besoins réels, et de les intégrer concrètement dans des projets.
 
@@ -20,15 +20,15 @@ Cette veille ne se limite pas à lire des articles : elle implique d'expériment
 
 ### Adoption précoce de Svelte 5
 
-Lors de la refonte de Syren V4 et Luce V4, j'ai proposé et défendu le choix de migrer d'Angular vers Svelte 5, alors que le framework venait tout juste de sortir. Cette décision s'appuyait sur plusieurs mois de veille : suivi des RFC, tests des versions beta, analyse des retours de la communauté. Le résultat a été une amélioration significative des performances et de l'expérience développeur. J'ai également adopté Paraglide.js (Inlang) pour l'internationalisation, une solution moderne qui remplace avantageusement les approches traditionnelles comme i18next.
+Lors de la refonte de **[Syren V4](/projects/syren-platform)** et **[Luce V4](/projects/luce-platform)**, j'ai proposé et défendu le choix de migrer d'Angular vers Svelte 5, alors que le framework venait tout juste de sortir. Cette décision s'appuyait sur plusieurs mois de veille : suivi des RFC, tests des versions beta, analyse des retours de la communauté. Le résultat a été une amélioration significative des performances et de l'expérience développeur. J'ai également adopté Paraglide.js (Inlang) pour l'internationalisation, une solution moderne qui remplace avantageusement les approches traditionnelles comme i18next.
 
 ### Exploration de Tauri et Rust
 
-Pour mon projet personnel Tidy App, j'ai choisi Tauri 2.0 plutôt qu'Electron après un benchmark approfondi. Cette décision m'a amené à apprendre Rust pour les parties natives de l'application. Le résultat : une application desktop de 15 Mo au lieu de 150 Mo, avec des performances nettement supérieures. Cette exploration autonome démontre ma capacité à sortir de ma zone de confort (JavaScript/TypeScript) pour adopter des technologies plus adaptées au besoin.
+Pour mon projet personnel **[Tidy App](/projects/tidy-app)**, j'ai choisi Tauri 2.0 plutôt qu'Electron après un benchmark approfondi. Cette décision m'a amené à apprendre Rust pour les parties natives de l'application. Le résultat : une application desktop de 15 Mo au lieu de 150 Mo, avec des performances nettement supérieures. Cette exploration autonome démontre ma capacité à sortir de ma zone de confort (JavaScript/TypeScript) pour adopter des technologies plus adaptées au besoin.
 
 ### Intégration des LLMs
 
-Toujours sur Tidy App, j'ai intégré des modèles de langage (Ollama en local, OpenAI en distant) pour la suggestion intelligente de noms de fichiers. Cette fonctionnalité nécessitait de comprendre les APIs des LLMs, d'optimiser les prompts, et de gérer les contraintes de latence et de coût. J'ai anticipé l'importance de l'IA générative dans les outils de productivité avant que cela ne devienne mainstream.
+Toujours sur **[Tidy App](/projects/tidy-app)**, j'ai intégré des modèles de langage (Ollama en local, OpenAI en distant) pour la suggestion intelligente de noms de fichiers. Cette fonctionnalité nécessitait de comprendre les APIs des LLMs, d'optimiser les prompts, et de gérer les contraintes de latence et de coût. J'ai anticipé l'importance de l'IA générative dans les outils de productivité avant que cela ne devienne mainstream.
 
 ## Mon autocritique
 

@@ -3,6 +3,7 @@ import type { SkillGroup } from '@utils/skills';
 
 interface Skill {
   name: string;
+  slug: string;
   level: number;
   category: 'technical' | 'human';
   group: SkillGroup;
@@ -127,17 +128,19 @@ const orderedSkills = [
           const x = SVG_CENTER + radius * Math.cos(angle);
           const y = SVG_CENTER + radius * Math.sin(angle);
           return (
-            <circle
-              cx={x}
-              cy={y}
-              r="6"
-              fill={groupColors[skill.group].fill}
-              stroke="#0a0a0a"
-              stroke-width="2"
-              class="skill-point"
-              data-skill={skill.name}
-              data-level={skill.level}
-            />
+            <a href={`/skills/${skill.slug}`}>
+              <circle
+                cx={x}
+                cy={y}
+                r="6"
+                fill={groupColors[skill.group].fill}
+                stroke="#0a0a0a"
+                stroke-width="2"
+                class="skill-point"
+                data-skill={skill.name}
+                data-level={skill.level}
+              />
+            </a>
           );
         })
       }
@@ -150,17 +153,19 @@ const orderedSkills = [
           const y = SVG_CENTER + LABEL_RADIUS * Math.sin(angle);
           const textAnchor = x < SVG_CENTER - 30 ? 'end' : x > SVG_CENTER + 30 ? 'start' : 'middle';
           return (
-            <text
-              x={x}
-              y={y}
-              text-anchor={textAnchor}
-              dominant-baseline="middle"
-              fill={groupColors[skill.group].fill}
-              class="font-heading"
-              style="font-size: 11px; font-weight: 600;"
-            >
-              {skill.name}
-            </text>
+            <a href={`/skills/${skill.slug}`} class="skill-label-link">
+              <text
+                x={x}
+                y={y}
+                text-anchor={textAnchor}
+                dominant-baseline="middle"
+                fill={groupColors[skill.group].fill}
+                class="font-heading skill-label"
+                style="font-size: 11px; font-weight: 600;"
+              >
+                {skill.name}
+              </text>
+            </a>
           );
         })
       }
@@ -330,5 +335,12 @@ const orderedSkills = [
   }
   .skill-point:hover {
     r: 10;
+  }
+  .skill-label {
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+  }
+  .skill-label-link:hover .skill-label {
+    opacity: 0.7;
   }
 </style>

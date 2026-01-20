@@ -18,7 +18,7 @@ const { skill } = Astro.props;
 const rawContent = skill.body;
 
 function extractSection(content: string, sectionName: string): string {
-  const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=## |$)`, 'i');
+  const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=\\n## |$)`, 'i');
   const match = content.match(regex);
   if (!match) return '';
   return match[0].replace(new RegExp(`## ${sectionName}[^\\n]*\\n?`, 'i'), '').trim();
@@ -151,6 +151,8 @@ const isTechnical = skill.data.category === 'technical';
           <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
             <div set:html={definitionContent
               .replace(/\n\n/g, '</p><p>')
+              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
+              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
               .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
               .replace(/^(.+)$/gm, '<p>$1</p>')
               .replace(/<p><\/p>/g, '')
@@ -173,6 +175,8 @@ const isTechnical = skill.data.category === 'technical';
             <div set:html={preuvesContent
               .replace(/### ([^\n]+)/g, '<h3 class="text-xl font-heading font-bold text-white mt-8 mb-4">$1</h3>')
               .replace(/\n\n/g, '</p><p>')
+              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
+              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
               .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
               .replace(/^(?!<[hp])(.*[^>])$/gm, '<p>$1</p>')
               .replace(/<p><\/p>/g, '')
@@ -196,6 +200,8 @@ const isTechnical = skill.data.category === 'technical';
           <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
             <div set:html={autocritiqueContent
               .replace(/\n\n/g, '</p><p>')
+              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
+              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
               .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
               .replace(/^(.+)$/gm, '<p>$1</p>')
               .replace(/<p><\/p>/g, '')
@@ -217,6 +223,8 @@ const isTechnical = skill.data.category === 'technical';
           <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
             <div set:html={evolutionContent
               .replace(/\n\n/g, '</p><p>')
+              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
+              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
               .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
               .replace(/^(.+)$/gm, '<p>$1</p>')
               .replace(/<p><\/p>/g, '')

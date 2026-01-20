@@ -26,6 +26,7 @@ const groupData = [
 // Prepare data for chart
 const chartData = sortedSkills.map(skill => ({
   name: skill.data.title,
+  slug: skill.id,
   level: skill.data.level,
   category: skill.data.category,
   group: skill.data.group,

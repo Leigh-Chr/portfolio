@@ -20,7 +20,7 @@ const skills = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    category: z.enum(['technical', 'soft']),
+    category: z.enum(['technical', 'human']),
     group: z.string(),
     level: z.number().min(1).max(10),
     icon: z.string(),
@@ -37,6 +37,7 @@ const experiences = defineCollection({
     title: z.string(),
     organization: z.string(),
     logo: z.string().optional(),
+    website: z.string().optional(),
     location: z.string(),
     startDate: z.string(),
     endDate: z.string().optional(),

@@ -11,17 +11,17 @@ summary: 'Capacité à transmettre des idées techniques de manière claire et �
 
 ## Ma Définition
 
-La communication est la capacité à transmettre des idées de manière claire et adaptée à son audience. En tant que développeur fullstack, je communique quotidiennement avec des interlocuteurs variés : équipe SI pour les aspects techniques, équipes métier pour comprendre les besoins fonctionnels, et parfois directement avec les utilisateurs finaux. Savoir adapter mon vocabulaire et mon niveau de détail selon l'audience est essentiel.
+La communication est la capacité à transmettre des idées de manière claire et adaptée à son audience. Dans un contexte où le travail hybride et distant s'est généralisé depuis 2020, la communication écrite asynchrone (documentation, messages, PR reviews) est devenue aussi importante que les échanges synchrones. L'émergence de la "documentation as code" et des outils comme Notion ou Confluence transforme la façon dont les équipes techniques partagent leurs connaissances. En tant que développeur fullstack, je communique quotidiennement avec des interlocuteurs variés : équipe SI pour les aspects techniques, équipes métier pour comprendre les besoins fonctionnels, et parfois directement avec les utilisateurs finaux. Savoir adapter mon vocabulaire et mon niveau de détail selon l'audience est essentiel.
 
 ## Mes éléments de preuve
 
 ### Stage communication chez BH Technologies
 
-Mon stage de 3 mois chez BH Technologies était orienté communication et image de marque. J'ai travaillé sur le site web corporate, rédigé des contenus SEO, et créé des supports de présentation pour les solutions Syren et Luce. Cette expérience m'a appris à vulgariser des concepts techniques IoT pour des audiences non-techniques (collectivités, décideurs).
+Mon stage de 3 mois chez BH Technologies était orienté communication et image de marque. J'ai travaillé sur le **[site web corporate](/projects/site-bh-technologies)**, rédigé des contenus SEO, et créé des supports de présentation pour les solutions Syren et Luce. Cette expérience m'a appris à vulgariser des concepts techniques IoT pour des audiences non-techniques (collectivités, décideurs).
 
 ### Ateliers de co-conception avec les utilisateurs Syren
 
-Lors du projet Syren V3, les responsables déchets des collectivités exprimaient leur frustration face à l'ancienne interface. J'ai organisé des ateliers de co-conception en reformulant leurs besoins en langage métier et en proposant des wireframes collaboratifs sur Penpot. Cette approche a permis une amélioration significative de la satisfaction utilisateur et une réduction des appels au support.
+Lors du projet **[Syren V3](/projects/syren-platform)**, les responsables déchets des collectivités exprimaient leur frustration face à l'ancienne interface. J'ai organisé des ateliers de co-conception en reformulant leurs besoins en langage métier et en proposant des wireframes collaboratifs sur Penpot. Cette approche a permis une amélioration significative de la satisfaction utilisateur et une réduction des appels au support.
 
 ### Documentation technique et APIs
 

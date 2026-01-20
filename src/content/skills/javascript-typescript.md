@@ -11,7 +11,7 @@ summary: "Maîtrise avancée de JavaScript et TypeScript pour le développement 
 
 ## Ma Définition
 
-TypeScript est devenu mon langage de prédilection pour tout projet d'envergure. Le typage statique qu'il apporte transforme radicalement l'expérience de développement : les erreurs sont détectées à la compilation plutôt qu'en production, l'autocomplétion devient intelligente, et le refactoring devient sûr.
+TypeScript est devenu mon langage de prédilection pour tout projet d'envergure. Le typage statique qu'il apporte transforme radicalement l'expérience de développement : les erreurs sont détectées à la compilation plutôt qu'en production, l'autocomplétion devient intelligente, et le refactoring devient sûr. Avec la sortie de TypeScript 5.x en 2024, l'écosystème continue de s'enrichir avec des fonctionnalités comme les décorateurs standardisés (stage 3) et l'amélioration des performances de compilation, consolidant sa position de standard pour le développement JavaScript à grande échelle.
 
 Dans mon travail quotidien chez BH Technologies, j'utilise TypeScript aussi bien côté frontend (Angular, SvelteJS) que backend (NestJS). Cette cohérence technologique sur l'ensemble de la stack facilite le partage de types entre le client et le serveur, réduisant drastiquement les bugs liés aux interfaces de données.
 
@@ -19,11 +19,11 @@ Dans mon travail quotidien chez BH Technologies, j'utilise TypeScript aussi bien
 
 ### Plus de 280 000 lignes de TypeScript sur mes projets personnels
 
-**AppStandard** représente plus de 216 000 lignes de TypeScript organisées en monorepo avec 19 packages. **Tidy App** ajoute 70 000 lignes supplémentaires. Cette échelle démontre ma capacité à structurer et maintenir des bases de code conséquentes avec un typage rigoureux.
+**[AppStandard](/projects/appstandard)** représente plus de 216 000 lignes de TypeScript organisées en monorepo avec 19 packages. **[Tidy App](/projects/tidy-app)** ajoute 70 000 lignes supplémentaires. Cette échelle démontre ma capacité à structurer et maintenir des bases de code conséquentes avec un typage rigoureux.
 
 ### Typage avancé et patterns idiomatiques
 
-Au-delà de la syntaxe de base, je maîtrise les patterns TypeScript avancés : génériques contraints, types utilitaires (Partial, Pick, Omit, Record), discriminated unions pour modéliser des états complexes, et inférence de types. Sur Syren et Luce, j'ai mis en place des types partagés entre frontend et backend pour garantir la cohérence des interfaces API.
+Au-delà de la syntaxe de base, je maîtrise les patterns TypeScript avancés : génériques contraints, types utilitaires (Partial, Pick, Omit, Record), discriminated unions pour modéliser des états complexes, et inférence de types. Sur **[Syren](/projects/syren-platform)** et **[Luce](/projects/luce-platform)**, j'ai mis en place des types partagés entre frontend et backend pour garantir la cohérence des interfaces API.
 
 ### Stack fullstack unifiée
 

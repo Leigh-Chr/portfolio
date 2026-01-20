@@ -51,18 +51,30 @@ Le projet représente plus de 70 000 lignes de TypeScript, avec un backend Rust 
 
 **Phase 4 - Sécurité et UX** : Système d'historique avec rollback complet. Prévisualisation avant exécution. Mode "dry run" pour tester sans modifier. Gestion des conflits de noms automatique.
 
-## Compétences mobilisées
+## Acteurs – les interactions
 
-Ce projet m'a permis de mobiliser et développer des compétences variées : développement cross-platform avec Tauri/Rust, intégration de LLMs (Ollama, OpenAI), extraction de métadonnées de fichiers, et conception d'interfaces utilisateur intuitives.
+Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son évolution :
+
+- **Communauté open source** : Retours via les issues GitHub, suggestions d'amélioration sur l'ergonomie du renommage en masse
+- **Utilisateurs beta** : Tests sur différents systèmes d'exploitation et avec des volumes de fichiers variés, identification de cas d'usage non anticipés
+- **Communauté IA/LLM** : Échanges sur les forums et Discord (Ollama, LocalAI) pour optimiser les prompts de suggestion de noms
+- **Écosystème NPM** : Publication du CLI pour réutilisation par d'autres développeurs et automatisation de workflows
 
 ## Résultats
 
-- Découverte et maîtrise de Tauri 2.0 et Rust
-- Compétences en intégration de LLMs (Ollama, OpenAI)
+### Pour moi
+
+- Découverte et maîtrise de Tauri 2.0 et des bases de Rust
+- Compétences en intégration de LLMs (Ollama local, API OpenAI)
 - Expertise en développement d'applications desktop cross-platform
-- Application fonctionnelle pour Windows, macOS et Linux
-- CLI publiée sur NPM
+- Apprentissage de la gestion des opérations fichiers sécurisées avec rollback
+
+### Pour les utilisateurs
+
+- Application fonctionnelle pour Windows, macOS et Linux (bundle < 20 Mo)
+- CLI publiée sur NPM pour l'automatisation
 - Système d'historique complet permettant d'annuler toutes les opérations
+- Mode hors-ligne respectueux de la vie privée grâce à Ollama
 
 ## Lendemains du projet
 

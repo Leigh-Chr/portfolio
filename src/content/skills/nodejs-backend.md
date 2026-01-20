@@ -11,17 +11,17 @@ summary: "Développement d'APIs et de services backend robustes avec l'écosyst�
 
 ## Ma Définition
 
-NestJS est le framework que j'utilise quotidiennement pour développer les APIs des plateformes Syren et Luce. Son architecture modulaire inspirée d'Angular, combinée à la puissance de Node.js, permet de construire des backends maintenables et testables. J'apprécie particulièrement la structure qu'impose NestJS : les modules, les contrôleurs, les services et les guards créent une séparation claire des responsabilités.
+NestJS est le framework que j'utilise quotidiennement pour développer les APIs des plateformes Syren et Luce. Avec Node.js 22 LTS (2024) et ses améliorations de performance, ainsi que NestJS v10 qui intègre nativement les dernières fonctionnalités ECMAScript, l'écosystème backend JavaScript n'a jamais été aussi mature. L'architecture modulaire de NestJS, inspirée d'Angular et combinée à la puissance de Node.js, permet de construire des backends maintenables et testables. J'apprécie particulièrement la structure qu'impose NestJS : les modules, les contrôleurs, les services et les guards créent une séparation claire des responsabilités.
 
 ## Mes éléments de preuve
 
 ### Refonte microservices de Luce V3
 
-L'API monolithique de Luce V3 devenait difficile à maintenir avec l'équipe grandissante. J'ai participé à la refonte en microservices NestJS : conception de l'API de gestion des points lumineux (lightnodes), mise en place des scénarios et plannings, et documentation Swagger automatique. Résultat : temps de déploiement divisé par 3, équipes autonomes sur leurs services, et API auto-documentée.
+L'API monolithique de **[Luce V3](/projects/luce-platform)** devenait difficile à maintenir avec l'équipe grandissante. J'ai participé à la refonte en microservices NestJS : conception de l'API de gestion des points lumineux (lightnodes), mise en place des scénarios et plannings, et documentation Swagger automatique. Résultat : temps de déploiement divisé par 3, équipes autonomes sur leurs services, et API auto-documentée.
 
 ### WebSockets temps réel pour l'IoT
 
-Je travaille avec les WebSockets (Socket.IO) pour les fonctionnalités temps réel de nos plateformes IoT : mise à jour des statuts de capteurs, alertes en temps réel, synchronisation des données cartographiques. Cette expertise est essentielle pour des applications de supervision comme Syren et Luce.
+Je travaille avec les WebSockets (Socket.IO) pour les fonctionnalités temps réel de nos plateformes IoT : mise à jour des statuts de capteurs, alertes en temps réel, synchronisation des données cartographiques. Cette expertise est essentielle pour des applications de supervision comme **[Syren](/projects/syren-platform)** et **[Luce](/projects/luce-platform)**.
 
 ### Bonnes pratiques et qualité
 

@@ -5,6 +5,14 @@ import { url } from '@utils/url';
 
 // Get all experiences from content collection
 const allExperiences = await getCollection('experiences');
+
+// Get projects and skills for title lookup
+const allProjects = await getCollection('projects');
+const allSkills = await getCollection('skills');
+
+// Create lookup maps for slug -> title
+const projectTitles = new Map(allProjects.map((p) => [p.slug, p.data.title]));
+const skillTitles = new Map(allSkills.map((s) => [s.slug, s.data.title]));
 const sortedExperiences = allExperiences.sort((a, b) => {
   // Sort by start date descending (anti-chronological)
   return new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime();
@@ -263,15 +271,35 @@ function formatDate(dateStr: string): string {
                       {/* Organization with logo */}
                       <div class="flex items-center gap-4 mb-4">
                         {exp.data.logo ? (
-                          <img
-                            src={url(exp.data.logo)}
-                            alt={exp.data.organization}
-                            class="w-10 h-10 object-contain"
-                            width="40"
-                            height="40"
-                            loading="lazy"
-                            decoding="async"
-                          />
+                          exp.data.website ? (
+                            <a
+                              href={exp.data.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="flex-shrink-0 hover:opacity-80 transition-opacity"
+                              title={`Visiter le site de ${exp.data.organization}`}
+                            >
+                              <img
+                                src={url(exp.data.logo)}
+                                alt={exp.data.organization}
+                                class="w-10 h-10 object-contain"
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                                decoding="async"
+                              />
+                            </a>
+                          ) : (
+                            <img
+                              src={url(exp.data.logo)}
+                              alt={exp.data.organization}
+                              class="w-10 h-10 object-contain"
+                              width="40"
+                              height="40"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          )
                         ) : (
                           <div class="w-10 h-10 bg-dark-700 border border-dark-600 flex items-center justify-center flex-shrink-0">
                             <span class="text-sm font-heading font-bold text-primary-400">
@@ -282,7 +310,18 @@ function formatDate(dateStr: string): string {
                         <div>
                           <p class="font-medium text-white text-sm">
                             {!hasRealContent && '[PLACEHOLDER] '}
-                            {exp.data.organization}
+                            {exp.data.website ? (
+                              <a
+                                href={exp.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-primary-400 transition-colors"
+                              >
+                                {exp.data.organization}
+                              </a>
+                            ) : (
+                              exp.data.organization
+                            )}
                           </p>
                           {exp.data.location && (
                             <p class="text-gray-400 text-xs">{exp.data.location}</p>
@@ -350,13 +389,13 @@ function formatDate(dateStr: string): string {
                             exp.data.relatedSkills?.length > 0) && (
                             <div class="mt-4 pt-4 border-t border-dark-600">
                               <p class="text-xs text-gray-400 mb-2">Voir aussi :</p>
-                              <div class="flex flex-wrap gap-1">
+                              <div class="flex flex-wrap gap-2">
                                 {exp.data.relatedProjects?.map((projectSlug: string) => (
                                   <a
                                     href={url(`/projects/${projectSlug}`)}
                                     class="text-xs text-primary-400 hover:underline"
                                   >
-                                    📁 {projectSlug}
+                                    📁 {projectTitles.get(projectSlug) || projectSlug}
                                   </a>
                                 ))}
                                 {exp.data.relatedSkills?.map((skillSlug: string) => (
@@ -364,7 +403,7 @@ function formatDate(dateStr: string): string {
                                     href={url(`/skills/${skillSlug}`)}
                                     class="text-xs text-accent-400 hover:underline"
                                   >
-                                    ⚡ {skillSlug}
+                                    ⚡ {skillTitles.get(skillSlug) || skillSlug}
                                   </a>
                                 ))}
                               </div>
@@ -451,15 +490,35 @@ function formatDate(dateStr: string): string {
                       {/* Organization with logo */}
                       <div class="flex items-center gap-4 mb-4">
                         {exp.data.logo ? (
-                          <img
-                            src={url(exp.data.logo)}
-                            alt={exp.data.organization}
-                            class="w-10 h-10 object-contain"
-                            width="40"
-                            height="40"
-                            loading="lazy"
-                            decoding="async"
-                          />
+                          exp.data.website ? (
+                            <a
+                              href={exp.data.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="flex-shrink-0 hover:opacity-80 transition-opacity"
+                              title={`Visiter le site de ${exp.data.organization}`}
+                            >
+                              <img
+                                src={url(exp.data.logo)}
+                                alt={exp.data.organization}
+                                class="w-10 h-10 object-contain"
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                                decoding="async"
+                              />
+                            </a>
+                          ) : (
+                            <img
+                              src={url(exp.data.logo)}
+                              alt={exp.data.organization}
+                              class="w-10 h-10 object-contain"
+                              width="40"
+                              height="40"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          )
                         ) : (
                           <div class="w-10 h-10 bg-dark-700 border border-dark-600 flex items-center justify-center flex-shrink-0">
                             <span class="text-sm font-heading font-bold text-accent-400">
@@ -468,7 +527,20 @@ function formatDate(dateStr: string): string {
                           </div>
                         )}
                         <div>
-                          <p class="font-medium text-white text-sm">{exp.data.organization}</p>
+                          <p class="font-medium text-white text-sm">
+                            {exp.data.website ? (
+                              <a
+                                href={exp.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-accent-400 transition-colors"
+                              >
+                                {exp.data.organization}
+                              </a>
+                            ) : (
+                              exp.data.organization
+                            )}
+                          </p>
                           {exp.data.location && (
                             <p class="text-gray-400 text-xs">{exp.data.location}</p>
                           )}
@@ -521,13 +593,13 @@ function formatDate(dateStr: string): string {
                             exp.data.relatedSkills?.length > 0) && (
                             <div class="mt-4 pt-4 border-t border-dark-600">
                               <p class="text-xs text-gray-400 mb-2">Compétences associées :</p>
-                              <div class="flex flex-wrap gap-1">
+                              <div class="flex flex-wrap gap-2">
                                 {exp.data.relatedSkills?.map((skillSlug: string) => (
                                   <a
                                     href={url(`/skills/${skillSlug}`)}
                                     class="text-xs text-accent-400 hover:underline"
                                   >
-                                    ⚡ {skillSlug}
+                                    ⚡ {skillTitles.get(skillSlug) || skillSlug}
                                   </a>
                                 ))}
                               </div>
