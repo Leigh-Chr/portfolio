@@ -73,7 +73,9 @@ const isActive = (href: string) => {
       </ul>
 
       <!-- CTA Button (Desktop) -->
-      <a href={url('/contact')} class="hidden lg:flex btn-accent text-sm px-4 py-2"> Me contacter </a>
+      <a href={url('/contact')} class="hidden lg:flex btn-accent text-sm px-4 py-2">
+        Me contacter
+      </a>
 
       <!-- Mobile Menu Button -->
       <button
@@ -137,135 +139,148 @@ const isActive = (href: string) => {
         }
       </ul>
       <div class="mt-4 pt-4 border-t border-dark-600">
-        <a href={url('/contact')} class="btn-accent w-full justify-center text-sm"> Me contacter </a>
+        <a href={url('/contact')} class="btn-accent w-full justify-center text-sm">
+          Me contacter
+        </a>
       </div>
     </div>
   </div>
 </header>
 
 <script define:vars={{ base }}>
-  // Update active navigation state on page change (for View Transitions)
-  function updateActiveNavigation() {
-    const currentPath = window.location.pathname;
-    const desktopNav = document.querySelector('header nav ul.hidden.md\\:flex');
-    const mobileNav = document.getElementById('mobile-menu');
-    const homePath = base + '/';
+  // Defer non-critical initialization to avoid blocking main thread
+  function initHeader() {
+    // Update active navigation state on page change (for View Transitions)
+    function updateActiveNavigation() {
+      const currentPath = window.location.pathname;
+      const desktopNav = document.querySelector('header nav ul.hidden.md\\:flex');
+      const mobileNav = document.getElementById('mobile-menu');
+      const homePath = base + '/';
 
-    function isActive(href) {
-      if (href === homePath || href === base) return currentPath === homePath || currentPath === base;
-      return currentPath.startsWith(href);
+      function isActive(href) {
+        if (href === homePath || href === base)
+          return currentPath === homePath || currentPath === base;
+        return currentPath.startsWith(href);
+      }
+
+      // Update desktop navigation
+      desktopNav?.querySelectorAll('a').forEach((link) => {
+        const href = link.getAttribute('href') || '';
+        if (isActive(href)) {
+          link.classList.add('text-primary-400', 'border-primary-500');
+          link.classList.remove('text-gray-300', 'border-transparent');
+        } else {
+          link.classList.remove('text-primary-400', 'border-primary-500');
+          link.classList.add('text-gray-300', 'border-transparent');
+        }
+      });
+
+      // Update mobile navigation
+      mobileNav?.querySelectorAll('a').forEach((link) => {
+        const href = link.getAttribute('href') || '';
+        if (isActive(href)) {
+          link.classList.add('bg-dark-700', 'text-primary-400', 'border-primary-500');
+          link.classList.remove('text-gray-300', 'border-transparent');
+        } else {
+          link.classList.remove('bg-dark-700', 'text-primary-400', 'border-primary-500');
+          link.classList.add('text-gray-300', 'border-transparent');
+        }
+      });
     }
 
-    // Update desktop navigation
-    desktopNav?.querySelectorAll('a').forEach((link) => {
-      const href = link.getAttribute('href') || '';
-      if (isActive(href)) {
-        link.classList.add('text-primary-400', 'border-primary-500');
-        link.classList.remove('text-gray-300', 'border-transparent');
+    // Listen for View Transitions page swap
+    document.addEventListener('astro:after-swap', updateActiveNavigation);
+
+    // Mobile menu toggle
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const header = document.getElementById('main-header');
+
+    function openMenu() {
+      mobileMenu?.classList.remove('hidden');
+      menuIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      menuButton?.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      menuButton?.setAttribute('aria-expanded', 'false');
+    }
+
+    function isMenuOpen() {
+      return !mobileMenu?.classList.contains('hidden');
+    }
+
+    // Toggle on button click
+    menuButton?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isMenuOpen()) {
+        closeMenu();
       } else {
-        link.classList.remove('text-primary-400', 'border-primary-500');
-        link.classList.add('text-gray-300', 'border-transparent');
+        openMenu();
       }
     });
 
-    // Update mobile navigation
-    mobileNav?.querySelectorAll('a').forEach((link) => {
-      const href = link.getAttribute('href') || '';
-      if (isActive(href)) {
-        link.classList.add('bg-dark-700', 'text-primary-400', 'border-primary-500');
-        link.classList.remove('text-gray-300', 'border-transparent');
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (isMenuOpen() && !mobileMenu?.contains(target) && !menuButton?.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen()) {
+        closeMenu();
+        menuButton?.focus();
+      }
+    });
+
+    // Close when clicking a navigation link
+    mobileMenu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+
+    // Throttle function for scroll performance
+    function throttle(fn, wait) {
+      let lastTime = 0;
+      return function (...args) {
+        const now = Date.now();
+        if (now - lastTime >= wait) {
+          lastTime = now;
+          fn.apply(this, args);
+        }
+      };
+    }
+
+    // Sticky header with enhanced border on scroll (throttled for performance)
+    const handleScroll = throttle(() => {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > 10) {
+        header?.classList.add('border-primary-500/50');
+        header?.classList.remove('border-dark-700');
       } else {
-        link.classList.remove('bg-dark-700', 'text-primary-400', 'border-primary-500');
-        link.classList.add('text-gray-300', 'border-transparent');
+        header?.classList.remove('border-primary-500/50');
+        header?.classList.add('border-dark-700');
       }
-    });
+    }, 100);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
   }
 
-  // Listen for View Transitions page swap
-  document.addEventListener('astro:after-swap', updateActiveNavigation);
-
-  // Mobile menu toggle
-  const menuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
-  const header = document.getElementById('main-header');
-
-  function openMenu() {
-    mobileMenu?.classList.remove('hidden');
-    menuIcon?.classList.add('hidden');
-    closeIcon?.classList.remove('hidden');
-    menuButton?.setAttribute('aria-expanded', 'true');
+  // Use requestIdleCallback to defer initialization, fallback to setTimeout
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initHeader, { timeout: 200 });
+  } else {
+    setTimeout(initHeader, 0);
   }
-
-  function closeMenu() {
-    mobileMenu?.classList.add('hidden');
-    menuIcon?.classList.remove('hidden');
-    closeIcon?.classList.add('hidden');
-    menuButton?.setAttribute('aria-expanded', 'false');
-  }
-
-  function isMenuOpen() {
-    return !mobileMenu?.classList.contains('hidden');
-  }
-
-  // Toggle on button click
-  menuButton?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (isMenuOpen()) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  });
-
-  // Close on click outside
-  document.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-    if (isMenuOpen() && !mobileMenu?.contains(target) && !menuButton?.contains(target)) {
-      closeMenu();
-    }
-  });
-
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isMenuOpen()) {
-      closeMenu();
-      menuButton?.focus();
-    }
-  });
-
-  // Close when clicking a navigation link
-  mobileMenu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      closeMenu();
-    });
-  });
-
-  // Throttle function for scroll performance
-  function throttle<T extends (...args: unknown[]) => void>(fn: T, wait: number): T {
-    let lastTime = 0;
-    return function (this: unknown, ...args: Parameters<T>) {
-      const now = Date.now();
-      if (now - lastTime >= wait) {
-        lastTime = now;
-        fn.apply(this, args);
-      }
-    } as T;
-  }
-
-  // Sticky header with enhanced border on scroll (throttled for performance)
-  const handleScroll = throttle(() => {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll > 10) {
-      header?.classList.add('border-primary-500/50');
-      header?.classList.remove('border-dark-700');
-    } else {
-      header?.classList.remove('border-primary-500/50');
-      header?.classList.add('border-dark-700');
-    }
-  }, 100);
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
 </script>

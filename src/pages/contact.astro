@@ -46,7 +46,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   </section>
 
   <!-- Contact Section (2 pts) -->
-  <section class="section-padding">
+  <section class="section-padding section-lazy">
     <div class="container-custom">
       <div class="max-w-5xl mx-auto">
         <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
@@ -192,8 +192,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
               id="contact-form"
               novalidate
             >
-              <input type="hidden" name="access_key" value="789d2e26-aedf-4f2c-809f-616fc1174acf">
-              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+              <input type="hidden" name="access_key" value="789d2e26-aedf-4f2c-809f-616fc1174acf" />
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
               <div class="space-y-8">
                 <!-- Name -->
                 <div>
@@ -509,7 +509,9 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                 Temps de réponse
               </p>
             </div>
-            <div class="text-center group tilt-1 md:offset-up-1 hover:-tilt-1 transition-transform min-w-[80px]">
+            <div
+              class="text-center group tilt-1 md:offset-up-1 hover:-tilt-1 transition-transform min-w-[80px]"
+            >
               <p class="stat-medium text-accent-400 stat-pulse" style="animation-delay: 0.3s">
                 Remote
               </p>

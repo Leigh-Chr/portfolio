@@ -57,9 +57,7 @@ const featuredProjects = allProjects.slice(0, 3);
             >
           </h1>
           <p class="text-3xl md:text-4xl text-accent-400 mb-6 font-heading font-bold">
-            <span class="highlight-marker highlight-marker-accent"
-              >Développeur Web Fullstack</span
-            >
+            <span class="highlight-marker highlight-marker-accent">Développeur Web Fullstack</span>
           </p>
           <p class="text-gray-300 text-xl mb-10 max-w-xl leading-relaxed">
             Passionné par le craft et le souci du détail. Je crée des expériences numériques
@@ -88,7 +86,9 @@ const featuredProjects = allProjects.slice(0, 3);
           </div>
 
           <!-- Quick Stats - Bold Memphis with subtle variations -->
-          <div class="mt-12 sm:mt-16 flex flex-wrap justify-start gap-6 sm:gap-10 md:gap-16 stagger-children">
+          <div
+            class="mt-12 sm:mt-16 flex flex-wrap justify-start gap-6 sm:gap-10 md:gap-16 stagger-children"
+          >
             <div class="text-center group -tilt-1 hover:tilt-2 transition-transform">
               <p class="stat-large text-primary-400 stat-pulse">10</p>
               <p
@@ -135,6 +135,7 @@ const featuredProjects = allProjects.slice(0, 3);
                 width={320}
                 height={320}
                 loading="eager"
+                fetchpriority="high"
                 format="webp"
                 quality={85}
               />
@@ -146,7 +147,7 @@ const featuredProjects = allProjects.slice(0, 3);
   </section>
 
   <!-- Featured Skills Section -->
-  <section class="section-padding section-alt relative overflow-hidden">
+  <section class="section-padding section-alt relative overflow-hidden section-lazy">
     <!-- Subtle decorative shapes -->
     <div
       class="absolute top-[10%] right-[2%] memphis-plus memphis-lg rotate-[15deg] opacity-12 hidden lg:block"
@@ -166,8 +167,8 @@ const featuredProjects = allProjects.slice(0, 3);
         </h2>
         <div class="section-divider -tilt-1"></div>
         <p class="section-subtitle">
-          Un équilibre entre savoir-faire technique et qualités humaines, au service de projets
-          qui ont du sens.
+          Un équilibre entre savoir-faire technique et qualités humaines, au service de projets qui
+          ont du sens.
         </p>
       </div>
 
@@ -223,7 +224,7 @@ const featuredProjects = allProjects.slice(0, 3);
   </section>
 
   <!-- Featured Projects Section -->
-  <section class="section-padding noise-overlay relative overflow-hidden">
+  <section class="section-padding noise-overlay relative overflow-hidden section-lazy">
     <!-- Subtle decorative shapes -->
     <div
       class="absolute top-[8%] left-[2%] memphis-circle-chunky-accent w-16 h-16 rotate-[-10deg] opacity-10 hidden lg:block"
@@ -245,8 +246,8 @@ const featuredProjects = allProjects.slice(0, 3);
         </h2>
         <div class="section-divider section-divider-accent tilt-2"></div>
         <p class="section-subtitle">
-          Des projets concrets qui reflètent mon approche : qualité, accessibilité et attention
-          aux détails.
+          Des projets concrets qui reflètent mon approche : qualité, accessibilité et attention aux
+          détails.
         </p>
       </div>
 
@@ -324,7 +325,7 @@ const featuredProjects = allProjects.slice(0, 3);
   </section>
 
   <!-- CTA Section -->
-  <section class="section-padding section-cta relative overflow-hidden">
+  <section class="section-padding section-cta relative overflow-hidden section-lazy">
     <!-- Parallax Layer 1 - Slow -->
     <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
       <div class="memphis-ring w-32 h-32 top-[5%] right-[5%] rotate-[15deg]"></div>
@@ -351,8 +352,8 @@ const featuredProjects = allProjects.slice(0, 3);
         Envie d'en savoir <span class="text-accent-400 squiggle squiggle-accent">plus</span> ?
       </h2>
       <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-        Vous avez un projet qui a du sens ? Discutons-en. Je suis toujours ouvert aux échanges
-        avec des personnes qui partagent mes valeurs.
+        Vous avez un projet qui a du sens ? Discutons-en. Je suis toujours ouvert aux échanges avec
+        des personnes qui partagent mes valeurs.
       </p>
       <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
         <a

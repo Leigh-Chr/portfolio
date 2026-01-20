@@ -113,18 +113,6 @@ function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
 }
-
-// Get experience icon
-function getIcon(type: 'work' | 'education' | 'certification'): string {
-  switch (type) {
-    case 'work':
-      return '💼';
-    case 'education':
-      return '🎓';
-    case 'certification':
-      return '📜';
-  }
-}
 ---
 
 <BaseLayout
@@ -176,7 +164,9 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
           class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-1 hover:-tilt-1 min-w-[100px]"
         >
           <p class="stat-large text-primary-400 stat-pulse">{workExperiences.length}</p>
-          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
+          <p
+            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+          >
             Expériences
           </p>
         </div>
@@ -186,28 +176,30 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
           <p class="stat-large text-accent-400 stat-pulse" style="animation-delay: 0.3s">
             {educationExperiences.length}
           </p>
-          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
+          <p
+            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+          >
             Formations
           </p>
         </div>
-        {certifications.length > 0 && (
-          <div
-            class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-white/50 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-2 hover:-tilt-2 min-w-[100px]"
-          >
-            <p class="stat-large text-white stat-pulse" style="animation-delay: 0.6s">
-              {certifications.length}
-            </p>
-            <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
-              Certifications
-            </p>
-          </div>
-        )}
+        {
+          certifications.length > 0 && (
+            <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-white/50 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-2 hover:-tilt-2 min-w-[100px]">
+              <p class="stat-large text-white stat-pulse" style="animation-delay: 0.6s">
+                {certifications.length}
+              </p>
+              <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
+                Certifications
+              </p>
+            </div>
+          )
+        }
       </div>
     </div>
   </section>
 
   <!-- Work Experience Section -->
-  <section class="section-padding section-alt">
+  <section class="section-padding section-alt section-lazy">
     <div class="container-custom">
       {
         !hasRealContent && (
@@ -404,7 +396,7 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
   </section>
 
   <!-- Education Section -->
-  <section class="section-padding">
+  <section class="section-padding section-lazy">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <!-- Education Header -->
@@ -567,7 +559,7 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
   </section>
 
   <!-- CTA Section -->
-  <section class="section-padding section-cta relative overflow-hidden">
+  <section class="section-padding section-cta relative overflow-hidden section-lazy">
     <!-- Parallax Layer 1 - Slow -->
     <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
       <div class="memphis-ring w-36 h-36 top-[5%] left-[5%] rotate-[-20deg]"></div>

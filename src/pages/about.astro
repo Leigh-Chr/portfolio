@@ -53,6 +53,7 @@ import profileImage from '@assets/images/profile.jpg';
                 width={400}
                 height={500}
                 loading="eager"
+                fetchpriority="high"
                 format="webp"
                 quality={85}
               />
@@ -72,10 +73,10 @@ import profileImage from '@assets/images/profile.jpg';
               >Virgil CHAREYRE</span
             >
           </h1>
-          <p class="text-2xl sm:text-3xl md:text-4xl text-accent-400 mb-4 sm:mb-6 font-heading font-bold">
-            <span class="highlight-marker highlight-marker-accent"
-              >Développeur Web Fullstack</span
-            >
+          <p
+            class="text-2xl sm:text-3xl md:text-4xl text-accent-400 mb-4 sm:mb-6 font-heading font-bold"
+          >
+            <span class="highlight-marker highlight-marker-accent">Développeur Web Fullstack</span>
           </p>
           <p class="text-gray-300 leading-relaxed mb-6 sm:mb-10 text-sm sm:text-base">
             Je crois qu'un bon produit se ressent dans les détails. Mon approche : peaufiner chaque
@@ -86,7 +87,9 @@ import profileImage from '@assets/images/profile.jpg';
 
           <!-- Quick Info -->
           <div class="flex flex-wrap gap-3 sm:gap-6">
-            <div class="flex items-center gap-2 px-3 sm:px-4 py-2 bg-dark-800 border-2 border-dark-600">
+            <div
+              class="flex items-center gap-2 px-3 sm:px-4 py-2 bg-dark-800 border-2 border-dark-600"
+            >
               <svg
                 class="w-5 h-5 text-primary-400"
                 fill="none"
@@ -132,7 +135,7 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 1: Mes Valeurs -->
-  <section class="section-padding" id="valeurs">
+  <section class="section-padding section-lazy" id="valeurs">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div class="content-section-header">
@@ -160,15 +163,16 @@ import profileImage from '@assets/images/profile.jpg';
         <p class="text-gray-400 mb-10 leading-relaxed">
           Ce qui me motive vraiment, c'est de fournir un <strong class="text-white"
             >travail hyper qualitatif et adapté</strong
-          >. Tout peaufiner, créer une expérience aux petits oignons. La technologie au service d'un web plus éthique et accessible.
+          >. Tout peaufiner, créer une expérience aux petits oignons. La technologie au service d'un
+          web plus éthique et accessible.
         </p>
 
         <div class="grid md:grid-cols-2 gap-8 stagger-children">
           <div class="card-glow p-8 wonky-box">
             <h3 class="text-xl font-heading font-bold text-white mb-3">Accessibilité</h3>
             <p class="text-gray-400 text-sm">
-              Le web doit être utilisable par tout le monde. L'inclusion n'est pas une option,
-              c'est un minimum.
+              Le web doit être utilisable par tout le monde. L'inclusion n'est pas une option, c'est
+              un minimum.
             </p>
           </div>
           <div class="card-glow p-8 wonky-box-alt">
@@ -181,8 +185,8 @@ import profileImage from '@assets/images/profile.jpg';
           <div class="card-glow p-8 wonky-box">
             <h3 class="text-xl font-heading font-bold text-white mb-3">Éthique</h3>
             <p class="text-gray-300 text-sm leading-relaxed">
-              Je choisis mes projets. Contribuer à un web plus responsable et moins prédateur,
-              c'est important pour moi.
+              Je choisis mes projets. Contribuer à un web plus responsable et moins prédateur, c'est
+              important pour moi.
             </p>
           </div>
           <div class="card-glow p-8 wonky-box-alt">
@@ -198,7 +202,7 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 2: Mon Projet Professionnel -->
-  <section class="section-padding section-alt" id="projet">
+  <section class="section-padding section-alt section-lazy" id="projet">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div class="content-section-header">
@@ -235,8 +239,8 @@ import profileImage from '@assets/images/profile.jpg';
         <div class="detail-box mb-8 border-tilted">
           <h3 class="text-xl font-heading font-bold text-white mb-4">Vision à court terme</h3>
           <p class="text-gray-400 leading-relaxed">
-            Trouver ma place, faire mes preuves, et créer des liens de confiance avec des clients
-            ou une équipe qui me ressemble.
+            Trouver ma place, faire mes preuves, et créer des liens de confiance avec des clients ou
+            une équipe qui me ressemble.
           </p>
         </div>
 
@@ -264,7 +268,9 @@ import profileImage from '@assets/images/profile.jpg';
                   stroke-width="2"
                   d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-gray-300">Construire un portfolio de projets dont je suis vraiment fier</span>
+              <span class="text-gray-300"
+                >Construire un portfolio de projets dont je suis vraiment fier</span
+              >
             </li>
             <li class="flex items-start gap-3">
               <svg
@@ -279,7 +285,9 @@ import profileImage from '@assets/images/profile.jpg';
                   stroke-width="2"
                   d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span class="text-gray-300">Trouver des collaborations durables avec des personnes qui partagent mes valeurs</span>
+              <span class="text-gray-300"
+                >Trouver des collaborations durables avec des personnes qui partagent mes valeurs</span
+              >
             </li>
             <li class="flex items-start gap-3">
               <svg
@@ -303,7 +311,7 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 3: Mes Qualités Humaines -->
-  <section class="section-padding" id="qualites">
+  <section class="section-padding section-lazy" id="qualites">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div class="content-section-header">
@@ -329,8 +337,8 @@ import profileImage from '@assets/images/profile.jpg';
         <div class="section-divider mb-10 -tilt-2"></div>
 
         <p class="text-gray-400 mb-10 leading-relaxed">
-          Au-delà des compétences techniques, ce sont mes qualités humaines qui définissent ma
-          façon de travailler et de collaborer.
+          Au-delà des compétences techniques, ce sont mes qualités humaines qui définissent ma façon
+          de travailler et de collaborer.
         </p>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
@@ -473,7 +481,7 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 4: Mes Centres d'Intérêt -->
-  <section class="section-padding section-alt" id="interets">
+  <section class="section-padding section-alt section-lazy" id="interets">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div class="content-section-header">
@@ -501,8 +509,8 @@ import profileImage from '@assets/images/profile.jpg';
         <div class="section-divider section-divider-accent mb-10 tilt-2"></div>
 
         <p class="text-gray-400 mb-10 leading-relaxed">
-          En dehors du code, j'ai mille centres d'intérêt — tech, créativité, cultures
-          alternatives. Voici ce qui me fait vibrer.
+          En dehors du code, j'ai mille centres d'intérêt — tech, créativité, cultures alternatives.
+          Voici ce qui me fait vibrer.
         </p>
 
         <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
@@ -617,7 +625,7 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- CTA Section -->
-  <section class="section-padding section-cta relative overflow-hidden">
+  <section class="section-padding section-cta relative overflow-hidden section-lazy">
     <!-- Parallax Layer 1 - Slow -->
     <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
       <div class="memphis-ring-accent w-32 h-32 top-[5%] left-[6%] rotate-[-15deg]"></div>

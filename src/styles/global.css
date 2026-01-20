@@ -800,18 +800,23 @@
 /* ---- PARALLAX LAYERS ---- */
 .parallax-layer {
   @apply absolute inset-0 pointer-events-none overflow-hidden;
+  contain: layout style paint;
+  will-change: transform;
 }
 
 .parallax-layer-slow {
   animation: parallax-drift-slow 30s ease-in-out infinite;
+  animation-delay: 0.1s;
 }
 
 .parallax-layer-medium {
   animation: parallax-drift-medium 20s ease-in-out infinite;
+  animation-delay: 0.2s;
 }
 
 .parallax-layer-fast {
   animation: parallax-drift-fast 12s ease-in-out infinite;
+  animation-delay: 0.3s;
 }
 
 @keyframes parallax-drift-slow {
@@ -877,6 +882,15 @@
 .memphis-3xl {
   width: 96px;
   height: 96px;
+}
+
+/* ---- ANIMATION PERFORMANCE HINTS ---- */
+.memphis-drift,
+.memphis-wobble,
+.memphis-scale,
+.memphis-pulse {
+  will-change: transform, opacity;
+  contain: layout style;
 }
 
 /* ---- ADDITIONAL ANIMATIONS ---- */
@@ -1535,4 +1549,56 @@
   border: 3px solid #a855f7;
   transform: translate(5px, 5px);
   pointer-events: none;
+}
+
+/* ===================
+   PERFORMANCE OPTIMIZATIONS
+   =================== */
+
+/* Content visibility for below-fold sections - improves initial render */
+.section-lazy {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* GPU-accelerated transforms for smooth animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Contain decorative elements to prevent layout thrashing */
+.memphis-circle,
+.memphis-circle-accent,
+.memphis-circle-filled,
+.memphis-circle-filled-accent,
+.memphis-square,
+.memphis-square-accent,
+.memphis-square-filled,
+.memphis-square-filled-accent,
+.memphis-triangle,
+.memphis-triangle-primary,
+.memphis-cross,
+.memphis-zigzag,
+.memphis-dots,
+.memphis-half-circle,
+.memphis-ring,
+.memphis-ring-accent,
+.memphis-circle-chunky,
+.memphis-blob,
+.memphis-blob-accent,
+.memphis-tri-filled,
+.memphis-tri-filled-accent,
+.memphis-plus {
+  contain: layout style paint;
+}
+
+/* Optimize stagger animations - use GPU compositing */
+.stagger-children > * {
+  will-change: opacity, transform;
+}
+
+/* Remove will-change after animation completes to free GPU memory */
+.animation-done {
+  will-change: auto;
 }
