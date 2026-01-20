@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { url } from '@utils/url';
 
 // Get all experiences from content collection
 const allExperiences = await getCollection('experiences');
@@ -271,7 +272,7 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
                       <div class="flex items-center gap-4 mb-4">
                         {exp.data.logo ? (
                           <img
-                            src={exp.data.logo}
+                            src={url(exp.data.logo)}
                             alt={exp.data.organization}
                             class="w-10 h-10 object-contain"
                             width="40"
@@ -360,7 +361,7 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
                               <div class="flex flex-wrap gap-1">
                                 {exp.data.relatedProjects?.map((projectSlug: string) => (
                                   <a
-                                    href={`/projects/${projectSlug}`}
+                                    href={url(`/projects/${projectSlug}`)}
                                     class="text-xs text-primary-400 hover:underline"
                                   >
                                     📁 {projectSlug}
@@ -368,7 +369,7 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
                                 ))}
                                 {exp.data.relatedSkills?.map((skillSlug: string) => (
                                   <a
-                                    href={`/skills/${skillSlug}`}
+                                    href={url(`/skills/${skillSlug}`)}
                                     class="text-xs text-accent-400 hover:underline"
                                   >
                                     ⚡ {skillSlug}
@@ -459,7 +460,7 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
                       <div class="flex items-center gap-4 mb-4">
                         {exp.data.logo ? (
                           <img
-                            src={exp.data.logo}
+                            src={url(exp.data.logo)}
                             alt={exp.data.organization}
                             class="w-10 h-10 object-contain"
                             width="40"
@@ -531,7 +532,7 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
                               <div class="flex flex-wrap gap-1">
                                 {exp.data.relatedSkills?.map((skillSlug: string) => (
                                   <a
-                                    href={`/skills/${skillSlug}`}
+                                    href={url(`/skills/${skillSlug}`)}
                                     class="text-xs text-accent-400 hover:underline"
                                   >
                                     ⚡ {skillSlug}
@@ -598,13 +599,13 @@ function getIcon(type: 'work' | 'education' | 'certification'): string {
       </p>
       <div class="flex flex-wrap justify-center gap-8">
         <a
-          href="/contact"
+          href={url('/contact')}
           class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100"
         >
           Me contacter
         </a>
         <a
-          href="/projects"
+          href={url('/projects')}
           class="btn-chunky bg-transparent text-white border-white hover:bg-white hover:text-dark-900"
         >
           Voir mes réalisations

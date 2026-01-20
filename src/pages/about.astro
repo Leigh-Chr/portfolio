@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { url } from '@utils/url';
 import profileImage from '@assets/images/profile.jpg';
 ---
 
@@ -648,12 +649,12 @@ import profileImage from '@assets/images/profile.jpg';
       </p>
       <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
         <a
-          href="/skills"
+          href={url('/skills')}
           class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100"
           >Mes compétences</a
         >
         <a
-          href="/projects"
+          href={url('/projects')}
           class="btn-chunky bg-transparent text-white border-white hover:bg-white hover:text-dark-900"
           >Mes réalisations</a
         >

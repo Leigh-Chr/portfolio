@@ -2,6 +2,7 @@
 import { slide } from 'astro:transitions';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { url } from '@utils/url';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -219,9 +220,9 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
       <div class="max-w-4xl mx-auto fade-in-up">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6" aria-label="Fil d'Ariane">
-          <a href="/" class="hover:text-primary-400 transition-colors">Accueil</a>
+          <a href={url('/')} class="hover:text-primary-400 transition-colors">Accueil</a>
           <span>/</span>
-          <a href="/projects" class="hover:text-primary-400 transition-colors">Réalisations</a>
+          <a href={url('/projects')} class="hover:text-primary-400 transition-colors">Réalisations</a>
           <span>/</span>
           <span class="text-white">{project.data.title}</span>
         </nav>
@@ -236,7 +237,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
             {project.data.fullImage ? (
               <div class="relative w-full h-full overflow-hidden scroll-preview">
                 <img
-                  src={project.data.fullImage}
+                  src={url(project.data.fullImage)}
                   alt={`Aperçu du projet ${project.data.title}`}
                   class="scroll-preview-img"
                   loading="lazy"
@@ -245,7 +246,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
               </div>
             ) : project.data.thumbnail ? (
               <img
-                src={project.data.thumbnail}
+                src={url(project.data.thumbnail)}
                 alt={`Aperçu du projet ${project.data.title}`}
                 class="w-full h-full object-cover"
                 width="400"
@@ -622,7 +623,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {relatedSkills.map((skill, index) => (
               <a
-                href={`/skills/${skill.id}`}
+                href={url(`/skills/${skill.id}`)}
                 class={`card-glow p-6 group ${index % 3 === 1 ? 'offset-up-1' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
               >
                 <div class="flex items-center gap-3">
@@ -648,7 +649,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
       <nav class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-10 border-t border-dark-600" aria-label="Navigation entre projets">
         {prevProject ? (
           <a
-            href={`/projects/${prevProject.id}`}
+            href={url(`/projects/${prevProject.id}`)}
             class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-2 sm:order-1"
             aria-label={`Projet précédent : ${prevProject.data.title}`}
           >
@@ -661,13 +662,13 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
           <span class="order-2 sm:order-1"></span>
         )}
 
-        <a href="/projects" class="text-sm text-gray-400 hover:text-primary-400 transition-colors order-1 sm:order-2">
+        <a href={url('/projects')} class="text-sm text-gray-400 hover:text-primary-400 transition-colors order-1 sm:order-2">
           Toutes les réalisations
         </a>
 
         {nextProject ? (
           <a
-            href={`/projects/${nextProject.id}`}
+            href={url(`/projects/${nextProject.id}`)}
             class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-3"
             aria-label={`Projet suivant : ${nextProject.data.title}`}
           >

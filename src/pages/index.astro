@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { url } from '@utils/url';
 import profileImage from '@assets/images/profile.jpg';
 
 // Get featured content
@@ -67,7 +68,7 @@ const featuredProjects = allProjects.slice(0, 3);
 
           <!-- CTA Buttons - Bold Memphis -->
           <div class="flex flex-wrap gap-4">
-            <a href="/projects" class="btn-chunky-primary">
+            <a href={url('/projects')} class="btn-chunky-primary">
               Voir mes réalisations
               <svg
                 class="w-6 h-6"
@@ -83,7 +84,7 @@ const featuredProjects = allProjects.slice(0, 3);
                   d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </a>
-            <a href="/contact" class="btn-chunky-accent"> Me contacter </a>
+            <a href={url('/contact')} class="btn-chunky-accent"> Me contacter </a>
           </div>
 
           <!-- Quick Stats - Bold Memphis with subtle variations -->
@@ -175,7 +176,7 @@ const featuredProjects = allProjects.slice(0, 3);
           featuredSkills.map((skill, index) => {
             return (
               <a
-                href={`/skills/${skill.id}`}
+                href={url(`/skills/${skill.id}`)}
                 class={`card-glow p-4 sm:p-6 md:p-8 group ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
               >
                 <div
@@ -201,7 +202,7 @@ const featuredProjects = allProjects.slice(0, 3);
       </div>
 
       <div class="text-center mt-16">
-        <a href="/skills" class="btn-secondary">
+        <a href={url('/skills')} class="btn-secondary">
           Voir toutes mes compétences
           <svg
             class="w-5 h-5"
@@ -254,7 +255,7 @@ const featuredProjects = allProjects.slice(0, 3);
           featuredProjects.map((project, index) => {
             return (
               <a
-                href={`/projects/${project.id}`}
+                href={url(`/projects/${project.id}`)}
                 class={`card-glow overflow-hidden group ${index % 3 === 1 ? 'offset-up-2' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
               >
                 <div
@@ -262,7 +263,7 @@ const featuredProjects = allProjects.slice(0, 3);
                   transition:name={`project-thumb-${project.id}`}
                 >
                   <img
-                    src={project.data.thumbnail || '/images/project-placeholder.jpg'}
+                    src={url(project.data.thumbnail || '/images/project-placeholder.jpg')}
                     alt={`Aperçu du projet ${project.data.title}`}
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
@@ -302,7 +303,7 @@ const featuredProjects = allProjects.slice(0, 3);
       </div>
 
       <div class="text-center mt-16">
-        <a href="/projects" class="btn-primary">
+        <a href={url('/projects')} class="btn-primary">
           Voir toutes mes réalisations
           <svg
             class="w-5 h-5"
@@ -355,12 +356,12 @@ const featuredProjects = allProjects.slice(0, 3);
       </p>
       <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
         <a
-          href="/contact"
+          href={url('/contact')}
           class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100"
           >Me contacter</a
         >
         <a
-          href="/about"
+          href={url('/about')}
           class="btn-chunky bg-transparent text-white border-white hover:bg-white hover:text-dark-900"
           >En savoir plus sur moi</a
         >

@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
+import { url } from '@utils/url';
 import '../styles/global.css';
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 const {
   title,
   description = 'Portfolio de Virgil CHAREYRE - Développeur Web Fullstack',
-  image = '/images/profile.jpg',
+  image = url('/images/profile.jpg'),
 } = Astro.props;
 const currentPath = Astro.url.pathname;
 const canonicalURL = new URL(currentPath, Astro.site || 'https://leigh-chr.github.io');
@@ -98,9 +99,9 @@ const jsonLd = {
     <meta name="twitter:image" content={imageURL.toString()} />
 
     <!-- Favicons & PWA -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.svg')} />
+    <link rel="manifest" href={url('/manifest.json')} />
     <meta name="theme-color" content="#0a0a0a" />
     <meta name="color-scheme" content="dark" />
 

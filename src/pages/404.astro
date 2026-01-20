@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { url } from '@utils/url';
 ---
 
 <BaseLayout
@@ -45,7 +46,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
         <!-- CTA Buttons -->
         <div class="flex flex-wrap justify-center gap-6">
-          <a href="/" class="btn-chunky-primary">
+          <a href={url('/')} class="btn-chunky-primary">
             <svg
               class="w-5 h-5"
               fill="none"
@@ -62,7 +63,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
             </svg>
             Retour à l'accueil
           </a>
-          <a href="/contact" class="btn-chunky-accent"> Me contacter </a>
+          <a href={url('/contact')} class="btn-chunky-accent"> Me contacter </a>
         </div>
 
         <!-- Quick Links -->
@@ -70,28 +71,28 @@ import BaseLayout from '@layouts/BaseLayout.astro';
           <p class="text-gray-500 text-sm mb-6">Ou explorez ces pages :</p>
           <div class="flex flex-wrap justify-center gap-6">
             <a
-              href="/skills"
+              href={url('/skills')}
               class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
             >
               Compétences
             </a>
             <span class="text-dark-600">•</span>
             <a
-              href="/projects"
+              href={url('/projects')}
               class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
             >
               Réalisations
             </a>
             <span class="text-dark-600">•</span>
             <a
-              href="/timeline"
+              href={url('/timeline')}
               class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
             >
               Parcours
             </a>
             <span class="text-dark-600">•</span>
             <a
-              href="/about"
+              href={url('/about')}
               class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
             >
               À propos
