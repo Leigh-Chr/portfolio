@@ -1,0 +1,35 @@
+{
+  "id": "/",
+  "name": "Portfolio Virgil CHAREYRE",
+  "short_name": "Virgil C.",
+  "description": "Portfolio de Virgil CHAREYRE - Expert en Ingénierie Logicielle",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#a855f7",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "lang": "fr",
+  "dir": "ltr",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "business"],
+  "prefer_related_applications": false
+}

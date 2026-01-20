@@ -1,0 +1,259 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all projects from content collection
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+const hasRealContent = sortedProjects.length > 0;
+
+// Placeholder projects if none exist
+const placeholderProjects = [
+  {
+    slug: 'project-1',
+    data: {
+      title: 'Application Web E-commerce',
+      shortDescription: 'Développement d\'une plateforme e-commerce complète avec panier, paiement et gestion des stocks.',
+      thumbnail: null,
+      context: { period: '2024', role: 'Lead Developer', company: 'Entreprise X' },
+    },
+  },
+  {
+    slug: 'project-2',
+    data: {
+      title: 'API REST Microservices',
+      shortDescription: 'Architecture microservices pour une application bancaire avec haute disponibilité.',
+      thumbnail: null,
+      context: { period: '2023', role: 'Backend Developer', company: 'Entreprise Y' },
+    },
+  },
+  {
+    slug: 'project-3',
+    data: {
+      title: 'Dashboard Analytics',
+      shortDescription: 'Interface de visualisation de données en temps réel pour le monitoring d\'infrastructure.',
+      thumbnail: null,
+      context: { period: '2023', role: 'Full Stack Developer', company: 'Entreprise Z' },
+    },
+  },
+  {
+    slug: 'project-4',
+    data: {
+      title: 'Application Mobile Cross-Platform',
+      shortDescription: 'Application mobile React Native pour la gestion de tâches et la productivité.',
+      thumbnail: null,
+      context: { period: '2022', role: 'Mobile Developer', company: 'Startup A' },
+    },
+  },
+  {
+    slug: 'project-5',
+    data: {
+      title: 'Système de Gestion de Contenu',
+      shortDescription: 'CMS sur mesure avec éditeur WYSIWYG et système de permissions avancé.',
+      thumbnail: null,
+      context: { period: '2022', role: 'Full Stack Developer', company: 'Agence B' },
+    },
+  },
+];
+
+const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
+---
+
+<BaseLayout title="Réalisations" description="Découvrez mes projets et réalisations professionnelles les plus significatifs.">
+  <!-- Hero Section -->
+  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
+      <div class="memphis-ring-accent memphis-3xl top-[8%] left-[4%] rotate-[-20deg]"></div>
+      <div class="memphis-square w-28 h-28 bottom-[12%] right-[5%] rotate-[35deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-filled memphis-xl top-[25%] right-[8%] memphis-scale"></div>
+      <div class="memphis-triangle-primary bottom-[28%] left-[6%] rotate-[18deg]"></div>
+      <div class="memphis-cross-accent memphis-lg top-[58%] left-[3%] rotate-[35deg] memphis-drift"></div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots-accent memphis-lg top-[18%] left-[12%]"></div>
+      <div class="memphis-zigzag bottom-[22%] right-[12%] rotate-[-8deg]"></div>
+      <div class="memphis-half-circle-accent w-10 h-5 top-[45%] right-[4%] rotate-[75deg]"></div>
+      <div class="memphis-square-filled-accent memphis-sm bottom-[40%] left-[10%] rotate-45 memphis-pulse"></div>
+    </div>
+
+    <div class="container-custom text-center fade-in-up relative z-10">
+      <h1 class="page-title">
+        Mes <span class="gradient-text-animated underline-zigzag underline-zigzag-accent" data-text="Réalisations">Réalisations</span>
+      </h1>
+      <div class="section-divider section-divider-accent section-divider-long"></div>
+      <p class="page-subtitle">
+        Un aperçu de mes projets les plus significatifs, illustrant ma capacité
+        à résoudre des problèmes complexes et à livrer des solutions de qualité.
+      </p>
+
+      <!-- Stats - Bold Memphis with subtle tilts -->
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-12 sm:mt-16 stagger-children">
+        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl -tilt-2 hover:tilt-2 min-w-[120px]">
+          <p class="stat-large text-primary-400 stat-pulse">{hasRealContent ? sortedProjects.length : 3}</p>
+          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">Réalisations</p>
+        </div>
+        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-1 md:offset-up-1 hover:-tilt-1 min-w-[120px]">
+          <p class="stat-large text-accent-400 stat-pulse" style="animation-delay: 0.3s">+3</p>
+          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">Années d'exp.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Grid (5 pts) -->
+  <section class="section-padding">
+    <div class="container-custom">
+      {!hasRealContent && (
+        <div class="alert-placeholder mb-8">
+          <strong>[PLACEHOLDER]</strong> Les projets ci-dessous sont des exemples.
+          Remplacez-les par vos vraies réalisations dans les fichiers de contenu.
+        </div>
+      )}
+
+      <!-- Projects as list/cards with short descriptions -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
+        {displayProjects.map((project, index) => (
+          <a
+            href={`/projects/${project.id}`}
+            class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''} ${index % 3 === 1 ? 'offset-up-2' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+          >
+            <!-- Thumbnail -->
+            <div class="aspect-video bg-dark-700 relative overflow-hidden" transition:name={`project-thumb-${project.id}`}>
+              {project.data.fullImage ? (
+                <div class="w-full h-full scroll-preview">
+                  <img
+                    src={project.data.fullImage}
+                    alt={`Aperçu du projet ${project.data.title}`}
+                    class="scroll-preview-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ) : project.data.thumbnail ? (
+                <img
+                  src={project.data.thumbnail}
+                  alt={`Aperçu du projet ${project.data.title}`}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                  decoding="async"
+                  width="384"
+                  height="216"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <div class="text-center">
+                    <span class="text-6xl opacity-30">📁</span>
+                    <p class="text-gray-400 text-sm mt-2">[Image projet]</p>
+                  </div>
+                </div>
+              )}
+              <!-- Project number badge -->
+              <div class="absolute top-4 left-4 w-8 h-8 bg-primary-500 flex items-center justify-center z-10">
+                <span class="text-white font-heading font-bold text-sm">{index + 1}</span>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-4 sm:p-6 md:p-8">
+              <!-- Context tags -->
+              <div class="flex flex-wrap gap-3 mb-4">
+                <span class="tag-primary text-xs">
+                  {project.data.context.period}
+                </span>
+                <span class="tag-gray text-xs">
+                  {project.data.context.role}
+                </span>
+              </div>
+
+              <!-- Title -->
+              <h2
+                class="font-heading font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-primary-400 transition-colors"
+                transition:name={`project-title-${project.id}`}
+              >
+                {!hasRealContent && '[PLACEHOLDER] '}
+                {project.data.title}
+              </h2>
+
+              <!-- Short description -->
+              <p class="text-gray-400 text-sm line-clamp-3 mb-6 leading-relaxed">
+                {project.data.shortDescription}
+              </p>
+
+              <!-- CTA -->
+              <div class="flex items-center text-primary-400 text-sm font-heading font-medium">
+                <span>Voir le projet</span>
+                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Link to Skills -->
+  <section class="section-padding section-alt">
+    <div class="container-custom text-center">
+      <h2 class="section-title">
+        Les compétences derrière ces <span class="text-accent-400 underline-memphis underline-memphis-accent">réalisations</span>
+      </h2>
+      <div class="section-divider section-divider-accent -tilt-1"></div>
+      <p class="section-subtitle mb-12">
+        Chaque projet a mobilisé un ensemble de compétences techniques et humaines.
+        Découvrez mon profil complet de compétences.
+      </p>
+      <a href="/skills" class="btn-chunky-primary">
+        Voir mes compétences
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA Contact -->
+  <section class="section-padding section-cta relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
+      <div class="memphis-ring w-36 h-36 top-[5%] right-[5%] rotate-[18deg]"></div>
+      <div class="memphis-square-accent w-24 h-24 bottom-[10%] left-[5%] rotate-[38deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-white memphis-2xl top-[18%] left-[12%] memphis-wobble"></div>
+      <div class="memphis-triangle bottom-[25%] right-[10%] rotate-[-20deg]"></div>
+      <div class="memphis-cross-white memphis-lg top-[52%] right-[4%] rotate-[22deg] memphis-drift"></div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots memphis-lg top-[12%] right-[18%]"></div>
+      <div class="memphis-zigzag-accent bottom-[18%] left-[18%] rotate-[10deg]"></div>
+      <div class="memphis-half-circle w-10 h-5 bottom-[40%] left-[5%] rotate-[-50deg]"></div>
+    </div>
+
+    <div class="container-custom text-center relative z-10">
+      <h2 class="section-title text-white mb-8">
+        Un projet en <span class="text-primary-400 squiggle">tête</span> ?
+      </h2>
+      <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+        Je suis toujours intéressé par de nouveaux défis.
+        N'hésitez pas à me contacter pour discuter de votre projet.
+      </p>
+      <a href="/contact" class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100">
+        Me contacter
+      </a>
+    </div>
+  </section>
+</BaseLayout>

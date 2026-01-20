@@ -1,0 +1,104 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page non trouvée"
+  description="La page que vous recherchez n'existe pas ou a été déplacée."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+  <section
+    class="min-h-[80vh] flex items-center relative noise-overlay overflow-hidden py-20 md:py-32"
+  >
+    <!-- Decorative shapes -->
+    <div class="hidden lg:block" aria-hidden="true">
+      <div class="memphis-circle-chunky w-32 h-32 top-[15%] right-[5%] rotate-12 opacity-15"></div>
+      <div class="memphis-tri-filled-lg-accent bottom-[20%] left-[5%] rotate-[-15deg] opacity-12">
+      </div>
+    </div>
+    <div class="hidden md:block" aria-hidden="true">
+      <div class="memphis-blob-accent memphis-2xl bottom-[30%] right-[8%] opacity-15"></div>
+      <div class="memphis-plus memphis-lg top-[25%] left-[8%] rotate-[20deg] opacity-12"></div>
+    </div>
+
+    <div class="container-custom text-center">
+      <div class="fade-in-up max-w-2xl mx-auto">
+        <!-- 404 Number -->
+        <div class="mb-10">
+          <span
+            class="text-[10rem] md:text-[14rem] font-heading font-black leading-none gradient-text-animated"
+          >
+            404
+          </span>
+        </div>
+
+        <!-- Message -->
+        <h1 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+          Oups ! Page <span class="text-primary-400 underline-memphis">introuvable</span>
+        </h1>
+        <p class="text-gray-400 text-lg mb-12 max-w-md mx-auto leading-relaxed">
+          La page que vous recherchez n'existe pas, a été déplacée ou est temporairement
+          indisponible.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap justify-center gap-6">
+          <a href="/" class="btn-chunky-primary">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+            Retour à l'accueil
+          </a>
+          <a href="/contact" class="btn-chunky-accent"> Me contacter </a>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="mt-16 pt-10 border-t border-dark-700">
+          <p class="text-gray-500 text-sm mb-6">Ou explorez ces pages :</p>
+          <div class="flex flex-wrap justify-center gap-6">
+            <a
+              href="/skills"
+              class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
+            >
+              Compétences
+            </a>
+            <span class="text-dark-600">•</span>
+            <a
+              href="/projects"
+              class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
+            >
+              Réalisations
+            </a>
+            <span class="text-dark-600">•</span>
+            <a
+              href="/timeline"
+              class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
+            >
+              Parcours
+            </a>
+            <span class="text-dark-600">•</span>
+            <a
+              href="/about"
+              class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
+            >
+              À propos
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

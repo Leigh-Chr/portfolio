@@ -1,0 +1,615 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all experiences from content collection
+const allExperiences = await getCollection('experiences');
+const sortedExperiences = allExperiences.sort((a, b) => {
+  // Sort by start date descending (anti-chronological)
+  return new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime();
+});
+
+const hasRealContent = sortedExperiences.length > 0;
+
+// Placeholder experiences if none exist
+const placeholderExperiences = [
+  {
+    slug: 'exp-1',
+    data: {
+      type: 'work' as const,
+      title: 'Développeur Full Stack Senior',
+      organization: 'Entreprise Tech',
+      logo: null,
+      location: 'Paris, France',
+      startDate: '2023-01',
+      endDate: null,
+      current: true,
+      order: 1,
+      relatedProjects: [],
+      relatedSkills: [],
+    },
+    body: 'Description du poste et des responsabilités.',
+  },
+  {
+    slug: 'exp-2',
+    data: {
+      type: 'work' as const,
+      title: 'Développeur Backend',
+      organization: 'Startup Innovante',
+      logo: null,
+      location: 'Lyon, France',
+      startDate: '2021-06',
+      endDate: '2022-12',
+      current: false,
+      order: 2,
+      relatedProjects: [],
+      relatedSkills: [],
+    },
+    body: "Développement d'APIs et microservices.",
+  },
+  {
+    slug: 'exp-3',
+    data: {
+      type: 'education' as const,
+      title: 'Master Ingénierie Logicielle',
+      organization: "École d'Ingénieurs",
+      logo: null,
+      location: 'Paris, France',
+      startDate: '2019-09',
+      endDate: '2021-06',
+      current: false,
+      order: 3,
+      relatedProjects: [],
+      relatedSkills: [],
+    },
+    body: 'Formation en génie logiciel et systèmes distribués.',
+  },
+  {
+    slug: 'exp-4',
+    data: {
+      type: 'work' as const,
+      title: 'Stagiaire Développeur',
+      organization: 'Agence Web',
+      logo: null,
+      location: 'Bordeaux, France',
+      startDate: '2020-04',
+      endDate: '2020-09',
+      current: false,
+      order: 4,
+      relatedProjects: [],
+      relatedSkills: [],
+    },
+    body: "Stage de fin d'études en développement web.",
+  },
+  {
+    slug: 'exp-5',
+    data: {
+      type: 'education' as const,
+      title: 'Licence Informatique',
+      organization: 'Université',
+      logo: null,
+      location: 'Bordeaux, France',
+      startDate: '2016-09',
+      endDate: '2019-06',
+      current: false,
+      order: 5,
+      relatedProjects: [],
+      relatedSkills: [],
+    },
+    body: 'Formation fondamentale en informatique.',
+  },
+];
+
+const displayExperiences = hasRealContent ? sortedExperiences : placeholderExperiences;
+
+// Group by type
+const workExperiences = displayExperiences.filter((e) => e.data.type === 'work');
+const educationExperiences = displayExperiences.filter((e) => e.data.type === 'education');
+const certifications = displayExperiences.filter((e) => e.data.type === 'certification');
+
+// Format date
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
+}
+
+// Get experience icon
+function getIcon(type: 'work' | 'education' | 'certification'): string {
+  switch (type) {
+    case 'work':
+      return '💼';
+    case 'education':
+      return '🎓';
+    case 'certification':
+      return '📜';
+  }
+}
+---
+
+<BaseLayout
+  title="Parcours"
+  description="Découvrez mon parcours professionnel et académique, de mes études à mes expériences en entreprise."
+>
+  <!-- Hero Section -->
+  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
+      <div class="memphis-ring memphis-3xl top-[10%] right-[6%] rotate-[20deg]"></div>
+      <div class="memphis-square-white w-28 h-28 bottom-[10%] left-[4%] rotate-[40deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-filled memphis-2xl top-[30%] left-[8%] memphis-scale"></div>
+      <div class="memphis-triangle bottom-[25%] right-[10%] rotate-[10deg]"></div>
+      <div class="memphis-cross-accent memphis-lg top-[55%] left-[3%] rotate-[35deg] memphis-drift">
+      </div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots-accent memphis-lg top-[20%] left-[15%]"></div>
+      <div class="memphis-zigzag bottom-[35%] right-[15%] rotate-[-12deg]"></div>
+      <div class="memphis-half-circle-accent w-8 h-4 top-[50%] right-[4%] rotate-[60deg]"></div>
+      <div
+        class="memphis-square-filled-accent memphis-sm bottom-[50%] left-[10%] rotate-45 memphis-pulse"
+      >
+      </div>
+    </div>
+
+    <div class="container-custom text-center fade-in-up relative z-10">
+      <h1 class="page-title">
+        Mon <span class="gradient-text-animated underline-zigzag" data-text="Parcours"
+          >Parcours</span
+        >
+      </h1>
+      <div class="section-divider section-divider-long"></div>
+      <p class="page-subtitle">
+        Une frise chronologique de mon évolution professionnelle et académique, de mes premiers pas
+        à aujourd'hui.
+      </p>
+
+      <!-- Quick Stats - Bold Memphis with subtle variations -->
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-16 stagger-children">
+        <div
+          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-1 hover:-tilt-1 min-w-[100px]"
+        >
+          <p class="stat-large text-primary-400 stat-pulse">{workExperiences.length}</p>
+          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
+            Expériences
+          </p>
+        </div>
+        <div
+          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl -tilt-2 md:offset-up-1 hover:tilt-2 min-w-[100px]"
+        >
+          <p class="stat-large text-accent-400 stat-pulse" style="animation-delay: 0.3s">
+            {educationExperiences.length}
+          </p>
+          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
+            Formations
+          </p>
+        </div>
+        {certifications.length > 0 && (
+          <div
+            class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-white/50 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-2 hover:-tilt-2 min-w-[100px]"
+          >
+            <p class="stat-large text-white stat-pulse" style="animation-delay: 0.6s">
+              {certifications.length}
+            </p>
+            <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
+              Certifications
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Experience Section -->
+  <section class="section-padding section-alt">
+    <div class="container-custom">
+      {
+        !hasRealContent && (
+          <div class="alert-placeholder mb-8">
+            <strong>[PLACEHOLDER]</strong> Les expériences ci-dessous sont des exemples.
+            Remplacez-les par votre vrai parcours dans les fichiers de contenu.
+          </div>
+        )
+      }
+
+      <div class="max-w-4xl mx-auto">
+        <!-- Work Experience Header -->
+        <div class="flex items-center gap-4 mb-12">
+          <div class="icon-box-lg bg-primary-500 border-primary-500">
+            <span class="text-2xl">💼</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-white">
+            Expériences <span class="text-primary-400">Professionnelles</span>
+          </h2>
+        </div>
+
+        <!-- Work Timeline -->
+        <div class="relative">
+          <!-- Vertical line -->
+          <div
+            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-primary-500/30"
+          >
+          </div>
+
+          <!-- Work Timeline items -->
+          {
+            workExperiences.map((exp, index) => {
+              return (
+                <div class="relative flex items-start mb-12 last:mb-0">
+                  {/* Timeline dot */}
+                  <div class="absolute left-8 transform -translate-x-1/2 z-10">
+                    <div
+                      class={`timeline-dot-lg ${exp.data.current ? 'bg-primary-500 border-primary-500 text-white' : 'bg-dark-800 border-primary-500'}`}
+                    >
+                      <span class="text-xl">💼</span>
+                    </div>
+                  </div>
+
+                  {/* Content card */}
+                  <div class="ml-20 sm:ml-24 flex-1">
+                    <div
+                      class={`card-glow p-4 sm:p-6 md:p-8 ${!hasRealContent ? 'opacity-70' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+                    >
+                      {/* Date badge */}
+                      <div class="flex mb-3">
+                        <span class="tag-primary">
+                          {formatDate(exp.data.startDate)}
+                          {exp.data.current
+                            ? ' - Présent'
+                            : exp.data.endDate
+                              ? ` - ${formatDate(exp.data.endDate)}`
+                              : ''}
+                        </span>
+                      </div>
+
+                      {/* Organization with logo */}
+                      <div class="flex items-center gap-4 mb-4">
+                        {exp.data.logo ? (
+                          <img
+                            src={exp.data.logo}
+                            alt={exp.data.organization}
+                            class="w-10 h-10 object-contain"
+                            width="40"
+                            height="40"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <div class="w-10 h-10 bg-dark-700 border border-dark-600 flex items-center justify-center flex-shrink-0">
+                            <span class="text-sm font-heading font-bold text-primary-400">
+                              {exp.data.organization.substring(0, 2).toUpperCase()}
+                            </span>
+                          </div>
+                        )}
+                        <div>
+                          <p class="font-medium text-white text-sm">
+                            {!hasRealContent && '[PLACEHOLDER] '}
+                            {exp.data.organization}
+                          </p>
+                          {exp.data.location && (
+                            <p class="text-gray-400 text-xs">{exp.data.location}</p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 class="font-heading font-bold text-xl text-white mb-3">
+                        {exp.data.title}
+                      </h3>
+
+                      {/* Status indicator */}
+                      <div class="flex flex-wrap items-center gap-2 mb-3">
+                        {exp.data.status && (
+                          <span class="inline-flex items-center px-2 py-1 text-xs bg-primary-500/20 text-primary-400 font-heading font-semibold border border-primary-500/30">
+                            {exp.data.status}
+                          </span>
+                        )}
+                        {exp.data.current && (
+                          <span class="inline-flex items-center gap-2 text-xs text-accent-400 font-heading font-semibold">
+                            <span class="w-2 h-2 bg-accent-400" />
+                            Poste actuel
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Expandable details */}
+                      <details class="mt-4 group">
+                        <summary
+                          class="cursor-pointer text-primary-400 text-sm font-heading font-semibold hover:text-primary-300 transition-colors flex items-center gap-2"
+                          aria-label={`Voir les détails de ${exp.data.title} chez ${exp.data.organization}`}
+                        >
+                          <span>Voir les détails</span>
+                          <svg
+                            class="w-4 h-4 group-open:rotate-180 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-dark-600">
+                          <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                            {exp.body || '[Description du poste, des missions et responsabilités]'}
+                          </p>
+
+                          {exp.data.type === 'work' && exp.data.status && (
+                            <div class="text-xs text-gray-400 mb-4">
+                              <p>
+                                • Statut :{' '}
+                                <span class="text-primary-400 font-medium">{exp.data.status}</span>
+                              </p>
+                            </div>
+                          )}
+
+                          {(exp.data.relatedProjects?.length > 0 ||
+                            exp.data.relatedSkills?.length > 0) && (
+                            <div class="mt-4 pt-4 border-t border-dark-600">
+                              <p class="text-xs text-gray-400 mb-2">Voir aussi :</p>
+                              <div class="flex flex-wrap gap-1">
+                                {exp.data.relatedProjects?.map((projectSlug: string) => (
+                                  <a
+                                    href={`/projects/${projectSlug}`}
+                                    class="text-xs text-primary-400 hover:underline"
+                                  >
+                                    📁 {projectSlug}
+                                  </a>
+                                ))}
+                                {exp.data.relatedSkills?.map((skillSlug: string) => (
+                                  <a
+                                    href={`/skills/${skillSlug}`}
+                                    class="text-xs text-accent-400 hover:underline"
+                                  >
+                                    ⚡ {skillSlug}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+
+          <!-- Future point -->
+          <div class="relative flex items-start mt-12">
+            <div class="absolute left-8 transform -translate-x-1/2">
+              <div class="icon-box-lg bg-primary-500 border-primary-500">
+                <span class="text-2xl">✨</span>
+              </div>
+            </div>
+            <div class="ml-20 sm:ml-24">
+              <p class="text-gray-400 text-sm font-heading italic">La suite s'écrit...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <!-- Education Header -->
+        <div class="flex items-center gap-4 mb-12">
+          <div class="icon-box-lg bg-accent-400 border-accent-400">
+            <span class="text-2xl">🎓</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-white">
+            <span class="text-accent-400">Formation</span> Académique
+          </h2>
+        </div>
+
+        <!-- Education Timeline -->
+        <div class="relative">
+          <!-- Vertical line -->
+          <div
+            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-400 to-accent-400/30"
+          >
+          </div>
+
+          <!-- Education Timeline items -->
+          {
+            educationExperiences.map((exp, index) => {
+              return (
+                <div class="relative flex items-start mb-12 last:mb-0">
+                  {/* Timeline dot */}
+                  <div class="absolute left-8 transform -translate-x-1/2 z-10">
+                    <div
+                      class={`timeline-dot-lg ${exp.data.current ? 'bg-accent-400 border-accent-400 text-dark-900' : 'bg-dark-800 border-accent-400'}`}
+                    >
+                      <span class="text-xl">🎓</span>
+                    </div>
+                  </div>
+
+                  {/* Content card */}
+                  <div class="ml-20 sm:ml-24 flex-1">
+                    <div
+                      class={`card-glow p-4 sm:p-6 md:p-8 ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+                    >
+                      {/* Date badge */}
+                      <div class="flex mb-3">
+                        <span class="tag-accent">
+                          {formatDate(exp.data.startDate)}
+                          {exp.data.current
+                            ? ' - Présent'
+                            : exp.data.endDate
+                              ? ` - ${formatDate(exp.data.endDate)}`
+                              : ''}
+                        </span>
+                      </div>
+
+                      {/* Organization with logo */}
+                      <div class="flex items-center gap-4 mb-4">
+                        {exp.data.logo ? (
+                          <img
+                            src={exp.data.logo}
+                            alt={exp.data.organization}
+                            class="w-10 h-10 object-contain"
+                            width="40"
+                            height="40"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <div class="w-10 h-10 bg-dark-700 border border-dark-600 flex items-center justify-center flex-shrink-0">
+                            <span class="text-sm font-heading font-bold text-accent-400">
+                              {exp.data.organization.substring(0, 2).toUpperCase()}
+                            </span>
+                          </div>
+                        )}
+                        <div>
+                          <p class="font-medium text-white text-sm">{exp.data.organization}</p>
+                          {exp.data.location && (
+                            <p class="text-gray-400 text-xs">{exp.data.location}</p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 class="font-heading font-bold text-xl text-white mb-3">
+                        {exp.data.title}
+                      </h3>
+
+                      {/* Current indicator */}
+                      {exp.data.current && (
+                        <div class="flex flex-wrap items-center gap-2 mb-3">
+                          <span class="inline-flex items-center gap-2 text-xs text-accent-400 font-heading font-semibold">
+                            <span class="w-2 h-2 bg-accent-400" />
+                            En cours
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Expandable details */}
+                      <details class="mt-4 group">
+                        <summary
+                          class="cursor-pointer text-accent-400 text-sm font-heading font-semibold hover:text-accent-300 transition-colors flex items-center gap-2"
+                          aria-label={`Voir les détails de ${exp.data.title} à ${exp.data.organization}`}
+                        >
+                          <span>Voir les détails</span>
+                          <svg
+                            class="w-4 h-4 group-open:rotate-180 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-dark-600">
+                          <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                            {exp.body || '[Description de la formation]'}
+                          </p>
+
+                          {(exp.data.relatedProjects?.length > 0 ||
+                            exp.data.relatedSkills?.length > 0) && (
+                            <div class="mt-4 pt-4 border-t border-dark-600">
+                              <p class="text-xs text-gray-400 mb-2">Compétences associées :</p>
+                              <div class="flex flex-wrap gap-1">
+                                {exp.data.relatedSkills?.map((skillSlug: string) => (
+                                  <a
+                                    href={`/skills/${skillSlug}`}
+                                    class="text-xs text-accent-400 hover:underline"
+                                  >
+                                    ⚡ {skillSlug}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+
+          <!-- Start point -->
+          <div class="relative flex items-start mt-12">
+            <div class="absolute left-8 transform -translate-x-1/2">
+              <div class="icon-box-lg bg-accent-400 border-accent-400">
+                <span class="text-2xl">🚀</span>
+              </div>
+            </div>
+            <div class="ml-20 sm:ml-24">
+              <p class="text-gray-400 text-sm font-heading italic">Le début de l'aventure...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-padding section-cta relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
+      <div class="memphis-ring w-36 h-36 top-[5%] left-[5%] rotate-[-20deg]"></div>
+      <div class="memphis-square-accent w-20 h-20 bottom-[10%] right-[6%] rotate-[45deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-white memphis-2xl top-[18%] right-[10%] memphis-wobble"></div>
+      <div class="memphis-triangle-primary bottom-[25%] left-[12%] rotate-[25deg]"></div>
+      <div class="memphis-cross-white memphis-lg top-[50%] left-[5%] rotate-[20deg] memphis-drift">
+      </div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots memphis-lg top-[12%] right-[18%]"></div>
+      <div class="memphis-zigzag-accent bottom-[18%] left-[20%] rotate-[15deg]"></div>
+      <div class="memphis-half-circle w-10 h-5 bottom-[45%] right-[4%] rotate-[-60deg]"></div>
+    </div>
+
+    <div class="container-custom text-center relative z-10">
+      <h2 class="section-title text-white mb-8">
+        Écrivons la suite <span class="text-accent-400 squiggle squiggle-accent">ensemble</span>
+      </h2>
+      <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+        Mon parcours continue de s'enrichir. Si vous pensez que nos chemins peuvent se croiser,
+        n'hésitez pas à me contacter.
+      </p>
+      <div class="flex flex-wrap justify-center gap-8">
+        <a
+          href="/contact"
+          class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100"
+        >
+          Me contacter
+        </a>
+        <a
+          href="/projects"
+          class="btn-chunky bg-transparent text-white border-white hover:bg-white hover:text-dark-900"
+        >
+          Voir mes réalisations
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

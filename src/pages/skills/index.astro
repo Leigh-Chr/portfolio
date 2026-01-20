@@ -1,0 +1,251 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SkillChart from '@components/SkillChart.astro';
+import { getCollection } from 'astro:content';
+import { skillGroups, getGroupAverageLevel, type SkillGroup } from '@utils/skills';
+
+// Get all skills from content collection
+const allSkills = await getCollection('skills');
+const sortedSkills = allSkills.sort((a, b) => a.data.order - b.data.order);
+
+// Group skills by group
+const frontendSkills = sortedSkills.filter(s => s.data.group === 'frontend');
+const backendSkills = sortedSkills.filter(s => s.data.group === 'backend');
+const personalSkills = sortedSkills.filter(s => s.data.group === 'personal');
+const interpersonalSkills = sortedSkills.filter(s => s.data.group === 'interpersonal');
+
+// Calculate averages
+const groupData = [
+  { key: 'frontend' as SkillGroup, skills: frontendSkills, avg: getGroupAverageLevel(frontendSkills) },
+  { key: 'backend' as SkillGroup, skills: backendSkills, avg: getGroupAverageLevel(backendSkills) },
+  { key: 'personal' as SkillGroup, skills: personalSkills, avg: getGroupAverageLevel(personalSkills) },
+  { key: 'interpersonal' as SkillGroup, skills: interpersonalSkills, avg: getGroupAverageLevel(interpersonalSkills) },
+];
+
+// Prepare data for chart
+const chartData = sortedSkills.map(skill => ({
+  name: skill.data.title,
+  level: skill.data.level,
+  category: skill.data.category,
+  group: skill.data.group,
+}));
+
+// Color mapping for groups - using design system colors
+const groupColors = {
+  frontend: {
+    bg: 'bg-info-500',
+    text: 'text-info-400',
+    border: 'border-info-500',
+    tag: 'tag-primary',
+    hoverBorder: 'hover:border-info-500',
+    groupHoverText: 'group-hover:text-info-400'
+  },
+  backend: {
+    bg: 'bg-primary-500',
+    text: 'text-primary-400',
+    border: 'border-primary-500',
+    tag: 'tag-secondary',
+    hoverBorder: 'hover:border-primary-500',
+    groupHoverText: 'group-hover:text-primary-400'
+  },
+  personal: {
+    bg: 'bg-accent-500',
+    text: 'text-accent-400',
+    border: 'border-accent-500',
+    tag: 'tag-accent',
+    hoverBorder: 'hover:border-accent-500',
+    groupHoverText: 'group-hover:text-accent-400'
+  },
+  interpersonal: {
+    bg: 'bg-tertiary-500',
+    text: 'text-tertiary-400',
+    border: 'border-tertiary-500',
+    tag: 'tag-tertiary',
+    hoverBorder: 'hover:border-tertiary-500',
+    groupHoverText: 'group-hover:text-tertiary-400'
+  },
+};
+---
+
+<BaseLayout title="Compétences" description="Découvrez mes compétences techniques et humaines, avec une vue comparative de mon profil.">
+  <!-- Hero Section -->
+  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
+      <div class="memphis-ring memphis-2xl top-[8%] left-[4%] rotate-[-20deg]"></div>
+      <div class="memphis-square-accent w-24 h-24 bottom-[12%] right-[5%] rotate-[35deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-chunky w-24 h-24 top-[20%] right-[6%] rotate-[-10deg] memphis-scale"></div>
+      <div class="memphis-tri-filled-lg-accent bottom-[18%] left-[5%] rotate-[20deg]"></div>
+      <div class="memphis-cross memphis-lg top-[55%] left-[4%] rotate-[15deg] memphis-drift"></div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots memphis-lg top-[15%] left-[12%]"></div>
+      <div class="memphis-zigzag-accent bottom-[22%] right-[10%] rotate-[-8deg]"></div>
+      <div class="memphis-half-circle w-10 h-5 top-[45%] right-[4%] rotate-[70deg]"></div>
+      <div class="memphis-blob-accent memphis-xl bottom-[30%] right-[15%] memphis-pulse"></div>
+    </div>
+
+    <div class="container-custom text-center fade-in-up relative z-10">
+      <h1 class="page-title">
+        Mes <span class="gradient-text-animated underline-zigzag" data-text="Compétences">Compétences</span>
+      </h1>
+      <div class="section-divider section-divider-long"></div>
+      <p class="page-subtitle">
+        Un ensemble équilibré de compétences techniques et humaines,
+        organisées en 4 domaines complémentaires.
+      </p>
+      <p class="text-sm text-gray-500 mt-4 italic">
+        Auto-évaluation relative à mon niveau de carrière (3 ans d'alternance)
+      </p>
+
+      <!-- Group Stats -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 stagger-children max-w-4xl mx-auto">
+        {groupData.map((group, i) => (
+          <div class={`text-center p-3 sm:p-4 md:p-6 bg-dark-800 border-2 sm:border-3 border-dark-600 group ${groupColors[group.key].hoverBorder} transition-all shadow-hard-lg ${i % 2 === 0 ? '-tilt-1' : 'tilt-1'} hover:scale-105 hover:shadow-hard-xl`}>
+            <span class="text-2xl sm:text-3xl mb-2 block">{skillGroups[group.key].icon}</span>
+            <p class={`text-3xl sm:text-4xl md:text-5xl font-heading font-black ${groupColors[group.key].text}`}>
+              {group.avg}<span class="text-base sm:text-xl text-gray-500">/10</span>
+            </p>
+            <p class="text-[10px] sm:text-xs text-gray-400 font-heading uppercase tracking-wide mt-1 leading-tight">
+              {skillGroups[group.key].label.replace('Développement ', '').replace('Compétences ', '')}
+            </p>
+            <p class="text-[10px] sm:text-xs text-gray-500 mt-1">
+              {group.skills.length} compétence{group.skills.length > 1 ? 's' : ''}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparative Chart Section -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="section-header">
+        <h2 class="section-title">Vue <span class="text-primary-400 underline-memphis">Comparative</span></h2>
+        <div class="section-divider -tilt-1"></div>
+        <p class="section-subtitle">
+          Ce schéma synthétique permet de visualiser la place et le niveau de chaque
+          compétence par rapport aux autres.
+        </p>
+      </div>
+
+      <SkillChart skills={chartData} />
+    </div>
+  </section>
+
+  <!-- Skills by Group Section -->
+  <section class="section-padding section-alt">
+    <div class="container-custom">
+      <div class="section-header">
+        <h2 class="section-title">Détail par <span class="text-accent-400 underline-memphis underline-memphis-accent">Domaine</span></h2>
+        <div class="section-divider section-divider-accent tilt-2"></div>
+        <p class="section-subtitle">
+          Cliquez sur une compétence pour découvrir sa définition détaillée,
+          mes preuves concrètes et mon analyse critique.
+        </p>
+      </div>
+
+      <!-- Groups Grid -->
+      <div class="space-y-20">
+        {groupData.map((group) => (
+          <div>
+            <!-- Group Header -->
+            <div class="flex flex-wrap items-center gap-3 sm:gap-6 mb-6 sm:mb-8">
+              <span class={`w-3 h-3 ${groupColors[group.key].bg} flex-shrink-0`}></span>
+              <h3 class="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-white flex items-center gap-2 sm:gap-3">
+                <span>{skillGroups[group.key].icon}</span>
+                <span class="break-words">{skillGroups[group.key].label}</span>
+              </h3>
+              <span class={`sm:ml-auto px-2 sm:px-3 py-1 text-xs sm:text-sm font-heading font-medium rounded bg-dark-700 border ${groupColors[group.key].border} ${groupColors[group.key].text}`}>
+                {group.avg}/10
+              </span>
+            </div>
+            <p class="text-gray-400 mb-6 sm:mb-8 sm:-mt-2 sm:ml-8 leading-relaxed text-sm sm:text-base">
+              {skillGroups[group.key].description}
+            </p>
+
+            <!-- Skills Cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
+              {group.skills.map((skill, index) => (
+                <a
+                  href={`/skills/${skill.id}`}
+                  class={`card-glow p-4 sm:p-6 md:p-8 group ${index % 3 === 1 ? 'md:offset-up-1' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+                >
+                  <div class="flex items-start justify-between mb-6">
+                    <div class="icon-box" transition:name={`skill-icon-${skill.id}`}>
+                      <span class="text-xl">
+                        {skill.data.icon || '💻'}
+                      </span>
+                    </div>
+                    <span class={groupColors[group.key].tag} transition:name={`skill-level-${skill.id}`}>{skill.data.level}/10</span>
+                  </div>
+                  <h4
+                    class={`font-heading font-bold text-xl text-white mb-3 ${groupColors[group.key].groupHoverText} transition-colors`}
+                    transition:name={`skill-title-${skill.id}`}
+                  >
+                    {skill.data.title}
+                  </h4>
+                  <p class="text-gray-400 text-sm line-clamp-2 leading-relaxed">
+                    {skill.data.summary}
+                  </p>
+                  <div class={`mt-6 flex items-center ${groupColors[group.key].text} text-sm font-heading font-medium`}>
+                    <span>Voir détails</span>
+                    <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation to Projects -->
+  <section class="section-padding section-cta relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
+      <div class="memphis-ring-accent w-28 h-28 top-[5%] left-[5%] rotate-[18deg]"></div>
+      <div class="memphis-square w-20 h-20 bottom-[8%] right-[4%] rotate-[40deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-white memphis-xl top-[18%] right-[10%] memphis-wobble"></div>
+      <div class="memphis-tri-filled-lg bottom-[18%] left-[6%] rotate-[-15deg]"></div>
+      <div class="memphis-cross-white memphis-md top-[50%] left-[4%] rotate-[25deg] memphis-drift"></div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots-accent memphis-md top-[12%] left-[15%]"></div>
+      <div class="memphis-zigzag bottom-[20%] right-[12%] rotate-[-10deg]"></div>
+      <div class="memphis-half-circle-accent w-8 h-4 bottom-[40%] right-[5%] rotate-[65deg]"></div>
+    </div>
+
+    <div class="container-custom text-center relative z-10">
+      <h2 class="section-title text-white mb-8">
+        Voir ces compétences <span class="text-accent-400 squiggle squiggle-accent">en action</span>
+      </h2>
+      <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+        Découvrez comment j'applique ces compétences dans mes réalisations concrètes.
+        Chaque projet illustre la mise en œuvre de plusieurs compétences.
+      </p>
+      <a href="/projects" class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100">
+        Voir mes réalisations
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

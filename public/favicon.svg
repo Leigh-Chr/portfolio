@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="url(#bg)"/>
+  <!-- Memphis triangle (yellow) -->
+  <polygon points="6,24 14,8 22,24" fill="none" stroke="#facc15" stroke-width="2"/>
+  <!-- Memphis circle (purple) -->
+  <circle cx="22" cy="10" r="5" fill="none" stroke="#a855f7" stroke-width="2"/>
+  <!-- Memphis square (cyan) -->
+  <rect x="20" y="18" width="8" height="8" fill="none" stroke="#22d3ee" stroke-width="2"/>
+  <!-- Dot accent -->
+  <circle cx="10" cy="20" r="2" fill="#a855f7"/>
+</svg>

@@ -1,0 +1,370 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import profileImage from '@assets/images/profile.jpg';
+
+// Get featured content
+const allSkills = await getCollection('skills');
+const allProjects = await getCollection('projects');
+
+const featuredSkills = allSkills.slice(0, 4);
+const featuredProjects = allProjects.slice(0, 3);
+---
+
+<BaseLayout title="Accueil">
+  <!-- Hero Section -->
+  <section
+    class="min-h-[90vh] flex items-center relative noise-overlay overflow-hidden py-20 md:py-32"
+  >
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
+      <div class="memphis-ring-accent memphis-2xl top-[8%] right-[4%] rotate-[-15deg]"></div>
+      <div class="memphis-square w-20 h-20 bottom-[12%] left-[3%] rotate-[30deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-chunky w-28 h-28 top-[15%] right-[8%] rotate-12 memphis-scale">
+      </div>
+      <div class="memphis-tri-filled-lg bottom-[18%] left-[5%] rotate-[-15deg]"></div>
+      <div class="memphis-cross-accent memphis-lg top-[50%] left-[3%] rotate-[25deg] memphis-drift">
+      </div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots-accent memphis-lg top-[20%] left-[10%]"></div>
+      <div class="memphis-zigzag bottom-[25%] right-[6%] rotate-[-10deg]"></div>
+      <div class="memphis-half-circle-accent w-8 h-4 top-[40%] right-[3%] rotate-[60deg]"></div>
+      <div class="memphis-blob-accent memphis-xl bottom-[30%] right-[12%] memphis-pulse"></div>
+    </div>
+
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Text Content -->
+        <div class="fade-in-up">
+          <p
+            class="text-primary-400 font-heading font-semibold mb-6 uppercase tracking-wider text-sm"
+          >
+            Bienvenue sur mon portfolio
+          </p>
+          <h1 class="page-title text-balance">
+            Bonjour, je suis <span
+              class="gradient-text-animated underline-zigzag"
+              data-text="Virgil">Virgil CHAREYRE</span
+            >
+          </h1>
+          <p class="text-3xl md:text-4xl text-accent-400 mb-6 font-heading font-bold">
+            <span class="highlight-marker highlight-marker-accent"
+              >Développeur Web Fullstack</span
+            >
+          </p>
+          <p class="text-gray-300 text-xl mb-10 max-w-xl leading-relaxed">
+            Passionné par le craft et le souci du détail. Je crée des expériences numériques
+            soignées, accessibles et éthiques — parce que le web mérite mieux que du vite-fait.
+          </p>
+
+          <!-- CTA Buttons - Bold Memphis -->
+          <div class="flex flex-wrap gap-4">
+            <a href="/projects" class="btn-chunky-primary">
+              Voir mes réalisations
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+            <a href="/contact" class="btn-chunky-accent"> Me contacter </a>
+          </div>
+
+          <!-- Quick Stats - Bold Memphis with subtle variations -->
+          <div class="mt-12 sm:mt-16 flex flex-wrap justify-start gap-6 sm:gap-10 md:gap-16 stagger-children">
+            <div class="text-center group -tilt-1 hover:tilt-2 transition-transform">
+              <p class="stat-large text-primary-400 stat-pulse">10</p>
+              <p
+                class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+              >
+                Compétences
+              </p>
+            </div>
+            <div class="text-center group tilt-1 md:offset-up-1 hover:-tilt-2 transition-transform">
+              <p class="stat-large text-accent-400 stat-pulse" style="animation-delay: 0.3s">5</p>
+              <p
+                class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+              >
+                Réalisations
+              </p>
+            </div>
+            <div class="text-center group -tilt-2 hover:tilt-2 transition-transform">
+              <p class="stat-large text-white stat-pulse" style="animation-delay: 0.6s">3</p>
+              <p
+                class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+              >
+                Années d'exp.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Image with enhanced styling + depth -->
+        <div class="hidden lg:block scale-in" style="animation-delay: 0.3s">
+          <div
+            class="w-80 h-80 mx-auto overflow-hidden shadow-hard-purple-xl border-3 border-primary-500 bg-dark-800 relative group transition-all duration-500 tilt-1 depth-layer"
+          >
+            <!-- Decorative corner with animation - offset -->
+            <div
+              class="absolute -top-1 -right-1 w-14 h-14 bg-accent-400 group-hover:w-16 group-hover:h-16 transition-all duration-300 -tilt-1"
+              aria-hidden="true"
+            >
+            </div>
+            <div class="w-full h-full flex items-center justify-center overflow-hidden">
+              <Image
+                src={profileImage}
+                alt="Photo de Virgil CHAREYRE"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                width={320}
+                height={320}
+                loading="eager"
+                format="webp"
+                quality={85}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Skills Section -->
+  <section class="section-padding section-alt relative overflow-hidden">
+    <!-- Subtle decorative shapes -->
+    <div
+      class="absolute top-[10%] right-[2%] memphis-plus memphis-lg rotate-[15deg] opacity-12 hidden lg:block"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="absolute bottom-[15%] left-[2%] memphis-blob-accent memphis-xl opacity-12 hidden lg:block"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container-custom relative z-10">
+      <div class="section-header">
+        <h2 class="section-title">
+          Mes <span class="text-primary-400 underline-memphis">Compétences</span> Clés
+        </h2>
+        <div class="section-divider -tilt-1"></div>
+        <p class="section-subtitle">
+          Un équilibre entre savoir-faire technique et qualités humaines, au service de projets
+          qui ont du sens.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 stagger-children">
+        {
+          featuredSkills.map((skill, index) => {
+            return (
+              <a
+                href={`/skills/${skill.id}`}
+                class={`card-glow p-4 sm:p-6 md:p-8 group ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+              >
+                <div
+                  class="icon-box mb-6 transition-shadow duration-300"
+                  transition:name={`skill-icon-${skill.id}`}
+                >
+                  <span class="text-2xl">{skill.data.icon || '✦'}</span>
+                </div>
+                <h3
+                  class="text-xl font-heading font-bold text-white mb-3 group-hover:text-primary-400 transition-all"
+                  transition:name={`skill-title-${skill.id}`}
+                >
+                  {skill.data.title}
+                </h3>
+                <p class="text-gray-400 text-sm line-clamp-2 mb-6">{skill.data.summary}</p>
+                <div class="skill-level-animated">
+                  <div class="skill-fill" style={`width: ${skill.data.level * 10}%`} />
+                </div>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <div class="text-center mt-16">
+        <a href="/skills" class="btn-secondary">
+          Voir toutes mes compétences
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section class="section-padding noise-overlay relative overflow-hidden">
+    <!-- Subtle decorative shapes -->
+    <div
+      class="absolute top-[8%] left-[2%] memphis-circle-chunky-accent w-16 h-16 rotate-[-10deg] opacity-10 hidden lg:block"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="absolute bottom-[12%] right-[2%] memphis-tri-filled rotate-[20deg] opacity-12 hidden lg:block"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container-custom relative z-10">
+      <div class="section-header">
+        <h2 class="section-title">
+          Réalisations <span class="text-accent-400 underline-memphis underline-memphis-accent"
+            >Récentes</span
+          >
+        </h2>
+        <div class="section-divider section-divider-accent tilt-2"></div>
+        <p class="section-subtitle">
+          Des projets concrets qui reflètent mon approche : qualité, accessibilité et attention
+          aux détails.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
+        {
+          featuredProjects.map((project, index) => {
+            return (
+              <a
+                href={`/projects/${project.id}`}
+                class={`card-glow overflow-hidden group ${index % 3 === 1 ? 'offset-up-2' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+              >
+                <div
+                  class="aspect-video bg-dark-700 relative overflow-hidden"
+                  transition:name={`project-thumb-${project.id}`}
+                >
+                  <img
+                    src={project.data.thumbnail || '/images/project-placeholder.jpg'}
+                    alt={`Aperçu du projet ${project.data.title}`}
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                    decoding="async"
+                    width="384"
+                    height="216"
+                  />
+                  {/* Gradient overlay on hover */}
+                  <div class="absolute inset-0 bg-gradient-to-t from-primary-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                <div class="p-4 sm:p-6 md:p-8">
+                  <h3
+                    class="text-xl font-heading font-bold text-white mb-3 group-hover:text-primary-400 transition-all"
+                    transition:name={`project-title-${project.id}`}
+                  >
+                    {project.data.title}
+                  </h3>
+                  <p class="text-gray-400 text-sm line-clamp-2 mb-6">
+                    {project.data.shortDescription}
+                  </p>
+                  <span class="link-arrow">
+                    Voir le projet
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <div class="text-center mt-16">
+        <a href="/projects" class="btn-primary">
+          Voir toutes mes réalisations
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-padding section-cta relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
+      <div class="memphis-ring w-32 h-32 top-[5%] right-[5%] rotate-[15deg]"></div>
+      <div class="memphis-square-accent w-20 h-20 bottom-[10%] left-[4%] rotate-[35deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-white memphis-xl top-[15%] left-[8%] memphis-wobble"></div>
+      <div class="memphis-triangle bottom-[20%] right-[8%] rotate-[-15deg]"></div>
+      <div class="memphis-cross-white memphis-lg top-[45%] right-[4%] rotate-[20deg] memphis-drift">
+      </div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots memphis-md top-[10%] right-[15%]"></div>
+      <div class="memphis-zigzag-accent bottom-[15%] left-[12%] rotate-[8deg]"></div>
+      <div class="memphis-half-circle w-8 h-4 bottom-[35%] left-[5%] rotate-[-45deg]"></div>
+    </div>
+
+    <div class="container-custom text-center relative z-10">
+      <h2 class="section-title text-white mb-8">
+        Envie d'en savoir <span class="text-accent-400 squiggle squiggle-accent">plus</span> ?
+      </h2>
+      <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+        Vous avez un projet qui a du sens ? Discutons-en. Je suis toujours ouvert aux échanges
+        avec des personnes qui partagent mes valeurs.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+        <a
+          href="/contact"
+          class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100"
+          >Me contacter</a
+        >
+        <a
+          href="/about"
+          class="btn-chunky bg-transparent text-white border-white hover:bg-white hover:text-dark-900"
+          >En savoir plus sur moi</a
+        >
+      </div>
+    </div>
+  </section>
+</BaseLayout>

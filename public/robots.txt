@@ -1,0 +1,6 @@
+# robots.txt for leigh-chr.github.io
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://leigh-chr.github.io/sitemap.xml

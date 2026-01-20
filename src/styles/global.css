@@ -1,0 +1,1538 @@
+/* Google Fonts loaded via <link> in BaseLayout.astro for better performance */
+
+@import 'tailwindcss';
+
+/* =============================================================================
+   TAILWIND V4 THEME CONFIGURATION
+   ============================================================================= */
+
+@theme {
+  /* Neo-Memphis Dark Theme Colors */
+  --color-dark-950: #050505;
+  --color-dark-900: #0a0a0a;
+  --color-dark-800: #141414;
+  --color-dark-700: #1f1f1f;
+  --color-dark-600: #2a2a2a;
+  --color-dark-500: #3d3d3d;
+
+  /* Primary: Purple/Violet */
+  --color-primary-50: #faf5ff;
+  --color-primary-100: #f3e8ff;
+  --color-primary-200: #e9d5ff;
+  --color-primary-300: #d8b4fe;
+  --color-primary-400: #c084fc;
+  --color-primary-500: #a855f7;
+  --color-primary-600: #9333ea;
+  --color-primary-700: #7c3aed;
+  --color-primary-800: #6b21a8;
+  --color-primary-900: #581c87;
+
+  /* Accent: Yellow */
+  --color-accent-50: #fefce8;
+  --color-accent-100: #fef9c3;
+  --color-accent-200: #fef08a;
+  --color-accent-300: #fde047;
+  --color-accent-400: #facc15;
+  --color-accent-500: #eab308;
+  --color-accent-600: #ca8a04;
+  --color-accent-700: #a16207;
+  --color-accent-800: #854d0e;
+  --color-accent-900: #713f12;
+
+  /* Tertiary: Rose */
+  --color-tertiary-300: #fda4af;
+  --color-tertiary-400: #fb7185;
+  --color-tertiary-500: #f43f5e;
+  --color-tertiary-600: #e11d48;
+
+  /* Info: Cyan */
+  --color-info-300: #67e8f9;
+  --color-info-400: #22d3ee;
+  --color-info-500: #06b6d4;
+  --color-info-600: #0891b2;
+
+  /* Neutral grays */
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+
+  /* Font families */
+  --font-heading:
+    'Space Grotesk', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-sans:
+    'DM Sans', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', sans-serif;
+
+  /* Neo-Memphis hard shadows */
+  --shadow-hard-sm: 3px 3px 0 0 #000;
+  --shadow-hard: 6px 6px 0 0 #000;
+  --shadow-hard-lg: 10px 10px 0 0 #000;
+  --shadow-hard-xl: 14px 14px 0 0 #000;
+  --shadow-hard-2xl: 18px 18px 0 0 #000;
+  --shadow-hard-3xl: 24px 24px 0 0 #000;
+  --shadow-hard-purple: 6px 6px 0 0 #a855f7;
+  --shadow-hard-purple-lg: 10px 10px 0 0 #a855f7;
+  --shadow-hard-purple-xl: 14px 14px 0 0 #a855f7;
+  --shadow-hard-yellow: 6px 6px 0 0 #facc15;
+  --shadow-hard-yellow-lg: 10px 10px 0 0 #facc15;
+  --shadow-hard-white: 6px 6px 0 0 #fff;
+  --shadow-hard-white-lg: 10px 10px 0 0 #fff;
+
+  /* Neon glow effects */
+  --shadow-glow-purple: 0 0 20px #a855f7, 0 0 40px rgba(168, 85, 247, 0.5);
+  --shadow-glow-purple-sm: 0 0 10px #a855f7, 0 0 20px rgba(168, 85, 247, 0.3);
+  --shadow-glow-purple-lg:
+    0 0 30px #a855f7, 0 0 60px rgba(168, 85, 247, 0.5), 0 0 90px rgba(168, 85, 247, 0.3);
+  --shadow-glow-yellow: 0 0 20px #facc15, 0 0 40px rgba(250, 204, 21, 0.5);
+  --shadow-glow-yellow-sm: 0 0 10px #facc15, 0 0 20px rgba(250, 204, 21, 0.3);
+  --shadow-glow-yellow-lg:
+    0 0 30px #facc15, 0 0 60px rgba(250, 204, 21, 0.5), 0 0 90px rgba(250, 204, 21, 0.3);
+
+  /* Combined hard + glow */
+  --shadow-hard-glow-purple: 6px 6px 0 0 #a855f7, 0 0 25px rgba(168, 85, 247, 0.5);
+  --shadow-hard-glow-purple-lg: 10px 10px 0 0 #a855f7, 0 0 35px rgba(168, 85, 247, 0.5);
+  --shadow-hard-glow-yellow: 6px 6px 0 0 #facc15, 0 0 25px rgba(250, 204, 21, 0.5);
+  --shadow-hard-glow-yellow-lg: 10px 10px 0 0 #facc15, 0 0 35px rgba(250, 204, 21, 0.5);
+
+  /* Memphis bounce animation timing */
+  --ease-memphis: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =============================================================================
+   DESIGN SYSTEM - NEO-MEMPHIS DARK
+   =============================================================================
+
+   A bold, expressive, geometric aesthetic with dark backgrounds
+   and vibrant purple/yellow accents.
+
+   CORE PRINCIPLES:
+   - Dark backgrounds (#0a0a0a to #1f1f1f)
+   - Purple primary (#a855f7) / Yellow accent (#facc15)
+   - Hard shadows (no blur, offset)
+   - Thick borders (2-3px)
+   - Geometric shapes (no soft rounded corners)
+   - Bold typography (Space Grotesk headings, DM Sans body)
+
+   ============================================================================= */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-gray-300 bg-dark-900 antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-white tracking-tight;
+  }
+
+  a {
+    @apply transition-all duration-200;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-primary-500 text-white;
+  }
+}
+
+@layer components {
+  /* ===================
+     LAYOUT
+     =================== */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-20 md:py-32;
+  }
+
+  /* ===================
+     CARDS - Neo-Memphis style
+     =================== */
+  .card {
+    @apply bg-dark-800 border-2 border-dark-600 shadow-hard transition-all duration-200;
+  }
+
+  .card:hover {
+    @apply border-primary-500 shadow-hard-purple-lg;
+    transform: translateX(-6px) translateY(-6px);
+  }
+
+  .card-compact {
+    @apply bg-dark-800 border-2 border-dark-600 shadow-hard-sm transition-all duration-200;
+  }
+
+  .card-compact:hover {
+    @apply border-primary-400 shadow-hard-purple;
+    transform: translateX(-3px) translateY(-3px);
+  }
+
+  /* Detail boxes (for content sections) */
+  .detail-box {
+    @apply bg-dark-800 border-2 border-dark-600 p-8;
+  }
+
+  /* ===================
+     SCROLL PREVIEW - Animated thumbnail
+     =================== */
+  .scroll-preview {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    container-type: inline-size;
+  }
+
+  .scroll-preview-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    transition: transform 4s linear;
+  }
+
+  .scroll-preview:hover .scroll-preview-img {
+    /* Move image up to show bottom - calculated for ~2:1 aspect ratio images in 16:9 container */
+    transform: translateY(calc(-100% + 56.25cqw));
+  }
+
+  /* Fallback for browsers without container query support */
+  @supports not (width: 1cqw) {
+    .scroll-preview:hover .scroll-preview-img {
+      transform: translateY(-52%);
+    }
+  }
+
+  /* ===================
+     BUTTONS - Bold Neo-Memphis
+     =================== */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-primary-500 text-dark-900 font-heading font-semibold
+           border-2 border-dark-900 shadow-hard-lg
+           hover:bg-primary-400
+           active:shadow-hard
+           transition-all duration-200;
+    transition-timing-function: var(--ease-memphis);
+  }
+
+  .btn-primary:hover {
+    transform: translateX(-6px) translateY(-6px);
+    box-shadow: var(--shadow-hard-xl);
+  }
+
+  .btn-primary:active {
+    transform: translateX(0) translateY(0);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-dark-700 text-white font-heading font-semibold
+           border-2 border-primary-500 shadow-hard-purple-lg
+           hover:bg-primary-500 hover:border-primary-400
+           active:shadow-hard-purple
+           transition-all duration-200;
+    transition-timing-function: var(--ease-memphis);
+  }
+
+  .btn-secondary:hover {
+    transform: translateX(-6px) translateY(-6px);
+    box-shadow: var(--shadow-hard-purple-xl);
+  }
+
+  .btn-secondary:active {
+    transform: translateX(0) translateY(0);
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-accent-400 text-dark-900 font-heading font-semibold
+           border-2 border-dark-900 shadow-hard-lg
+           hover:bg-accent-300
+           active:shadow-hard
+           transition-all duration-200;
+    transition-timing-function: var(--ease-memphis);
+  }
+
+  .btn-accent:hover {
+    transform: translateX(-6px) translateY(-6px);
+    box-shadow: var(--shadow-hard-xl);
+  }
+
+  .btn-accent:active {
+    transform: translateX(0) translateY(0);
+  }
+
+  .btn-white {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           bg-white text-dark-900 font-heading font-semibold
+           border-2 border-dark-900 shadow-hard-lg
+           hover:bg-gray-100
+           active:shadow-hard
+           transition-all duration-200;
+    transition-timing-function: var(--ease-memphis);
+  }
+
+  .btn-white:hover {
+    transform: translateX(-6px) translateY(-6px);
+    box-shadow: var(--shadow-hard-xl);
+  }
+
+  .btn-white:active {
+    transform: translateX(0) translateY(0);
+  }
+
+  /* ===================
+     TAGS - Geometric pills
+     =================== */
+  .tag {
+    @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide;
+  }
+
+  .tag-primary {
+    @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide
+           bg-primary-500/20 text-primary-300 border border-primary-500/50;
+  }
+
+  .tag-accent {
+    @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide
+           bg-accent-400/20 text-accent-300 border border-accent-400/50;
+  }
+
+  .tag-gray {
+    @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide
+           bg-dark-600 text-gray-300 border border-dark-500;
+  }
+
+  .tag-secondary {
+    @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide
+           bg-primary-600/20 text-primary-300 border border-primary-600/30;
+  }
+
+  .tag-tertiary {
+    @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide
+           bg-tertiary-500/20 text-tertiary-400 border border-tertiary-500/30;
+  }
+
+  /* ===================
+     TEXT HIGHLIGHTS
+     =================== */
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400 font-bold;
+  }
+
+  .text-highlight {
+    @apply text-primary-400;
+  }
+
+  .text-accent-highlight {
+    @apply text-accent-400;
+  }
+
+  /* Background highlight */
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary-600 to-primary-800;
+  }
+
+  /* ===================
+     SECTION BACKGROUNDS
+     =================== */
+  .section-hero {
+    @apply bg-dark-900;
+  }
+
+  .section-alt {
+    @apply bg-dark-800;
+  }
+
+  .section-cta {
+    @apply bg-gradient-to-br from-primary-600 via-primary-700 to-dark-900;
+  }
+
+  /* ===================
+     ICON CONTAINERS
+     =================== */
+  .icon-box {
+    @apply w-12 h-12 flex items-center justify-center shrink-0
+           bg-dark-700 border-2 border-primary-500;
+  }
+
+  .icon-box-sm {
+    @apply w-10 h-10 flex items-center justify-center shrink-0
+           bg-dark-700 border-2 border-primary-500;
+  }
+
+  .icon-box-lg {
+    @apply w-16 h-16 flex items-center justify-center shrink-0
+           bg-dark-700 border-2 border-primary-500;
+  }
+
+  /* ===================
+     SECTION HEADERS - BOLD MEMPHIS
+     =================== */
+  .section-header {
+    @apply text-center mb-20;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-gray-400 max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed;
+  }
+
+  /* ===================
+     PAGE HEADERS - EXTRA BOLD
+     =================== */
+  .page-title {
+    @apply text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-10 tracking-tight leading-none;
+  }
+
+  .page-subtitle {
+    @apply text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed;
+  }
+
+  /* ===================
+     CONTENT SECTIONS
+     =================== */
+  .content-section-header {
+    @apply flex items-center gap-6 mb-8;
+  }
+
+  .content-section-title {
+    @apply text-2xl md:text-3xl font-heading font-bold text-white tracking-tight;
+  }
+
+  /* ===================
+     FORM ELEMENTS
+     =================== */
+  .form-input {
+    @apply w-full px-4 py-3 bg-dark-800 text-white
+           border-2 border-dark-600
+           focus:border-primary-500 focus:ring-0 focus:outline-none
+           placeholder:text-gray-500
+           transition-colors;
+  }
+
+  .form-select {
+    @apply w-full px-4 py-3 bg-dark-800 text-white
+           border-2 border-dark-600
+           focus:border-primary-500 focus:ring-0 focus:outline-none
+           transition-colors;
+  }
+
+  .form-textarea {
+    @apply w-full px-4 py-3 bg-dark-800 text-white
+           border-2 border-dark-600
+           focus:border-primary-500 focus:ring-0 focus:outline-none
+           placeholder:text-gray-500
+           resize-none transition-colors;
+  }
+
+  /* ===================
+     ALERT/PLACEHOLDER
+     =================== */
+  .alert-placeholder {
+    @apply bg-accent-400/10 border-2 border-accent-400/50 p-4 text-accent-300 text-sm text-center max-w-2xl mx-auto;
+  }
+
+  /* ===================
+     TIMELINE ELEMENTS
+     =================== */
+  .timeline-dot {
+    @apply w-10 h-10 flex items-center justify-center
+           bg-dark-800 border-primary-500;
+    border-width: 3px;
+  }
+
+  .timeline-dot-lg {
+    @apply w-16 h-16 flex items-center justify-center
+           bg-dark-800 border-primary-500;
+    border-width: 3px;
+  }
+
+  /* ===================
+     PROFILE AVATARS
+     =================== */
+  .profile-avatar {
+    @apply w-12 h-12 overflow-hidden bg-dark-700 border-2 border-primary-500;
+  }
+
+  .profile-avatar-xl {
+    @apply w-20 h-20 overflow-hidden bg-dark-700 border-2 border-primary-500;
+  }
+
+  /* ===================
+     BUTTON ICON
+     =================== */
+  .btn-icon {
+    @apply p-2 text-gray-400 hover:text-white hover:bg-dark-700 transition-colors;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ===================
+   SKILL LEVEL BAR
+   =================== */
+.skill-level {
+  @apply h-3 bg-dark-700 overflow-hidden border border-dark-600;
+}
+
+/* ===================
+   LINK WITH ARROW
+   =================== */
+.link-arrow {
+  @apply flex items-center gap-1 text-sm font-heading font-semibold text-primary-400 hover:text-primary-300 transition-colors;
+}
+
+.link-arrow svg {
+  @apply w-4 h-4 transition-transform duration-200;
+}
+
+.link-arrow:hover svg {
+  transform: translateX(4px);
+}
+
+/* ===================
+   DECORATIVE ELEMENTS - MEMPHIS SHAPES SYSTEM
+   =================== */
+
+/* ---- BASE SHAPES ---- */
+
+/* Circles - outline */
+.memphis-circle {
+  @apply absolute rounded-full border-2 border-primary-500/30 pointer-events-none;
+}
+
+.memphis-circle-accent {
+  @apply absolute rounded-full border-2 border-accent-400/30 pointer-events-none;
+}
+
+/* Circles - filled */
+.memphis-circle-filled {
+  @apply absolute rounded-full bg-primary-500/20 pointer-events-none;
+}
+
+.memphis-circle-filled-accent {
+  @apply absolute rounded-full bg-accent-400/20 pointer-events-none;
+}
+
+/* Squares - outline */
+.memphis-square {
+  @apply absolute border-2 border-primary-500/30 pointer-events-none;
+}
+
+.memphis-square-accent {
+  @apply absolute border-2 border-accent-400/30 pointer-events-none;
+}
+
+/* Squares - filled */
+.memphis-square-filled {
+  @apply absolute bg-primary-500/20 pointer-events-none;
+}
+
+.memphis-square-filled-accent {
+  @apply absolute bg-accent-400/20 pointer-events-none;
+}
+
+.memphis-square-white {
+  @apply absolute border-2 pointer-events-none;
+  border-color: rgb(255 255 255 / 25%);
+}
+
+.memphis-square-thick {
+  @apply absolute border-4 border-primary-500/25 pointer-events-none;
+}
+
+/* Triangles */
+.memphis-triangle {
+  @apply absolute w-0 h-0 pointer-events-none;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 35px solid rgb(250 204 21 / 20%);
+}
+
+.memphis-triangle-primary {
+  @apply absolute w-0 h-0 pointer-events-none;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 26px solid rgb(168 85 247 / 20%);
+}
+
+/* Cross / Plus signs */
+.memphis-cross {
+  @apply absolute pointer-events-none;
+}
+
+.memphis-cross::before,
+.memphis-cross::after {
+  content: '';
+  position: absolute;
+  background: rgb(168 85 247 / 30%);
+}
+
+.memphis-cross::before {
+  width: 100%;
+  height: 30%;
+  top: 35%;
+  left: 0;
+}
+
+.memphis-cross::after {
+  width: 30%;
+  height: 100%;
+  left: 35%;
+  top: 0;
+}
+
+.memphis-cross-accent::before,
+.memphis-cross-accent::after {
+  background: rgb(250 204 21 / 30%);
+}
+
+.memphis-cross-white {
+  @apply absolute pointer-events-none;
+}
+.memphis-cross-white::before,
+.memphis-cross-white::after {
+  content: '';
+  @apply absolute;
+  background: rgb(255 255 255 / 25%);
+}
+.memphis-cross-white::before {
+  @apply w-full h-0.5 top-1/2 left-0 -translate-y-1/2;
+}
+.memphis-cross-white::after {
+  @apply h-full w-0.5 left-1/2 top-0 -translate-x-1/2;
+}
+
+/* Zigzag lines */
+.memphis-zigzag {
+  @apply absolute pointer-events-none overflow-visible;
+  width: 80px;
+  height: 16px;
+}
+
+.memphis-zigzag::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent 25%,
+    rgb(168 85 247 / 30%) 25%,
+    rgb(168 85 247 / 30%) 50%,
+    transparent 50%,
+    transparent 75%,
+    rgb(168 85 247 / 30%) 75%
+  );
+  background-size: 16px 16px;
+}
+
+.memphis-zigzag-accent::before {
+  background: linear-gradient(
+    135deg,
+    transparent 25%,
+    rgb(250 204 21 / 30%) 25%,
+    rgb(250 204 21 / 30%) 50%,
+    transparent 50%,
+    transparent 75%,
+    rgb(250 204 21 / 30%) 75%
+  );
+  background-size: 16px 16px;
+}
+
+/* Dots cluster */
+.memphis-dots {
+  @apply absolute pointer-events-none;
+  width: 40px;
+  height: 40px;
+}
+
+.memphis-dots::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, rgb(168 85 247 / 40%) 3px, transparent 3px);
+  background-size: 12px 12px;
+}
+
+.memphis-dots-accent::before {
+  background-image: radial-gradient(circle, rgb(250 204 21 / 40%) 3px, transparent 3px);
+  background-size: 12px 12px;
+}
+
+/* Half circles */
+.memphis-half-circle {
+  @apply absolute pointer-events-none;
+  border-radius: 0 0 100px 100px;
+  border: 2px solid rgb(168 85 247 / 30%);
+  border-top: none;
+}
+
+.memphis-half-circle-accent {
+  @apply absolute pointer-events-none;
+  border-radius: 0 0 100px 100px;
+  border: 2px solid rgb(250 204 21 / 30%);
+  border-top: none;
+}
+
+/* Ring (thick circle) */
+.memphis-ring {
+  @apply absolute rounded-full pointer-events-none;
+  border: 4px solid rgb(168 85 247 / 20%);
+}
+
+.memphis-ring-accent {
+  @apply absolute rounded-full pointer-events-none;
+  border: 4px solid rgb(250 204 21 / 20%);
+}
+
+/* ---- THICK BORDER SHAPES ---- */
+
+/* Extra thick circles */
+.memphis-circle-chunky {
+  @apply absolute rounded-full pointer-events-none;
+  border: 6px solid rgb(168 85 247 / 30%);
+}
+
+.memphis-circle-chunky-accent {
+  @apply absolute rounded-full pointer-events-none;
+  border: 6px solid rgb(250 204 21 / 30%);
+}
+
+.memphis-circle-white {
+  @apply absolute rounded-full border-2 pointer-events-none;
+  border-color: rgb(255 255 255 / 25%);
+}
+
+/* ---- BOLD FILLED SHAPES ---- */
+
+/* Solid circles */
+.memphis-blob {
+  @apply absolute rounded-full bg-primary-500/25 pointer-events-none;
+}
+
+.memphis-blob-accent {
+  @apply absolute rounded-full bg-accent-400/25 pointer-events-none;
+}
+
+/* Filled triangles - larger */
+.memphis-tri-filled {
+  @apply absolute w-0 h-0 pointer-events-none;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 44px solid rgb(168 85 247 / 25%);
+}
+
+.memphis-tri-filled-accent {
+  @apply absolute w-0 h-0 pointer-events-none;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 44px solid rgb(250 204 21 / 25%);
+}
+
+.memphis-tri-filled-lg {
+  @apply absolute w-0 h-0 pointer-events-none;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 60px solid rgb(168 85 247 / 20%);
+}
+
+.memphis-tri-filled-lg-accent {
+  @apply absolute w-0 h-0 pointer-events-none;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 60px solid rgb(250 204 21 / 20%);
+}
+
+/* Filled plus sign */
+.memphis-plus {
+  @apply absolute pointer-events-none;
+}
+
+.memphis-plus::before,
+.memphis-plus::after {
+  content: '';
+  position: absolute;
+  background: rgb(168 85 247 / 35%);
+  border-radius: 2px;
+}
+
+.memphis-plus::before {
+  width: 100%;
+  height: 35%;
+  top: 32.5%;
+  left: 0;
+}
+
+.memphis-plus::after {
+  width: 35%;
+  height: 100%;
+  left: 32.5%;
+  top: 0;
+}
+
+.memphis-plus-accent::before,
+.memphis-plus-accent::after {
+  background: rgb(250 204 21 / 35%);
+}
+
+/* ---- PARALLAX LAYERS ---- */
+.parallax-layer {
+  @apply absolute inset-0 pointer-events-none overflow-hidden;
+}
+
+.parallax-layer-slow {
+  animation: parallax-drift-slow 30s ease-in-out infinite;
+}
+
+.parallax-layer-medium {
+  animation: parallax-drift-medium 20s ease-in-out infinite;
+}
+
+.parallax-layer-fast {
+  animation: parallax-drift-fast 12s ease-in-out infinite;
+}
+
+@keyframes parallax-drift-slow {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(5px, -8px);
+  }
+  50% {
+    transform: translate(-3px, 5px);
+  }
+  75% {
+    transform: translate(8px, 3px);
+  }
+}
+
+@keyframes parallax-drift-medium {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-10px, 6px);
+  }
+  66% {
+    transform: translate(8px, -10px);
+  }
+}
+
+@keyframes parallax-drift-fast {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(12px, -12px);
+  }
+}
+
+/* ---- SIZE MODIFIERS ---- */
+.memphis-sm {
+  width: 12px;
+  height: 12px;
+}
+.memphis-md {
+  width: 20px;
+  height: 20px;
+}
+.memphis-lg {
+  width: 32px;
+  height: 32px;
+}
+.memphis-xl {
+  width: 48px;
+  height: 48px;
+}
+.memphis-2xl {
+  width: 64px;
+  height: 64px;
+}
+.memphis-3xl {
+  width: 96px;
+  height: 96px;
+}
+
+/* ---- ADDITIONAL ANIMATIONS ---- */
+.memphis-drift {
+  animation: memphis-drift 8s ease-in-out infinite;
+}
+
+.memphis-wobble {
+  animation: memphis-wobble 4s ease-in-out infinite;
+}
+
+.memphis-scale {
+  animation: memphis-scale 5s ease-in-out infinite;
+}
+
+@keyframes memphis-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(10px, -5px) rotate(3deg);
+  }
+  50% {
+    transform: translate(5px, 10px) rotate(-2deg);
+  }
+  75% {
+    transform: translate(-8px, 5px) rotate(4deg);
+  }
+}
+
+@keyframes memphis-wobble {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes memphis-scale {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
+}
+
+/* Dotted pattern background */
+.pattern-dots {
+  background-image: radial-gradient(circle, var(--color-dark-600) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ===================
+   SCROLLBAR STYLING
+   =================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-600 hover:bg-dark-500;
+}
+
+/* ===================
+   FOCUS STYLES
+   =================== */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary-500;
+}
+
+/* ===================
+   REDUCED MOTION
+   =================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Ensure staggered content is visible when animations are disabled */
+  .stagger-children > * {
+    opacity: 1 !important;
+  }
+
+  /* Ensure fade-in content is visible */
+  .fade-in-up,
+  .scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Ensure animated elements have static fallback */
+  .memphis-pulse,
+  .memphis-drift,
+  .memphis-wobble,
+  .memphis-scale,
+  .stat-pulse {
+    opacity: 0.3 !important;
+    transform: none !important;
+  }
+
+  /* Disable parallax movement */
+  .parallax-layer,
+  .parallax-layer-slow,
+  .parallax-layer-medium,
+  .parallax-layer-fast {
+    animation: none !important;
+  }
+
+  /* Static gradient text */
+  .gradient-text-animated {
+    background-position: 0% center !important;
+  }
+}
+
+/* =============================================================================
+   ENHANCED NEO-MEMPHIS EFFECTS
+   ============================================================================= */
+
+/* ===================
+   2. ANIMATED GRADIENT TEXT
+   =================== */
+.gradient-text-animated {
+  @apply text-transparent bg-clip-text font-bold;
+  background-image: linear-gradient(90deg, #a855f7, #c084fc, #facc15, #fde047, #a855f7);
+  background-size: 200% auto;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* ===================
+   3. MEMPHIS SHAPE ANIMATIONS
+   =================== */
+.memphis-pulse {
+  animation: memphis-pulse 3s ease-in-out infinite;
+}
+
+@keyframes memphis-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+/* ===================
+   4. CARD LIFT EFFECT (Memphis-style)
+   =================== */
+.card-glow {
+  @apply bg-dark-800 border-2 border-dark-600 shadow-hard transition-all duration-300;
+}
+
+.card-glow:hover {
+  @apply border-primary-500 shadow-hard-glow-purple;
+  transform: translateX(-4px) translateY(-4px);
+}
+
+/* ===================
+   5. NOISE/GRAIN TEXTURE
+   =================== */
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ===================
+   7. SKILL BARS ANIMATED
+   =================== */
+.skill-level-animated {
+  @apply h-3 bg-dark-700 overflow-hidden border border-dark-600;
+}
+
+.skill-level-animated .skill-fill {
+  @apply h-full;
+  background: linear-gradient(90deg, #a855f7 0%, #c084fc 50%, #facc15 100%);
+  background-size: 200% 100%;
+  animation: skill-shimmer 2s ease-in-out infinite;
+  transform-origin: left;
+  transition: width 1s ease-out;
+}
+
+@keyframes skill-shimmer {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* ===================
+   8. STATS ANIMATION
+   =================== */
+.stat-pulse {
+  animation: stat-pulse 2s ease-in-out infinite;
+}
+
+@keyframes stat-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ===================
+   ENTRY ANIMATIONS
+   =================== */
+.fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scale-in {
+  animation: scale-in 0.4s ease-out forwards;
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-children > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-children > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-children > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-children > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.stagger-children > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* ===================
+   BOLD MEMPHIS DECORATIONS
+   =================== */
+
+/* Decorative underlines - Memphis style */
+.underline-memphis {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-memphis::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 4px;
+  background: #a855f7;
+}
+
+.underline-memphis-accent::after {
+  background: #facc15;
+}
+
+/* Zigzag underline - pure Memphis */
+.underline-zigzag {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-zigzag::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 6px;
+  background:
+    linear-gradient(135deg, #a855f7 25%, transparent 25%),
+    linear-gradient(225deg, #a855f7 25%, transparent 25%),
+    linear-gradient(45deg, #a855f7 25%, transparent 25%),
+    linear-gradient(315deg, #a855f7 25%, transparent 25%);
+  background-size: 8px 8px;
+  background-position:
+    0 0,
+    4px 0,
+    4px -4px,
+    0px 4px;
+}
+
+.underline-zigzag-accent::after {
+  background:
+    linear-gradient(135deg, #facc15 25%, transparent 25%),
+    linear-gradient(225deg, #facc15 25%, transparent 25%),
+    linear-gradient(45deg, #facc15 25%, transparent 25%),
+    linear-gradient(315deg, #facc15 25%, transparent 25%);
+  background-size: 8px 8px;
+  background-position:
+    0 0,
+    4px 0,
+    4px -4px,
+    0px 4px;
+}
+
+/* Squiggle/wave decoration */
+.squiggle {
+  position: relative;
+}
+
+.squiggle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 8px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 2 Q 2.5 0, 5 2 T 10 2 T 15 2 T 20 2' stroke='%23a855f7' fill='none' stroke-width='2'/%3E%3C/svg%3E")
+    repeat-x;
+}
+
+.squiggle-accent::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 2 Q 2.5 0, 5 2 T 10 2 T 15 2 T 20 2' stroke='%23facc15' fill='none' stroke-width='2'/%3E%3C/svg%3E")
+    repeat-x;
+}
+
+/* Highlight marker effect */
+.highlight-marker {
+  position: relative;
+  display: inline;
+}
+
+.highlight-marker::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  bottom: 0;
+  height: 40%;
+  background: #a855f7;
+  opacity: 0.3;
+  z-index: -1;
+  transform: skewX(-3deg);
+}
+
+.highlight-marker-accent::before {
+  background: #facc15;
+}
+
+/* Big bold stats - Memphis style */
+.stat-large {
+  @apply text-6xl md:text-7xl font-heading font-black tracking-tight leading-none;
+}
+
+.stat-medium {
+  @apply text-5xl md:text-6xl font-heading font-bold tracking-tight leading-none;
+}
+
+/* Chunky buttons - more Memphis impact */
+.btn-chunky {
+  @apply inline-flex items-center justify-center gap-3 px-8 py-4 text-lg
+         font-heading font-bold uppercase tracking-wide
+         shadow-hard-xl
+         transition-all duration-200;
+  border-width: 3px;
+  transition-timing-function: var(--ease-memphis);
+}
+
+.btn-chunky:hover {
+  transform: translateX(-8px) translateY(-8px);
+  box-shadow: var(--shadow-hard-2xl);
+}
+
+.btn-chunky:active {
+  transform: translateX(0) translateY(0);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+.btn-chunky-primary {
+  @apply inline-flex items-center justify-center gap-3 px-8 py-4 text-lg
+         font-heading font-bold uppercase tracking-wide
+         shadow-hard-xl transition-all duration-200
+         bg-primary-500 text-dark-900 border-dark-900
+         hover:bg-primary-400;
+  border-width: 3px;
+  transition-timing-function: var(--ease-memphis);
+}
+
+.btn-chunky-primary:hover {
+  transform: translateX(-8px) translateY(-8px);
+  box-shadow: var(--shadow-hard-2xl);
+}
+
+.btn-chunky-primary:active {
+  transform: translateX(0) translateY(0);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+.btn-chunky-accent {
+  @apply inline-flex items-center justify-center gap-3 px-8 py-4 text-lg
+         font-heading font-bold uppercase tracking-wide
+         shadow-hard-xl transition-all duration-200
+         bg-accent-400 text-dark-900 border-dark-900
+         hover:bg-accent-300;
+  border-width: 3px;
+  transition-timing-function: var(--ease-memphis);
+}
+
+.btn-chunky-accent:hover {
+  transform: translateX(-8px) translateY(-8px);
+  box-shadow: var(--shadow-hard-2xl);
+}
+
+.btn-chunky-accent:active {
+  transform: translateX(0) translateY(0);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+/* Bold section divider */
+.section-divider {
+  @apply w-24 h-2 bg-primary-500 mx-auto my-8;
+}
+
+.section-divider-accent {
+  @apply bg-accent-400;
+}
+
+.section-divider-long {
+  @apply w-48;
+}
+
+/* ===================
+   SUBTLE MEMPHIS VARIATIONS
+   Breaking the grid with controlled chaos
+   =================== */
+
+/* Subtle rotations */
+.tilt-1 {
+  transform: rotate(1deg);
+}
+.tilt-2 {
+  transform: rotate(2deg);
+}
+.-tilt-1 {
+  transform: rotate(-1deg);
+}
+.-tilt-2 {
+  transform: rotate(-2deg);
+}
+
+/* Hover tilt effect */
+.hover\:tilt-2:hover {
+  transform: rotate(2deg);
+}
+.hover\:-tilt-2:hover {
+  transform: rotate(-2deg);
+}
+
+/* Subtle offsets for asymmetry */
+.offset-up-1 {
+  transform: translateY(-4px);
+}
+.offset-up-2 {
+  transform: translateY(-8px);
+}
+
+/* Depth layers with pseudo-elements */
+.depth-layer {
+  position: relative;
+}
+
+.depth-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #a855f7;
+  opacity: 0.15;
+  transform: translate(6px, 6px);
+  z-index: -1;
+}
+
+.depth-layer-accent::before {
+  background: #facc15;
+}
+
+/* Memphis wonky box - slightly skewed container */
+.wonky-box {
+  transform: rotate(-0.5deg);
+  transition: transform 0.3s ease;
+}
+
+.wonky-box:hover {
+  transform: rotate(0.5deg);
+}
+
+.wonky-box-alt {
+  transform: rotate(0.5deg);
+}
+
+.wonky-box-alt:hover {
+  transform: rotate(-0.5deg);
+}
+
+/* ===================
+   MISALIGNED BORDERS - Memphis Imperfection
+   Borders that don't align perfectly with content
+   =================== */
+
+/* Tilted border - border at slight angle from content */
+.border-tilted {
+  position: relative;
+}
+
+.border-tilted::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 2px solid #a855f7;
+  transform: rotate(1deg);
+  pointer-events: none;
+}
+
+.border-tilted-alt::before {
+  transform: rotate(-1deg);
+}
+
+.border-tilted-accent::before {
+  border-color: #facc15;
+}
+
+/* Wonky icon box - icon container with misaligned border */
+.icon-box-wonky {
+  @apply w-12 h-12 flex items-center justify-center shrink-0 bg-dark-700 relative;
+}
+
+.icon-box-wonky::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid #a855f7;
+  transform: translate(3px, 3px) rotate(2deg);
+}
+
+.icon-box-wonky-alt::before {
+  transform: translate(-2px, 2px) rotate(-2deg);
+}
+
+.icon-box-wonky-accent::before {
+  border-color: #facc15;
+}
+
+/* Partial border offset - only some sides misaligned */
+.border-corner-offset {
+  position: relative;
+}
+
+.border-corner-offset::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-top: 2px solid #a855f7;
+  border-right: 2px solid #a855f7;
+  pointer-events: none;
+}
+
+.border-corner-offset::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-bottom: 2px solid #facc15;
+  border-left: 2px solid #facc15;
+  pointer-events: none;
+}
+
+/* Profile avatar with offset border */
+.avatar-offset {
+  position: relative;
+}
+
+.avatar-offset::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 3px solid #a855f7;
+  transform: translate(5px, 5px);
+  pointer-events: none;
+}

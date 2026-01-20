@@ -1,0 +1,267 @@
+---
+import { Image } from 'astro:assets';
+import { mainNavigation } from '@/config/navigation';
+import profileImage from '@assets/images/profile.jpg';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const isActive = (href: string) => {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+};
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b-2 border-dark-700 transition-all duration-300"
+  id="main-header"
+  transition:persist
+  transition:name="main-header"
+>
+  <div class="container-custom">
+    <nav class="flex items-center justify-between h-20" aria-label="Navigation principale">
+      <!-- Logo / Identity -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="profile-avatar">
+          <div class="w-full h-full bg-dark-700 flex items-center justify-center overflow-hidden">
+            <Image
+              src={profileImage}
+              alt="Photo de Virgil CHAREYRE"
+              class="w-full h-full object-cover"
+              width={48}
+              height={48}
+              loading="eager"
+              format="webp"
+              quality={80}
+            />
+          </div>
+        </div>
+        <div class="hidden sm:block">
+          <p
+            class="font-heading font-bold text-lg text-white group-hover:text-primary-400 transition-colors"
+          >
+            Virgil CHAREYRE
+          </p>
+          <p class="text-xs text-gray-400">Développeur Web Fullstack</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex items-center gap-1">
+        {
+          mainNavigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class={`px-4 py-2 text-sm font-heading font-semibold transition-all duration-200 border-b-2 ${
+                  isActive(item.href)
+                    ? 'text-primary-400 border-primary-500'
+                    : 'text-gray-300 border-transparent hover:text-white hover:border-accent-400'
+                }`}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- CTA Button (Desktop) -->
+      <a href="/contact" class="hidden lg:flex btn-accent text-sm px-4 py-2"> Me contacter </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        type="button"
+        class="md:hidden btn-icon text-white"
+        id="mobile-menu-button"
+        aria-label="Menu"
+        aria-expanded="false"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          id="menu-icon"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg
+          class="w-6 h-6 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          id="close-icon"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="md:hidden hidden bg-dark-800 border-t-2 border-dark-600" id="mobile-menu">
+    <div class="container-custom py-4">
+      <ul class="flex flex-col gap-1">
+        {
+          mainNavigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class={`block px-4 py-3 text-sm font-heading font-semibold transition-all duration-200 border-l-2 ${
+                  isActive(item.href)
+                    ? 'bg-dark-700 text-primary-400 border-primary-500'
+                    : 'text-gray-300 border-transparent hover:text-white hover:bg-dark-700 hover:border-accent-400'
+                }`}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-4 pt-4 border-t border-dark-600">
+        <a href="/contact" class="btn-accent w-full justify-center text-sm"> Me contacter </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Update active navigation state on page change (for View Transitions)
+  function updateActiveNavigation() {
+    const currentPath = window.location.pathname;
+    const desktopNav = document.querySelector('header nav ul.hidden.md\\:flex');
+    const mobileNav = document.getElementById('mobile-menu');
+
+    function isActive(href: string): boolean {
+      if (href === '/') return currentPath === '/';
+      return currentPath.startsWith(href);
+    }
+
+    // Update desktop navigation
+    desktopNav?.querySelectorAll('a').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      if (isActive(href)) {
+        link.classList.add('text-primary-400', 'border-primary-500');
+        link.classList.remove('text-gray-300', 'border-transparent');
+      } else {
+        link.classList.remove('text-primary-400', 'border-primary-500');
+        link.classList.add('text-gray-300', 'border-transparent');
+      }
+    });
+
+    // Update mobile navigation
+    mobileNav?.querySelectorAll('a').forEach((link) => {
+      const href = link.getAttribute('href') || '';
+      if (isActive(href)) {
+        link.classList.add('bg-dark-700', 'text-primary-400', 'border-primary-500');
+        link.classList.remove('text-gray-300', 'border-transparent');
+      } else {
+        link.classList.remove('bg-dark-700', 'text-primary-400', 'border-primary-500');
+        link.classList.add('text-gray-300', 'border-transparent');
+      }
+    });
+  }
+
+  // Listen for View Transitions page swap
+  document.addEventListener('astro:after-swap', updateActiveNavigation);
+
+  // Mobile menu toggle
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+  const header = document.getElementById('main-header');
+
+  function openMenu() {
+    mobileMenu?.classList.remove('hidden');
+    menuIcon?.classList.add('hidden');
+    closeIcon?.classList.remove('hidden');
+    menuButton?.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.add('hidden');
+    menuIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  }
+
+  function isMenuOpen() {
+    return !mobileMenu?.classList.contains('hidden');
+  }
+
+  // Toggle on button click
+  menuButton?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (isMenuOpen()) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Close on click outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (isMenuOpen() && !mobileMenu?.contains(target) && !menuButton?.contains(target)) {
+      closeMenu();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen()) {
+      closeMenu();
+      menuButton?.focus();
+    }
+  });
+
+  // Close when clicking a navigation link
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // Throttle function for scroll performance
+  function throttle<T extends (...args: unknown[]) => void>(fn: T, wait: number): T {
+    let lastTime = 0;
+    return function (this: unknown, ...args: Parameters<T>) {
+      const now = Date.now();
+      if (now - lastTime >= wait) {
+        lastTime = now;
+        fn.apply(this, args);
+      }
+    } as T;
+  }
+
+  // Sticky header with enhanced border on scroll (throttled for performance)
+  const handleScroll = throttle(() => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 10) {
+      header?.classList.add('border-primary-500/50');
+      header?.classList.remove('border-dark-700');
+    } else {
+      header?.classList.remove('border-primary-500/50');
+      header?.classList.add('border-dark-700');
+    }
+  }, 100);
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+</script>

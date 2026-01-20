@@ -1,0 +1,186 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = 'Portfolio de Virgil CHAREYRE - Développeur Web Fullstack',
+  image = '/images/profile.jpg',
+} = Astro.props;
+const currentPath = Astro.url.pathname;
+const canonicalURL = new URL(currentPath, Astro.site || 'https://leigh-chr.github.io');
+const imageURL = new URL(image, Astro.site || 'https://leigh-chr.github.io');
+const fullTitle = `${title} | Portfolio Virgil CHAREYRE`;
+
+// JSON-LD structured data
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Virgil CHAREYRE',
+  givenName: 'Virgil',
+  familyName: 'CHAREYRE',
+  jobTitle: 'Développeur Web Fullstack',
+  url: 'https://leigh-chr.github.io',
+  image: imageURL.toString(),
+  email: 'virgil.07@hotmail.fr',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Grenoble',
+    addressRegion: 'Auvergne-Rhône-Alpes',
+    addressCountry: 'FR',
+  },
+  sameAs: ['https://linkedin.com/in/virgil-chareyre', 'https://github.com/Leigh-Chr'],
+  knowsAbout: [
+    'JavaScript',
+    'TypeScript',
+    'React',
+    'Node.js',
+    'Python',
+    'Développement Web',
+    'Ingénierie Logicielle',
+    'Architecture Logicielle',
+    'Gestion de Projet',
+    'Méthodologies Agile',
+  ],
+  knowsLanguage: [
+    {
+      '@type': 'Language',
+      name: 'Français',
+      alternateName: 'fr',
+    },
+    {
+      '@type': 'Language',
+      name: 'Anglais',
+      alternateName: 'en',
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Virgil CHAREYRE" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL.toString()} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.toString()} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL.toString()} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Portfolio Virgil CHAREYRE" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL.toString()} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL.toString()} />
+
+    <!-- Favicons & PWA -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Google Fonts with preconnect and optimized non-blocking loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Additional head content from child pages -->
+    <slot name="head" />
+
+    <!-- Astro View Transitions with prefetch -->
+    <ClientRouter />
+
+    <title>{fullTitle}</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-dark-900 relative overflow-x-hidden">
+    <!-- Skip to main content link for accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-500 focus:text-dark-900 focus:font-heading focus:font-semibold"
+    >
+      Aller au contenu principal
+    </a>
+    <!-- Decorative Neo-Memphis background elements -->
+    <div
+      class="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+      aria-hidden="true"
+      transition:persist
+    >
+      <!-- Large shapes - back layer -->
+      <div class="parallax-layer parallax-layer-slow hidden lg:block">
+        <div class="memphis-circle-chunky w-64 h-64 -top-16 -right-16 opacity-10"></div>
+        <div class="memphis-tri-filled-lg bottom-[20%] -left-6 rotate-[-20deg] opacity-12"></div>
+      </div>
+
+      <!-- Medium shapes -->
+      <div class="parallax-layer parallax-layer-medium hidden md:block">
+        <div class="memphis-blob-accent w-28 h-28 bottom-[35%] left-[3%] opacity-15"></div>
+        <div class="memphis-square-thick w-16 h-16 top-[30%] right-[3%] rotate-[25deg] opacity-10">
+        </div>
+      </div>
+
+      <!-- Small shapes - front layer -->
+      <div class="parallax-layer parallax-layer-fast hidden md:block">
+        <div
+          class="memphis-tri-filled-accent bottom-[15%] right-[5%] rotate-[15deg] memphis-drift opacity-15"
+        >
+        </div>
+        <div class="memphis-plus-accent memphis-md left-[4%] top-[25%] rotate-[30deg] opacity-12">
+        </div>
+      </div>
+
+      <!-- Dots pattern overlay -->
+      <div class="absolute inset-0 pattern-dots opacity-20"></div>
+    </div>
+
+    <Header currentPath={currentPath} />
+    <main id="main-content" class="flex-grow pt-20 relative z-10">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

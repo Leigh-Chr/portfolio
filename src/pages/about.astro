@@ -1,0 +1,663 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import profileImage from '@assets/images/profile.jpg';
+---
+
+<BaseLayout
+  title="À propos"
+  description="Découvrez qui je suis, mes valeurs, mon projet professionnel et ce qui me passionne."
+>
+  <!-- Hero Section -->
+  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
+      <div class="memphis-ring memphis-3xl top-[5%] right-[4%] rotate-[15deg]"></div>
+      <div class="memphis-square-accent w-28 h-28 bottom-[10%] left-[3%] rotate-[30deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-filled-accent memphis-xl top-[28%] left-[5%] memphis-scale"></div>
+      <div class="memphis-triangle bottom-[22%] right-[8%] rotate-[-10deg]"></div>
+      <div
+        class="memphis-cross-accent memphis-lg top-[62%] right-[3%] rotate-[40deg] memphis-drift"
+      >
+      </div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots memphis-lg top-[12%] right-[12%]"></div>
+      <div class="memphis-zigzag bottom-[30%] left-[8%] rotate-[-15deg]"></div>
+      <div class="memphis-half-circle w-10 h-5 top-[48%] left-[2%] rotate-[50deg]"></div>
+      <div
+        class="memphis-square-filled memphis-sm bottom-[42%] right-[10%] rotate-45 memphis-pulse"
+      >
+      </div>
+    </div>
+
+    <div class="container-custom relative z-10">
+      <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+        <!-- Image -->
+        <div class="order-2 lg:order-1 scale-in">
+          <div
+            class="overflow-hidden shadow-hard-purple-xl border-3 border-primary-500 bg-dark-800 group transition-all duration-500 tilt-1 depth-layer avatar-offset"
+          >
+            <div class="aspect-[4/5] bg-dark-700 flex items-center justify-center">
+              <Image
+                src={profileImage}
+                alt="Photo de Virgil CHAREYRE"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                width={400}
+                height={500}
+                loading="eager"
+                format="webp"
+                quality={85}
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="order-1 lg:order-2 fade-in-up">
+          <p
+            class="text-primary-400 font-heading font-semibold mb-6 uppercase tracking-wider text-sm"
+          >
+            À propos de moi
+          </p>
+          <h1 class="page-title">
+            <span class="gradient-text-animated underline-zigzag" data-text="Virgil"
+              >Virgil CHAREYRE</span
+            >
+          </h1>
+          <p class="text-2xl sm:text-3xl md:text-4xl text-accent-400 mb-4 sm:mb-6 font-heading font-bold">
+            <span class="highlight-marker highlight-marker-accent"
+              >Développeur Web Fullstack</span
+            >
+          </p>
+          <p class="text-gray-300 leading-relaxed mb-6 sm:mb-10 text-sm sm:text-base">
+            Je crois qu'un bon produit se ressent dans les détails. Mon approche : peaufiner chaque
+            interaction, soigner l'accessibilité, et livrer un travail dont je suis fier — pas juste
+            fonctionnel, mais vraiment bien fait. Esprit libre et engagé, je cherche des projets qui
+            ont du sens.
+          </p>
+
+          <!-- Quick Info -->
+          <div class="flex flex-wrap gap-3 sm:gap-6">
+            <div class="flex items-center gap-2 px-3 sm:px-4 py-2 bg-dark-800 border-2 border-dark-600">
+              <svg
+                class="w-5 h-5 text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span class="text-gray-300 text-sm font-medium">France</span>
+            </div>
+            <div class="flex items-center gap-2 px-4 py-2 bg-dark-800 border-2 border-dark-600">
+              <svg
+                class="w-5 h-5 text-accent-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <span class="text-gray-300 text-sm font-medium">Disponible</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Mes Valeurs -->
+  <section class="section-padding" id="valeurs">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="content-section-header">
+          <div class="icon-box-wonky">
+            <svg
+              class="w-6 h-6 text-primary-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="content-section-title">
+            Mes <span class="text-primary-400 underline-memphis">Valeurs</span>
+          </h2>
+        </div>
+        <div class="section-divider mb-10 -tilt-1"></div>
+
+        <p class="text-gray-400 mb-10 leading-relaxed">
+          Ce qui me motive vraiment, c'est de fournir un <strong class="text-white"
+            >travail hyper qualitatif et adapté</strong
+          >. Tout peaufiner, créer une expérience aux petits oignons. La technologie au service d'un web plus éthique et accessible.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8 stagger-children">
+          <div class="card-glow p-8 wonky-box">
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Accessibilité</h3>
+            <p class="text-gray-400 text-sm">
+              Le web doit être utilisable par tout le monde. L'inclusion n'est pas une option,
+              c'est un minimum.
+            </p>
+          </div>
+          <div class="card-glow p-8 wonky-box-alt">
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Transparence</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Code propre, communication claire, pas de bullshit. Je dis ce que je fais et je fais
+              ce que je dis.
+            </p>
+          </div>
+          <div class="card-glow p-8 wonky-box">
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Éthique</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Je choisis mes projets. Contribuer à un web plus responsable et moins prédateur,
+              c'est important pour moi.
+            </p>
+          </div>
+          <div class="card-glow p-8 wonky-box-alt">
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Qualité</h3>
+            <p class="text-gray-400 text-sm">
+              Pas de compromis sur le craft. Un travail bâclé, même livré à temps, reste un travail
+              bâclé.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Mon Projet Professionnel -->
+  <section class="section-padding section-alt" id="projet">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="content-section-header">
+          <div class="icon-box-wonky icon-box-wonky-alt icon-box-wonky-accent">
+            <svg
+              class="w-6 h-6 text-accent-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h2 class="content-section-title">
+            Mon Projet <span class="text-accent-400 underline-memphis underline-memphis-accent"
+              >Professionnel</span
+            >
+          </h2>
+        </div>
+        <div class="section-divider section-divider-accent mb-10 tilt-1"></div>
+
+        <p class="text-gray-400 mb-10 leading-relaxed">
+          Mon objectif est simple : <strong class="text-white"
+            >vivre de ce métier qui est aussi une passion</strong
+          >, en travaillant sur des projets qui ont du sens. Je ne cherche pas la richesse ou le
+          prestige — je cherche des collaborations authentiques, avec des personnes qui partagent
+          mes valeurs.
+        </p>
+
+        <div class="detail-box mb-8 border-tilted">
+          <h3 class="text-xl font-heading font-bold text-white mb-4">Vision à court terme</h3>
+          <p class="text-gray-400 leading-relaxed">
+            Trouver ma place, faire mes preuves, et créer des liens de confiance avec des clients
+            ou une équipe qui me ressemble.
+          </p>
+        </div>
+
+        <div class="detail-box mb-8 border-tilted-alt border-tilted-accent">
+          <h3 class="text-xl font-heading font-bold text-white mb-4">Vision à long terme</h3>
+          <p class="text-gray-400">
+            Une stabilité où le travail est un plaisir et non une contrainte. Contribuer à des
+            projets à impact positif, loin des logiques de croissance à tout prix.
+          </p>
+        </div>
+
+        <div class="detail-box border-corner-offset">
+          <h3 class="text-xl font-heading font-bold text-white mb-4">Mes objectifs clés</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg
+                class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-gray-300">Construire un portfolio de projets dont je suis vraiment fier</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-gray-300">Trouver des collaborations durables avec des personnes qui partagent mes valeurs</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg
+                class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-gray-300">Contribuer à des projets open source ou associatifs</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Mes Qualités Humaines -->
+  <section class="section-padding" id="qualites">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="content-section-header">
+          <div class="icon-box">
+            <svg
+              class="w-6 h-6 text-primary-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="content-section-title">
+            Mes Qualités <span class="text-primary-400 underline-memphis">Humaines</span>
+          </h2>
+        </div>
+        <div class="section-divider mb-10 -tilt-2"></div>
+
+        <p class="text-gray-400 mb-10 leading-relaxed">
+          Au-delà des compétences techniques, ce sont mes qualités humaines qui définissent ma
+          façon de travailler et de collaborer.
+        </p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box">
+            <div class="icon-box-lg mx-auto mb-6">
+              <svg
+                class="w-8 h-8 text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Sensibilité</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Une attention particulière aux détails et aux besoins des utilisateurs. Je ressens
+              quand quelque chose ne va pas.
+            </p>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box-alt md:offset-up-1">
+            <div class="icon-box-lg mx-auto mb-6">
+              <svg
+                class="w-8 h-8 text-accent-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Honnêteté</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Je dis les choses comme elles sont. Pas de faux-semblants, pas de promesses en l'air.
+            </p>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box">
+            <div class="icon-box-lg mx-auto mb-6">
+              <svg
+                class="w-8 h-8 text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Humilité</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Je sais ce que je sais, et je sais ce que je ne sais pas. Toujours prêt à apprendre.
+            </p>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box-alt">
+            <div class="icon-box-lg mx-auto mb-6">
+              <svg
+                class="w-8 h-8 text-accent-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Persévérance</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Je m'accroche jusqu'à ce que ce soit vraiment bien. Le "assez bien" ne me suffit pas.
+            </p>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box md:offset-up-1">
+            <div class="icon-box-lg mx-auto mb-6">
+              <svg
+                class="w-8 h-8 text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Douceur</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Sous l'apparence punk, une grande bienveillance. Je préfère construire ensemble
+              qu'imposer.
+            </p>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box-alt">
+            <div class="icon-box-lg mx-auto mb-6">
+              <svg
+                class="w-8 h-8 text-accent-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-heading font-bold text-white mb-3">Engagement</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Militant pour l'inclusion et un numérique éthique. Les causes qui comptent méritent
+              qu'on s'y investisse.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Mes Centres d'Intérêt -->
+  <section class="section-padding section-alt" id="interets">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto">
+        <div class="content-section-header">
+          <div class="icon-box">
+            <svg
+              class="w-6 h-6 text-accent-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="content-section-title">
+            Mes Centres <span class="text-accent-400 underline-memphis underline-memphis-accent"
+              >d'Intérêt</span
+            >
+          </h2>
+        </div>
+        <div class="section-divider section-divider-accent mb-10 tilt-2"></div>
+
+        <p class="text-gray-400 mb-10 leading-relaxed">
+          En dehors du code, j'ai mille centres d'intérêt — tech, créativité, cultures
+          alternatives. Voici ce qui me fait vibrer.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box">
+            <div class="icon-box-wonky flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-white mb-3">Cultures Alternatives</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                Punk dans l'âme, je m'inspire des mouvements qui remettent en question les normes
+                établies. Pop culture et contre-culture nourrissent ma créativité.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box-alt">
+            <div class="icon-box-wonky icon-box-wonky-alt icon-box-wonky-accent flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-accent-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-white mb-3">Engagement</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                Impliqué pour l'inclusion, l'accessibilité et un numérique éthique. Les causes qui
+                comptent méritent qu'on s'y investisse, même celles qui ne me concernent pas
+                directement.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box">
+            <div class="icon-box flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-primary-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-white mb-3">Curiosité Créative</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                Passionné par la tech mais aussi par tout ce qui touche à la création — arts
+                visuels, musique, culture geek. Je me passionne de tout.
+              </p>
+            </div>
+          </div>
+
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box-alt">
+            <div class="icon-box flex-shrink-0">
+              <svg
+                class="w-6 h-6 text-accent-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-heading font-bold text-white mb-3">Side Projects</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">
+                J'expérimente, je bidouille, je crée pour le plaisir. C'est comme ça qu'on progresse
+                vraiment — et qu'on garde la passion intacte.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-padding section-cta relative overflow-hidden">
+    <!-- Parallax Layer 1 - Slow -->
+    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
+      <div class="memphis-ring-accent w-32 h-32 top-[5%] left-[6%] rotate-[-15deg]"></div>
+      <div class="memphis-square-white w-24 h-24 bottom-[8%] right-[5%] rotate-[40deg]"></div>
+    </div>
+
+    <!-- Parallax Layer 2 - Medium -->
+    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
+      <div class="memphis-circle-white memphis-xl top-[22%] right-[12%] memphis-wobble"></div>
+      <div class="memphis-triangle-primary bottom-[28%] left-[10%] rotate-[20deg]"></div>
+      <div class="memphis-cross-white memphis-lg top-[55%] left-[4%] rotate-[30deg] memphis-drift">
+      </div>
+    </div>
+
+    <!-- Parallax Layer 3 - Fast -->
+    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
+      <div class="memphis-dots-accent memphis-lg top-[15%] right-[20%]"></div>
+      <div class="memphis-zigzag bottom-[20%] right-[18%] rotate-[12deg]"></div>
+      <div class="memphis-half-circle-accent w-8 h-4 top-[42%] right-[3%] rotate-[-45deg]"></div>
+    </div>
+
+    <div class="container-custom text-center relative z-10">
+      <h2 class="section-title text-white mb-8">
+        Envie d'en savoir <span class="text-accent-400 squiggle squiggle-accent">plus</span> ?
+      </h2>
+      <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+        Découvrez mes compétences détaillées et mes réalisations pour mieux comprendre mon profil et
+        ma façon de travailler.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+        <a
+          href="/skills"
+          class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100"
+          >Mes compétences</a
+        >
+        <a
+          href="/projects"
+          class="btn-chunky bg-transparent text-white border-white hover:bg-white hover:text-dark-900"
+          >Mes réalisations</a
+        >
+      </div>
+    </div>
+  </section>
+</BaseLayout>
