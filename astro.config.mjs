@@ -8,7 +8,8 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'),
     }),
   ],
-  site: 'https://virgil-chareyre.dev',
+  site: 'https://leigh-chr.github.io',
+  base: '/portfolio',
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',
