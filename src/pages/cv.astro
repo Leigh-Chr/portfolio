@@ -1,0 +1,1079 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { url } from '@utils/url';
+import profileImage from '@assets/images/profile.jpg';
+import { profile, contact, availability, languages, techStack } from '@config/cv';
+
+// Get all content from collections
+const allExperiences = await getCollection('experiences');
+const allSkills = await getCollection('skills');
+const allProjects = await getCollection('projects');
+
+// Sort experiences by date (anti-chronological)
+const sortedExperiences = allExperiences.sort(
+  (a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime()
+);
+
+// Separate work and education
+const workExperiences = sortedExperiences.filter((e) => e.data.type === 'work');
+const educationExperiences = sortedExperiences.filter((e) => e.data.type === 'education');
+
+// Sort skills by category and order
+const technicalSkills = allSkills
+  .filter((s) => s.data.category === 'technical')
+  .sort((a, b) => a.data.order - b.data.order);
+const humanSkills = allSkills
+  .filter((s) => s.data.category === 'human')
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Sort projects by order
+const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+// Format date helper
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
+}
+
+// Get ISO date for datetime attribute
+function getISODate(dateStr: string): string {
+  return dateStr; // Already in YYYY-MM format or YYYY-MM-DD
+}
+
+// Level to text helper
+function levelToText(level: number): string {
+  if (level >= 8) return 'Expert';
+  if (level >= 6) return 'Avancé';
+  if (level >= 4) return 'Intermédiaire';
+  return 'Débutant';
+}
+
+// Clean markdown and extract first paragraph for CV display
+function cleanMarkdownForCV(text: string): string {
+  if (!text) return '';
+
+  // Get first paragraph (before double newline)
+  const firstParagraph = text.split('\n\n')[0] || text;
+
+  // Remove markdown formatting
+  return (
+    firstParagraph
+      // Remove bold/italic
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/__([^_]+)__/g, '$1')
+      .replace(/_([^_]+)_/g, '$1')
+      // Remove links, keep text
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      // Remove headers
+      .replace(/^#{1,6}\s+/gm, '')
+      // Remove bullet points
+      .replace(/^[-*+]\s+/gm, '')
+      // Clean up extra whitespace
+      .replace(/\n/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  );
+}
+
+// Extract mission points (smarter version that prioritizes mission-related content)
+function extractMissionPoints(text: string, maxPoints: number = 4): string[] {
+  if (!text) return [];
+
+  const points: string[] = [];
+  const stackKeywords = ['stack', 'technique', 'technologie', 'outil'];
+  const missionKeywords = ['mission', 'responsabilit', 'réalisation', 'contribution'];
+
+  // Try to find bullets under mission-related headers first
+  const headerRegex = /\*\*([^*]+)\*\*\s*:?\s*\n([\s\S]*?)(?=\*\*[^*]+\*\*|$)/g;
+  let headerMatch;
+
+  while ((headerMatch = headerRegex.exec(text)) !== null && points.length < maxPoints) {
+    const headerText = headerMatch[1].toLowerCase();
+    const sectionContent = headerMatch[2];
+
+    // Skip stack/technique sections
+    if (stackKeywords.some((kw) => headerText.includes(kw))) {
+      continue;
+    }
+
+    // Prioritize mission sections
+    if (missionKeywords.some((kw) => headerText.includes(kw))) {
+      const sectionBulletRegex = /^[-*+]\s+(.+)$/gm;
+      let bulletMatch;
+      while (
+        (bulletMatch = sectionBulletRegex.exec(sectionContent)) !== null &&
+        points.length < maxPoints
+      ) {
+        const cleanPoint = bulletMatch[1]
+          .replace(/\*\*([^*]+)\*\*/g, '$1')
+          .replace(/\*([^*]+)\*/g, '$1')
+          .trim();
+        if (cleanPoint.length > 10) {
+          points.push(cleanPoint);
+        }
+      }
+    }
+  }
+
+  // If no mission-specific points found, fall back to filtered bullets
+  if (points.length === 0) {
+    // Remove stack technique sections first
+    let cleanedText = text;
+    const stackSectionRegex =
+      /\*\*[^*]*(?:stack|technique|technologie)[^*]*\*\*\s*:?\s*\n[\s\S]*?(?=\*\*[^*]+\*\*|\n\n|$)/gi;
+    cleanedText = cleanedText.replace(stackSectionRegex, '');
+
+    const bulletRegex = /^[-*+]\s+(.+)$/gm;
+    let match;
+    while ((match = bulletRegex.exec(cleanedText)) !== null && points.length < maxPoints) {
+      const cleanPoint = match[1]
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/\*([^*]+)\*/g, '$1')
+        .trim();
+      // Filter out short points and likely stack items (containing ":" at start)
+      if (cleanPoint.length > 10 && !cleanPoint.match(/^[A-Za-z]+\s*:/)) {
+        points.push(cleanPoint);
+      }
+    }
+  }
+
+  return points;
+}
+
+// Format availability string
+function formatAvailability(): string {
+  const parts: string[] = [];
+  if (availability.available) {
+    parts.push('Disponible');
+  }
+  if (availability.types.length > 0) {
+    parts.push(availability.types.join(' / '));
+  }
+  if (availability.locations.length > 0) {
+    parts.push(availability.locations.join(' / '));
+  }
+  return parts.join(' • ');
+}
+---
+
+<BaseLayout
+  title={`CV - ${profile.name} - ${profile.title}`}
+  description={`CV de ${profile.name} - ${profile.title} spécialisé TypeScript, React, Svelte et Node.js. Disponible en téléchargement PDF.`}
+>
+  <!-- JSON-LD Resume structured data for SEO and ATS -->
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: profile.name,
+        jobTitle: profile.title,
+        description: profile.summary,
+        email: contact.email,
+        url: 'https://leigh-chr.github.io/portfolio/',
+        image: 'https://leigh-chr.github.io/portfolio/images/profile.jpg',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Grenoble',
+          addressCountry: 'FR',
+        },
+        sameAs: [contact.linkedin, contact.github],
+        knowsAbout: techStack,
+        knowsLanguage: languages.map((l) => l.name),
+        hasCredential: educationExperiences.map((exp) => ({
+          '@type': 'EducationalOccupationalCredential',
+          name: exp.data.title,
+          recognizedBy: {
+            '@type': 'Organization',
+            name: exp.data.organization,
+          },
+        })),
+        hasOccupation: workExperiences.map((exp) => ({
+          '@type': 'Occupation',
+          name: exp.data.title,
+          occupationLocation: {
+            '@type': 'City',
+            name: exp.data.location || 'Grenoble',
+          },
+        })),
+      })}
+    />
+  </Fragment>
+
+  <!-- Print button (hidden on print) -->
+  <div class="fixed bottom-6 right-6 z-50 print:hidden">
+    <button
+      onclick="window.print()"
+      class="btn-chunky-primary flex items-center gap-2"
+      aria-label="Imprimer ou enregistrer en PDF"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+        ></path>
+      </svg>
+      <span>Enregistrer en PDF</span>
+    </button>
+  </div>
+
+  <article class="cv-container" itemscope itemtype="https://schema.org/Person">
+    <!-- Header - ATS-optimized single column layout -->
+    <header class="cv-header">
+      <!-- Identity Block -->
+      <div class="cv-identity-block">
+        <div class="cv-photo">
+          <Image
+            src={profileImage}
+            alt={profile.name}
+            class="cv-photo-img"
+            width={120}
+            height={150}
+            format="webp"
+            quality={90}
+            itemprop="image"
+          />
+        </div>
+        <div class="cv-identity">
+          <h1 class="cv-name" itemprop="name">{profile.name}</h1>
+          <p class="cv-title" itemprop="jobTitle">{profile.title}</p>
+          <p class="cv-subtitle">{profile.subtitle}</p>
+          {
+            availability.available && (
+              <p class="cv-availability">
+                <span class="cv-availability-dot" aria-hidden="true" />
+                <span>{formatAvailability()}</span>
+              </p>
+            )
+          }
+        </div>
+      </div>
+
+      <!-- Contact Information - semantic address element -->
+      <address class="cv-contact" itemprop="address">
+        <ul class="cv-contact-list">
+          <li class="cv-contact-item">
+            <span class="cv-contact-label">Email :</span>
+            <a href={`mailto:${contact.email}`} class="cv-link" itemprop="email">{contact.email}</a>
+          </li>
+          <li class="cv-contact-item">
+            <span class="cv-contact-label">LinkedIn :</span>
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cv-link"
+              itemprop="sameAs">{contact.linkedinDisplay}</a
+            >
+          </li>
+          <li class="cv-contact-item">
+            <span class="cv-contact-label">GitHub :</span>
+            <a
+              href={contact.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cv-link"
+              itemprop="sameAs">{contact.githubDisplay}</a
+            >
+          </li>
+          <li class="cv-contact-item">
+            <span class="cv-contact-label">Portfolio :</span>
+            <a href={url('/')} class="cv-link" itemprop="url">leigh-chr.github.io/portfolio/</a>
+          </li>
+          <li class="cv-contact-item">
+            <span class="cv-contact-label">Localisation :</span>
+            <span itemprop="addressLocality">{contact.location}</span>
+          </li>
+        </ul>
+      </address>
+    </header>
+
+    <!-- Professional Summary -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Profil</h2>
+      <p class="cv-summary">{profile.summary}</p>
+    </section>
+
+    <!-- Work Experience -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Expérience Professionnelle</h2>
+
+      {
+        workExperiences.map((exp) => {
+          const keyPoints = extractMissionPoints(exp.body);
+          const summary = cleanMarkdownForCV(exp.body);
+
+          return (
+            <article class="cv-entry" itemscope itemtype="https://schema.org/OrganizationRole">
+              <div class="cv-entry-header">
+                <div class="cv-entry-left">
+                  <h3 class="cv-entry-title" itemprop="roleName">
+                    {exp.data.title}
+                  </h3>
+                  <p class="cv-entry-company">
+                    {exp.data.website ? (
+                      <a
+                        href={exp.data.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="cv-link"
+                        itemprop="memberOf"
+                      >
+                        {exp.data.organization}
+                      </a>
+                    ) : (
+                      <span itemprop="memberOf">{exp.data.organization}</span>
+                    )}
+                    {exp.data.status && <span class="cv-status">({exp.data.status})</span>}
+                  </p>
+                </div>
+                <div class="cv-entry-right">
+                  <span class="cv-entry-date">
+                    <time datetime={getISODate(exp.data.startDate)} itemprop="startDate">
+                      {formatDate(exp.data.startDate)}
+                    </time>
+                    {' - '}
+                    {exp.data.current ? (
+                      <span>Présent</span>
+                    ) : exp.data.endDate ? (
+                      <time datetime={getISODate(exp.data.endDate)} itemprop="endDate">
+                        {formatDate(exp.data.endDate)}
+                      </time>
+                    ) : null}
+                  </span>
+                  {exp.data.location && <span class="cv-entry-location">{exp.data.location}</span>}
+                </div>
+              </div>
+
+              {/* Show key points if available, otherwise show cleaned summary */}
+              {keyPoints.length > 0 ? (
+                <ul class="cv-entry-points" itemprop="description">
+                  {keyPoints.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="cv-entry-description" itemprop="description">
+                  {summary}
+                </p>
+              )}
+            </article>
+          );
+        })
+      }
+    </section>
+
+    <!-- Education -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Formation</h2>
+
+      {
+        educationExperiences.map((exp) => {
+          const summary = cleanMarkdownForCV(exp.body);
+
+          return (
+            <article
+              class="cv-entry cv-entry-compact"
+              itemscope
+              itemtype="https://schema.org/EducationalOccupationalCredential"
+            >
+              <div class="cv-entry-header">
+                <div class="cv-entry-left">
+                  <h3 class="cv-entry-title" itemprop="name">
+                    {exp.data.title}
+                  </h3>
+                  <p class="cv-entry-company">
+                    {exp.data.website ? (
+                      <a
+                        href={exp.data.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="cv-link"
+                        itemprop="recognizedBy"
+                      >
+                        {exp.data.organization}
+                      </a>
+                    ) : (
+                      <span itemprop="recognizedBy">{exp.data.organization}</span>
+                    )}
+                  </p>
+                </div>
+                <div class="cv-entry-right">
+                  <span class="cv-entry-date">
+                    <time datetime={getISODate(exp.data.startDate)}>
+                      {formatDate(exp.data.startDate)}
+                    </time>
+                    {' - '}
+                    {exp.data.current ? (
+                      <span>Présent</span>
+                    ) : exp.data.endDate ? (
+                      <time datetime={getISODate(exp.data.endDate)}>
+                        {formatDate(exp.data.endDate)}
+                      </time>
+                    ) : null}
+                  </span>
+                  {exp.data.location && <span class="cv-entry-location">{exp.data.location}</span>}
+                </div>
+              </div>
+              {summary && (
+                <p class="cv-entry-description cv-entry-description-short" itemprop="description">
+                  {summary}
+                </p>
+              )}
+            </article>
+          );
+        })
+      }
+    </section>
+
+    <!-- Skills - ATS-optimized single column layout -->
+    <section class="cv-section cv-skills-section">
+      <h2 class="cv-section-title">Compétences</h2>
+
+      <!-- Technical Skills -->
+      <div class="cv-skills-block">
+        <h3 class="cv-skills-subtitle">Compétences Techniques</h3>
+        <ul class="cv-skills-list-inline">
+          {
+            technicalSkills.map((skill, index) => (
+              <li class="cv-skill-inline">
+                {skill.data.title} ({levelToText(skill.data.level)})
+                {index < technicalSkills.length - 1 ? ' • ' : ''}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Human Skills -->
+      <div class="cv-skills-block">
+        <h3 class="cv-skills-subtitle">Compétences Humaines</h3>
+        <ul class="cv-skills-list-inline">
+          {
+            humanSkills.map((skill, index) => (
+              <li class="cv-skill-inline">
+                {skill.data.title} ({levelToText(skill.data.level)})
+                {index < humanSkills.length - 1 ? ' • ' : ''}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="cv-skills-block">
+        <h3 class="cv-skills-subtitle">Stack Technique</h3>
+        <p class="cv-tech-list">{techStack.join(' • ')}</p>
+      </div>
+    </section>
+
+    <!-- Projects - ATS-optimized single column -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">Projets</h2>
+
+      {
+        sortedProjects.map((project) => (
+          <article class="cv-project-entry">
+            <div class="cv-entry-header">
+              <div class="cv-entry-left">
+                <h3 class="cv-entry-title">{project.data.title}</h3>
+                <p class="cv-entry-company">{project.data.context.company}</p>
+              </div>
+              <div class="cv-entry-right">
+                <span class="cv-entry-date">{project.data.context.period}</span>
+              </div>
+            </div>
+            <p class="cv-entry-description">{project.data.shortDescription}</p>
+            {project.data.links &&
+              (project.data.links.repository || project.data.links.website) && (
+                <p class="cv-project-links-text">
+                  Liens :{' '}
+                  {project.data.links.repository && (
+                    <a
+                      href={project.data.links.repository}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="cv-link"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                  {project.data.links.repository && project.data.links.website && ' • '}
+                  {project.data.links.website && (
+                    <a
+                      href={project.data.links.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="cv-link"
+                    >
+                      Site web
+                    </a>
+                  )}
+                </p>
+              )}
+          </article>
+        ))
+      }
+    </section>
+
+    <!-- Languages - ATS-friendly inline format -->
+    <section class="cv-section cv-languages-section">
+      <h2 class="cv-section-title">Langues</h2>
+      <ul class="cv-languages-list">
+        {
+          languages.map((lang) => (
+            <li class="cv-language-item">
+              <span class="cv-language-name">{lang.name}</span> (
+              <span class="cv-language-level">{lang.level}</span>)
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="cv-footer">
+      <p>
+        Portfolio complet disponible sur <a href={url('/')} class="cv-link"
+          >https://leigh-chr.github.io/portfolio/</a
+        >
+      </p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* =============================================================================
+     CV STYLES - Optimized for screen and print
+     ============================================================================= */
+
+  .cv-container {
+    @apply max-w-4xl mx-auto px-6 py-12;
+  }
+
+  /* Header - ATS-optimized layout */
+  .cv-header {
+    @apply mb-8 pb-6 border-b-3 border-primary-500;
+  }
+
+  /* Identity block: photo + name/title */
+  .cv-identity-block {
+    @apply flex flex-col sm:flex-row gap-6 mb-6;
+  }
+
+  @media (max-width: 640px) {
+    .cv-identity-block {
+      @apply text-center items-center;
+    }
+  }
+
+  /* Photo */
+  .cv-photo {
+    @apply flex-shrink-0;
+  }
+
+  .cv-photo-img {
+    @apply w-28 h-auto border-3 border-primary-500 object-cover;
+  }
+
+  .cv-identity {
+    @apply flex flex-col justify-center;
+  }
+
+  .cv-name {
+    @apply text-3xl md:text-4xl font-heading font-bold text-white mb-1;
+  }
+
+  .cv-title {
+    @apply text-lg md:text-xl text-primary-400 font-heading font-semibold mb-1;
+  }
+
+  .cv-subtitle {
+    @apply text-gray-400 text-sm mb-3;
+  }
+
+  /* Availability badge with pulse animation */
+  .cv-availability {
+    @apply flex flex-wrap items-center gap-2 text-xs text-gray-300 m-0;
+  }
+
+  .cv-availability-dot {
+    @apply w-2 h-2 bg-green-400 rounded-full;
+    animation: pulse-availability 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-availability {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+    }
+    50% {
+      opacity: 0.7;
+      box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cv-availability {
+      @apply justify-center;
+    }
+  }
+
+  /* Contact - semantic address element with ATS-friendly labels */
+  .cv-contact {
+    @apply not-italic text-sm;
+  }
+
+  .cv-contact-list {
+    @apply list-none p-0 m-0 flex flex-wrap gap-x-6 gap-y-2;
+  }
+
+  @media (max-width: 640px) {
+    .cv-contact-list {
+      @apply flex-col gap-2 items-center;
+    }
+  }
+
+  .cv-contact-item {
+    @apply flex items-center gap-1 text-gray-300;
+  }
+
+  .cv-contact-label {
+    @apply text-gray-500 text-xs;
+  }
+
+  .cv-link {
+    @apply text-primary-400 hover:text-primary-300 transition-colors;
+  }
+
+  /* Sections */
+  .cv-section {
+    @apply mb-6;
+  }
+
+  .cv-section-title {
+    @apply text-lg font-heading font-bold text-white mb-3 pb-2 border-b border-dark-600 uppercase tracking-wider;
+  }
+
+  .cv-summary {
+    @apply text-gray-300 leading-relaxed text-sm;
+  }
+
+  /* Entries (Experience, Education) */
+  .cv-entry {
+    @apply mb-5 last:mb-0;
+  }
+
+  .cv-entry-compact {
+    @apply mb-4;
+  }
+
+  .cv-entry-header {
+    @apply flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2;
+  }
+
+  .cv-entry-left {
+    @apply flex-1;
+  }
+
+  .cv-entry-right {
+    @apply flex flex-col items-start sm:items-end text-sm;
+  }
+
+  .cv-entry-title {
+    @apply text-base font-heading font-bold text-white;
+  }
+
+  .cv-entry-company {
+    @apply text-gray-400 text-sm;
+  }
+
+  .cv-status {
+    @apply text-primary-400 ml-1;
+  }
+
+  .cv-entry-date {
+    @apply text-primary-400 font-medium text-sm;
+  }
+
+  .cv-entry-location {
+    @apply text-gray-500 text-xs;
+  }
+
+  .cv-entry-description {
+    @apply text-gray-400 text-sm leading-relaxed;
+  }
+
+  .cv-entry-description-short {
+    /* Full text displayed - no truncation on CV */
+  }
+
+  .cv-entry-points {
+    @apply list-disc list-inside text-gray-400 text-sm space-y-1 ml-1;
+  }
+
+  .cv-entry-points li {
+    @apply leading-relaxed;
+  }
+
+  /* Skills - ATS-friendly single column */
+  .cv-skills-block {
+    @apply mb-4;
+  }
+
+  .cv-skills-subtitle {
+    @apply text-xs font-heading font-semibold text-accent-400 uppercase tracking-wider mb-2;
+  }
+
+  .cv-skills-list-inline {
+    @apply list-none p-0 m-0 text-gray-300 text-sm leading-relaxed;
+  }
+
+  .cv-skill-inline {
+    @apply inline;
+  }
+
+  .cv-tech-list {
+    @apply text-gray-300 text-sm leading-relaxed m-0;
+  }
+
+  /* Projects - ATS-friendly single column */
+  .cv-project-entry {
+    @apply mb-4 last:mb-0;
+  }
+
+  .cv-project-links-text {
+    @apply text-xs text-gray-500 mt-1;
+  }
+
+  /* Languages - ATS-friendly inline list */
+  .cv-languages-list {
+    @apply list-none p-0 m-0 text-gray-300 text-sm;
+  }
+
+  .cv-language-item {
+    @apply inline;
+  }
+
+  .cv-language-item::after {
+    content: ' • ';
+  }
+
+  .cv-language-item:last-child::after {
+    content: '';
+  }
+
+  .cv-language-name {
+    @apply font-medium;
+  }
+
+  .cv-language-level {
+    @apply text-gray-500;
+  }
+
+  /* Footer */
+  .cv-footer {
+    @apply mt-8 pt-4 border-t border-dark-600 text-center text-xs text-gray-500;
+  }
+
+  /* =============================================================================
+     PRINT STYLES
+     ============================================================================= */
+
+  @media print {
+    /* Reset page for A4 */
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    /* Global print overrides - ensure white background everywhere */
+    :global(html),
+    :global(body) {
+      background: white !important;
+      background-color: white !important;
+      color: black !important;
+      font-size: 10pt !important;
+      line-height: 1.3 !important;
+    }
+
+    /* Hide ALL non-CV elements from site layout */
+    :global(#main-header),
+    :global(footer:not(.cv-footer)),
+    :global(a[href='#main-content']),
+    :global(.parallax-layer),
+    :global(.pattern-dots),
+    :global([class*='memphis-']),
+    :global([aria-hidden='true']:not(svg):not(.cv-container *)),
+    :global(.decorative-element),
+    :global(.fixed:not(.cv-container *)) {
+      display: none !important;
+    }
+
+    :global(main) {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    /* Show URLs after links in print for better usability */
+    .cv-link[href^='http']:not([href*='mailto'])::after {
+      content: ' (' attr(href) ')';
+      font-size: 7pt;
+      color: #666;
+      word-break: break-all;
+    }
+
+    /* Don't show URL for links that already display it */
+    .cv-contact .cv-link::after {
+      content: none !important;
+    }
+
+    .cv-container {
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* Header layout for print - ATS-friendly single column */
+    .cv-header {
+      margin-bottom: 12px !important;
+      padding-bottom: 8px !important;
+      border-bottom-color: #6b21a8 !important;
+    }
+
+    .cv-identity-block {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 12px !important;
+      margin-bottom: 8px !important;
+    }
+
+    /* Photo */
+    .cv-photo-img {
+      width: 60px !important;
+      height: auto !important;
+      border-color: #6b21a8 !important;
+    }
+
+    /* Contact list for print - horizontal compact layout */
+    .cv-contact {
+      font-style: normal !important;
+    }
+
+    .cv-contact-list {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 4px 12px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .cv-contact-item {
+      font-size: 8pt !important;
+      color: #333 !important;
+    }
+
+    .cv-contact-label {
+      font-size: 7pt !important;
+      color: #666 !important;
+    }
+
+    /* Typography */
+    .cv-name {
+      font-size: 18pt !important;
+      color: black !important;
+      margin-bottom: 2px !important;
+    }
+
+    .cv-title {
+      font-size: 11pt !important;
+      color: #6b21a8 !important;
+      margin-bottom: 2px !important;
+    }
+
+    .cv-subtitle {
+      font-size: 9pt !important;
+      color: #666 !important;
+      margin-bottom: 4px !important;
+    }
+
+    .cv-availability {
+      font-size: 8pt !important;
+      color: #333 !important;
+    }
+
+    .cv-availability-dot {
+      background-color: #22c55e !important;
+      animation: none !important;
+    }
+
+    .cv-section {
+      margin-bottom: 10px !important;
+    }
+
+    .cv-section-title {
+      font-size: 11pt !important;
+      color: black !important;
+      border-bottom-color: #ccc !important;
+      margin-bottom: 6px !important;
+      padding-bottom: 4px !important;
+      page-break-after: avoid !important;
+    }
+
+    .cv-link {
+      color: #6b21a8 !important;
+      text-decoration: none !important;
+    }
+
+    /* Content */
+    .cv-summary {
+      color: #333 !important;
+      font-size: 9pt !important;
+    }
+
+    .cv-entry {
+      margin-bottom: 8px !important;
+    }
+
+    .cv-entry-compact {
+      margin-bottom: 6px !important;
+    }
+
+    .cv-entry-title {
+      font-size: 10pt !important;
+      color: black !important;
+    }
+
+    .cv-entry-company {
+      font-size: 9pt !important;
+      color: #666 !important;
+    }
+
+    .cv-entry-date {
+      font-size: 9pt !important;
+      color: #6b21a8 !important;
+    }
+
+    .cv-entry-location {
+      font-size: 8pt !important;
+      color: #666 !important;
+    }
+
+    .cv-entry-description,
+    .cv-entry-points {
+      color: #333 !important;
+      font-size: 9pt !important;
+    }
+
+    .cv-entry-points {
+      margin-left: 8px !important;
+    }
+
+    .cv-status {
+      color: #6b21a8 !important;
+    }
+
+    /* Skills - ATS-friendly inline layout */
+    .cv-skills-block {
+      margin-bottom: 6px !important;
+    }
+
+    .cv-skills-subtitle {
+      font-size: 9pt !important;
+      color: #6b21a8 !important;
+      margin-bottom: 2px !important;
+    }
+
+    .cv-skills-list-inline {
+      color: #333 !important;
+      font-size: 9pt !important;
+    }
+
+    .cv-skill-inline {
+      display: inline !important;
+    }
+
+    .cv-tech-list {
+      color: #333 !important;
+      font-size: 8pt !important;
+    }
+
+    /* Projects - ATS-friendly single column */
+    .cv-project-entry {
+      margin-bottom: 6px !important;
+      page-break-inside: avoid !important;
+    }
+
+    .cv-project-links-text {
+      font-size: 7pt !important;
+      color: #666 !important;
+    }
+
+    /* Languages */
+    .cv-language-name {
+      color: #333 !important;
+      font-size: 9pt !important;
+    }
+
+    .cv-language-level {
+      color: #666 !important;
+      font-size: 8pt !important;
+    }
+
+    /* Footer */
+    .cv-footer {
+      margin-top: 10px !important;
+      padding-top: 6px !important;
+      border-top-color: #ccc !important;
+      color: #666 !important;
+      font-size: 8pt !important;
+    }
+
+    /* Page breaks - intelligent rules */
+    .cv-entry,
+    .cv-project-entry {
+      page-break-inside: avoid !important;
+    }
+
+    /* Small sections can avoid page breaks */
+    .cv-skills-section,
+    .cv-languages-section,
+    .cv-footer {
+      page-break-inside: avoid !important;
+    }
+
+    /* Prevent orphan headers */
+    .cv-section-title,
+    .cv-skills-subtitle,
+    .cv-entry-title {
+      page-break-after: avoid !important;
+    }
+
+    /* Allow breaks between entries in long sections */
+    .cv-entry + .cv-entry,
+    .cv-project-entry + .cv-project-entry {
+      page-break-before: auto !important;
+    }
+
+    /* Widows and orphans control */
+    p,
+    li {
+      orphans: 2 !important;
+      widows: 2 !important;
+    }
+
+    /* Hide screen-only elements */
+    button {
+      display: none !important;
+    }
+  }
+</style>

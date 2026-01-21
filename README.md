@@ -1,5 +1,5 @@
 # Portfolio - Virgil Chareyre
 
-Mon portfolio professionnel : [virgil-chareyre.dev](https://virgil-chareyre.dev)
+Mon portfolio professionnel : [leigh-chr.github.io/portfolio](https://leigh-chr.github.io/portfolio/)
 
 Construit avec Astro, TypeScript et Tailwind CSS.
