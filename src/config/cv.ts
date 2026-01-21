@@ -33,8 +33,8 @@ export interface LanguageInfo {
 export const profile: ProfileInfo = {
   name: 'Virgil CHAREYRE',
   title: 'Développeur Web Fullstack',
-  subtitle: 'TypeScript, React, Svelte & Node.js',
-  summary: `Développeur Web Fullstack avec 3 ans d'expérience en entreprise, travaillant principalement avec TypeScript pour le développement d'applications web modernes. Passionné par l'accessibilité, la qualité du code et les bonnes pratiques. Je recherche des projets qui ont du sens, au sein d'équipes qui partagent mes valeurs d'éthique et de transparence.`,
+  subtitle: '',
+  summary: `Développeur Web Fullstack avec 3 ans d'expérience en entreprise. À l'aise avec de nombreuses technologies frontend et backend. Passionné par l'accessibilité, la qualité du code et les bonnes pratiques. Je recherche des projets qui ont du sens, au sein d'équipes qui partagent mes valeurs d'éthique et de transparence.`,
 };
 
 export const contact: ContactInfo = {

@@ -243,7 +243,7 @@ function formatAvailability(): string {
         <div class="cv-identity">
           <h1 class="cv-name" itemprop="name">{profile.name}</h1>
           <p class="cv-title" itemprop="jobTitle">{profile.title}</p>
-          <p class="cv-subtitle">{profile.subtitle}</p>
+          {profile.subtitle && <p class="cv-subtitle">{profile.subtitle}</p>}
           {
             availability.available && (
               <p class="cv-availability">
