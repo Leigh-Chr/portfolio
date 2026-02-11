@@ -14,47 +14,30 @@ const allSkills = await getCollection('skills');
 const projectTitles = new Map(allProjects.map((p) => [p.slug, p.data.title]));
 const skillTitles = new Map(allSkills.map((s) => [s.slug, s.data.title]));
 const sortedExperiences = allExperiences.sort((a, b) => {
-  // Sort by start date descending (anti-chronological)
-  return new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime();
+  // Sort by start date ascending (chronological: oldest first)
+  return new Date(a.data.startDate).getTime() - new Date(b.data.startDate).getTime();
 });
 
 const hasRealContent = sortedExperiences.length > 0;
 
-// Placeholder experiences if none exist
+// Placeholder experiences if none exist (chronological: oldest first)
 const placeholderExperiences = [
   {
-    slug: 'exp-1',
+    slug: 'exp-5',
     data: {
-      type: 'work' as const,
-      title: 'Développeur Full Stack Senior',
-      organization: 'Entreprise Tech',
+      type: 'education' as const,
+      title: 'Licence Informatique',
+      organization: 'Université',
       logo: null,
-      location: 'Paris, France',
-      startDate: '2023-01',
-      endDate: null,
-      current: true,
-      order: 1,
-      relatedProjects: [],
-      relatedSkills: [],
-    },
-    body: 'Description du poste et des responsabilités.',
-  },
-  {
-    slug: 'exp-2',
-    data: {
-      type: 'work' as const,
-      title: 'Développeur Backend',
-      organization: 'Startup Innovante',
-      logo: null,
-      location: 'Lyon, France',
-      startDate: '2021-06',
-      endDate: '2022-12',
+      location: 'Bordeaux, France',
+      startDate: '2016-09',
+      endDate: '2019-06',
       current: false,
-      order: 2,
+      order: 5,
       relatedProjects: [],
       relatedSkills: [],
     },
-    body: "Développement d'APIs et microservices.",
+    body: 'Formation fondamentale en informatique.',
   },
   {
     slug: 'exp-3',
@@ -91,21 +74,38 @@ const placeholderExperiences = [
     body: "Stage de fin d'études en développement web.",
   },
   {
-    slug: 'exp-5',
+    slug: 'exp-2',
     data: {
-      type: 'education' as const,
-      title: 'Licence Informatique',
-      organization: 'Université',
+      type: 'work' as const,
+      title: 'Développeur Backend',
+      organization: 'Startup Innovante',
       logo: null,
-      location: 'Bordeaux, France',
-      startDate: '2016-09',
-      endDate: '2019-06',
+      location: 'Lyon, France',
+      startDate: '2021-06',
+      endDate: '2022-12',
       current: false,
-      order: 5,
+      order: 2,
       relatedProjects: [],
       relatedSkills: [],
     },
-    body: 'Formation fondamentale en informatique.',
+    body: "Développement d'APIs et microservices.",
+  },
+  {
+    slug: 'exp-1',
+    data: {
+      type: 'work' as const,
+      title: 'Développeur Full Stack Senior',
+      organization: 'Entreprise Tech',
+      logo: null,
+      location: 'Paris, France',
+      startDate: '2023-01',
+      endDate: null,
+      current: true,
+      order: 1,
+      relatedProjects: [],
+      relatedSkills: [],
+    },
+    body: 'Description du poste et des responsabilités.',
   },
 ];
 
@@ -144,16 +144,6 @@ function formatDate(dateStr: string): string {
       <!-- Quick Stats - Bold Memphis with subtle variations -->
       <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-16">
         <div
-          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[100px]"
-        >
-          <p class="stat-large text-primary-400">{workExperiences.length}</p>
-          <p
-            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
-          >
-            Expériences
-          </p>
-        </div>
-        <div
           class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[100px]"
         >
           <p class="stat-large text-accent-400">
@@ -163,6 +153,16 @@ function formatDate(dateStr: string): string {
             class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
           >
             Formations
+          </p>
+        </div>
+        <div
+          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[100px]"
+        >
+          <p class="stat-large text-primary-400">{workExperiences.length}</p>
+          <p
+            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+          >
+            Expériences
           </p>
         </div>
         {
@@ -179,7 +179,7 @@ function formatDate(dateStr: string): string {
     </div>
   </section>
 
-  <!-- Work Experience Section -->
+  <!-- Education Section -->
   <section class="section-padding section-alt section-lazy">
     <div class="container-custom">
       {
@@ -191,6 +191,202 @@ function formatDate(dateStr: string): string {
         )
       }
 
+      <div class="max-w-4xl mx-auto">
+        <!-- Education Header -->
+        <div class="flex items-center gap-4 mb-12">
+          <div class="icon-box-lg bg-accent-400 border-accent-400">
+            <span class="text-2xl">🎓</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-heading font-bold text-white">
+            <span class="text-accent-400">Formation</span> Académique
+          </h2>
+        </div>
+
+        <!-- Education Timeline -->
+        <div class="relative">
+          <!-- Vertical line -->
+          <div
+            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-400/30 to-accent-400 origin-top"
+            data-gsap="timeline-line"
+          >
+          </div>
+
+          <!-- Start point -->
+          <div class="relative flex items-start mb-12" data-gsap="reveal">
+            <div class="absolute left-8 transform -translate-x-1/2">
+              <div class="icon-box-lg bg-accent-400 border-accent-400">
+                <span class="text-2xl">🚀</span>
+              </div>
+            </div>
+            <div class="ml-20 sm:ml-24">
+              <p class="text-gray-400 text-sm font-heading italic">Le début de l'aventure...</p>
+            </div>
+          </div>
+
+          <!-- Education Timeline items -->
+          {
+            educationExperiences.map((exp) => {
+              return (
+                <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
+                  {/* Timeline dot */}
+                  <div class="absolute left-8 transform -translate-x-1/2 z-10">
+                    <div
+                      class={`timeline-dot-lg ${exp.data.current ? 'bg-accent-400 border-accent-400 text-dark-900' : 'bg-dark-800 border-accent-400'}`}
+                    >
+                      <span class="text-xl">🎓</span>
+                    </div>
+                  </div>
+
+                  {/* Content card */}
+                  <div class="ml-20 sm:ml-24 flex-1">
+                    <div class="card-glow p-4 sm:p-6 md:p-8">
+                      {/* Date badge */}
+                      <div class="flex mb-3">
+                        <span class="tag-accent">
+                          {formatDate(exp.data.startDate)}
+                          {exp.data.current
+                            ? ' - Présent'
+                            : exp.data.endDate
+                              ? ` - ${formatDate(exp.data.endDate)}`
+                              : ''}
+                        </span>
+                      </div>
+
+                      {/* Organization with logo */}
+                      <div class="flex items-center gap-4 mb-4">
+                        {exp.data.logo ? (
+                          exp.data.website ? (
+                            <a
+                              href={exp.data.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="flex-shrink-0 hover:opacity-80 transition-opacity"
+                              title={`Visiter le site de ${exp.data.organization}`}
+                            >
+                              <img
+                                src={url(exp.data.logo)}
+                                alt={exp.data.organization}
+                                class="w-10 h-10 object-contain"
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                                decoding="async"
+                              />
+                            </a>
+                          ) : (
+                            <img
+                              src={url(exp.data.logo)}
+                              alt={exp.data.organization}
+                              class="w-10 h-10 object-contain"
+                              width="40"
+                              height="40"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          )
+                        ) : (
+                          <div class="w-10 h-10 bg-dark-700 border border-dark-600 flex items-center justify-center flex-shrink-0">
+                            <span class="text-sm font-heading font-bold text-accent-400">
+                              {exp.data.organization.substring(0, 2).toUpperCase()}
+                            </span>
+                          </div>
+                        )}
+                        <div>
+                          <p class="font-medium text-white text-sm">
+                            {exp.data.website ? (
+                              <a
+                                href={exp.data.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-accent-400 transition-colors"
+                              >
+                                {exp.data.organization}
+                              </a>
+                            ) : (
+                              exp.data.organization
+                            )}
+                          </p>
+                          {exp.data.location && (
+                            <p class="text-gray-400 text-xs">{exp.data.location}</p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Title */}
+                      <h3 class="font-heading font-bold text-xl text-white mb-3">
+                        {exp.data.title}
+                      </h3>
+
+                      {/* Current indicator */}
+                      {exp.data.current && (
+                        <div class="flex flex-wrap items-center gap-2 mb-3">
+                          <span class="inline-flex items-center gap-2 text-xs text-accent-400 font-heading font-semibold">
+                            <span class="w-2 h-2 bg-accent-400" />
+                            En cours
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Expandable details */}
+                      <details class="mt-4 group">
+                        <summary
+                          class="cursor-pointer text-accent-400 text-sm font-heading font-semibold hover:text-accent-300 transition-colors flex items-center gap-2"
+                          aria-label={`Voir les détails de ${exp.data.title} à ${exp.data.organization}`}
+                        >
+                          <span>Voir les détails</span>
+                          <svg
+                            class="w-4 h-4 group-open:rotate-180 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        </summary>
+                        <div class="mt-4 pt-4 border-t border-dark-600">
+                          <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                            {exp.body || '[Description de la formation]'}
+                          </p>
+
+                          {(exp.data.relatedProjects?.length > 0 ||
+                            exp.data.relatedSkills?.length > 0) && (
+                            <div class="mt-4 pt-4 border-t border-dark-600">
+                              <p class="text-xs text-gray-400 mb-2">Compétences associées :</p>
+                              <div class="flex flex-wrap gap-2">
+                                {exp.data.relatedSkills?.map((skillSlug: string) => (
+                                  <a
+                                    href={url(`/skills/${skillSlug}`)}
+                                    class="text-xs text-accent-400 hover:underline"
+                                  >
+                                    ⚡ {skillTitles.get(skillSlug) || skillSlug}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Experience Section -->
+  <section class="section-padding section-lazy">
+    <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <!-- Work Experience Header -->
         <div class="flex items-center gap-4 mb-12">
@@ -206,7 +402,7 @@ function formatDate(dateStr: string): string {
         <div class="relative">
           <!-- Vertical line -->
           <div
-            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-primary-500/30 origin-top"
+            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500/30 to-primary-500 origin-top"
             data-gsap="timeline-line"
           >
           </div>
@@ -393,7 +589,7 @@ function formatDate(dateStr: string): string {
           }
 
           <!-- Future point -->
-          <div class="relative flex items-start mt-12">
+          <div class="relative flex items-start mt-12" data-gsap="reveal">
             <div class="absolute left-8 transform -translate-x-1/2">
               <div class="icon-box-lg bg-primary-500 border-primary-500">
                 <span class="text-2xl">✨</span>
@@ -401,201 +597,6 @@ function formatDate(dateStr: string): string {
             </div>
             <div class="ml-20 sm:ml-24">
               <p class="text-gray-400 text-sm font-heading italic">La suite s'écrit...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Education Section -->
-  <section class="section-padding section-lazy">
-    <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
-        <!-- Education Header -->
-        <div class="flex items-center gap-4 mb-12">
-          <div class="icon-box-lg bg-accent-400 border-accent-400">
-            <span class="text-2xl">🎓</span>
-          </div>
-          <h2 class="text-2xl md:text-3xl font-heading font-bold text-white">
-            <span class="text-accent-400">Formation</span> Académique
-          </h2>
-        </div>
-
-        <!-- Education Timeline -->
-        <div class="relative">
-          <!-- Vertical line -->
-          <div
-            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-400 to-accent-400/30 origin-top"
-            data-gsap="timeline-line"
-          >
-          </div>
-
-          <!-- Education Timeline items -->
-          {
-            educationExperiences.map((exp) => {
-              return (
-                <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
-                  {/* Timeline dot */}
-                  <div class="absolute left-8 transform -translate-x-1/2 z-10">
-                    <div
-                      class={`timeline-dot-lg ${exp.data.current ? 'bg-accent-400 border-accent-400 text-dark-900' : 'bg-dark-800 border-accent-400'}`}
-                    >
-                      <span class="text-xl">🎓</span>
-                    </div>
-                  </div>
-
-                  {/* Content card */}
-                  <div class="ml-20 sm:ml-24 flex-1">
-                    <div class="card-glow p-4 sm:p-6 md:p-8">
-                      {/* Date badge */}
-                      <div class="flex mb-3">
-                        <span class="tag-accent">
-                          {formatDate(exp.data.startDate)}
-                          {exp.data.current
-                            ? ' - Présent'
-                            : exp.data.endDate
-                              ? ` - ${formatDate(exp.data.endDate)}`
-                              : ''}
-                        </span>
-                      </div>
-
-                      {/* Organization with logo */}
-                      <div class="flex items-center gap-4 mb-4">
-                        {exp.data.logo ? (
-                          exp.data.website ? (
-                            <a
-                              href={exp.data.website}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="flex-shrink-0 hover:opacity-80 transition-opacity"
-                              title={`Visiter le site de ${exp.data.organization}`}
-                            >
-                              <img
-                                src={url(exp.data.logo)}
-                                alt={exp.data.organization}
-                                class="w-10 h-10 object-contain"
-                                width="40"
-                                height="40"
-                                loading="lazy"
-                                decoding="async"
-                              />
-                            </a>
-                          ) : (
-                            <img
-                              src={url(exp.data.logo)}
-                              alt={exp.data.organization}
-                              class="w-10 h-10 object-contain"
-                              width="40"
-                              height="40"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          )
-                        ) : (
-                          <div class="w-10 h-10 bg-dark-700 border border-dark-600 flex items-center justify-center flex-shrink-0">
-                            <span class="text-sm font-heading font-bold text-accent-400">
-                              {exp.data.organization.substring(0, 2).toUpperCase()}
-                            </span>
-                          </div>
-                        )}
-                        <div>
-                          <p class="font-medium text-white text-sm">
-                            {exp.data.website ? (
-                              <a
-                                href={exp.data.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="hover:text-accent-400 transition-colors"
-                              >
-                                {exp.data.organization}
-                              </a>
-                            ) : (
-                              exp.data.organization
-                            )}
-                          </p>
-                          {exp.data.location && (
-                            <p class="text-gray-400 text-xs">{exp.data.location}</p>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Title */}
-                      <h3 class="font-heading font-bold text-xl text-white mb-3">
-                        {exp.data.title}
-                      </h3>
-
-                      {/* Current indicator */}
-                      {exp.data.current && (
-                        <div class="flex flex-wrap items-center gap-2 mb-3">
-                          <span class="inline-flex items-center gap-2 text-xs text-accent-400 font-heading font-semibold">
-                            <span class="w-2 h-2 bg-accent-400" />
-                            En cours
-                          </span>
-                        </div>
-                      )}
-
-                      {/* Expandable details */}
-                      <details class="mt-4 group">
-                        <summary
-                          class="cursor-pointer text-accent-400 text-sm font-heading font-semibold hover:text-accent-300 transition-colors flex items-center gap-2"
-                          aria-label={`Voir les détails de ${exp.data.title} à ${exp.data.organization}`}
-                        >
-                          <span>Voir les détails</span>
-                          <svg
-                            class="w-4 h-4 group-open:rotate-180 transition-transform"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </summary>
-                        <div class="mt-4 pt-4 border-t border-dark-600">
-                          <p class="text-gray-400 text-sm mb-4 leading-relaxed">
-                            {exp.body || '[Description de la formation]'}
-                          </p>
-
-                          {(exp.data.relatedProjects?.length > 0 ||
-                            exp.data.relatedSkills?.length > 0) && (
-                            <div class="mt-4 pt-4 border-t border-dark-600">
-                              <p class="text-xs text-gray-400 mb-2">Compétences associées :</p>
-                              <div class="flex flex-wrap gap-2">
-                                {exp.data.relatedSkills?.map((skillSlug: string) => (
-                                  <a
-                                    href={url(`/skills/${skillSlug}`)}
-                                    class="text-xs text-accent-400 hover:underline"
-                                  >
-                                    ⚡ {skillTitles.get(skillSlug) || skillSlug}
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </details>
-                    </div>
-                  </div>
-                </div>
-              );
-            })
-          }
-
-          <!-- Start point -->
-          <div class="relative flex items-start mt-12">
-            <div class="absolute left-8 transform -translate-x-1/2">
-              <div class="icon-box-lg bg-accent-400 border-accent-400">
-                <span class="text-2xl">🚀</span>
-              </div>
-            </div>
-            <div class="ml-20 sm:ml-24">
-              <p class="text-gray-400 text-sm font-heading italic">Le début de l'aventure...</p>
             </div>
           </div>
         </div>
