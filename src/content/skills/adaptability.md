@@ -6,7 +6,7 @@ level: 8
 icon: '🔄'
 order: 10
 relatedProjects:
-  ['syren-platform', 'luce-platform', 'site-bh-technologies', 'appstandard', 'tidy-app']
+  ['syren-platform', 'luce-platform', 'site-bh-technologies', 'appstandard', 'tidy-app', 'cahnon']
 summary: "Capacité à m'adapter à des contextes variés : domaines métier, équipes, méthodologies et évolutions de projet."
 ---
 
@@ -45,3 +45,4 @@ Je souhaite continuer à diversifier mes expériences pour renforcer cette adapt
 - [Site Web BH Technologies](/projects/site-bh-technologies) - Transition stage → alternance
 - [AppStandard](/projects/appstandard) - Projet personnel, autonomie complète
 - [Tidy App](/projects/tidy-app) - Exploration Tauri/Rust, nouveau paradigme
+- [Cahnon](/projects/cahnon) - Apprentissage Rust avancé, Tauri v2, ProseMirror

@@ -5,7 +5,7 @@ group: 'personal'
 level: 8
 icon: '🧩'
 order: 8
-relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app']
+relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon']
 summary: 'Approche méthodique pour analyser, décomposer et résoudre des problèmes techniques de manière efficace.'
 ---
 
@@ -43,3 +43,4 @@ Je souhaite approfondir les techniques de debugging avancées : profiling mémoi
 - [Plateforme Luce](/projects/luce-platform) - Diagnostic problèmes réseau LoRaWAN
 - [AppStandard](/projects/appstandard) - Parsing RRULE complexe, architecture monorepo
 - [Tidy App](/projects/tidy-app) - Intégration LLMs, gestion edge cases
+- [Cahnon](/projects/cahnon) - Détection d'incohérences narratives, auto-linking dans l'éditeur

@@ -21,7 +21,7 @@ const links = project.data.links;
 const rawContent = project.body;
 
 function extractSection(content: string, sectionName: string): string {
-  const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=## |$)`, 'i');
+  const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=\\n## [^#]|$)`, 'i');
   const match = content.match(regex);
   if (!match) return '';
   return match[0].replace(new RegExp(`## ${sectionName}[^\\n]*\\n?`, 'i'), '').trim();
@@ -102,11 +102,12 @@ function parseSubsections(content: string): Record<string, string> {
   return result;
 }
 
-function parseResultats(content: string): {pourMoi: string[], pourEntreprise: string[], unified: string[]} {
+function parseResultats(content: string): {pourMoi: string[], pourEntreprise: string[], pourEntrepriseLabel: string, unified: string[]} {
   const subsections = parseSubsections(content);
   const result = {
     pourMoi: [] as string[],
     pourEntreprise: [] as string[],
+    pourEntrepriseLabel: "Pour l'entreprise",
     unified: [] as string[]
   };
 
@@ -115,6 +116,12 @@ function parseResultats(content: string): {pourMoi: string[], pourEntreprise: st
   }
   if (subsections['Pour l\'entreprise']) {
     result.pourEntreprise = parseList(subsections['Pour l\'entreprise']);
+  } else if (subsections['Pour les utilisateurs']) {
+    result.pourEntreprise = parseList(subsections['Pour les utilisateurs']);
+    result.pourEntrepriseLabel = 'Pour les utilisateurs';
+  } else if (subsections['Pour la communauté']) {
+    result.pourEntreprise = parseList(subsections['Pour la communauté']);
+    result.pourEntrepriseLabel = 'Pour la communauté';
   }
 
   // If no subsections, parse as unified list
@@ -508,7 +515,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
               {resultats.pourEntreprise.length > 0 && (
                 <div class="detail-box">
                   <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                    <span class="text-accent-400">🏢</span> Pour l'entreprise
+                    <span class="text-accent-400">{isPersonalProject ? '🌍' : '🏢'}</span> {resultats.pourEntrepriseLabel}
                   </h3>
                   <ul class="space-y-2 text-gray-400 text-sm">
                     {resultats.pourEntreprise.map((item) => (

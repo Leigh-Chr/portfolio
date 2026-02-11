@@ -5,7 +5,7 @@ group: 'backend'
 level: 6
 icon: '🗄️'
 order: 4
-relatedProjects: ['syren-platform', 'luce-platform', 'appstandard']
+relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'cahnon']
 summary: 'Conception et optimisation de bases de données relationnelles et NoSQL adaptées aux besoins de chaque projet.'
 ---
 
@@ -42,3 +42,4 @@ Je souhaite approfondir les aspects avancés : réplication, sharding, optimisat
 - [Plateforme Syren](/projects/syren-platform) - PostgreSQL, données capteurs IoT
 - [Plateforme Luce](/projects/luce-platform) - PostgreSQL, historiques de mesures
 - [AppStandard](/projects/appstandard) - Architecture multi-domaine PostgreSQL
+- [Cahnon](/projects/cahnon) - SQLite embarqué, 25+ tables, relations N:M

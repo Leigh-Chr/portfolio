@@ -5,7 +5,7 @@ group: 'backend'
 level: 7
 icon: '🔧'
 order: 5
-relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app']
+relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon']
 summary: "Conception d'APIs RESTful bien structurées et compréhension des principes d'architecture logicielle."
 ---
 
@@ -43,3 +43,4 @@ Je souhaite approfondir mes connaissances en architecture logicielle : patterns 
 - [Plateforme Luce](/projects/luce-platform) - Architecture microservices
 - [AppStandard](/projects/appstandard) - Monorepo 19 packages, CI/CD
 - [Tidy App](/projects/tidy-app) - Architecture Tauri, APIs internes
+- [Cahnon](/projects/cahnon) - Architecture IPC Tauri v2, 20 modules de commandes Rust

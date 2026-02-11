@@ -5,7 +5,7 @@ group: 'frontend'
 level: 8
 icon: '💻'
 order: 1
-relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app']
+relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon']
 summary: "Maîtrise avancée de JavaScript et TypeScript pour le développement d'applications web modernes, robustes et maintenables."
 ---
 
@@ -45,3 +45,4 @@ Je souhaite approfondir certains aspects avancés : les types conditionnels comp
 - [Plateforme Luce](/projects/luce-platform) - Frontend Angular/Svelte + Backend NestJS
 - [AppStandard](/projects/appstandard) - 216k+ lignes TypeScript en monorepo
 - [Tidy App](/projects/tidy-app) - 70k+ lignes TypeScript avec Tauri
+- [Cahnon](/projects/cahnon) - Frontend Svelte 5/TypeScript, couche API 1 300 lignes
