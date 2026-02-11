@@ -240,8 +240,10 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
                   src={url(project.data.fullImage)}
                   alt={`Aperçu du projet ${project.data.title}`}
                   class="scroll-preview-img"
-                  loading="lazy"
-                  decoding="async"
+                  width="800"
+                  height="1600"
+                  loading="eager"
+                  fetchpriority="high"
                 />
               </div>
             ) : project.data.thumbnail ? (
@@ -251,8 +253,8 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
                 class="w-full h-full object-cover"
                 width="400"
                 height="225"
-                loading="lazy"
-                decoding="async"
+                loading="eager"
+                fetchpriority="high"
               />
             ) : (
               <div class="w-full h-full flex items-center justify-center">

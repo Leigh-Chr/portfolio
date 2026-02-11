@@ -81,7 +81,7 @@ const groupColors = {
         Un ensemble équilibré de compétences techniques et humaines,
         organisées en 4 domaines complémentaires.
       </p>
-      <p class="text-sm text-gray-500 mt-4 italic">
+      <p class="text-sm text-gray-400 mt-4 italic">
         Auto-évaluation relative à mon niveau de carrière (3 ans d'alternance)
       </p>
 
@@ -91,12 +91,12 @@ const groupColors = {
           <div class={`text-center p-3 sm:p-4 md:p-6 bg-dark-800 border-2 sm:border-3 border-dark-600 group ${groupColors[group.key].hoverBorder} transition-all shadow-hard-lg hover:scale-105 hover:shadow-hard-xl`}>
             <span class="text-2xl sm:text-3xl mb-2 block">{skillGroups[group.key].icon}</span>
             <p class={`text-3xl sm:text-4xl md:text-5xl font-heading font-black ${groupColors[group.key].text}`}>
-              {group.avg}<span class="text-base sm:text-xl text-gray-500">/10</span>
+              {group.avg}<span class="text-base sm:text-xl text-gray-400">/10</span>
             </p>
             <p class="text-[10px] sm:text-xs text-gray-400 font-heading uppercase tracking-wide mt-1 leading-tight">
               {skillGroups[group.key].label.replace('Développement ', '').replace('Compétences ', '')}
             </p>
-            <p class="text-[10px] sm:text-xs text-gray-500 mt-1">
+            <p class="text-[10px] sm:text-xs text-gray-400 mt-1">
               {group.skills.length} compétence{group.skills.length > 1 ? 's' : ''}
             </p>
           </div>

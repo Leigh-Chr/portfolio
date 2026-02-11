@@ -1,5 +1,6 @@
 ---
 import type { SkillGroup } from '@utils/skills';
+import { url } from '@utils/url';
 
 interface Skill {
   name: string;
@@ -65,7 +66,7 @@ const orderedSkills = [
   <svg
     viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
     class="w-full h-auto"
-    role="img"
+    role="group"
     aria-label="Graphique radar représentant les niveaux de compétences par domaine : Frontend, Backend, Personnelles et Interpersonnelles"
   >
     <!-- Background circles -->
@@ -127,7 +128,10 @@ const orderedSkills = [
         const x = SVG_CENTER + radius * Math.cos(angle);
         const y = SVG_CENTER + radius * Math.sin(angle);
         return (
-          <a href={`/skills/${skill.slug}`}>
+          <a
+            href={url(`/skills/${skill.slug}`)}
+            aria-label={`${skill.name} - niveau ${skill.level}/10`}
+          >
             <circle
               cx={x}
               cy={y}
@@ -152,7 +156,11 @@ const orderedSkills = [
         const y = SVG_CENTER + LABEL_RADIUS * Math.sin(angle);
         const textAnchor = x < SVG_CENTER - 30 ? 'end' : x > SVG_CENTER + 30 ? 'start' : 'middle';
         return (
-          <a href={`/skills/${skill.slug}`} class="skill-label-link">
+          <a
+            href={url(`/skills/${skill.slug}`)}
+            class="skill-label-link"
+            aria-label={`Voir la compétence ${skill.name}`}
+          >
             <text
               x={x}
               y={y}

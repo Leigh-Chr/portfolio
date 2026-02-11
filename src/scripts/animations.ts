@@ -31,19 +31,19 @@ function animateHero(): void {
 
 function animateScrollReveal(): void {
   const reveals = document.querySelectorAll<HTMLElement>('[data-gsap="reveal"]');
-  reveals.forEach((el) => {
-    gsap.set(el, { opacity: 0, y: 30 });
-    gsap.to(el, {
-      y: 0,
-      opacity: 1,
-      duration: 0.7,
-      ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
+  if (reveals.length === 0) return;
+  gsap.set(reveals, { opacity: 0, y: 30 });
+  ScrollTrigger.batch('[data-gsap="reveal"]', {
+    start: 'top 85%',
+    onEnter: (batch) => {
+      gsap.to(batch, {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: 'back.out(1.7)',
+        stagger: 0.1,
+      });
+    },
   });
 }
 
@@ -128,37 +128,42 @@ function animateTimelineLine(): void {
 
 function animateCTA(): void {
   const ctas = document.querySelectorAll<HTMLElement>('[data-gsap="cta"]');
-  ctas.forEach((cta) => {
-    gsap.set(cta, { opacity: 0, y: 30 });
-    gsap.to(cta, {
-      y: 0,
-      opacity: 1,
-      duration: 0.7,
-      ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: cta,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
+  if (ctas.length === 0) return;
+  gsap.set(ctas, { opacity: 0, y: 30 });
+  ScrollTrigger.batch('[data-gsap="cta"]', {
+    start: 'top 85%',
+    onEnter: (batch) => {
+      gsap.to(batch, {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: 'back.out(1.7)',
+        stagger: 0.1,
+      });
+    },
   });
 }
 
 function animateMemphisShapes(): void {
   const shapes = document.querySelectorAll<HTMLElement>('.memphis-shape-fg');
+  if (shapes.length === 0) return;
+
   shapes.forEach((shape) => {
     const targetOpacity = parseFloat(shape.style.opacity) || 0.1;
+    shape.dataset['targetOpacity'] = String(targetOpacity);
     gsap.set(shape, { opacity: 0 });
-    gsap.to(shape, {
-      opacity: targetOpacity,
-      duration: 0.7,
-      ease: 'back.out(1.7)',
-      scrollTrigger: {
-        trigger: shape,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-    });
+  });
+
+  ScrollTrigger.batch('.memphis-shape-fg', {
+    start: 'top 85%',
+    onEnter: (batch) => {
+      gsap.to(batch, {
+        opacity: (_i: number, el: HTMLElement) => parseFloat(el.dataset['targetOpacity'] || '0.1'),
+        duration: 0.7,
+        ease: 'back.out(1.7)',
+        stagger: 0.05,
+      });
+    },
   });
 }
 
@@ -166,8 +171,15 @@ function initAnimations(): void {
   if (prefersReducedMotion()) return;
 
   ctx = gsap.context(() => {
-    const animations = [
-      animateHero,
+    // Hero runs immediately (above the fold)
+    try {
+      animateHero();
+    } catch (e) {
+      console.warn('[GSAP] Animation "animateHero" failed:', e);
+    }
+
+    // Defer remaining animations to avoid blocking main thread
+    const deferredAnimations = [
       animateScrollReveal,
       animateStagger,
       animateTimeline,
@@ -176,16 +188,22 @@ function initAnimations(): void {
       animateMemphisShapes,
     ];
 
-    for (const anim of animations) {
-      try {
-        anim();
-      } catch (e) {
-        console.warn(`[GSAP] Animation "${anim.name}" failed:`, e);
+    let i = 0;
+    function runNext() {
+      if (i < deferredAnimations.length) {
+        try {
+          deferredAnimations[i]!();
+        } catch (e) {
+          console.warn(`[GSAP] Animation failed:`, e);
+        }
+        i++;
+        requestAnimationFrame(runNext);
+      } else {
+        // Refresh once when all animations are registered
+        requestAnimationFrame(() => ScrollTrigger.refresh());
       }
     }
-
-    // Recalculate ScrollTrigger positions after content-visibility rendering
-    ScrollTrigger.refresh();
+    requestAnimationFrame(runNext);
   });
 }
 

@@ -249,32 +249,25 @@ const isActive = (href: string) => {
       });
     });
 
-    // Throttle function for scroll performance
-    function throttle(fn, wait) {
-      let lastTime = 0;
-      return function (...args) {
-        const now = Date.now();
-        if (now - lastTime >= wait) {
-          lastTime = now;
-          fn.apply(this, args);
+    // Use IntersectionObserver instead of scroll listener for header border
+    const sentinel = document.createElement('div');
+    sentinel.setAttribute('aria-hidden', 'true');
+    sentinel.style.cssText = 'position:absolute;top:10px;height:1px;width:1px;pointer-events:none';
+    document.body.prepend(sentinel);
+
+    const scrollObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          header?.classList.add('border-primary-500/50');
+          header?.classList.remove('border-dark-700');
+        } else {
+          header?.classList.remove('border-primary-500/50');
+          header?.classList.add('border-dark-700');
         }
-      };
-    }
-
-    // Sticky header with enhanced border on scroll (throttled for performance)
-    const handleScroll = throttle(() => {
-      const currentScroll = window.scrollY;
-
-      if (currentScroll > 10) {
-        header?.classList.add('border-primary-500/50');
-        header?.classList.remove('border-dark-700');
-      } else {
-        header?.classList.remove('border-primary-500/50');
-        header?.classList.add('border-dark-700');
-      }
-    }, 100);
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+      },
+      { threshold: 0 }
+    );
+    scrollObserver.observe(sentinel);
   }
 
   // Use requestIdleCallback to defer initialization, fallback to setTimeout
