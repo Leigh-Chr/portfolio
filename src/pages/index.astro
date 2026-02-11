@@ -15,36 +15,11 @@ const featuredProjects = allProjects.slice(0, 3);
 
 <BaseLayout title="Accueil">
   <!-- Hero Section -->
-  <section
-    class="min-h-[90vh] flex items-center relative noise-overlay overflow-hidden py-20 md:py-32"
-  >
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
-      <div class="memphis-ring-accent memphis-2xl top-[8%] right-[4%] rotate-[-15deg]"></div>
-      <div class="memphis-square w-20 h-20 bottom-[12%] left-[3%] rotate-[30deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-chunky w-28 h-28 top-[15%] right-[8%] rotate-12 memphis-scale">
-      </div>
-      <div class="memphis-tri-filled-lg bottom-[18%] left-[5%] rotate-[-15deg]"></div>
-      <div class="memphis-cross-accent memphis-lg top-[50%] left-[3%] rotate-[25deg] memphis-drift">
-      </div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots-accent memphis-lg top-[20%] left-[10%]"></div>
-      <div class="memphis-zigzag bottom-[25%] right-[6%] rotate-[-10deg]"></div>
-      <div class="memphis-half-circle-accent w-8 h-4 top-[40%] right-[3%] rotate-[60deg]"></div>
-      <div class="memphis-blob-accent memphis-xl bottom-[30%] right-[12%] memphis-pulse"></div>
-    </div>
-
+  <section class="min-h-[90vh] flex items-center relative overflow-hidden py-20 md:py-32">
     <div class="container-custom">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
         <!-- Text Content -->
-        <div class="fade-in-up">
+        <div data-gsap="hero">
           <p
             class="text-primary-400 font-heading font-semibold mb-6 uppercase tracking-wider text-sm"
           >
@@ -86,27 +61,25 @@ const featuredProjects = allProjects.slice(0, 3);
           </div>
 
           <!-- Quick Stats - Bold Memphis with subtle variations -->
-          <div
-            class="mt-12 sm:mt-16 flex flex-wrap justify-start gap-6 sm:gap-10 md:gap-16 stagger-children"
-          >
-            <div class="text-center group -tilt-1 hover:tilt-2 transition-transform">
-              <p class="stat-large text-primary-400 stat-pulse">10</p>
+          <div class="mt-12 sm:mt-16 flex flex-wrap justify-start gap-6 sm:gap-10 md:gap-16">
+            <div class="text-center group">
+              <p class="stat-large text-primary-400">10</p>
               <p
                 class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
               >
                 Compétences
               </p>
             </div>
-            <div class="text-center group tilt-1 md:offset-up-1 hover:-tilt-2 transition-transform">
-              <p class="stat-large text-accent-400 stat-pulse" style="animation-delay: 0.3s">5</p>
+            <div class="text-center group">
+              <p class="stat-large text-accent-400">5</p>
               <p
                 class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
               >
                 Réalisations
               </p>
             </div>
-            <div class="text-center group -tilt-2 hover:tilt-2 transition-transform">
-              <p class="stat-large text-white stat-pulse" style="animation-delay: 0.6s">3</p>
+            <div class="text-center group">
+              <p class="stat-large text-white">3</p>
               <p
                 class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
               >
@@ -117,16 +90,10 @@ const featuredProjects = allProjects.slice(0, 3);
         </div>
 
         <!-- Hero Image with enhanced styling + depth -->
-        <div class="hidden lg:block scale-in" style="animation-delay: 0.3s">
+        <div class="hidden lg:block" data-gsap="reveal">
           <div
-            class="w-80 h-80 mx-auto overflow-hidden shadow-hard-purple-xl border-3 border-primary-500 bg-dark-800 relative group transition-all duration-500 tilt-1 depth-layer"
+            class="w-80 h-80 mx-auto overflow-hidden shadow-hard-purple-xl border-3 border-primary-500 bg-dark-800 relative group transition-all duration-500"
           >
-            <!-- Decorative corner with animation - offset -->
-            <div
-              class="absolute -top-1 -right-1 w-14 h-14 bg-accent-400 group-hover:w-16 group-hover:h-16 transition-all duration-300 -tilt-1"
-              aria-hidden="true"
-            >
-            </div>
             <div class="w-full h-full flex items-center justify-center overflow-hidden">
               <Image
                 src={profileImage}
@@ -148,38 +115,23 @@ const featuredProjects = allProjects.slice(0, 3);
 
   <!-- Featured Skills Section -->
   <section class="section-padding section-alt relative overflow-hidden section-lazy">
-    <!-- Subtle decorative shapes -->
-    <div
-      class="absolute top-[10%] right-[2%] memphis-plus memphis-lg rotate-[15deg] opacity-12 hidden lg:block"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="absolute bottom-[15%] left-[2%] memphis-blob-accent memphis-xl opacity-12 hidden lg:block"
-      aria-hidden="true"
-    >
-    </div>
-
-    <div class="container-custom relative z-10">
-      <div class="section-header">
+    <div class="container-custom">
+      <div class="section-header" data-gsap="reveal">
         <h2 class="section-title">
           Mes <span class="text-primary-400 underline-memphis">Compétences</span> Clés
         </h2>
-        <div class="section-divider -tilt-1"></div>
+        <div class="section-divider"></div>
         <p class="section-subtitle">
           Un équilibre entre savoir-faire technique et qualités humaines, au service de projets qui
           ont du sens.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 stagger-children">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {
-          featuredSkills.map((skill, index) => {
+          featuredSkills.map((skill) => {
             return (
-              <a
-                href={url(`/skills/${skill.id}`)}
-                class={`card-glow p-4 sm:p-6 md:p-8 group ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
-              >
+              <a href={url(`/skills/${skill.id}`)} class="card-glow p-4 sm:p-6 md:p-8 group">
                 <div
                   class="icon-box mb-6 transition-shadow duration-300"
                   transition:name={`skill-icon-${skill.id}`}
@@ -224,41 +176,26 @@ const featuredProjects = allProjects.slice(0, 3);
   </section>
 
   <!-- Featured Projects Section -->
-  <section class="section-padding noise-overlay relative overflow-hidden section-lazy">
-    <!-- Subtle decorative shapes -->
-    <div
-      class="absolute top-[8%] left-[2%] memphis-circle-chunky-accent w-16 h-16 rotate-[-10deg] opacity-10 hidden lg:block"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="absolute bottom-[12%] right-[2%] memphis-tri-filled rotate-[20deg] opacity-12 hidden lg:block"
-      aria-hidden="true"
-    >
-    </div>
-
-    <div class="container-custom relative z-10">
-      <div class="section-header">
+  <section class="section-padding relative overflow-hidden section-lazy">
+    <div class="container-custom">
+      <div class="section-header" data-gsap="reveal">
         <h2 class="section-title">
           Réalisations <span class="text-accent-400 underline-memphis underline-memphis-accent"
             >Récentes</span
           >
         </h2>
-        <div class="section-divider section-divider-accent tilt-2"></div>
+        <div class="section-divider section-divider-accent"></div>
         <p class="section-subtitle">
           Des projets concrets qui reflètent mon approche : qualité, accessibilité et attention aux
           détails.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
+      <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {
-          featuredProjects.map((project, index) => {
+          featuredProjects.map((project) => {
             return (
-              <a
-                href={url(`/projects/${project.id}`)}
-                class={`card-glow overflow-hidden group ${index % 3 === 1 ? 'offset-up-2' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
-              >
+              <a href={url(`/projects/${project.id}`)} class="card-glow overflow-hidden group">
                 <div
                   class="aspect-video bg-dark-700 relative overflow-hidden"
                   transition:name={`project-thumb-${project.id}`}
@@ -326,28 +263,7 @@ const featuredProjects = allProjects.slice(0, 3);
 
   <!-- CTA Section -->
   <section class="section-padding section-cta relative overflow-hidden section-lazy">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
-      <div class="memphis-ring w-32 h-32 top-[5%] right-[5%] rotate-[15deg]"></div>
-      <div class="memphis-square-accent w-20 h-20 bottom-[10%] left-[4%] rotate-[35deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-white memphis-xl top-[15%] left-[8%] memphis-wobble"></div>
-      <div class="memphis-triangle bottom-[20%] right-[8%] rotate-[-15deg]"></div>
-      <div class="memphis-cross-white memphis-lg top-[45%] right-[4%] rotate-[20deg] memphis-drift">
-      </div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots memphis-md top-[10%] right-[15%]"></div>
-      <div class="memphis-zigzag-accent bottom-[15%] left-[12%] rotate-[8deg]"></div>
-      <div class="memphis-half-circle w-8 h-4 bottom-[35%] left-[5%] rotate-[-45deg]"></div>
-    </div>
-
-    <div class="container-custom text-center relative z-10">
+    <div class="container-custom text-center" data-gsap="cta">
       <h2 class="section-title text-white mb-8">
         Envie d'en savoir <span class="text-accent-400 squiggle squiggle-accent">plus</span> ?
       </h2>

@@ -128,33 +128,8 @@ function formatDate(dateStr: string): string {
   description="Découvrez mon parcours professionnel et académique, de mes études à mes expériences en entreprise."
 >
   <!-- Hero Section -->
-  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
-      <div class="memphis-ring memphis-3xl top-[10%] right-[6%] rotate-[20deg]"></div>
-      <div class="memphis-square-white w-28 h-28 bottom-[10%] left-[4%] rotate-[40deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-filled memphis-2xl top-[30%] left-[8%] memphis-scale"></div>
-      <div class="memphis-triangle bottom-[25%] right-[10%] rotate-[10deg]"></div>
-      <div class="memphis-cross-accent memphis-lg top-[55%] left-[3%] rotate-[35deg] memphis-drift">
-      </div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots-accent memphis-lg top-[20%] left-[15%]"></div>
-      <div class="memphis-zigzag bottom-[35%] right-[15%] rotate-[-12deg]"></div>
-      <div class="memphis-half-circle-accent w-8 h-4 top-[50%] right-[4%] rotate-[60deg]"></div>
-      <div
-        class="memphis-square-filled-accent memphis-sm bottom-[50%] left-[10%] rotate-45 memphis-pulse"
-      >
-      </div>
-    </div>
-
-    <div class="container-custom text-center fade-in-up relative z-10">
+  <section class="section-padding section-hero relative overflow-hidden">
+    <div class="container-custom text-center" data-gsap="hero">
       <h1 class="page-title">
         Mon <span class="gradient-text-animated underline-zigzag" data-text="Parcours"
           >Parcours</span
@@ -167,11 +142,11 @@ function formatDate(dateStr: string): string {
       </p>
 
       <!-- Quick Stats - Bold Memphis with subtle variations -->
-      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-16 stagger-children">
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-16">
         <div
-          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-1 hover:-tilt-1 min-w-[100px]"
+          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[100px]"
         >
-          <p class="stat-large text-primary-400 stat-pulse">{workExperiences.length}</p>
+          <p class="stat-large text-primary-400">{workExperiences.length}</p>
           <p
             class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
           >
@@ -179,9 +154,9 @@ function formatDate(dateStr: string): string {
           </p>
         </div>
         <div
-          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl -tilt-2 md:offset-up-1 hover:tilt-2 min-w-[100px]"
+          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[100px]"
         >
-          <p class="stat-large text-accent-400 stat-pulse" style="animation-delay: 0.3s">
+          <p class="stat-large text-accent-400">
             {educationExperiences.length}
           </p>
           <p
@@ -192,10 +167,8 @@ function formatDate(dateStr: string): string {
         </div>
         {
           certifications.length > 0 && (
-            <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-white/50 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-2 hover:-tilt-2 min-w-[100px]">
-              <p class="stat-large text-white stat-pulse" style="animation-delay: 0.6s">
-                {certifications.length}
-              </p>
+            <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-white/50 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[100px]">
+              <p class="stat-large text-white">{certifications.length}</p>
               <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">
                 Certifications
               </p>
@@ -233,15 +206,16 @@ function formatDate(dateStr: string): string {
         <div class="relative">
           <!-- Vertical line -->
           <div
-            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-primary-500/30"
+            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 to-primary-500/30 origin-top"
+            data-gsap="timeline-line"
           >
           </div>
 
           <!-- Work Timeline items -->
           {
-            workExperiences.map((exp, index) => {
+            workExperiences.map((exp) => {
               return (
-                <div class="relative flex items-start mb-12 last:mb-0">
+                <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
                   {/* Timeline dot */}
                   <div class="absolute left-8 transform -translate-x-1/2 z-10">
                     <div
@@ -254,7 +228,7 @@ function formatDate(dateStr: string): string {
                   {/* Content card */}
                   <div class="ml-20 sm:ml-24 flex-1">
                     <div
-                      class={`card-glow p-4 sm:p-6 md:p-8 ${!hasRealContent ? 'opacity-70' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+                      class={`card-glow p-4 sm:p-6 md:p-8${!hasRealContent ? ' opacity-70' : ''}`}
                     >
                       {/* Date badge */}
                       <div class="flex mb-3">
@@ -452,15 +426,16 @@ function formatDate(dateStr: string): string {
         <div class="relative">
           <!-- Vertical line -->
           <div
-            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-400 to-accent-400/30"
+            class="absolute left-8 md:left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-400 to-accent-400/30 origin-top"
+            data-gsap="timeline-line"
           >
           </div>
 
           <!-- Education Timeline items -->
           {
-            educationExperiences.map((exp, index) => {
+            educationExperiences.map((exp) => {
               return (
-                <div class="relative flex items-start mb-12 last:mb-0">
+                <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
                   {/* Timeline dot */}
                   <div class="absolute left-8 transform -translate-x-1/2 z-10">
                     <div
@@ -472,9 +447,7 @@ function formatDate(dateStr: string): string {
 
                   {/* Content card */}
                   <div class="ml-20 sm:ml-24 flex-1">
-                    <div
-                      class={`card-glow p-4 sm:p-6 md:p-8 ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
-                    >
+                    <div class="card-glow p-4 sm:p-6 md:p-8">
                       {/* Date badge */}
                       <div class="flex mb-3">
                         <span class="tag-accent">
@@ -632,28 +605,7 @@ function formatDate(dateStr: string): string {
 
   <!-- CTA Section -->
   <section class="section-padding section-cta relative overflow-hidden section-lazy">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
-      <div class="memphis-ring w-36 h-36 top-[5%] left-[5%] rotate-[-20deg]"></div>
-      <div class="memphis-square-accent w-20 h-20 bottom-[10%] right-[6%] rotate-[45deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-white memphis-2xl top-[18%] right-[10%] memphis-wobble"></div>
-      <div class="memphis-triangle-primary bottom-[25%] left-[12%] rotate-[25deg]"></div>
-      <div class="memphis-cross-white memphis-lg top-[50%] left-[5%] rotate-[20deg] memphis-drift">
-      </div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots memphis-lg top-[12%] right-[18%]"></div>
-      <div class="memphis-zigzag-accent bottom-[18%] left-[20%] rotate-[15deg]"></div>
-      <div class="memphis-half-circle w-10 h-5 bottom-[45%] right-[4%] rotate-[-60deg]"></div>
-    </div>
-
-    <div class="container-custom text-center relative z-10">
+    <div class="container-custom text-center" data-gsap="cta">
       <h2 class="section-title text-white mb-8">
         Écrivons la suite <span class="text-accent-400 squiggle squiggle-accent">ensemble</span>
       </h2>

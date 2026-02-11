@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
+import MemphisShapesFg from '@components/MemphisShapesFg.astro';
 import { url } from '@utils/url';
 import '../styles/global.css';
 
@@ -146,43 +147,14 @@ const jsonLd = {
     >
       Aller au contenu principal
     </a>
-    <!-- Decorative Neo-Memphis background elements -->
-    <div
-      class="fixed inset-0 pointer-events-none z-0 overflow-hidden"
-      aria-hidden="true"
-      transition:persist
-    >
-      <!-- Large shapes - back layer -->
-      <div class="parallax-layer parallax-layer-slow hidden lg:block">
-        <div class="memphis-circle-chunky w-64 h-64 -top-16 -right-16 opacity-10"></div>
-        <div class="memphis-tri-filled-lg bottom-[20%] -left-6 rotate-[-20deg] opacity-12"></div>
-      </div>
-
-      <!-- Medium shapes -->
-      <div class="parallax-layer parallax-layer-medium hidden md:block">
-        <div class="memphis-blob-accent w-28 h-28 bottom-[35%] left-[3%] opacity-15"></div>
-        <div class="memphis-square-thick w-16 h-16 top-[30%] right-[3%] rotate-[25deg] opacity-10">
-        </div>
-      </div>
-
-      <!-- Small shapes - front layer -->
-      <div class="parallax-layer parallax-layer-fast hidden md:block">
-        <div
-          class="memphis-tri-filled-accent bottom-[15%] right-[5%] rotate-[15deg] memphis-drift opacity-15"
-        >
-        </div>
-        <div class="memphis-plus-accent memphis-md left-[4%] top-[25%] rotate-[30deg] opacity-12">
-        </div>
-      </div>
-
-      <!-- Dots pattern overlay -->
-      <div class="absolute inset-0 pattern-dots opacity-20"></div>
-    </div>
-
     <Header currentPath={currentPath} />
     <main id="main-content" class="flex-grow pt-20 relative z-10">
+      <MemphisShapesFg />
       <slot />
     </main>
     <Footer />
+    <script>
+      import '@scripts/animations';
+    </script>
   </body>
 </html>

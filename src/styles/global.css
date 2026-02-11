@@ -9,7 +9,7 @@
 @theme {
   /* Neo-Memphis Dark Theme Colors */
   --color-dark-950: #050505;
-  --color-dark-900: #0a0a0a;
+  --color-dark-900: #0f0f0f;
   --color-dark-800: #141414;
   --color-dark-700: #1f1f1f;
   --color-dark-600: #2a2a2a;
@@ -151,33 +151,17 @@
      =================== */
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    position: relative;
+    z-index: 2;
   }
 
   .section-padding {
-    @apply py-20 md:py-32;
+    @apply py-20 md:py-32 relative bg-dark-900;
   }
 
   /* ===================
      CARDS - Neo-Memphis style
      =================== */
-  .card {
-    @apply bg-dark-800 border-2 border-dark-600 shadow-hard transition-all duration-200;
-  }
-
-  .card:hover {
-    @apply border-primary-500 shadow-hard-purple-lg;
-    transform: translateX(-6px) translateY(-6px);
-  }
-
-  .card-compact {
-    @apply bg-dark-800 border-2 border-dark-600 shadow-hard-sm transition-all duration-200;
-  }
-
-  .card-compact:hover {
-    @apply border-primary-400 shadow-hard-purple;
-    transform: translateX(-3px) translateY(-3px);
-  }
-
   /* Detail boxes (for content sections) */
   .detail-box {
     @apply bg-dark-800 border-2 border-dark-600 p-8;
@@ -274,32 +258,9 @@
     transform: translateX(0) translateY(0);
   }
 
-  .btn-white {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-white text-dark-900 font-heading font-semibold
-           border-2 border-dark-900 shadow-hard-lg
-           hover:bg-gray-100
-           active:shadow-hard
-           transition-all duration-200;
-    transition-timing-function: var(--ease-memphis);
-  }
-
-  .btn-white:hover {
-    transform: translateX(-6px) translateY(-6px);
-    box-shadow: var(--shadow-hard-xl);
-  }
-
-  .btn-white:active {
-    transform: translateX(0) translateY(0);
-  }
-
   /* ===================
      TAGS - Geometric pills
      =================== */
-  .tag {
-    @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide;
-  }
-
   .tag-primary {
     @apply inline-flex items-center px-3 py-1 text-xs font-heading font-semibold uppercase tracking-wide
            bg-primary-500/20 text-primary-300 border border-primary-500/50;
@@ -326,26 +287,6 @@
   }
 
   /* ===================
-     TEXT HIGHLIGHTS
-     =================== */
-  .gradient-text {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400 font-bold;
-  }
-
-  .text-highlight {
-    @apply text-primary-400;
-  }
-
-  .text-accent-highlight {
-    @apply text-accent-400;
-  }
-
-  /* Background highlight */
-  .gradient-bg {
-    @apply bg-gradient-to-br from-primary-600 to-primary-800;
-  }
-
-  /* ===================
      SECTION BACKGROUNDS
      =================== */
   .section-hero {
@@ -354,10 +295,13 @@
 
   .section-alt {
     @apply bg-dark-800;
+    z-index: 2;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E");
   }
 
   .section-cta {
-    @apply bg-gradient-to-br from-primary-600 via-primary-700 to-dark-900;
+    @apply bg-primary-800;
+    z-index: 2;
   }
 
   /* ===================
@@ -451,12 +395,6 @@
   /* ===================
      TIMELINE ELEMENTS
      =================== */
-  .timeline-dot {
-    @apply w-10 h-10 flex items-center justify-center
-           bg-dark-800 border-primary-500;
-    border-width: 3px;
-  }
-
   .timeline-dot-lg {
     @apply w-16 h-16 flex items-center justify-center
            bg-dark-800 border-primary-500;
@@ -511,446 +449,6 @@
 }
 
 /* ===================
-   DECORATIVE ELEMENTS - MEMPHIS SHAPES SYSTEM
-   =================== */
-
-/* ---- BASE SHAPES ---- */
-
-/* Circles - outline */
-.memphis-circle {
-  @apply absolute rounded-full border-2 border-primary-500/30 pointer-events-none;
-}
-
-.memphis-circle-accent {
-  @apply absolute rounded-full border-2 border-accent-400/30 pointer-events-none;
-}
-
-/* Circles - filled */
-.memphis-circle-filled {
-  @apply absolute rounded-full bg-primary-500/20 pointer-events-none;
-}
-
-.memphis-circle-filled-accent {
-  @apply absolute rounded-full bg-accent-400/20 pointer-events-none;
-}
-
-/* Squares - outline */
-.memphis-square {
-  @apply absolute border-2 border-primary-500/30 pointer-events-none;
-}
-
-.memphis-square-accent {
-  @apply absolute border-2 border-accent-400/30 pointer-events-none;
-}
-
-/* Squares - filled */
-.memphis-square-filled {
-  @apply absolute bg-primary-500/20 pointer-events-none;
-}
-
-.memphis-square-filled-accent {
-  @apply absolute bg-accent-400/20 pointer-events-none;
-}
-
-.memphis-square-white {
-  @apply absolute border-2 pointer-events-none;
-  border-color: rgb(255 255 255 / 25%);
-}
-
-.memphis-square-thick {
-  @apply absolute border-4 border-primary-500/25 pointer-events-none;
-}
-
-/* Triangles */
-.memphis-triangle {
-  @apply absolute w-0 h-0 pointer-events-none;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 35px solid rgb(250 204 21 / 20%);
-}
-
-.memphis-triangle-primary {
-  @apply absolute w-0 h-0 pointer-events-none;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 26px solid rgb(168 85 247 / 20%);
-}
-
-/* Cross / Plus signs */
-.memphis-cross {
-  @apply absolute pointer-events-none;
-}
-
-.memphis-cross::before,
-.memphis-cross::after {
-  content: '';
-  position: absolute;
-  background: rgb(168 85 247 / 30%);
-}
-
-.memphis-cross::before {
-  width: 100%;
-  height: 30%;
-  top: 35%;
-  left: 0;
-}
-
-.memphis-cross::after {
-  width: 30%;
-  height: 100%;
-  left: 35%;
-  top: 0;
-}
-
-.memphis-cross-accent::before,
-.memphis-cross-accent::after {
-  background: rgb(250 204 21 / 30%);
-}
-
-.memphis-cross-white {
-  @apply absolute pointer-events-none;
-}
-.memphis-cross-white::before,
-.memphis-cross-white::after {
-  content: '';
-  @apply absolute;
-  background: rgb(255 255 255 / 25%);
-}
-.memphis-cross-white::before {
-  @apply w-full h-0.5 top-1/2 left-0 -translate-y-1/2;
-}
-.memphis-cross-white::after {
-  @apply h-full w-0.5 left-1/2 top-0 -translate-x-1/2;
-}
-
-/* Zigzag lines */
-.memphis-zigzag {
-  @apply absolute pointer-events-none overflow-visible;
-  width: 80px;
-  height: 16px;
-}
-
-.memphis-zigzag::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    transparent 25%,
-    rgb(168 85 247 / 30%) 25%,
-    rgb(168 85 247 / 30%) 50%,
-    transparent 50%,
-    transparent 75%,
-    rgb(168 85 247 / 30%) 75%
-  );
-  background-size: 16px 16px;
-}
-
-.memphis-zigzag-accent::before {
-  background: linear-gradient(
-    135deg,
-    transparent 25%,
-    rgb(250 204 21 / 30%) 25%,
-    rgb(250 204 21 / 30%) 50%,
-    transparent 50%,
-    transparent 75%,
-    rgb(250 204 21 / 30%) 75%
-  );
-  background-size: 16px 16px;
-}
-
-/* Dots cluster */
-.memphis-dots {
-  @apply absolute pointer-events-none;
-  width: 40px;
-  height: 40px;
-}
-
-.memphis-dots::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(circle, rgb(168 85 247 / 40%) 3px, transparent 3px);
-  background-size: 12px 12px;
-}
-
-.memphis-dots-accent::before {
-  background-image: radial-gradient(circle, rgb(250 204 21 / 40%) 3px, transparent 3px);
-  background-size: 12px 12px;
-}
-
-/* Half circles */
-.memphis-half-circle {
-  @apply absolute pointer-events-none;
-  border-radius: 0 0 100px 100px;
-  border: 2px solid rgb(168 85 247 / 30%);
-  border-top: none;
-}
-
-.memphis-half-circle-accent {
-  @apply absolute pointer-events-none;
-  border-radius: 0 0 100px 100px;
-  border: 2px solid rgb(250 204 21 / 30%);
-  border-top: none;
-}
-
-/* Ring (thick circle) */
-.memphis-ring {
-  @apply absolute rounded-full pointer-events-none;
-  border: 4px solid rgb(168 85 247 / 20%);
-}
-
-.memphis-ring-accent {
-  @apply absolute rounded-full pointer-events-none;
-  border: 4px solid rgb(250 204 21 / 20%);
-}
-
-/* ---- THICK BORDER SHAPES ---- */
-
-/* Extra thick circles */
-.memphis-circle-chunky {
-  @apply absolute rounded-full pointer-events-none;
-  border: 6px solid rgb(168 85 247 / 30%);
-}
-
-.memphis-circle-chunky-accent {
-  @apply absolute rounded-full pointer-events-none;
-  border: 6px solid rgb(250 204 21 / 30%);
-}
-
-.memphis-circle-white {
-  @apply absolute rounded-full border-2 pointer-events-none;
-  border-color: rgb(255 255 255 / 25%);
-}
-
-/* ---- BOLD FILLED SHAPES ---- */
-
-/* Solid circles */
-.memphis-blob {
-  @apply absolute rounded-full bg-primary-500/25 pointer-events-none;
-}
-
-.memphis-blob-accent {
-  @apply absolute rounded-full bg-accent-400/25 pointer-events-none;
-}
-
-/* Filled triangles - larger */
-.memphis-tri-filled {
-  @apply absolute w-0 h-0 pointer-events-none;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-bottom: 44px solid rgb(168 85 247 / 25%);
-}
-
-.memphis-tri-filled-accent {
-  @apply absolute w-0 h-0 pointer-events-none;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-bottom: 44px solid rgb(250 204 21 / 25%);
-}
-
-.memphis-tri-filled-lg {
-  @apply absolute w-0 h-0 pointer-events-none;
-  border-left: 35px solid transparent;
-  border-right: 35px solid transparent;
-  border-bottom: 60px solid rgb(168 85 247 / 20%);
-}
-
-.memphis-tri-filled-lg-accent {
-  @apply absolute w-0 h-0 pointer-events-none;
-  border-left: 35px solid transparent;
-  border-right: 35px solid transparent;
-  border-bottom: 60px solid rgb(250 204 21 / 20%);
-}
-
-/* Filled plus sign */
-.memphis-plus {
-  @apply absolute pointer-events-none;
-}
-
-.memphis-plus::before,
-.memphis-plus::after {
-  content: '';
-  position: absolute;
-  background: rgb(168 85 247 / 35%);
-  border-radius: 2px;
-}
-
-.memphis-plus::before {
-  width: 100%;
-  height: 35%;
-  top: 32.5%;
-  left: 0;
-}
-
-.memphis-plus::after {
-  width: 35%;
-  height: 100%;
-  left: 32.5%;
-  top: 0;
-}
-
-.memphis-plus-accent::before,
-.memphis-plus-accent::after {
-  background: rgb(250 204 21 / 35%);
-}
-
-/* ---- PARALLAX LAYERS ---- */
-.parallax-layer {
-  @apply absolute inset-0 pointer-events-none overflow-hidden;
-  contain: layout style paint;
-  will-change: transform;
-}
-
-.parallax-layer-slow {
-  animation: parallax-drift-slow 30s ease-in-out infinite;
-  animation-delay: 0.1s;
-}
-
-.parallax-layer-medium {
-  animation: parallax-drift-medium 20s ease-in-out infinite;
-  animation-delay: 0.2s;
-}
-
-.parallax-layer-fast {
-  animation: parallax-drift-fast 12s ease-in-out infinite;
-  animation-delay: 0.3s;
-}
-
-@keyframes parallax-drift-slow {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(5px, -8px);
-  }
-  50% {
-    transform: translate(-3px, 5px);
-  }
-  75% {
-    transform: translate(8px, 3px);
-  }
-}
-
-@keyframes parallax-drift-medium {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  33% {
-    transform: translate(-10px, 6px);
-  }
-  66% {
-    transform: translate(8px, -10px);
-  }
-}
-
-@keyframes parallax-drift-fast {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(12px, -12px);
-  }
-}
-
-/* ---- SIZE MODIFIERS ---- */
-.memphis-sm {
-  width: 12px;
-  height: 12px;
-}
-.memphis-md {
-  width: 20px;
-  height: 20px;
-}
-.memphis-lg {
-  width: 32px;
-  height: 32px;
-}
-.memphis-xl {
-  width: 48px;
-  height: 48px;
-}
-.memphis-2xl {
-  width: 64px;
-  height: 64px;
-}
-.memphis-3xl {
-  width: 96px;
-  height: 96px;
-}
-
-/* ---- ANIMATION PERFORMANCE HINTS ---- */
-.memphis-drift,
-.memphis-wobble,
-.memphis-scale,
-.memphis-pulse {
-  will-change: transform, opacity;
-  contain: layout style;
-}
-
-/* ---- ADDITIONAL ANIMATIONS ---- */
-.memphis-drift {
-  animation: memphis-drift 8s ease-in-out infinite;
-}
-
-.memphis-wobble {
-  animation: memphis-wobble 4s ease-in-out infinite;
-}
-
-.memphis-scale {
-  animation: memphis-scale 5s ease-in-out infinite;
-}
-
-@keyframes memphis-drift {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(10px, -5px) rotate(3deg);
-  }
-  50% {
-    transform: translate(5px, 10px) rotate(-2deg);
-  }
-  75% {
-    transform: translate(-8px, 5px) rotate(4deg);
-  }
-}
-
-@keyframes memphis-wobble {
-  0%,
-  100% {
-    transform: rotate(-3deg);
-  }
-  50% {
-    transform: rotate(3deg);
-  }
-}
-
-@keyframes memphis-scale {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.5;
-  }
-}
-
-/* Dotted pattern background */
-.pattern-dots {
-  background-image: radial-gradient(circle, var(--color-dark-600) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* ===================
    SCROLLBAR STYLING
    =================== */
 ::-webkit-scrollbar {
@@ -990,34 +488,15 @@
     scroll-behavior: auto;
   }
 
-  /* Ensure staggered content is visible when animations are disabled */
-  .stagger-children > * {
-    opacity: 1 !important;
-  }
-
-  /* Ensure fade-in content is visible */
-  .fade-in-up,
-  .scale-in {
+  /* Ensure GSAP-animated content is visible */
+  [data-gsap],
+  [data-gsap='stagger'] > *,
+  [data-gsap='hero'] > *,
+  [data-gsap='timeline-item'] .timeline-dot-lg,
+  [data-gsap='timeline-item'] .card-glow,
+  [data-gsap='timeline-line'] {
     opacity: 1 !important;
     transform: none !important;
-  }
-
-  /* Ensure animated elements have static fallback */
-  .memphis-pulse,
-  .memphis-drift,
-  .memphis-wobble,
-  .memphis-scale,
-  .stat-pulse {
-    opacity: 0.3 !important;
-    transform: none !important;
-  }
-
-  /* Disable parallax movement */
-  .parallax-layer,
-  .parallax-layer-slow,
-  .parallax-layer-medium,
-  .parallax-layer-fast {
-    animation: none !important;
   }
 
   /* Static gradient text */
@@ -1031,7 +510,7 @@
    ============================================================================= */
 
 /* ===================
-   2. ANIMATED GRADIENT TEXT
+   1. ANIMATED GRADIENT TEXT
    =================== */
 .gradient-text-animated {
   @apply text-transparent bg-clip-text font-bold;
@@ -1051,26 +530,7 @@
 }
 
 /* ===================
-   3. MEMPHIS SHAPE ANIMATIONS
-   =================== */
-.memphis-pulse {
-  animation: memphis-pulse 3s ease-in-out infinite;
-}
-
-@keyframes memphis-pulse {
-  0%,
-  100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.05);
-  }
-}
-
-/* ===================
-   4. CARD LIFT EFFECT (Memphis-style)
+   2. CARD LIFT EFFECT (Memphis-style)
    =================== */
 .card-glow {
   @apply bg-dark-800 border-2 border-dark-600 shadow-hard transition-all duration-300;
@@ -1082,23 +542,7 @@
 }
 
 /* ===================
-   5. NOISE/GRAIN TEXTURE
-   =================== */
-.noise-overlay {
-  position: relative;
-}
-
-.noise-overlay::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
-}
-
-/* ===================
-   7. SKILL BARS ANIMATED
+   3. SKILL BARS ANIMATED
    =================== */
 .skill-level-animated {
   @apply h-3 bg-dark-700 overflow-hidden border border-dark-600;
@@ -1121,81 +565,6 @@
   50% {
     background-position: 100% center;
   }
-}
-
-/* ===================
-   8. STATS ANIMATION
-   =================== */
-.stat-pulse {
-  animation: stat-pulse 2s ease-in-out infinite;
-}
-
-@keyframes stat-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-/* ===================
-   ENTRY ANIMATIONS
-   =================== */
-.fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.scale-in {
-  animation: scale-in 0.4s ease-out forwards;
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Stagger children */
-.stagger-children > * {
-  opacity: 0;
-  animation: fade-in-up 0.5s ease-out forwards;
-}
-
-.stagger-children > *:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.stagger-children > *:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.stagger-children > *:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.stagger-children > *:nth-child(4) {
-  animation-delay: 0.4s;
-}
-.stagger-children > *:nth-child(5) {
-  animation-delay: 0.5s;
-}
-.stagger-children > *:nth-child(6) {
-  animation-delay: 0.6s;
 }
 
 /* ===================
@@ -1388,167 +757,400 @@
   @apply w-48;
 }
 
-/* ===================
-   SUBTLE MEMPHIS VARIATIONS
-   Breaking the grid with controlled chaos
-   =================== */
+/* =============================================================================
+   MEMPHIS FOREGROUND SHAPES
+   ============================================================================= */
 
-/* Subtle rotations */
-.tilt-1 {
-  transform: rotate(1deg);
-}
-.tilt-2 {
-  transform: rotate(2deg);
-}
-.-tilt-1 {
-  transform: rotate(-1deg);
-}
-.-tilt-2 {
-  transform: rotate(-2deg);
-}
-
-/* Hover tilt effect */
-.hover\:tilt-2:hover {
-  transform: rotate(2deg);
-}
-.hover\:-tilt-2:hover {
-  transform: rotate(-2deg);
-}
-
-/* Subtle offsets for asymmetry */
-.offset-up-1 {
-  transform: translateY(-4px);
-}
-.offset-up-2 {
-  transform: translateY(-8px);
-}
-
-/* Depth layers with pseudo-elements */
-.depth-layer {
-  position: relative;
-}
-
-.depth-layer::before {
-  content: '';
+/* Container - covers entire main content area */
+.memphis-shapes-fg {
   position: absolute;
   inset: 0;
-  background: #a855f7;
-  opacity: 0.15;
-  transform: translate(6px, 6px);
-  z-index: -1;
-}
-
-.depth-layer-accent::before {
-  background: #facc15;
-}
-
-/* Memphis wonky box - slightly skewed container */
-.wonky-box {
-  transform: rotate(-0.5deg);
-  transition: transform 0.3s ease;
-}
-
-.wonky-box:hover {
-  transform: rotate(0.5deg);
-}
-
-.wonky-box-alt {
-  transform: rotate(0.5deg);
-}
-
-.wonky-box-alt:hover {
-  transform: rotate(-0.5deg);
-}
-
-/* ===================
-   MISALIGNED BORDERS - Memphis Imperfection
-   Borders that don't align perfectly with content
-   =================== */
-
-/* Tilted border - border at slight angle from content */
-.border-tilted {
-  position: relative;
-}
-
-.border-tilted::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border: 2px solid #a855f7;
-  transform: rotate(1deg);
   pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.border-tilted-alt::before {
-  transform: rotate(-1deg);
-}
-
-.border-tilted-accent::before {
-  border-color: #facc15;
-}
-
-/* Wonky icon box - icon container with misaligned border */
-.icon-box-wonky {
-  @apply w-12 h-12 flex items-center justify-center shrink-0 bg-dark-700 relative;
-}
-
-.icon-box-wonky::before {
-  content: '';
+/* Base shape */
+.memphis-shape-fg {
   position: absolute;
-  inset: 0;
-  border: 2px solid #a855f7;
-  transform: translate(3px, 3px) rotate(2deg);
+  will-change: transform;
 }
 
-.icon-box-wonky-alt::before {
-  transform: translate(-2px, 2px) rotate(-2deg);
+/* --- Shape types --- */
+
+/* Filled circle */
+.fg-dot {
+  width: var(--fg-s);
+  height: var(--fg-s);
+  border-radius: 50%;
+  background: var(--fg-c);
 }
 
-.icon-box-wonky-accent::before {
-  border-color: #facc15;
+/* Hollow ring */
+.fg-ring {
+  width: var(--fg-s);
+  height: var(--fg-s);
+  border-radius: 50%;
+  border: var(--fg-bw, 4px) solid var(--fg-c);
 }
 
-/* Partial border offset - only some sides misaligned */
-.border-corner-offset {
-  position: relative;
+/* Filled square */
+.fg-square-fill {
+  width: var(--fg-s);
+  height: var(--fg-s);
+  background: var(--fg-c);
 }
 
-.border-corner-offset::before {
-  content: '';
+/* Horizontal dash */
+.fg-dash {
+  width: var(--fg-s);
+  height: var(--fg-h, 8px);
+  background: var(--fg-c);
+  border-radius: 4px;
+}
+
+/* Cross (+) shape */
+.fg-cross {
   position: absolute;
-  top: -4px;
-  right: -4px;
-  width: calc(100% - 20px);
-  height: calc(100% - 20px);
-  border-top: 2px solid #a855f7;
-  border-right: 2px solid #a855f7;
-  pointer-events: none;
+  width: var(--fg-s);
+  height: var(--fg-s);
 }
 
-.border-corner-offset::after {
-  content: '';
+.fg-cross span:first-child {
   position: absolute;
-  bottom: -4px;
-  left: -4px;
-  width: calc(100% - 20px);
-  height: calc(100% - 20px);
-  border-bottom: 2px solid #facc15;
-  border-left: 2px solid #facc15;
-  pointer-events: none;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 5px;
+  background: var(--fg-c);
+  transform: translateY(-50%);
+  border-radius: 2px;
 }
 
-/* Profile avatar with offset border */
-.avatar-offset {
-  position: relative;
-}
-
-.avatar-offset::before {
-  content: '';
+.fg-cross span:last-child {
   position: absolute;
-  inset: -4px;
-  border: 3px solid #a855f7;
-  transform: translate(5px, 5px);
-  pointer-events: none;
+  left: 50%;
+  top: 15%;
+  bottom: 15%;
+  width: 5px;
+  background: var(--fg-c);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Triangle (CSS borders) */
+.fg-triangle {
+  width: 0;
+  height: 0;
+  border-left: calc(var(--fg-s) / 2) solid transparent;
+  border-right: calc(var(--fg-s) / 2) solid transparent;
+  border-bottom: calc(var(--fg-s) * 0.866) solid var(--fg-c);
+}
+
+/* Semicircle */
+.fg-semicircle {
+  width: var(--fg-s);
+  height: calc(var(--fg-s) / 2);
+  background: var(--fg-c);
+  border-radius: calc(var(--fg-s) / 2) calc(var(--fg-s) / 2) 0 0;
+}
+
+/* Diamond (rotated square) */
+.fg-diamond {
+  width: var(--fg-s);
+  height: var(--fg-s);
+  background: var(--fg-c);
+  transform: rotate(45deg);
+}
+
+/* SVG shape containers */
+.fg-wave,
+.fg-zigzag,
+.fg-squiggle,
+.fg-star,
+.fg-star-fill,
+.fg-spiral,
+.fg-hexagon-fill,
+.fg-crescent {
+  color: var(--fg-c);
+  line-height: 0;
+}
+
+/* Capsule / rounded rectangle */
+.fg-pill {
+  width: var(--fg-s);
+  height: var(--fg-h, 40px);
+  background: var(--fg-c);
+  border-radius: 9999px;
+}
+
+/* Ellipse / oval */
+.fg-ellipse {
+  width: var(--fg-s);
+  height: calc(var(--fg-s) * 0.55);
+  border-radius: 50%;
+  background: var(--fg-c);
+}
+
+/* Filled quarter circle (pie slice) */
+.fg-arc-fill {
+  width: var(--fg-s);
+  height: var(--fg-s);
+  background: var(--fg-c);
+  border-radius: var(--fg-s) 0 0 0;
+}
+
+/* --- Fill patterns (CSS shapes) --- */
+
+.fg-pattern-stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--fg-c),
+    var(--fg-c) 4px,
+    transparent 4px,
+    transparent 12px
+  ) !important;
+}
+
+.fg-pattern-hstripes {
+  background: repeating-linear-gradient(
+    0deg,
+    var(--fg-c),
+    var(--fg-c) 3px,
+    transparent 3px,
+    transparent 10px
+  ) !important;
+}
+
+.fg-pattern-dots {
+  background:
+    radial-gradient(circle 2.5px at 6px 6px, var(--fg-c) 100%, transparent 100%),
+    radial-gradient(circle 2.5px at 14px 14px, var(--fg-c) 100%, transparent 100%) !important;
+  background-size: 16px 16px !important;
+}
+
+.fg-pattern-crosshatch {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      var(--fg-c),
+      var(--fg-c) 2px,
+      transparent 2px,
+      transparent 10px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      var(--fg-c),
+      var(--fg-c) 2px,
+      transparent 2px,
+      transparent 10px
+    ) !important;
+}
+
+/* --- Animations --- */
+
+/* Gentle vertical float */
+@keyframes memphis-float {
+  0%,
+  100% {
+    transform: rotate(var(--fg-rot, 0deg)) translateY(0);
+  }
+  50% {
+    transform: rotate(var(--fg-rot, 0deg)) translateY(-18px);
+  }
+}
+
+/* Tilting rock */
+@keyframes memphis-rock {
+  0%,
+  100% {
+    transform: rotate(calc(var(--fg-rot, 0deg) + 0deg));
+  }
+  25% {
+    transform: rotate(calc(var(--fg-rot, 0deg) + 8deg));
+  }
+  75% {
+    transform: rotate(calc(var(--fg-rot, 0deg) - 8deg));
+  }
+}
+
+/* Slow continuous spin */
+@keyframes memphis-spin {
+  from {
+    transform: rotate(var(--fg-rot, 0deg));
+  }
+  to {
+    transform: rotate(calc(var(--fg-rot, 0deg) + 360deg));
+  }
+}
+
+/* Rhythmic pulse */
+@keyframes memphis-pulse {
+  0%,
+  100% {
+    transform: rotate(var(--fg-rot, 0deg)) scale(1);
+  }
+  50% {
+    transform: rotate(var(--fg-rot, 0deg)) scale(1.2);
+  }
+}
+
+/* Horizontal sway */
+@keyframes memphis-sway {
+  0%,
+  100% {
+    transform: rotate(var(--fg-rot, 0deg)) translateX(0);
+  }
+  50% {
+    transform: rotate(var(--fg-rot, 0deg)) translateX(14px);
+  }
+}
+
+/* Stretch width */
+@keyframes memphis-stretch {
+  0%,
+  100% {
+    transform: rotate(var(--fg-rot, 0deg)) scaleX(1);
+  }
+  50% {
+    transform: rotate(var(--fg-rot, 0deg)) scaleX(1.15);
+  }
+}
+
+/* Diamond needs special handling (already rotated 45deg) */
+@keyframes memphis-spin-diamond {
+  from {
+    transform: rotate(45deg);
+  }
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+@keyframes memphis-rock-diamond {
+  0%,
+  100% {
+    transform: rotate(45deg);
+  }
+  25% {
+    transform: rotate(53deg);
+  }
+  75% {
+    transform: rotate(37deg);
+  }
+}
+
+@keyframes memphis-float-diamond {
+  0%,
+  100% {
+    transform: rotate(45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(45deg) translateY(-18px);
+  }
+}
+
+@keyframes memphis-pulse-diamond {
+  0%,
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.2);
+  }
+}
+
+@keyframes memphis-sway-diamond {
+  0%,
+  100% {
+    transform: rotate(45deg) translateX(0);
+  }
+  50% {
+    transform: rotate(45deg) translateX(14px);
+  }
+}
+
+@keyframes memphis-stretch-diamond {
+  0%,
+  100% {
+    transform: rotate(45deg) scaleX(1);
+  }
+  50% {
+    transform: rotate(45deg) scaleX(1.15);
+  }
+}
+
+/* Apply animations via data attribute */
+[data-fg-anim='float'] {
+  animation: memphis-float 6s ease-in-out infinite;
+}
+[data-fg-anim='rock'] {
+  animation: memphis-rock 5s ease-in-out infinite;
+}
+[data-fg-anim='spin'] {
+  animation: memphis-spin 20s linear infinite;
+}
+[data-fg-anim='pulse'] {
+  animation: memphis-pulse 4s ease-in-out infinite;
+}
+[data-fg-anim='sway'] {
+  animation: memphis-sway 7s ease-in-out infinite;
+}
+[data-fg-anim='stretch'] {
+  animation: memphis-stretch 5s ease-in-out infinite;
+}
+
+/* Diamond overrides (preserve base 45deg rotation) */
+.fg-diamond[data-fg-anim='spin'] {
+  animation-name: memphis-spin-diamond;
+}
+.fg-diamond[data-fg-anim='rock'] {
+  animation-name: memphis-rock-diamond;
+}
+.fg-diamond[data-fg-anim='float'] {
+  animation-name: memphis-float-diamond;
+}
+.fg-diamond[data-fg-anim='pulse'] {
+  animation-name: memphis-pulse-diamond;
+}
+.fg-diamond[data-fg-anim='sway'] {
+  animation-name: memphis-sway-diamond;
+}
+.fg-diamond[data-fg-anim='stretch'] {
+  animation-name: memphis-stretch-diamond;
+}
+
+/* Stagger animation delays for variety */
+.memphis-shape-fg:nth-child(2n) {
+  animation-delay: -1.5s;
+}
+.memphis-shape-fg:nth-child(3n) {
+  animation-delay: -3s;
+}
+.memphis-shape-fg:nth-child(5n) {
+  animation-delay: -4.5s;
+}
+.memphis-shape-fg:nth-child(7n) {
+  animation-delay: -2s;
+}
+.memphis-shape-fg:nth-child(11n) {
+  animation-delay: -5s;
+}
+.memphis-shape-fg:nth-child(4n + 1) {
+  animation-duration: 7s;
+}
+.memphis-shape-fg:nth-child(6n + 2) {
+  animation-duration: 8s;
+}
+.memphis-shape-fg:nth-child(9n + 3) {
+  animation-duration: 5.5s;
+}
+
+/* Hide on very small screens to avoid clutter */
+@media (max-width: 640px) {
+  .memphis-shapes-fg {
+    display: none;
+  }
 }
 
 /* ===================
@@ -1561,44 +1163,9 @@
   contain-intrinsic-size: auto 500px;
 }
 
-/* GPU-accelerated transforms for smooth animations */
-.gpu-accelerated {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* Contain decorative elements to prevent layout thrashing */
-.memphis-circle,
-.memphis-circle-accent,
-.memphis-circle-filled,
-.memphis-circle-filled-accent,
-.memphis-square,
-.memphis-square-accent,
-.memphis-square-filled,
-.memphis-square-filled-accent,
-.memphis-triangle,
-.memphis-triangle-primary,
-.memphis-cross,
-.memphis-zigzag,
-.memphis-dots,
-.memphis-half-circle,
-.memphis-ring,
-.memphis-ring-accent,
-.memphis-circle-chunky,
-.memphis-blob,
-.memphis-blob-accent,
-.memphis-tri-filled,
-.memphis-tri-filled-accent,
-.memphis-plus {
-  contain: layout style paint;
-}
-
-/* Optimize stagger animations - use GPU compositing */
-.stagger-children > * {
-  will-change: opacity, transform;
-}
-
-/* Remove will-change after animation completes to free GPU memory */
-.animation-done {
-  will-change: auto;
+/* Disable content-visibility on sections with GSAP animations
+   content-visibility: auto skips rendering of off-screen content,
+   which breaks ScrollTrigger position calculations */
+.section-lazy:has([data-gsap]) {
+  content-visibility: visible;
 }

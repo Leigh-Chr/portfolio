@@ -1,0 +1,550 @@
+---
+/* Decorative Memphis foreground shapes - positioned inside <main>.
+   20 shapes distributed as percentages of <main> height.
+   Each shape is visually distinct. Always visible regardless of page length. */
+
+interface FgShape {
+  type:
+    | 'dot'
+    | 'ring'
+    | 'square-fill'
+    | 'dash'
+    | 'cross'
+    | 'wave'
+    | 'triangle'
+    | 'semicircle'
+    | 'diamond'
+    | 'zigzag'
+    | 'squiggle'
+    | 'star'
+    | 'pill'
+    | 'spiral'
+    | 'hexagon-fill'
+    | 'crescent'
+    | 'ellipse'
+    | 'star-fill'
+    | 'arc-fill';
+  size: number;
+  h?: number;
+  top: number; // relative position (converted to % by buildStyle)
+  side: 'left' | 'right';
+  off: number;
+  color: string;
+  op: number;
+  anim: string;
+  rot?: number;
+  bw?: number; // border-width for CSS shapes (default 4)
+  sw?: number; // stroke-width for SVG shapes (default 3-4)
+  pattern?: 'stripes' | 'dots' | 'crosshatch' | 'hstripes';
+}
+
+const shapes: FgShape[] = [
+  // #1 — ring (large, purple, thick border)
+  {
+    type: 'ring',
+    size: 350,
+    top: 4,
+    side: 'right',
+    off: 3,
+    color: '#a855f7',
+    op: 0.12,
+    anim: 'float',
+    bw: 6,
+  },
+  // #2 — dot (small, yellow, dotted)
+  {
+    type: 'dot',
+    size: 120,
+    top: 24,
+    side: 'left',
+    off: 5,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'pulse',
+    pattern: 'dots',
+  },
+  // #3 — semicircle (large, purple, striped)
+  {
+    type: 'semicircle',
+    size: 275,
+    top: 44,
+    side: 'left',
+    off: 5,
+    color: '#a855f7',
+    op: 0.1,
+    anim: 'sway',
+    rot: 35,
+    pattern: 'stripes',
+  },
+  // #4 — cross (medium, yellow)
+  {
+    type: 'cross',
+    size: 158,
+    top: 64,
+    side: 'right',
+    off: 14,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'rock',
+    rot: 22,
+  },
+  // #5 — diamond (small, purple, h-striped)
+  {
+    type: 'diamond',
+    size: 130,
+    top: 84,
+    side: 'left',
+    off: 18,
+    color: '#a855f7',
+    op: 0.1,
+    anim: 'spin',
+    pattern: 'hstripes',
+  },
+  // #6 — zigzag (extra-large, yellow, thick stroke)
+  {
+    type: 'zigzag',
+    size: 420,
+    top: 104,
+    side: 'right',
+    off: 1,
+    color: '#facc15',
+    op: 0.08,
+    anim: 'sway',
+    rot: -5,
+    sw: 6,
+  },
+  // #7 — squiggle (large, purple, thick stroke)
+  {
+    type: 'squiggle',
+    size: 202,
+    h: 55,
+    top: 124,
+    side: 'right',
+    off: 16,
+    color: '#a855f7',
+    op: 0.1,
+    anim: 'pulse',
+    sw: 5,
+  },
+  // #8 — star (very large, yellow, outline)
+  {
+    type: 'star',
+    size: 300,
+    top: 144,
+    side: 'left',
+    off: 4,
+    color: '#facc15',
+    op: 0.08,
+    anim: 'spin',
+    sw: 5,
+  },
+  // #9 — wave (extra-large, purple, thick stroke)
+  {
+    type: 'wave',
+    size: 400,
+    h: 40,
+    top: 164,
+    side: 'right',
+    off: 2,
+    color: '#a855f7',
+    op: 0.08,
+    anim: 'stretch',
+    rot: 8,
+    sw: 5,
+  },
+  // #10 — square-fill (medium, yellow, striped)
+  {
+    type: 'square-fill',
+    size: 150,
+    top: 184,
+    side: 'left',
+    off: 5,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'spin',
+    rot: 12,
+    pattern: 'stripes',
+  },
+  // #11 — triangle (medium, purple)
+  {
+    type: 'triangle',
+    size: 195,
+    top: 204,
+    side: 'right',
+    off: 6,
+    color: '#a855f7',
+    op: 0.1,
+    anim: 'float',
+    rot: 55,
+  },
+  // #12 — ellipse (large, yellow, h-striped)
+  {
+    type: 'ellipse',
+    size: 260,
+    top: 224,
+    side: 'left',
+    off: 10,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'rock',
+    rot: 25,
+    pattern: 'hstripes',
+  },
+  // #13 — spiral (large, purple, thin stroke)
+  {
+    type: 'spiral',
+    size: 204,
+    top: 244,
+    side: 'right',
+    off: 3,
+    color: '#a855f7',
+    op: 0.1,
+    anim: 'spin',
+    sw: 2,
+  },
+  // #14 — hexagon-fill (medium, yellow, h-striped)
+  {
+    type: 'hexagon-fill',
+    size: 153,
+    top: 264,
+    side: 'left',
+    off: 5,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'float',
+    rot: 10,
+    pattern: 'hstripes',
+  },
+  // #15 — crescent (medium, yellow, striped)
+  {
+    type: 'crescent',
+    size: 175,
+    top: 284,
+    side: 'right',
+    off: 10,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'float',
+    rot: -20,
+    pattern: 'stripes',
+  },
+  // #16 — dash (large, purple, crosshatched)
+  {
+    type: 'dash',
+    size: 280,
+    h: 12,
+    top: 304,
+    side: 'right',
+    off: 12,
+    color: '#a855f7',
+    op: 0.1,
+    anim: 'stretch',
+    rot: 42,
+    pattern: 'crosshatch',
+  },
+  // #17 — pill (medium, yellow, h-striped)
+  {
+    type: 'pill',
+    size: 197,
+    h: 65,
+    top: 324,
+    side: 'left',
+    off: 4,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'rock',
+    rot: -55,
+    pattern: 'hstripes',
+  },
+  // #18 — arc-fill (medium, yellow, dotted)
+  {
+    type: 'arc-fill',
+    size: 156,
+    top: 344,
+    side: 'right',
+    off: 22,
+    color: '#facc15',
+    op: 0.1,
+    anim: 'sway',
+    rot: -32,
+    pattern: 'dots',
+  },
+  // #19 — star-fill (small, purple, striped)
+  {
+    type: 'star-fill',
+    size: 145,
+    top: 364,
+    side: 'left',
+    off: 20,
+    color: '#a855f7',
+    op: 0.12,
+    anim: 'pulse',
+    pattern: 'stripes',
+  },
+  // #20 — triangle (very large, purple, dramatic)
+  {
+    type: 'triangle',
+    size: 360,
+    top: 384,
+    side: 'left',
+    off: 3,
+    color: '#a855f7',
+    op: 0.07,
+    anim: 'stretch',
+    rot: -28,
+  },
+];
+
+function buildSpiralPath(size: number): string {
+  const cx = size / 2;
+  const cy = size / 2;
+  const maxR = size / 2 - 5;
+  const steps = 90;
+  const turns = 3;
+  return Array.from({ length: steps + 1 }, (_, i) => {
+    const t = i / steps;
+    const angle = t * turns * 2 * Math.PI;
+    const r = t * maxR;
+    const x = Math.round(cx + r * Math.cos(angle));
+    const y = Math.round(cy + r * Math.sin(angle));
+    return i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`;
+  }).join(' ');
+}
+
+function svgPatternDefs(id: string, pattern: string): string {
+  if (pattern === 'stripes') {
+    return `<defs><pattern id="${id}" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="12" fill="currentColor"/></pattern></defs>`;
+  }
+  if (pattern === 'hstripes') {
+    return `<defs><pattern id="${id}" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="3" fill="currentColor"/></pattern></defs>`;
+  }
+  if (pattern === 'dots') {
+    return `<defs><pattern id="${id}" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.5" fill="currentColor"/></pattern></defs>`;
+  }
+  if (pattern === 'crosshatch') {
+    return `<defs><pattern id="${id}" width="10" height="10" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="10" y2="10" stroke="currentColor" stroke-width="2"/><line x1="10" y1="0" x2="0" y2="10" stroke="currentColor" stroke-width="2"/></pattern></defs>`;
+  }
+  return '';
+}
+
+const maxTop = Math.max(...shapes.map((s) => s.top));
+
+function buildStyle(s: FgShape): string {
+  const topPct = ((s.top / maxTop) * 98).toFixed(1);
+  const pos = s.side === 'left' ? `left:${String(s.off)}%` : `right:${String(s.off)}%`;
+  let style = `top:${topPct}%;${pos};opacity:${String(s.op)};--fg-s:${String(s.size)}px;--fg-c:${s.color}`;
+  if (s.h) style += `;--fg-h:${String(s.h)}px`;
+  if (s.bw) style += `;--fg-bw:${String(s.bw)}px`;
+  if (s.rot) style += `;--fg-rot:${String(s.rot)}deg`;
+  return style;
+}
+---
+
+<div class="memphis-shapes-fg" aria-hidden="true">
+  {
+    shapes.map((s) => {
+      const style = buildStyle(s);
+
+      if (s.type === 'cross') {
+        return (
+          <div class="memphis-shape-fg fg-cross" data-fg-anim={s.anim} style={style}>
+            <span />
+            <span />
+          </div>
+        );
+      }
+
+      if (s.type === 'wave') {
+        return (
+          <div class="memphis-shape-fg fg-wave" data-fg-anim={s.anim} style={style}>
+            <svg
+              width={s.size}
+              height={s.h}
+              viewBox={`0 0 ${s.size} ${s.h}`}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d={`M0 ${s.h! / 2} Q ${s.size / 8} 0, ${s.size / 4} ${s.h! / 2} T ${s.size / 2} ${s.h! / 2} T ${(s.size * 3) / 4} ${s.h! / 2} T ${s.size} ${s.h! / 2}`}
+                stroke="currentColor"
+                stroke-width={s.sw || 3}
+                fill="none"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+        );
+      }
+
+      if (s.type === 'zigzag') {
+        const w = s.size;
+        const seg = w / 8;
+        const points = Array.from({ length: 9 }, (_, i) => {
+          const x = Math.round(i * seg);
+          const y = i % 2 === 0 ? 22 : 8;
+          return `${x},${y}`;
+        }).join(' ');
+        return (
+          <div class="memphis-shape-fg fg-zigzag" data-fg-anim={s.anim} style={style}>
+            <svg
+              width={w}
+              height="30"
+              viewBox={`0 0 ${w} 30`}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polyline
+                points={points}
+                stroke="currentColor"
+                stroke-width={s.sw || 4}
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        );
+      }
+
+      if (s.type === 'squiggle') {
+        const h = s.h!;
+        return (
+          <div class="memphis-shape-fg fg-squiggle" data-fg-anim={s.anim} style={style}>
+            <svg
+              width={s.size}
+              height={h}
+              viewBox={`0 0 ${s.size} ${h}`}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d={`M 0 ${h} C ${s.size * 0.3} ${h}, ${s.size * 0.2} 0, ${s.size * 0.5} ${h * 0.5} S ${s.size * 0.8} ${h}, ${s.size} 0`}
+                stroke="currentColor"
+                stroke-width={s.sw || 4}
+                fill="none"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+        );
+      }
+
+      if (s.type === 'star' || s.type === 'star-fill') {
+        const r = s.size / 2;
+        const ir = r * 0.45;
+        const starPoints = Array.from({ length: 12 }, (_, i) => {
+          const angle = ((i * 30 - 90) * Math.PI) / 180;
+          const radius = i % 2 === 0 ? r : ir;
+          return `${Math.round(r + radius * Math.cos(angle))},${Math.round(r + radius * Math.sin(angle))}`;
+        }).join(' ');
+        const isFilled = s.type === 'star-fill';
+        const patId = `p${s.top}`;
+        const hasPat = isFilled && s.pattern;
+        const fillVal = isFilled ? (hasPat ? `url(#${patId})` : 'currentColor') : 'none';
+        return (
+          <div class={`memphis-shape-fg fg-${s.type}`} data-fg-anim={s.anim} style={style}>
+            <svg
+              width={s.size}
+              height={s.size}
+              viewBox={`0 0 ${s.size} ${s.size}`}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {hasPat && <g set:html={svgPatternDefs(patId, s.pattern!)} />}
+              <polygon
+                points={starPoints}
+                stroke={isFilled ? 'none' : 'currentColor'}
+                stroke-width={isFilled ? 0 : s.sw || 3}
+                fill={fillVal}
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        );
+      }
+
+      if (s.type === 'spiral') {
+        return (
+          <div class="memphis-shape-fg fg-spiral" data-fg-anim={s.anim} style={style}>
+            <svg
+              width={s.size}
+              height={s.size}
+              viewBox={`0 0 ${s.size} ${s.size}`}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d={buildSpiralPath(s.size)}
+                stroke="currentColor"
+                stroke-width={s.sw || 3}
+                fill="none"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+        );
+      }
+
+      if (s.type === 'hexagon-fill') {
+        const r = s.size / 2;
+        const hexPoints = Array.from({ length: 6 }, (_, i) => {
+          const angle = ((i * 60 - 90) * Math.PI) / 180;
+          return `${Math.round(r + r * Math.cos(angle))},${Math.round(r + r * Math.sin(angle))}`;
+        }).join(' ');
+        const patId = `ph${s.top}`;
+        const hasPat = !!s.pattern;
+        const fillVal = hasPat ? `url(#${patId})` : 'currentColor';
+        return (
+          <div class="memphis-shape-fg fg-hexagon-fill" data-fg-anim={s.anim} style={style}>
+            <svg
+              width={s.size}
+              height={s.size}
+              viewBox={`0 0 ${s.size} ${s.size}`}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {hasPat && <g set:html={svgPatternDefs(patId, s.pattern!)} />}
+              <polygon points={hexPoints} fill={fillVal} stroke-linejoin="round" />
+            </svg>
+          </div>
+        );
+      }
+
+      if (s.type === 'crescent') {
+        const r = s.size / 2;
+        const patId = `pc${s.top}`;
+        const hasPat = !!s.pattern;
+        const fillVal = hasPat ? `url(#${patId})` : 'currentColor';
+        return (
+          <div class="memphis-shape-fg fg-crescent" data-fg-anim={s.anim} style={style}>
+            <svg
+              width={s.size}
+              height={s.size}
+              viewBox={`0 0 ${s.size} ${s.size}`}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {hasPat && <g set:html={svgPatternDefs(patId, s.pattern!)} />}
+              <path
+                d={`M ${r} 0 A ${r} ${r} 0 1 1 ${r} ${s.size} A ${r * 0.65} ${r * 0.65} 0 1 0 ${r} 0 Z`}
+                fill={fillVal}
+              />
+            </svg>
+          </div>
+        );
+      }
+
+      {
+        /* CSS-rendered shapes: add pattern class if applicable */
+      }
+      const patternClass = s.pattern ? ` fg-pattern-${s.pattern}` : '';
+      return (
+        <div
+          class={`memphis-shape-fg fg-${s.type}${patternClass}`}
+          data-fg-anim={s.anim}
+          style={style}
+        />
+      );
+    })
+  }
+</div>

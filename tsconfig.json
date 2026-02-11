@@ -9,7 +9,8 @@
       "@content/*": ["src/content/*"],
       "@config/*": ["src/config/*"],
       "@utils/*": ["src/utils/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@scripts/*": ["src/scripts/*"]
     },
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,

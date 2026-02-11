@@ -10,40 +10,13 @@ import profileImage from '@assets/images/profile.jpg';
   description="Découvrez qui je suis, mes valeurs, mon projet professionnel et ce qui me passionne."
 >
   <!-- Hero Section -->
-  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
-      <div class="memphis-ring memphis-3xl top-[5%] right-[4%] rotate-[15deg]"></div>
-      <div class="memphis-square-accent w-28 h-28 bottom-[10%] left-[3%] rotate-[30deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-filled-accent memphis-xl top-[28%] left-[5%] memphis-scale"></div>
-      <div class="memphis-triangle bottom-[22%] right-[8%] rotate-[-10deg]"></div>
-      <div
-        class="memphis-cross-accent memphis-lg top-[62%] right-[3%] rotate-[40deg] memphis-drift"
-      >
-      </div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots memphis-lg top-[12%] right-[12%]"></div>
-      <div class="memphis-zigzag bottom-[30%] left-[8%] rotate-[-15deg]"></div>
-      <div class="memphis-half-circle w-10 h-5 top-[48%] left-[2%] rotate-[50deg]"></div>
-      <div
-        class="memphis-square-filled memphis-sm bottom-[42%] right-[10%] rotate-45 memphis-pulse"
-      >
-      </div>
-    </div>
-
-    <div class="container-custom relative z-10">
+  <section class="section-padding section-hero relative overflow-hidden">
+    <div class="container-custom">
       <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
         <!-- Image -->
-        <div class="order-2 lg:order-1 scale-in">
+        <div class="order-2 lg:order-1" data-gsap="reveal">
           <div
-            class="overflow-hidden shadow-hard-purple-xl border-3 border-primary-500 bg-dark-800 group transition-all duration-500 tilt-1 depth-layer avatar-offset"
+            class="overflow-hidden shadow-hard-purple-xl border-3 border-primary-500 bg-dark-800 group transition-all duration-500"
           >
             <div class="aspect-[4/5] bg-dark-700 flex items-center justify-center">
               <Image
@@ -62,7 +35,7 @@ import profileImage from '@assets/images/profile.jpg';
         </div>
 
         <!-- Text -->
-        <div class="order-1 lg:order-2 fade-in-up">
+        <div class="order-1 lg:order-2" data-gsap="hero">
           <p
             class="text-primary-400 font-heading font-semibold mb-6 uppercase tracking-wider text-sm"
           >
@@ -135,11 +108,11 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 1: Mes Valeurs -->
-  <section class="section-padding section-lazy" id="valeurs">
+  <section class="section-padding section-alt section-lazy" id="valeurs">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div class="content-section-header">
-          <div class="icon-box-wonky">
+          <div class="icon-box">
             <svg
               class="w-6 h-6 text-primary-400"
               fill="none"
@@ -158,7 +131,7 @@ import profileImage from '@assets/images/profile.jpg';
             Mes <span class="text-primary-400 underline-memphis">Valeurs</span>
           </h2>
         </div>
-        <div class="section-divider mb-10 -tilt-1"></div>
+        <div class="section-divider mb-10"></div>
 
         <p class="text-gray-400 mb-10 leading-relaxed">
           Ce qui me motive vraiment, c'est de fournir un <strong class="text-white"
@@ -167,29 +140,29 @@ import profileImage from '@assets/images/profile.jpg';
           web plus éthique et accessible.
         </p>
 
-        <div class="grid md:grid-cols-2 gap-8 stagger-children">
-          <div class="card-glow p-8 wonky-box">
+        <div class="grid md:grid-cols-2 gap-8" data-gsap="stagger">
+          <div class="card-glow p-8">
             <h3 class="text-xl font-heading font-bold text-white mb-3">Accessibilité</h3>
             <p class="text-gray-400 text-sm">
               Le web doit être utilisable par tout le monde. L'inclusion n'est pas une option, c'est
               un minimum.
             </p>
           </div>
-          <div class="card-glow p-8 wonky-box-alt">
+          <div class="card-glow p-8">
             <h3 class="text-xl font-heading font-bold text-white mb-3">Transparence</h3>
             <p class="text-gray-300 text-sm leading-relaxed">
               Code propre, communication claire, pas de bullshit. Je dis ce que je fais et je fais
               ce que je dis.
             </p>
           </div>
-          <div class="card-glow p-8 wonky-box">
+          <div class="card-glow p-8">
             <h3 class="text-xl font-heading font-bold text-white mb-3">Éthique</h3>
             <p class="text-gray-300 text-sm leading-relaxed">
               Je choisis mes projets. Contribuer à un web plus responsable et moins prédateur, c'est
               important pour moi.
             </p>
           </div>
-          <div class="card-glow p-8 wonky-box-alt">
+          <div class="card-glow p-8">
             <h3 class="text-xl font-heading font-bold text-white mb-3">Qualité</h3>
             <p class="text-gray-400 text-sm">
               Pas de compromis sur le craft. Un travail bâclé, même livré à temps, reste un travail
@@ -202,11 +175,11 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 2: Mon Projet Professionnel -->
-  <section class="section-padding section-alt section-lazy" id="projet">
+  <section class="section-padding section-lazy" id="projet">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-4xl mx-auto" data-gsap="reveal">
         <div class="content-section-header">
-          <div class="icon-box-wonky icon-box-wonky-alt icon-box-wonky-accent">
+          <div class="icon-box">
             <svg
               class="w-6 h-6 text-accent-400"
               fill="none"
@@ -226,7 +199,7 @@ import profileImage from '@assets/images/profile.jpg';
             >
           </h2>
         </div>
-        <div class="section-divider section-divider-accent mb-10 tilt-1"></div>
+        <div class="section-divider section-divider-accent mb-10"></div>
 
         <p class="text-gray-400 mb-10 leading-relaxed">
           Mon objectif est simple : <strong class="text-white"
@@ -236,7 +209,7 @@ import profileImage from '@assets/images/profile.jpg';
           mes valeurs.
         </p>
 
-        <div class="detail-box mb-8 border-tilted">
+        <div class="detail-box mb-8">
           <h3 class="text-xl font-heading font-bold text-white mb-4">Vision à court terme</h3>
           <p class="text-gray-400 leading-relaxed">
             Trouver ma place, faire mes preuves, et créer des liens de confiance avec des clients ou
@@ -244,7 +217,7 @@ import profileImage from '@assets/images/profile.jpg';
           </p>
         </div>
 
-        <div class="detail-box mb-8 border-tilted-alt border-tilted-accent">
+        <div class="detail-box mb-8">
           <h3 class="text-xl font-heading font-bold text-white mb-4">Vision à long terme</h3>
           <p class="text-gray-400">
             Une stabilité où le travail est un plaisir et non une contrainte. Contribuer à des
@@ -252,7 +225,7 @@ import profileImage from '@assets/images/profile.jpg';
           </p>
         </div>
 
-        <div class="detail-box border-corner-offset">
+        <div class="detail-box">
           <h3 class="text-xl font-heading font-bold text-white mb-4">Mes objectifs clés</h3>
           <ul class="space-y-4">
             <li class="flex items-start gap-3">
@@ -311,7 +284,7 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 3: Mes Qualités Humaines -->
-  <section class="section-padding section-lazy" id="qualites">
+  <section class="section-padding section-alt section-lazy" id="qualites">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <div class="content-section-header">
@@ -334,15 +307,15 @@ import profileImage from '@assets/images/profile.jpg';
             Mes Qualités <span class="text-primary-400 underline-memphis">Humaines</span>
           </h2>
         </div>
-        <div class="section-divider mb-10 -tilt-2"></div>
+        <div class="section-divider mb-10"></div>
 
         <p class="text-gray-400 mb-10 leading-relaxed">
           Au-delà des compétences techniques, ce sont mes qualités humaines qui définissent ma façon
           de travailler et de collaborer.
         </p>
 
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
-          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group">
             <div class="icon-box-lg mx-auto mb-6">
               <svg
                 class="w-8 h-8 text-primary-400"
@@ -365,7 +338,7 @@ import profileImage from '@assets/images/profile.jpg';
             </p>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box-alt md:offset-up-1">
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group">
             <div class="icon-box-lg mx-auto mb-6">
               <svg
                 class="w-8 h-8 text-accent-400"
@@ -387,7 +360,7 @@ import profileImage from '@assets/images/profile.jpg';
             </p>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box">
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group">
             <div class="icon-box-lg mx-auto mb-6">
               <svg
                 class="w-8 h-8 text-primary-400"
@@ -408,7 +381,7 @@ import profileImage from '@assets/images/profile.jpg';
             </p>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box-alt">
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group">
             <div class="icon-box-lg mx-auto mb-6">
               <svg
                 class="w-8 h-8 text-accent-400"
@@ -430,7 +403,7 @@ import profileImage from '@assets/images/profile.jpg';
             </p>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box md:offset-up-1">
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group">
             <div class="icon-box-lg mx-auto mb-6">
               <svg
                 class="w-8 h-8 text-primary-400"
@@ -453,7 +426,7 @@ import profileImage from '@assets/images/profile.jpg';
             </p>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group wonky-box-alt">
+          <div class="card-glow p-4 sm:p-6 md:p-8 text-center group">
             <div class="icon-box-lg mx-auto mb-6">
               <svg
                 class="w-8 h-8 text-accent-400"
@@ -481,9 +454,9 @@ import profileImage from '@assets/images/profile.jpg';
   </section>
 
   <!-- Section 4: Mes Centres d'Intérêt -->
-  <section class="section-padding section-alt section-lazy" id="interets">
+  <section class="section-padding section-lazy" id="interets">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-4xl mx-auto" data-gsap="reveal">
         <div class="content-section-header">
           <div class="icon-box">
             <svg
@@ -506,7 +479,7 @@ import profileImage from '@assets/images/profile.jpg';
             >
           </h2>
         </div>
-        <div class="section-divider section-divider-accent mb-10 tilt-2"></div>
+        <div class="section-divider section-divider-accent mb-10"></div>
 
         <p class="text-gray-400 mb-10 leading-relaxed">
           En dehors du code, j'ai mille centres d'intérêt — tech, créativité, cultures alternatives.
@@ -514,8 +487,8 @@ import profileImage from '@assets/images/profile.jpg';
         </p>
 
         <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box">
-            <div class="icon-box-wonky flex-shrink-0">
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6">
+            <div class="icon-box flex-shrink-0">
               <svg
                 class="w-6 h-6 text-primary-400"
                 fill="none"
@@ -539,8 +512,8 @@ import profileImage from '@assets/images/profile.jpg';
             </div>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box-alt">
-            <div class="icon-box-wonky icon-box-wonky-alt icon-box-wonky-accent flex-shrink-0">
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6">
+            <div class="icon-box flex-shrink-0">
               <svg
                 class="w-6 h-6 text-accent-400"
                 fill="none"
@@ -570,7 +543,7 @@ import profileImage from '@assets/images/profile.jpg';
             </div>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box">
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6">
             <div class="icon-box flex-shrink-0">
               <svg
                 class="w-6 h-6 text-primary-400"
@@ -595,7 +568,7 @@ import profileImage from '@assets/images/profile.jpg';
             </div>
           </div>
 
-          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6 wonky-box-alt">
+          <div class="card-glow p-4 sm:p-6 md:p-8 flex gap-4 sm:gap-6">
             <div class="icon-box flex-shrink-0">
               <svg
                 class="w-6 h-6 text-accent-400"
@@ -626,28 +599,7 @@ import profileImage from '@assets/images/profile.jpg';
 
   <!-- CTA Section -->
   <section class="section-padding section-cta relative overflow-hidden section-lazy">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
-      <div class="memphis-ring-accent w-32 h-32 top-[5%] left-[6%] rotate-[-15deg]"></div>
-      <div class="memphis-square-white w-24 h-24 bottom-[8%] right-[5%] rotate-[40deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-white memphis-xl top-[22%] right-[12%] memphis-wobble"></div>
-      <div class="memphis-triangle-primary bottom-[28%] left-[10%] rotate-[20deg]"></div>
-      <div class="memphis-cross-white memphis-lg top-[55%] left-[4%] rotate-[30deg] memphis-drift">
-      </div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots-accent memphis-lg top-[15%] right-[20%]"></div>
-      <div class="memphis-zigzag bottom-[20%] right-[18%] rotate-[12deg]"></div>
-      <div class="memphis-half-circle-accent w-8 h-4 top-[42%] right-[3%] rotate-[-45deg]"></div>
-    </div>
-
-    <div class="container-custom text-center relative z-10">
+    <div class="container-custom text-center" data-gsap="cta">
       <h2 class="section-title text-white mb-8">
         Envie d'en savoir <span class="text-accent-400 squiggle squiggle-accent">plus</span> ?
       </h2>

@@ -7,37 +7,13 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   description="Contactez-moi pour discuter de vos projets ou simplement échanger."
 >
   <!-- Hero Section -->
-  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
-      <div class="memphis-ring-accent memphis-3xl top-[8%] left-[5%] rotate-[25deg]"></div>
-      <div class="memphis-square w-24 h-24 bottom-[15%] right-[4%] rotate-[35deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-filled memphis-xl top-[22%] right-[10%] memphis-scale"></div>
-      <div class="memphis-triangle bottom-[28%] left-[8%] rotate-[15deg]"></div>
-      <div class="memphis-cross memphis-lg top-[58%] right-[4%] rotate-[30deg] memphis-drift"></div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots memphis-lg top-[18%] left-[12%]"></div>
-      <div class="memphis-zigzag-accent bottom-[22%] right-[12%] rotate-[-8deg]"></div>
-      <div class="memphis-half-circle-accent w-8 h-4 top-[48%] left-[4%] rotate-[80deg]"></div>
-      <div
-        class="memphis-square-filled-accent memphis-sm bottom-[45%] right-[15%] rotate-45 memphis-pulse"
-      >
-      </div>
-    </div>
-
-    <div class="container-custom text-center fade-in-up relative z-10">
+  <section class="section-padding section-hero relative overflow-hidden">
+    <div class="container-custom text-center" data-gsap="hero">
       <h1 class="page-title">
         <span class="gradient-text-animated underline-zigzag" data-text="Contactez">Contactez</span
         >-moi
       </h1>
-      <div class="section-divider section-divider-long -tilt-1"></div>
+      <div class="section-divider section-divider-long"></div>
       <p class="page-subtitle">
         Une question, un projet, ou simplement envie d'échanger ? N'hésitez pas à me contacter, je
         serai ravi de vous répondre.
@@ -46,9 +22,9 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   </section>
 
   <!-- Contact Section (2 pts) -->
-  <section class="section-padding section-lazy">
+  <section class="section-padding section-alt section-lazy">
     <div class="container-custom">
-      <div class="max-w-5xl mx-auto">
+      <div class="max-w-5xl mx-auto" data-gsap="reveal">
         <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
           <!-- Contact Info -->
           <div>
@@ -60,9 +36,9 @@ import BaseLayout from '@layouts/BaseLayout.astro';
               <!-- Email -->
               <a
                 href="mailto:virgil.07@hotmail.fr"
-                class="card-glow p-6 flex items-start gap-6 group wonky-box"
+                class="card-glow p-6 flex items-start gap-6 group"
               >
-                <div class="icon-box-wonky">
+                <div class="icon-box">
                   <svg
                     class="w-6 h-6 text-primary-400"
                     fill="none"
@@ -92,9 +68,9 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                 href="https://linkedin.com/in/virgil-chareyre"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="card-glow p-6 flex items-start gap-6 group wonky-box-alt"
+                class="card-glow p-6 flex items-start gap-6 group"
               >
-                <div class="icon-box-wonky icon-box-wonky-alt">
+                <div class="icon-box">
                   <svg
                     class="w-6 h-6 text-primary-400"
                     fill="currentColor"
@@ -120,9 +96,9 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                 href="https://github.com/Leigh-Chr"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="card-glow p-6 flex items-start gap-6 group wonky-box"
+                class="card-glow p-6 flex items-start gap-6 group"
               >
-                <div class="icon-box-wonky icon-box-wonky-accent">
+                <div class="icon-box">
                   <svg
                     class="w-6 h-6 text-white"
                     fill="currentColor"
@@ -144,8 +120,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
               </a>
 
               <!-- Location -->
-              <div class="card-glow p-6 flex items-start gap-6 wonky-box-alt">
-                <div class="icon-box-wonky icon-box-wonky-alt icon-box-wonky-accent">
+              <div class="card-glow p-6 flex items-start gap-6">
+                <div class="icon-box">
                   <svg
                     class="w-6 h-6 text-accent-400"
                     fill="none"
@@ -186,7 +162,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
             </h2>
 
             <form
-              class="card-glow p-4 sm:p-6 md:p-8 tilt-1 depth-layer depth-layer-accent"
+              class="card-glow p-4 sm:p-6 md:p-8"
               action="https://api.web3forms.com/submit"
               method="POST"
               id="contact-form"
@@ -456,79 +432,51 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   </section>
 
   <!-- Availability Section -->
-  <section class="section-padding section-alt relative overflow-hidden">
-    <!-- Subtle decorative shapes on sides -->
-    <div
-      class="absolute top-[15%] right-[3%] memphis-cross-accent memphis-lg rotate-[25deg] memphis-drift hidden lg:block"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="absolute bottom-[20%] left-[4%] memphis-circle-accent memphis-xl memphis-wobble hidden lg:block"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="absolute top-[55%] left-[2%] memphis-dots-accent memphis-md hidden xl:block"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="absolute bottom-[45%] right-[2%] memphis-half-circle w-10 h-5 rotate-[-30deg] hidden xl:block"
-      aria-hidden="true"
-    >
-    </div>
-
-    <div class="container-custom relative z-10">
-      <div class="max-w-3xl mx-auto text-center">
+  <section class="section-padding relative overflow-hidden">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center" data-gsap="reveal">
         <h2 class="section-title mb-6">
           <span class="text-primary-400 underline-memphis">Disponibilité</span>
         </h2>
-        <div class="section-divider tilt-2 mb-10"></div>
-        <div class="detail-box card-glow">
-          <div class="flex items-center justify-center gap-4 mb-6">
-            <span class="w-3 h-3 bg-accent-400"></span>
-            <span class="text-white font-heading font-medium">Actuellement disponible</span>
-          </div>
-          <p class="text-gray-400">
-            Diplômé d'un Mastère Expert en Ingénierie Logicielle, je suis développeur Fullstack avec
-            une appétence particulière pour le front-end. Je recherche des opportunités en CDI ou
-            CDD, idéalement à Grenoble ou en remote — mais je reste ouvert à la mobilité pour le bon
-            projet.
-          </p>
+        <div class="section-divider mb-10"></div>
+        <div class="flex items-center justify-center gap-4 mb-6">
+          <span class="w-3 h-3 bg-accent-400"></span>
+          <span class="text-white font-heading font-medium">Actuellement disponible</span>
+        </div>
+        <p class="text-gray-400">
+          Diplômé d'un Mastère Expert en Ingénierie Logicielle, je suis développeur Fullstack avec
+          une appétence particulière pour le front-end. Je recherche des opportunités en CDI ou CDD,
+          idéalement à Grenoble ou en remote — mais je reste ouvert à la mobilité pour le bon
+          projet.
+        </p>
 
-          <!-- Response time -->
-          <div
-            class="mt-8 sm:mt-10 pt-8 sm:pt-10 border-t border-dark-600 flex flex-wrap justify-center gap-6 sm:gap-10 md:gap-16 stagger-children"
-          >
-            <div class="text-center group -tilt-1 hover:tilt-2 transition-transform min-w-[80px]">
-              <p class="stat-medium text-primary-400 stat-pulse">24-48h</p>
-              <p
-                class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
-              >
-                Temps de réponse
-              </p>
-            </div>
-            <div
-              class="text-center group tilt-1 md:offset-up-1 hover:-tilt-1 transition-transform min-w-[80px]"
+        <!-- Response time -->
+        <div
+          class="mt-8 sm:mt-10 pt-8 sm:pt-10 border-t border-dark-600 flex flex-wrap justify-center gap-6 sm:gap-10 md:gap-16"
+        >
+          <div class="text-center group min-w-[80px]">
+            <p class="stat-medium text-primary-400">24-48h</p>
+            <p
+              class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
             >
-              <p class="stat-medium text-accent-400 stat-pulse" style="animation-delay: 0.3s">
-                Remote
-              </p>
-              <p
-                class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
-              >
-                Mode de travail
-              </p>
-            </div>
-            <div class="text-center group -tilt-2 hover:tilt-2 transition-transform min-w-[80px]">
-              <p class="stat-medium text-white stat-pulse" style="animation-delay: 0.6s">France</p>
-              <p
-                class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
-              >
-                Fuseau horaire
-              </p>
-            </div>
+              Temps de réponse
+            </p>
+          </div>
+          <div class="text-center group min-w-[80px]">
+            <p class="stat-medium text-accent-400">Remote</p>
+            <p
+              class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+            >
+              Mode de travail
+            </p>
+          </div>
+          <div class="text-center group min-w-[80px]">
+            <p class="stat-medium text-white">France</p>
+            <p
+              class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+            >
+              Fuseau horaire
+            </p>
           </div>
         </div>
       </div>

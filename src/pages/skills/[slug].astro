@@ -79,9 +79,9 @@ const isTechnical = skill.data.category === 'technical';
   </Fragment>
 
   <!-- Hero Section -->
-  <section class="section-padding section-hero noise-overlay">
+  <section class="section-padding section-hero">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto fade-in-up">
+      <div class="max-w-4xl mx-auto" data-gsap="reveal">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6" aria-label="Fil d'Ariane">
           <a href={url('/')} class="hover:text-primary-400 transition-colors">Accueil</a>
@@ -135,6 +135,7 @@ const isTechnical = skill.data.category === 'technical';
   </section>
 
   <!-- Content Sections -->
+  <section class="section-alt">
   <div class="container-custom section-padding" transition:animate={slide({ duration: '0.3s' })}>
     <div class="max-w-4xl mx-auto">
 
@@ -244,11 +245,11 @@ const isTechnical = skill.data.category === 'technical';
         <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
 
         {relatedProjects.length > 0 ? (
-          <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            {relatedProjects.map((project, index) => (
+          <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
+            {relatedProjects.map((project) => (
               <a
                 href={url(`/projects/${project.id}`)}
-                class={`card-glow p-4 sm:p-6 md:p-8 group ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+                class="card-glow p-4 sm:p-6 md:p-8 group"
               >
                 <h3 class="font-heading font-bold text-xl text-white mb-3 group-hover:text-primary-400 transition-colors">
                   {project.data.title}
@@ -308,4 +309,5 @@ const isTechnical = skill.data.category === 'technical';
       </nav>
     </div>
   </div>
+  </section>
 </BaseLayout>

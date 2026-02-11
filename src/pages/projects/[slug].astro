@@ -215,9 +215,9 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
   </Fragment>
 
   <!-- Hero Section -->
-  <section class="section-padding section-hero noise-overlay">
+  <section class="section-padding section-hero">
     <div class="container-custom">
-      <div class="max-w-4xl mx-auto fade-in-up">
+      <div class="max-w-4xl mx-auto" data-gsap="reveal">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6" aria-label="Fil d'Ariane">
           <a href={url('/')} class="hover:text-primary-400 transition-colors">Accueil</a>
@@ -328,6 +328,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
   </section>
 
   <!-- Content Sections -->
+  <section class="section-alt">
   <div class="container-custom section-padding" transition:animate={slide({ duration: '0.3s' })}>
     <div class="max-w-4xl mx-auto">
 
@@ -620,11 +621,11 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
           </div>
           <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {relatedSkills.map((skill, index) => (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
+            {relatedSkills.map((skill) => (
               <a
                 href={url(`/skills/${skill.id}`)}
-                class={`card-glow p-6 group ${index % 3 === 1 ? 'offset-up-1' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+                class="card-glow p-6 group"
               >
                 <div class="flex items-center gap-3">
                   <div class="w-10 h-10 bg-dark-700 border-2 border-primary-500 flex items-center justify-center">
@@ -683,4 +684,5 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
       </nav>
     </div>
   </div>
+  </section>
 </BaseLayout>

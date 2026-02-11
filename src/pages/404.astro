@@ -10,22 +10,9 @@ import { url } from '@utils/url';
   <Fragment slot="head">
     <meta name="robots" content="noindex, nofollow" />
   </Fragment>
-  <section
-    class="min-h-[80vh] flex items-center relative noise-overlay overflow-hidden py-20 md:py-32"
-  >
-    <!-- Decorative shapes -->
-    <div class="hidden lg:block" aria-hidden="true">
-      <div class="memphis-circle-chunky w-32 h-32 top-[15%] right-[5%] rotate-12 opacity-15"></div>
-      <div class="memphis-tri-filled-lg-accent bottom-[20%] left-[5%] rotate-[-15deg] opacity-12">
-      </div>
-    </div>
-    <div class="hidden md:block" aria-hidden="true">
-      <div class="memphis-blob-accent memphis-2xl bottom-[30%] right-[8%] opacity-15"></div>
-      <div class="memphis-plus memphis-lg top-[25%] left-[8%] rotate-[20deg] opacity-12"></div>
-    </div>
-
+  <section class="min-h-[80vh] flex items-center relative overflow-hidden py-20 md:py-32">
     <div class="container-custom text-center">
-      <div class="fade-in-up max-w-2xl mx-auto">
+      <div class="max-w-2xl mx-auto" data-gsap="hero">
         <!-- 404 Number -->
         <div class="mb-10">
           <span

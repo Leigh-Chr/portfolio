@@ -63,29 +63,8 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
 
 <BaseLayout title="Réalisations" description="Découvrez mes projets et réalisations professionnelles les plus significatifs.">
   <!-- Hero Section -->
-  <section class="section-padding section-hero noise-overlay relative overflow-hidden">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow hidden lg:block" aria-hidden="true">
-      <div class="memphis-ring-accent memphis-3xl top-[8%] left-[4%] rotate-[-20deg]"></div>
-      <div class="memphis-square w-28 h-28 bottom-[12%] right-[5%] rotate-[35deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-filled memphis-xl top-[25%] right-[8%] memphis-scale"></div>
-      <div class="memphis-triangle-primary bottom-[28%] left-[6%] rotate-[18deg]"></div>
-      <div class="memphis-cross-accent memphis-lg top-[58%] left-[3%] rotate-[35deg] memphis-drift"></div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots-accent memphis-lg top-[18%] left-[12%]"></div>
-      <div class="memphis-zigzag bottom-[22%] right-[12%] rotate-[-8deg]"></div>
-      <div class="memphis-half-circle-accent w-10 h-5 top-[45%] right-[4%] rotate-[75deg]"></div>
-      <div class="memphis-square-filled-accent memphis-sm bottom-[40%] left-[10%] rotate-45 memphis-pulse"></div>
-    </div>
-
-    <div class="container-custom text-center fade-in-up relative z-10">
+  <section class="section-padding section-hero relative overflow-hidden">
+    <div class="container-custom text-center" data-gsap="hero">
       <h1 class="page-title">
         Mes <span class="gradient-text-animated underline-zigzag underline-zigzag-accent" data-text="Réalisations">Réalisations</span>
       </h1>
@@ -96,13 +75,13 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
       </p>
 
       <!-- Stats - Bold Memphis with subtle tilts -->
-      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-12 sm:mt-16 stagger-children">
-        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl -tilt-2 hover:tilt-2 min-w-[120px]">
-          <p class="stat-large text-primary-400 stat-pulse">{hasRealContent ? sortedProjects.length : 3}</p>
+      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-12 sm:mt-16">
+        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]">
+          <p class="stat-large text-primary-400">{hasRealContent ? sortedProjects.length : 3}</p>
           <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">Réalisations</p>
         </div>
-        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl tilt-1 md:offset-up-1 hover:-tilt-1 min-w-[120px]">
-          <p class="stat-large text-accent-400 stat-pulse" style="animation-delay: 0.3s">+3</p>
+        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]">
+          <p class="stat-large text-accent-400">+3</p>
           <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">Années d'exp.</p>
         </div>
       </div>
@@ -110,7 +89,7 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
   </section>
 
   <!-- Projects Grid (5 pts) -->
-  <section class="section-padding">
+  <section class="section-padding section-alt">
     <div class="container-custom">
       {!hasRealContent && (
         <div class="alert-placeholder mb-8">
@@ -120,11 +99,11 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
       )}
 
       <!-- Projects as list/cards with short descriptions -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 stagger-children">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {displayProjects.map((project, index) => (
           <a
             href={url(`/projects/${project.id}`)}
-            class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''} ${index % 3 === 1 ? 'offset-up-2' : ''} ${index % 2 === 0 ? 'wonky-box' : 'wonky-box-alt'}`}
+            class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''}`}
           >
             <!-- Thumbnail -->
             <div class="aspect-video bg-dark-700 relative overflow-hidden" transition:name={`project-thumb-${project.id}`}>
@@ -203,12 +182,12 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
   </section>
 
   <!-- Link to Skills -->
-  <section class="section-padding section-alt">
+  <section class="section-padding">
     <div class="container-custom text-center">
       <h2 class="section-title">
         Les compétences derrière ces <span class="text-accent-400 underline-memphis underline-memphis-accent">réalisations</span>
       </h2>
-      <div class="section-divider section-divider-accent -tilt-1"></div>
+      <div class="section-divider section-divider-accent"></div>
       <p class="section-subtitle mb-12">
         Chaque projet a mobilisé un ensemble de compétences techniques et humaines.
         Découvrez mon profil complet de compétences.
@@ -224,29 +203,9 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
 
   <!-- CTA Contact -->
   <section class="section-padding section-cta relative overflow-hidden">
-    <!-- Parallax Layer 1 - Slow -->
-    <div class="parallax-layer parallax-layer-slow" aria-hidden="true">
-      <div class="memphis-ring w-36 h-36 top-[5%] right-[5%] rotate-[18deg]"></div>
-      <div class="memphis-square-accent w-24 h-24 bottom-[10%] left-[5%] rotate-[38deg]"></div>
-    </div>
-
-    <!-- Parallax Layer 2 - Medium -->
-    <div class="parallax-layer parallax-layer-medium hidden md:block" aria-hidden="true">
-      <div class="memphis-circle-white memphis-2xl top-[18%] left-[12%] memphis-wobble"></div>
-      <div class="memphis-triangle bottom-[25%] right-[10%] rotate-[-20deg]"></div>
-      <div class="memphis-cross-white memphis-lg top-[52%] right-[4%] rotate-[22deg] memphis-drift"></div>
-    </div>
-
-    <!-- Parallax Layer 3 - Fast -->
-    <div class="parallax-layer parallax-layer-fast hidden md:block" aria-hidden="true">
-      <div class="memphis-dots memphis-lg top-[12%] right-[18%]"></div>
-      <div class="memphis-zigzag-accent bottom-[18%] left-[18%] rotate-[10deg]"></div>
-      <div class="memphis-half-circle w-10 h-5 bottom-[40%] left-[5%] rotate-[-50deg]"></div>
-    </div>
-
-    <div class="container-custom text-center relative z-10">
+    <div class="container-custom text-center" data-gsap="cta">
       <h2 class="section-title text-white mb-8">
-        Un projet en <span class="text-primary-400 squiggle">tête</span> ?
+        Un projet en <span class="text-accent-400 squiggle squiggle-accent">tête</span> ?
       </h2>
       <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
         Je suis toujours intéressé par de nouveaux défis.
