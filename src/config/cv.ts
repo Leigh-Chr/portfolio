@@ -3,7 +3,7 @@
  * Centralized data for the CV page - edit here to update the CV
  */
 
-export interface ContactInfo {
+interface ContactInfo {
   email: string;
   linkedin: string;
   linkedinDisplay: string;
@@ -12,20 +12,20 @@ export interface ContactInfo {
   location: string;
 }
 
-export interface Availability {
+interface Availability {
   available: boolean;
   types: string[]; // e.g., ['CDI', 'CDD']
   locations: string[]; // e.g., ['Remote', 'Grenoble']
 }
 
-export interface ProfileInfo {
+interface ProfileInfo {
   name: string;
   title: string;
   subtitle: string;
   summary: string;
 }
 
-export interface LanguageInfo {
+interface LanguageInfo {
   name: string;
   level: string;
 }
