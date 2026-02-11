@@ -25,9 +25,9 @@ context:
 
 Transit Display Hub est une plateforme fullstack d'information voyageurs pour les réseaux de transport en commun. L'application permet aux opérateurs de configurer leur réseau (lignes de métro, bus, tram, train), de gérer les horaires et de diffuser des messages d'alerte, le tout affiché en temps réel sur des écrans connectés aux arrêts via WebSocket.
 
-Le projet couvre l'ensemble de la chaîne : une **interface d'administration** pour les opérateurs (gestion du réseau, des horaires, des messages et des appareils), un **affichage kiosk** public montrant les prochains départs et alertes en cours, et une **carte réseau interactive** avec calcul d'itinéraires par algorithme A\*.
+Le projet couvre l'ensemble de la chaîne : une **interface d'administration** pour les opérateurs (gestion du réseau, des horaires, des messages et des appareils), un **affichage kiosk** public montrant les prochains départs et alertes en cours, et une **carte réseau interactive** avec calcul d'itinéraires par algorithme de Dijkstra.
 
-L'architecture repose sur un backend **Spring Boot 4 / Java 21** avec une API REST de 10 contrôleurs et une communication temps réel via **WebSocket STOMP**, un frontend **Angular 21** avec Signals et Angular Material, et une base **PostgreSQL** avec migrations Flyway. Le projet totalise environ **6 000 lignes de Java** et **27 000 lignes de TypeScript**, accompagnées de **1 494 tests** (JUnit 5 + Vitest + Playwright).
+L'architecture repose sur un backend **Spring Boot 4 / Java 21** avec une API REST de 10 contrôleurs et une communication temps réel via **WebSocket STOMP**, un frontend **Angular 21** avec Signals et Angular Material, et une base **PostgreSQL** avec migrations Flyway. Le projet totalise environ **6 000 lignes de Java** et **15 000 lignes de TypeScript** applicatifs, accompagnés de **1 572 tests** (JUnit 5 + Vitest).
 
 Le déploiement est conteneurisé via **Docker Compose** avec trois services (PostgreSQL, backend Spring Boot, frontend Nginx), prêt pour la production.
 
@@ -43,15 +43,15 @@ Le déploiement est conteneurisé via **Docker Compose** avec trois services (Po
 
 ## Étapes – ce que j'ai fait
 
-**Phase 1 - Architecture et fondations** : Mise en place de l'architecture DDD (Domain-Driven Design) avec séparation en couches (domain, application, infrastructure, api). Configuration de Spring Boot 4 avec Spring Security, JWT, WebSocket STOMP et Spring Data JPA. Création du schéma PostgreSQL avec Flyway et des 8 tables du modèle de données.
+**Phase 1 - Architecture et fondations** : Mise en place de l'architecture DDD (Domain-Driven Design) avec séparation en couches (domain, application, infrastructure, api). Configuration de Spring Boot 4 avec Spring Security, JWT, WebSocket STOMP et Spring Data JPA. Création du schéma PostgreSQL avec Flyway et des 9 tables du modèle de données.
 
 **Phase 2 - Backend API et logique métier** : Développement des 11 services métier et 10 contrôleurs REST couvrant la gestion des lignes, arrêts, itinéraires, horaires, messages, appareils et utilisateurs. Implémentation du système de rôles (Admin/Agent) avec filtres de sécurité JWT. Mise en place du `DisplayStateCalculator` pour le pré-calcul des états d'affichage.
 
-**Phase 3 - Frontend Angular et interface d'administration** : Création de l'interface d'administration avec Angular 21, Angular Material et Tailwind CSS. Développement des modules de gestion (dashboard, lignes, arrêts, horaires, messages, appareils, utilisateurs) avec composants standalone, Signals pour la réactivité et lazy loading des routes.
+**Phase 3 - Frontend Angular et interface d'administration** : Création de l'interface d'administration avec Angular 21 et Angular Material. Développement des modules de gestion (dashboard, lignes, arrêts, horaires, messages, appareils, utilisateurs) avec composants standalone, Signals pour la réactivité et lazy loading des routes.
 
 **Phase 4 - Temps réel et affichage kiosk** : Intégration WebSocket STOMP pour la diffusion en temps réel des mises à jour d'affichage. Développement du composant kiosk montrant les prochains départs par ligne avec alertes actives. Implémentation du système d'événements domaine (ScheduleChangedEvent, MessageChangedEvent, NetworkChangedEvent) déclenchant le recalcul automatique des états d'affichage.
 
-**Phase 5 - Carte réseau et déploiement** : Développement de la carte réseau interactive avec algorithme A\* pour le calcul d'itinéraires et cache Caffeine pour les performances. Conteneurisation avec Docker multi-stage (JDK 21 + Nginx). Configuration Docker Compose 3 services. Mise en place de Husky, commitlint et lint-staged pour la qualité.
+**Phase 5 - Carte réseau et déploiement** : Développement de la carte réseau interactive avec algorithme de Dijkstra pour le calcul d'itinéraires et cache Caffeine pour les performances. Conteneurisation avec Docker multi-stage (JDK 21 + Nginx). Configuration Docker Compose 3 services. Mise en place de Husky, commitlint et lint-staged pour la qualité.
 
 ## Acteurs – les interactions
 
@@ -71,14 +71,14 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 - Compétences en architecture DDD appliquée à un domaine métier concret
 - Maîtrise de la communication temps réel via WebSocket STOMP
 - Expérience en conteneurisation Docker multi-service pour le déploiement production
-- Capacité à produire une couverture de tests complète (1 494 tests)
+- Capacité à produire une couverture de tests complète (1 572 tests)
 
 ### Pour les utilisateurs
 
 - Plateforme fonctionnelle prête pour la production avec Docker Compose
 - Interface d'administration complète pour la gestion du réseau de transport
 - Affichage kiosk temps réel adapté aux écrans de toutes tailles
-- Carte réseau interactive avec calcul d'itinéraires par algorithme A\*
+- Carte réseau interactive avec calcul d'itinéraires par algorithme de Dijkstra
 - Système de messages d'alerte multi-niveaux (info, warning, critical) avec portées configurables (réseau, ligne, arrêt)
 - API REST documentée avec 10 contrôleurs et authentification JWT
 
@@ -100,7 +100,7 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 - Le projet est fonctionnel et déployable en production via Docker
 - L'architecture DDD permet d'ajouter de nouveaux domaines sans régressions
-- La couverture de tests (1 494 tests) garantit la stabilité lors des évolutions
+- La couverture de tests (1 572 tests) garantit la stabilité lors des évolutions
 
 ## Regard critique
 

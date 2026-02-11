@@ -47,4 +47,4 @@ Je souhaite approfondir certains aspects avancés : les types conditionnels comp
 - [AppStandard](/projects/appstandard) - 216k+ lignes TypeScript en monorepo
 - [Tidy App](/projects/tidy-app) - 70k+ lignes TypeScript avec Tauri
 - [Cahnon](/projects/cahnon) - Frontend Svelte 5/TypeScript, couche API 1 300 lignes
-- [Transit Display Hub](/projects/transit-display-hub) - Frontend Angular 21/TypeScript, 27k lignes
+- [Transit Display Hub](/projects/transit-display-hub) - Frontend Angular 21/TypeScript, 15k lignes

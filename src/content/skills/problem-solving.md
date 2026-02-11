@@ -45,4 +45,4 @@ Je souhaite approfondir les techniques de debugging avancées : profiling mémoi
 - [AppStandard](/projects/appstandard) - Parsing RRULE complexe, architecture monorepo
 - [Tidy App](/projects/tidy-app) - Intégration LLMs, gestion edge cases
 - [Cahnon](/projects/cahnon) - Détection d'incohérences narratives, auto-linking dans l'éditeur
-- [Transit Display Hub](/projects/transit-display-hub) - Algorithme A\* pathfinding, pré-calcul d'état temps réel
+- [Transit Display Hub](/projects/transit-display-hub) - Algorithme de Dijkstra pathfinding, pré-calcul d'état temps réel
