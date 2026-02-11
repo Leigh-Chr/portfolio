@@ -6,8 +6,7 @@ logo: '/images/logos/iscod.jpg'
 website: 'https://www.iscod.fr'
 location: 'Formation à distance'
 startDate: '2023-09'
-endDate: '2025-09'
-current: false
+current: true
 order: 3
 relatedProjects: []
 relatedSkills: ['javascript-typescript', 'nodejs-backend', 'problem-solving']
@@ -15,7 +14,7 @@ relatedSkills: ['javascript-typescript', 'nodejs-backend', 'problem-solving']
 
 Formation de niveau Bac+5 axée sur l'architecture logicielle et les méthodologies agiles avancées. Spécialisation en développement web moderne et accessibilité numérique.
 
-Compétences acquises :
+Compétences développées :
 
 - Architecture logicielle et patterns avancés
 - Méthodologies agiles et DevOps
