@@ -27,7 +27,7 @@ Transit Display Hub est une plateforme fullstack d'information voyageurs pour le
 
 Le projet couvre l'ensemble de la chaîne : une **interface d'administration** pour les opérateurs (gestion du réseau, des horaires, des messages et des appareils), un **affichage kiosk** public montrant les prochains départs et alertes en cours, et une **carte réseau interactive** avec calcul d'itinéraires par algorithme de Dijkstra.
 
-L'architecture repose sur un backend **Spring Boot 4 / Java 21** avec une API REST de 10 contrôleurs et une communication temps réel via **WebSocket STOMP**, un frontend **Angular 21** avec Signals et Angular Material, et une base **PostgreSQL** avec migrations Flyway. Le projet totalise environ **6 000 lignes de Java** et **15 000 lignes de TypeScript** applicatifs, accompagnés de **1 572 tests** (JUnit 5 + Vitest).
+L'architecture repose sur un backend **Spring Boot 4 / Java 21** avec une API REST de 10 contrôleurs et une communication temps réel via **WebSocket STOMP**, un frontend **Angular 21** avec Signals et Angular Material, et une base **PostgreSQL** avec migrations Flyway. Le projet totalise environ **6 000 lignes de Java** et **15 000 lignes de TypeScript** applicatifs, accompagnés de **plus de 1 500 tests** (JUnit 5 + Vitest).
 
 Le déploiement est conteneurisé via **Docker Compose** avec trois services (PostgreSQL, backend Spring Boot, frontend Nginx), prêt pour la production.
 
@@ -71,7 +71,7 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 - Compétences en architecture DDD appliquée à un domaine métier concret
 - Maîtrise de la communication temps réel via WebSocket STOMP
 - Expérience en conteneurisation Docker multi-service pour le déploiement production
-- Capacité à produire une couverture de tests complète (1 572 tests)
+- Capacité à produire une couverture de tests complète (plus de 1 500 tests)
 
 ### Pour les utilisateurs
 
@@ -100,7 +100,7 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 - Le projet est fonctionnel et déployable en production via Docker
 - L'architecture DDD permet d'ajouter de nouveaux domaines sans régressions
-- La couverture de tests (1 572 tests) garantit la stabilité lors des évolutions
+- La couverture de tests (plus de 1 500 tests) garantit la stabilité lors des évolutions
 
 ## Regard critique
 

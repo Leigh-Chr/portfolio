@@ -25,9 +25,9 @@ context:
 
 Cahnon est une application desktop dédiée aux auteurs de fiction, conçue pour organiser des scènes, maintenir la cohérence narrative et exporter des manuscrits propres. Le mot d'ordre : **"Write freely. Stay consistent."**
 
-L'application propose un environnement d'écriture sans distraction couplé à des outils puissants d'organisation narrative : une **bible des personnages, lieux et objets** avec détection automatique dans le texte, une **timeline chronologique** avec détection de conflits, un système d'**arcs narratifs** avec suivi de statut narratif, et un **corkboard** pour visualiser les scènes comme des fiches.
+L'application propose un environnement d'écriture sans distraction couplé à des outils puissants d'organisation narrative : une **bible narrative** (personnages, lieux, objets, factions, concepts, glossaire) avec détection automatique dans le texte, une **timeline chronologique** avec détection de conflits, un système d'**arcs narratifs** avec suivi de statut narratif, et un **corkboard** pour visualiser les scènes comme des fiches.
 
-Le projet représente environ **14 000 lignes de code Rust** pour le backend (plus **19 000 lignes de tests**) et **1 300 lignes TypeScript** pour la couche API frontend, avec **51 composants Svelte** et **25+ modules de base de données** SQLite. Chaque projet d'écriture est stocké dans un fichier unique `.cahnon` (base SQLite), garantissant portabilité et confidentialité totale des données.
+Le projet représente environ **13 000 lignes de code Rust** pour le backend (plus **21 000 lignes de tests**) et **1 300 lignes TypeScript** pour la couche API frontend, avec **51 composants Svelte** et **25+ modules de base de données** SQLite. Chaque projet d'écriture est stocké dans un fichier unique `.cahnon` (base SQLite), garantissant portabilité et confidentialité totale des données.
 
 L'architecture repose sur **Tauri v2** pour le shell natif desktop, **Svelte 5 avec le système de runes** pour la réactivité fine du frontend, **Rust** pour la logique métier et les opérations fichiers, et **TipTap/ProseMirror** pour l'éditeur de texte riche extensible.
 
@@ -66,7 +66,7 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 ### Pour moi
 
-- Maîtrise de Rust pour le développement d'applications backend performantes (14k lignes de code + 19k de tests)
+- Maîtrise de Rust pour le développement d'applications backend performantes (13k lignes de code + 21k de tests)
 - Expertise approfondie de Tauri v2 et de l'architecture IPC frontend/backend
 - Compétences avancées en Svelte 5 avec le système de runes pour la réactivité fine
 - Maîtrise de TipTap/ProseMirror et des extensions d'éditeur de texte riche
@@ -78,7 +78,7 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 - Application desktop fonctionnelle pour Windows, macOS et Linux (bundle < 20 Mo)
 - Données 100% locales dans un fichier unique `.cahnon` — aucun cloud, confidentialité totale
 - Éditeur de texte riche avec modes focus, typewriter et compteur de mots
-- Bible narrative complète avec détection et liaison automatique dans le texte
+- Bible narrative complète (6 types d'entrées) avec détection et liaison automatique dans le texte
 - Timeline avec détection de conflits et arcs narratifs avec suivi de statut
 - Export multi-format : Markdown, texte brut, PDF, DOCX, JSON, CSV
 
