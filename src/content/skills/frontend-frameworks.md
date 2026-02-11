@@ -5,7 +5,8 @@ group: 'frontend'
 level: 8
 icon: '⚛️'
 order: 2
-relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon']
+relatedProjects:
+  ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']
 summary: "Développement d'interfaces utilisateur modernes avec les principaux frameworks du marché : React, Angular, Svelte et Vue."
 ---
 
@@ -48,3 +49,4 @@ Je souhaite approfondir les patterns émergents : Server Components (React/Next.
 - [AppStandard](/projects/appstandard) - React 19, architecture moderne, 216k+ lignes
 - [Tidy App](/projects/tidy-app) - Interface desktop avec Tauri, UI TypeScript moderne
 - [Cahnon](/projects/cahnon) - Svelte 5 runes, TipTap/ProseMirror, 51 composants
+- [Transit Display Hub](/projects/transit-display-hub) - Angular 21 Signals, Material, standalone components

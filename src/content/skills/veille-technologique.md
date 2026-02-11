@@ -6,7 +6,15 @@ level: 8
 icon: '🔍'
 order: 7
 relatedProjects:
-  ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'site-bh-technologies', 'cahnon']
+  [
+    'syren-platform',
+    'luce-platform',
+    'appstandard',
+    'tidy-app',
+    'site-bh-technologies',
+    'cahnon',
+    'transit-display-hub',
+  ]
 summary: 'Capacité à identifier, apprendre et adopter de nouvelles technologies pertinentes pour rester à la pointe du développement.'
 ---
 
@@ -58,3 +66,4 @@ Je maintiens cette compétence par une pratique régulière : projets personnels
 - [Tidy App](/projects/tidy-app) - Tauri 2.0, Rust, intégration LLMs
 - [Site Web BH Technologies](/projects/site-bh-technologies) - SEO technique, Google Analytics, Lighthouse
 - [Cahnon](/projects/cahnon) - Tauri v2, Svelte 5 runes, Rust, TipTap/ProseMirror
+- [Transit Display Hub](/projects/transit-display-hub) - Spring Boot 4, Angular 21 Signals, WebSocket STOMP

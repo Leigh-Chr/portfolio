@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <linearGradient id="accent-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#10b981"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+
+  <!-- Decorative elements -->
+  <g opacity="0.05">
+    <circle cx="100" cy="100" r="70" stroke="#3b82f6" stroke-width="1" fill="none"/>
+    <circle cx="1100" cy="530" r="50" stroke="#10b981" stroke-width="1" fill="none"/>
+  </g>
+
+  <!-- Transit display mockup -->
+  <g transform="translate(600, 210)">
+    <g transform="translate(-280, -130)">
+      <!-- Display screen frame -->
+      <rect x="0" y="0" width="560" height="300" rx="8" fill="#111827" stroke="#1f2937" stroke-width="2"/>
+
+      <!-- Header bar -->
+      <rect x="0" y="0" width="560" height="40" rx="8" fill="#1e3a5f"/>
+      <rect x="0" y="32" width="560" height="8" fill="#1e3a5f"/>
+      <text x="20" y="26" font-family="system-ui, sans-serif" font-size="14" fill="#fff" font-weight="600">Gare Centrale</text>
+      <text x="460" y="26" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8">14:32</text>
+      <circle cx="540" cy="20" r="6" fill="#22c55e"/>
+
+      <!-- Line 1: Metro -->
+      <g transform="translate(15, 55)">
+        <rect x="0" y="0" width="530" height="50" rx="4" fill="#1f2937"/>
+        <rect x="8" y="8" width="34" height="34" rx="6" fill="#ef4444"/>
+        <text x="25" y="30" font-family="system-ui, sans-serif" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">M1</text>
+        <text x="52" y="22" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="500">Ligne 1 — Direction Aéroport</text>
+        <text x="52" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">via Place de la République</text>
+        <text x="480" y="22" font-family="system-ui, sans-serif" font-size="16" fill="#22c55e" font-weight="700" text-anchor="end">2 min</text>
+        <text x="480" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#64748b" text-anchor="end">puis 8, 15 min</text>
+      </g>
+
+      <!-- Line 2: Bus -->
+      <g transform="translate(15, 115)">
+        <rect x="0" y="0" width="530" height="50" rx="4" fill="#1f2937"/>
+        <rect x="8" y="8" width="34" height="34" rx="6" fill="#3b82f6"/>
+        <text x="25" y="30" font-family="system-ui, sans-serif" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">B3</text>
+        <text x="52" y="22" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="500">Bus 3 — Direction Université</text>
+        <text x="52" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">via Centre Commercial</text>
+        <text x="480" y="22" font-family="system-ui, sans-serif" font-size="16" fill="#facc15" font-weight="700" text-anchor="end">5 min</text>
+        <text x="480" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#64748b" text-anchor="end">puis 20 min</text>
+      </g>
+
+      <!-- Line 3: Tram -->
+      <g transform="translate(15, 175)">
+        <rect x="0" y="0" width="530" height="50" rx="4" fill="#1f2937"/>
+        <rect x="8" y="8" width="34" height="34" rx="6" fill="#10b981"/>
+        <text x="25" y="30" font-family="system-ui, sans-serif" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">T2</text>
+        <text x="52" y="22" font-family="system-ui, sans-serif" font-size="11" fill="#e2e8f0" font-weight="500">Tram 2 — Direction Parc Nord</text>
+        <text x="52" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#64748b">via Hôtel de Ville</text>
+        <text x="480" y="22" font-family="system-ui, sans-serif" font-size="16" fill="#ef4444" font-weight="700" text-anchor="end">12 min</text>
+        <text x="480" y="38" font-family="system-ui, sans-serif" font-size="10" fill="#64748b" text-anchor="end">puis 24 min</text>
+      </g>
+
+      <!-- Alert banner -->
+      <g transform="translate(15, 240)">
+        <rect x="0" y="0" width="530" height="45" rx="4" fill="#facc15" opacity="0.15" stroke="#facc15" stroke-width="1"/>
+        <text x="12" y="18" font-family="system-ui, sans-serif" font-size="11" fill="#facc15" font-weight="600">⚠ Perturbation Ligne M1</text>
+        <text x="12" y="34" font-family="system-ui, sans-serif" font-size="10" fill="#94a3b8">Travaux entre Gare Centrale et Commerce — Fréquence réduite jusqu'à 18h</text>
+      </g>
+    </g>
+
+    <!-- WebSocket indicator -->
+    <g transform="translate(-310, -40)">
+      <rect x="0" y="0" width="80" height="50" rx="6" fill="#22c55e" opacity="0.15" stroke="#22c55e" stroke-width="1"/>
+      <text x="40" y="18" font-family="system-ui, sans-serif" font-size="9" fill="#22c55e" text-anchor="middle" font-weight="600">WebSocket</text>
+      <circle cx="25" cy="35" r="3" fill="#22c55e"/>
+      <circle cx="40" cy="35" r="3" fill="#22c55e" opacity="0.6"/>
+      <circle cx="55" cy="35" r="3" fill="#22c55e" opacity="0.3"/>
+    </g>
+
+    <!-- REST API indicator -->
+    <g transform="translate(280, -80)">
+      <rect x="0" y="0" width="80" height="50" rx="6" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="1"/>
+      <text x="40" y="18" font-family="system-ui, sans-serif" font-size="9" fill="#3b82f6" text-anchor="middle" font-weight="600">REST API</text>
+      <text x="40" y="35" font-family="system-ui, sans-serif" font-size="8" fill="#64748b" text-anchor="middle">10 controllers</text>
+    </g>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="440" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">Transit Display Hub</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="478" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#9ca3af" text-anchor="middle">Plateforme d'information voyageurs en temps réel</text>
+
+  <!-- Tech badges -->
+  <g transform="translate(600, 530)">
+    <rect x="-260" y="0" width="100" height="24" rx="4" fill="#3b82f6" opacity="0.2"/>
+    <text x="-210" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#3b82f6" text-anchor="middle">Angular 21</text>
+
+    <rect x="-150" y="0" width="110" height="24" rx="4" fill="#10b981" opacity="0.2"/>
+    <text x="-95" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#10b981" text-anchor="middle">Spring Boot 4</text>
+
+    <rect x="-30" y="0" width="70" height="24" rx="4" fill="#facc15" opacity="0.2"/>
+    <text x="5" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#facc15" text-anchor="middle">Java 21</text>
+
+    <rect x="50" y="0" width="90" height="24" rx="4" fill="#22d3ee" opacity="0.2"/>
+    <text x="95" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#22d3ee" text-anchor="middle">PostgreSQL</text>
+
+    <rect x="150" y="0" width="80" height="24" rx="4" fill="#a855f7" opacity="0.2"/>
+    <text x="190" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#a855f7" text-anchor="middle">WebSocket</text>
+  </g>
+
+  <!-- Border accent -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#accent-grad)"/>
+</svg>

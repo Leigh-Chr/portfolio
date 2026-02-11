@@ -5,7 +5,7 @@ group: 'backend'
 level: 6
 icon: '🗄️'
 order: 4
-relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'cahnon']
+relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'cahnon', 'transit-display-hub']
 summary: 'Conception et optimisation de bases de données relationnelles et NoSQL adaptées aux besoins de chaque projet.'
 ---
 
@@ -43,3 +43,4 @@ Je souhaite approfondir les aspects avancés : réplication, sharding, optimisat
 - [Plateforme Luce](/projects/luce-platform) - PostgreSQL, historiques de mesures
 - [AppStandard](/projects/appstandard) - Architecture multi-domaine PostgreSQL
 - [Cahnon](/projects/cahnon) - SQLite embarqué, 25+ tables, relations N:M
+- [Transit Display Hub](/projects/transit-display-hub) - PostgreSQL, Flyway migrations, JPA/Hibernate
