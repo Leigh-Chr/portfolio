@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
+import { getLogoImage } from '@utils/images';
 
 // Get all experiences from content collection
 const allExperiences = await getCollection('experiences');
@@ -254,7 +256,7 @@ function formatDate(dateStr: string): string {
 
                       {/* Organization with logo */}
                       <div class="flex items-center gap-4 mb-4">
-                        {exp.data.logo ? (
+                        {exp.data.logo && getLogoImage(exp.data.logo) ? (
                           exp.data.website ? (
                             <a
                               href={exp.data.website}
@@ -263,23 +265,23 @@ function formatDate(dateStr: string): string {
                               class="flex-shrink-0 hover:opacity-80 transition-opacity"
                               title={`Visiter le site de ${exp.data.organization}`}
                             >
-                              <img
-                                src={url(exp.data.logo)}
+                              <Image
+                                src={getLogoImage(exp.data.logo)!}
                                 alt={exp.data.organization}
                                 class="w-10 h-10 object-contain"
-                                width="40"
-                                height="40"
+                                width={80}
+                                height={80}
                                 loading="lazy"
                                 decoding="async"
                               />
                             </a>
                           ) : (
-                            <img
-                              src={url(exp.data.logo)}
+                            <Image
+                              src={getLogoImage(exp.data.logo)!}
                               alt={exp.data.organization}
                               class="w-10 h-10 object-contain"
-                              width="40"
-                              height="40"
+                              width={80}
+                              height={80}
                               loading="lazy"
                               decoding="async"
                             />
@@ -439,7 +441,7 @@ function formatDate(dateStr: string): string {
 
                       {/* Organization with logo */}
                       <div class="flex items-center gap-4 mb-4">
-                        {exp.data.logo ? (
+                        {exp.data.logo && getLogoImage(exp.data.logo) ? (
                           exp.data.website ? (
                             <a
                               href={exp.data.website}
@@ -448,23 +450,23 @@ function formatDate(dateStr: string): string {
                               class="flex-shrink-0 hover:opacity-80 transition-opacity"
                               title={`Visiter le site de ${exp.data.organization}`}
                             >
-                              <img
-                                src={url(exp.data.logo)}
+                              <Image
+                                src={getLogoImage(exp.data.logo)!}
                                 alt={exp.data.organization}
                                 class="w-10 h-10 object-contain"
-                                width="40"
-                                height="40"
+                                width={80}
+                                height={80}
                                 loading="lazy"
                                 decoding="async"
                               />
                             </a>
                           ) : (
-                            <img
-                              src={url(exp.data.logo)}
+                            <Image
+                              src={getLogoImage(exp.data.logo)!}
                               alt={exp.data.organization}
                               class="w-10 h-10 object-contain"
-                              width="40"
-                              height="40"
+                              width={80}
+                              height={80}
                               loading="lazy"
                               decoding="async"
                             />

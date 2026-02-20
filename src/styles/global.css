@@ -1,4 +1,5 @@
-/* Google Fonts loaded via <link> in BaseLayout.astro for better performance */
+@import '@fontsource-variable/dm-sans';
+@import '@fontsource-variable/space-grotesk';
 
 @import 'tailwindcss';
 
@@ -20,7 +21,7 @@
   --color-primary-100: #f3e8ff;
   --color-primary-200: #e9d5ff;
   --color-primary-300: #d8b4fe;
-  --color-primary-400: #c084fc;
+  --color-primary-400: #c387ff;
   --color-primary-500: #a855f7;
   --color-primary-600: #9333ea;
   --color-primary-700: #7c3aed;
@@ -41,7 +42,7 @@
 
   /* Tertiary: Rose */
   --color-tertiary-300: #fda4af;
-  --color-tertiary-400: #fb7185;
+  --color-tertiary-400: #fc798a;
   --color-tertiary-500: #f43f5e;
   --color-tertiary-600: #e11d48;
 
@@ -59,10 +60,10 @@
 
   /* Font families */
   --font-heading:
-    'Space Grotesk', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Space Grotesk Variable', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     sans-serif;
   --font-sans:
-    'DM Sans', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'DM Sans Variable', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', sans-serif;
 
   /* Neo-Memphis hard shadows */
@@ -204,9 +205,9 @@
      =================== */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           bg-primary-500 text-dark-900 font-heading font-semibold
+           bg-primary-400 text-dark-900 font-heading font-semibold
            border-2 border-dark-900 shadow-hard-lg
-           hover:bg-primary-400
+           hover:bg-primary-300
            active:shadow-hard
            transition-all duration-200;
     transition-timing-function: var(--ease-memphis);
@@ -709,8 +710,8 @@
   @apply inline-flex items-center justify-center gap-3 px-8 py-4 text-lg
          font-heading font-bold uppercase tracking-wide
          shadow-hard-xl transition-all duration-200
-         bg-primary-500 text-dark-900 border-dark-900
-         hover:bg-primary-400;
+         bg-primary-400 text-dark-900 border-dark-900
+         hover:bg-primary-300;
   border-width: 3px;
   transition-timing-function: var(--ease-memphis);
 }

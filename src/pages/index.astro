@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
+import { getProjectImage } from '@utils/images';
 import profileImage from '@assets/images/profile.jpg';
 
 // Get featured content
@@ -198,15 +199,27 @@ const featuredProjects = allProjects.slice(0, 3);
                   class="aspect-video bg-dark-700 relative overflow-hidden"
                   transition:name={`project-thumb-${project.id}`}
                 >
-                  <img
-                    src={url(project.data.thumbnail || '/images/project-placeholder.jpg')}
-                    alt={`Aperçu du projet ${project.data.title}`}
-                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                    decoding="async"
-                    width="384"
-                    height="216"
-                  />
+                  {project.data.thumbnail && getProjectImage(project.data.thumbnail) ? (
+                    <Image
+                      src={getProjectImage(project.data.thumbnail)!}
+                      alt={`Aperçu du projet ${project.data.title}`}
+                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                      decoding="async"
+                      width={384}
+                      height={216}
+                    />
+                  ) : (
+                    <img
+                      src={url(project.data.thumbnail || '/images/project-placeholder.jpg')}
+                      alt={`Aperçu du projet ${project.data.title}`}
+                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                      decoding="async"
+                      width="384"
+                      height="216"
+                    />
+                  )}
                   {/* Gradient overlay on hover */}
                   <div class="absolute inset-0 bg-gradient-to-t from-primary-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>

@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
+import { getProjectImage } from '@utils/images';
 
 // Get all projects from content collection
 const allProjects = await getCollection('projects');
@@ -135,25 +137,29 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
                 class="aspect-video bg-dark-700 relative overflow-hidden"
                 transition:name={`project-thumb-${project.id}`}
               >
-                {project.data.fullImage ? (
+                {project.data.fullImage && getProjectImage(project.data.fullImage) ? (
                   <div class="w-full h-full scroll-preview">
-                    <img
-                      src={url(project.data.fullImage)}
+                    <Image
+                      src={getProjectImage(project.data.fullImage)!}
                       alt={`Aperçu du projet ${project.data.title}`}
                       class="scroll-preview-img"
-                      loading="lazy"
-                      decoding="async"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding={index === 0 ? 'sync' : 'async'}
+                      fetchpriority={index === 0 ? 'high' : undefined}
+                      widths={[384, 768]}
+                      sizes="(max-width: 768px) 100vw, 384px"
                     />
                   </div>
-                ) : project.data.thumbnail ? (
-                  <img
-                    src={url(project.data.thumbnail)}
+                ) : project.data.thumbnail && getProjectImage(project.data.thumbnail) ? (
+                  <Image
+                    src={getProjectImage(project.data.thumbnail)!}
                     alt={`Aperçu du projet ${project.data.title}`}
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    loading="lazy"
-                    decoding="async"
-                    width="384"
-                    height="216"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding={index === 0 ? 'sync' : 'async'}
+                    fetchpriority={index === 0 ? 'high' : undefined}
+                    width={384}
+                    height={216}
                   />
                 ) : (
                   <div class="w-full h-full flex items-center justify-center">

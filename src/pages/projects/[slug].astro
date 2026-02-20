@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import { slide } from 'astro:transitions';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
+import { getProjectImage } from '@utils/images';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -256,25 +258,24 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
             transition:name={`project-thumb-${project.id}`}
           >
             {
-              project.data.fullImage ? (
+              project.data.fullImage && getProjectImage(project.data.fullImage) ? (
                 <div class="relative w-full h-full overflow-hidden scroll-preview">
-                  <img
-                    src={url(project.data.fullImage)}
+                  <Image
+                    src={getProjectImage(project.data.fullImage)!}
                     alt={`Aperçu du projet ${project.data.title}`}
                     class="scroll-preview-img"
-                    width="800"
-                    height="1600"
+                    width={800}
                     loading="eager"
                     fetchpriority="high"
                   />
                 </div>
-              ) : project.data.thumbnail ? (
-                <img
-                  src={url(project.data.thumbnail)}
+              ) : project.data.thumbnail && getProjectImage(project.data.thumbnail) ? (
+                <Image
+                  src={getProjectImage(project.data.thumbnail)!}
                   alt={`Aperçu du projet ${project.data.title}`}
                   class="w-full h-full object-cover"
-                  width="400"
-                  height="225"
+                  width={400}
+                  height={225}
                   loading="eager"
                   fetchpriority="high"
                 />
@@ -346,7 +347,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
                       target="_blank"
                       rel="noopener noreferrer"
                       class="inline-flex items-center gap-2 px-4 py-2 bg-primary-500/10 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white transition-all duration-200"
-                      aria-label={`Visiter le site de ${project.data.title}`}
+                      aria-label={`Voir le site de ${project.data.title}`}
                     >
                       <svg
                         class="w-5 h-5"
@@ -486,7 +487,7 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
                     <div class="flex gap-4">
                       <div class="flex flex-col items-center">
                         <div
-                          class={`w-10 h-10 ${index === phases.length - 1 ? 'bg-accent-400' : 'bg-primary-500'} flex items-center justify-center`}
+                          class={`w-10 h-10 ${index === phases.length - 1 ? 'bg-accent-400' : 'bg-primary-800'} flex items-center justify-center`}
                         >
                           <span
                             class={`font-heading font-bold ${index === phases.length - 1 ? 'text-dark-900' : 'text-white'}`}
