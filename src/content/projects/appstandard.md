@@ -56,12 +56,7 @@ Le projet représente plus de 216 000 lignes de TypeScript, organisées en monor
 
 ## Acteurs – les interactions
 
-Le projet est perso, mais je n'ai pas bossé dans le vide :
-
-- **Contributeurs GitHub** : Retours et suggestions via les issues, quelques contributions sur les parsers RFC
-- **Utilisateurs beta** : Tests des applications en conditions réelles, retours sur l'ergonomie et les bugs rencontrés avec différents fichiers .ics/.vcf
-- **Communauté RFC/iCalendar** : Échanges sur les forums spécialisés pour clarifier les ambiguïtés des spécifications
-- **Écosystème NPM** : Publication des packages pour réutilisation par d'autres développeurs
+J'ai travaillé seul sur l'intégralité du projet. Lecture des spécifications RFC, architecture monorepo, développement des parsers et des trois applications, publication des packages NPM et mise en place de l'infrastructure : tout a été réalisé en autonomie.
 
 ## Résultats
 

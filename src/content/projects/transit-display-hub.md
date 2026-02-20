@@ -55,12 +55,7 @@ Le déploiement est conteneurisé via **Docker Compose** avec trois services (Po
 
 ## Acteurs – les interactions
 
-Projet solo, mais pas sans échanges :
-
-- **Utilisateurs GitHub** : Retours sur l'ergonomie du dashboard et la configuration du réseau via les issues
-- **Scénarios de test réalistes** : Réseaux multi-lignes simulés avec perturbations et messages d'alerte de différentes sévérités
-- **Forums Spring Boot** : Échanges sur les patterns avancés de Spring Boot 4 (événements domaine, WebSocket STOMP, caching Caffeine)
-- **Forums Angular** : Discussions sur l'adoption des Signals, le mode zoneless et les standalone components
+J'ai travaillé seul sur ce projet de bout en bout. Architecture DDD, développement backend Spring Boot et frontend Angular, mise en place du temps réel WebSocket, conteneurisation Docker et rédaction des tests : tout a été fait en autonomie.
 
 ## Résultats
 

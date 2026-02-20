@@ -53,12 +53,7 @@ Le projet représente plus de 70 000 lignes de TypeScript, avec un backend Rust 
 
 ## Acteurs – les interactions
 
-Ce projet perso a quand même bénéficié de retours extérieurs :
-
-- **Utilisateurs GitHub** : Retours et suggestions sur l'ergonomie du renommage en masse via les issues
-- **Utilisateurs beta** : Tests sur différents systèmes d'exploitation et avec des volumes de fichiers variés, identification de cas d'usage non anticipés
-- **Discord Ollama et LocalAI** : Échanges sur les forums pour optimiser les prompts de suggestion de noms
-- **Écosystème NPM** : Publication du CLI pour réutilisation par d'autres développeurs et automatisation de workflows
+J'ai travaillé seul sur ce projet, de la conception à la publication. Choix technologiques, architecture, développement, tests, publication NPM et distribution desktop : tout a été fait en autonomie complète.
 
 ## Résultats
 

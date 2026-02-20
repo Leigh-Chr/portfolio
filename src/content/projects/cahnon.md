@@ -55,12 +55,7 @@ L'architecture repose sur **Tauri v2** pour le shell natif desktop, **Svelte 5 a
 
 ## Acteurs – les interactions
 
-Même en solo, j'ai eu pas mal d'échanges autour du projet :
-
-- **Utilisateurs GitHub** : Issues et suggestions sur l'ergonomie de l'éditeur et les fonctionnalités que les auteurs attendent
-- **Auteurs beta-testeurs** : Tests en conditions réelles avec des manuscrits de tailles variées, identification de cas d'usage que je n'avais pas prévus (séries multi-tomes, récits non linéaires)
-- **Discord Tauri** : Aide pour résoudre des problèmes d'intégration IPC et de distribution cross-platform
-- **Discord Svelte** : Discussions sur les patterns avancés des runes Svelte 5 pour le state management à grande échelle
+J'ai travaillé seul sur l'ensemble du projet. Conception de l'architecture Tauri/Rust/Svelte, développement du backend et du frontend, création de l'éditeur TipTap, modélisation de la base SQLite et mise en place de la chaîne de qualité : tout a été réalisé en autonomie.
 
 ## Résultats
 
