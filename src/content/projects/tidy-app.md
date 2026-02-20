@@ -25,7 +25,7 @@ context:
 
 ## Présentation
 
-Tidy App est un outil de rangement et renommage automatique de fichiers, disponible en application desktop (Windows, macOS, Linux) et en CLI. Le projet intègre l'intelligence artificielle pour suggérer des noms de fichiers pertinents et des structures de dossiers adaptées au contenu.
+Tidy App est un outil de rangement et renommage automatique de fichiers, disponible en application desktop (Windows, macOS, Linux) et en CLI. Le projet utilise l'intelligence artificielle pour suggérer des noms de fichiers cohérents et des structures de dossiers adaptées au contenu.
 
 L'application extrait les métadonnées des fichiers (EXIF pour les images, propriétés PDF, documents Office) et permet de créer des templates de nommage dynamiques. Un système d'historique complet permet d'annuler toutes les opérations.
 
@@ -35,9 +35,9 @@ Le projet représente plus de 70 000 lignes de TypeScript, avec un backend Rust 
 
 **Contexte** : Projet personnel né d'un besoin concret : après des années d'accumulation, mon dossier Téléchargements contenait plus de 3000 fichiers mal nommés. Les renommer manuellement aurait pris des heures.
 
-**Problématique** : Les outils de renommage existants sont soit trop basiques (renommage séquentiel), soit trop complexes (expressions régulières). Aucun n'exploitait les métadonnées des fichiers ni l'IA pour suggérer des noms pertinents.
+**Problématique** : Les outils de renommage existants sont soit trop basiques (renommage séquentiel), soit trop complexes (expressions régulières). Aucun n'exploitait les métadonnées des fichiers ni l'IA pour suggérer des noms qui ont du sens.
 
-**Objectifs** : Créer un outil de rangement automatique qui combine extraction de métadonnées, templates personnalisables et suggestions IA pour des noms de fichiers pertinents.
+**Objectifs** : Créer un outil de rangement automatique qui combine extraction de métadonnées, templates personnalisables et suggestions IA pour des noms de fichiers lisibles.
 
 **Risques identifiés** : Complexité du développement cross-platform (Windows, macOS, Linux), intégration de modèles IA locaux et distants, gestion sécurisée des opérations fichiers.
 
@@ -53,20 +53,20 @@ Le projet représente plus de 70 000 lignes de TypeScript, avec un backend Rust 
 
 ## Acteurs – les interactions
 
-Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son évolution :
+Ce projet perso a quand même bénéficié de retours extérieurs :
 
-- **Communauté open source** : Retours via les issues GitHub, suggestions d'amélioration sur l'ergonomie du renommage en masse
+- **Utilisateurs GitHub** : Retours et suggestions sur l'ergonomie du renommage en masse via les issues
 - **Utilisateurs beta** : Tests sur différents systèmes d'exploitation et avec des volumes de fichiers variés, identification de cas d'usage non anticipés
-- **Communauté IA/LLM** : Échanges sur les forums et Discord (Ollama, LocalAI) pour optimiser les prompts de suggestion de noms
+- **Discord Ollama et LocalAI** : Échanges sur les forums pour optimiser les prompts de suggestion de noms
 - **Écosystème NPM** : Publication du CLI pour réutilisation par d'autres développeurs et automatisation de workflows
 
 ## Résultats
 
 ### Pour moi
 
-- Découverte et maîtrise de Tauri 2.0 et des bases de Rust
-- Compétences en intégration de LLMs (Ollama local, API OpenAI)
-- Expertise en développement d'applications desktop cross-platform
+- Tauri 2.0 et les bases de Rust appris sur ce projet
+- Intégration de LLMs en pratique (Ollama local, API OpenAI)
+- Développement d'applications desktop cross-platform
 - Apprentissage de la gestion des opérations fichiers sécurisées avec rollback
 
 ### Pour les utilisateurs
@@ -92,8 +92,8 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 ### Aujourd'hui
 
-- Le projet est en développement actif
-- Les builds desktop sont disponibles pour les trois plateformes
+- Le projet avance régulièrement
+- Les builds desktop tournent sur les trois plateformes
 - Le CLI est publié sur NPM
 
 ## Regard critique

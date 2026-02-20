@@ -12,31 +12,31 @@ summary: 'Approche méthodique pour analyser, décomposer et résoudre des probl
 
 ## Ma Définition
 
-La résolution de problèmes est le quotidien du développeur. L'émergence des outils d'IA assistée comme GitHub Copilot et Claude transforme l'approche du debugging en 2024 : ces assistants aident à identifier des patterns d'erreurs, suggèrent des solutions et accélèrent la recherche. Parallèlement, les pratiques d'observabilité (OpenTelemetry, distributed tracing) permettent de diagnostiquer des problèmes complexes dans les architectures distribuées. Chaque bug à corriger, chaque fonctionnalité à implémenter est un puzzle à résoudre. Face à un problème complexe, ma méthode est toujours la même : d'abord comprendre et reproduire le problème de manière isolée, puis le décomposer en sous-problèmes plus simples.
+Chaque bug à corriger, chaque fonctionnalité à implémenter, c'est un puzzle. Ma méthode n'a pas changé depuis le début : d'abord comprendre et reproduire le problème de manière isolée, puis le découper en morceaux plus petits. Ça paraît basique, mais dans le contexte IoT de BH Technologies où un bug peut venir de n'importe quelle couche (capteur, réseau, backend, frontend), c'est la seule approche qui marche.
 
 ## Mes éléments de preuve
 
 ### Débogage multicouche dans l'IoT
 
-Dans le contexte IoT de BH Technologies, les problèmes sont souvent multicouches : le bug peut venir du capteur physique, de la communication réseau LoRaWAN, du backend qui traite les données, ou du frontend qui les affiche. Cette complexité m'a appris à raisonner de manière systémique, à utiliser les logs stratégiquement et à ne pas faire d'hypothèses prématurées. J'utilise le débogage pas-à-pas, les breakpoints conditionnels, et parfois le "rubber duck debugging".
+Chez BH Technologies, quand quelque chose ne marche pas, le bug peut se cacher n'importe où : capteur physique, réseau LoRaWAN, backend, ou frontend. J'ai appris à ne pas sauter aux conclusions et à remonter méthodiquement la chaîne avec les logs. Breakpoints conditionnels, débogage pas-à-pas, et parfois le bon vieux "rubber duck debugging" — expliquer le problème à voix haute pour le comprendre.
 
 ### Refonte des rapports Syren V3
 
-Les rapports IoT de **[Syren V3](/projects/syren-platform)** étaient illisibles et généraient de nombreuses demandes de clarification. J'ai analysé le problème en observant comment les utilisateurs les consultaient, puis j'ai refait entièrement la mise en page : graphiques clairs, information structurée par priorité, exports PDF propres. Résultat : amélioration notable de la satisfaction et réduction significative des demandes d'explication.
+Les rapports IoT de **[Syren V3](/projects/syren-platform)** étaient illisibles et généraient beaucoup de tickets de clarification au support. J'ai observé comment les utilisateurs les consultaient en vrai, puis j'ai refondu la mise en page : graphiques lisibles, information priorisée, exports PDF propres. Les demandes d'explication ont nettement baissé après ça.
 
 ### Implémentation des RRULE dans AppStandard
 
-Sur **[AppStandard](/projects/appstandard)**, j'ai dû implémenter le parsing des règles de récurrence (RRULE) du standard RFC 5545. Ces règles peuvent être extrêmement complexes (récurrences avec exceptions, fuseaux horaires, limites). J'ai décomposé le problème en sous-parsers, écrit des tests exhaustifs, et itéré jusqu'à gérer tous les cas edge. Cette approche méthodique a permis de créer un parser robuste qui gère les fichiers .ics de Google, Apple et Outlook.
+Sur **[AppStandard](/projects/appstandard)**, j'ai dû implémenter le parsing des règles de récurrence (RRULE) du standard RFC 5545. Ces règles peuvent être extrêmement complexes (récurrences avec exceptions, fuseaux horaires, limites). J'ai décomposé le problème en sous-parsers, écrit des tests exhaustifs, et itéré jusqu'à gérer tous les cas edge. Au final, le parser gère correctement les fichiers .ics de Google, Apple et Outlook.
 
 ## Mon autocritique
 
-Mon parcours en STI2D, orienté vers l'ingénierie, m'a formé à cette approche analytique dès le lycée. J'apprécie particulièrement les problèmes de performance : analyser des requêtes lentes, optimiser des algorithmes, réduire la consommation mémoire.
+Le STI2D m'a donné le goût de l'analyse technique dès le lycée. Ce que je préfère, ce sont les problèmes de performance : requêtes lentes à démonter, algorithmes à optimiser, mémoire à gratter.
 
-Mon conseil : toujours reproduire le problème de manière isolée avant de chercher une solution. Un bug qu'on ne peut pas reproduire est un bug qu'on ne peut pas vraiment corriger.
+Mon réflexe numéro un : isoler le bug avant de chercher une solution. Si on ne peut pas le reproduire, on ne peut pas vraiment le corriger.
 
 ## Mon évolution dans cette compétence
 
-Je souhaite approfondir les techniques de debugging avancées : profiling mémoire, analyse de performance, et observabilité (traces distribuées, métriques). Ces compétences sont essentielles pour maintenir des applications à grande échelle.
+Je veux creuser les techniques de debugging avancées : profiling mémoire, analyse de performance, observabilité (traces distribuées, métriques). Plus les apps grossissent, plus ces compétences deviennent nécessaires.
 
 ## Réalisations associées
 

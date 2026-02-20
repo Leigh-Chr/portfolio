@@ -12,35 +12,31 @@ summary: "Développement d'interfaces utilisateur modernes avec les principaux f
 
 ## Ma Définition
 
-La maîtrise des frameworks frontend modernes est au cœur de mon métier de développeur fullstack. L'année 2024 a été marquée par des évolutions majeures : la sortie de Svelte 5 avec son nouveau système de réactivité (runes), React 19 et ses Server Components, et la maturité croissante des méta-frameworks comme Next.js 15 et SvelteKit 2. Ces évolutions confirment la tendance vers des architectures hybrides SSR/SSG et une meilleure intégration serveur-client.
-
-Plutôt que de me spécialiser sur un seul outil, j'ai développé une expertise transversale qui me permet de m'adapter aux besoins de chaque projet : React pour sa flexibilité et son écosystème, Angular pour les applications d'entreprise structurées, Svelte pour ses performances exceptionnelles, et Vue pour sa courbe d'apprentissage progressive. Sur chaque framework, je maîtrise les patterns avancés (state management, routing, SSR/SSG) et je comprends les compromis architecturaux qui guident le choix d'un outil plutôt qu'un autre.
+Plutôt que de me spécialiser sur un seul framework, j'ai préféré en pratiquer plusieurs sérieusement : React pour sa flexibilité, Angular pour les grosses apps structurées, Svelte pour la performance, Vue quand la courbe d'apprentissage de l'équipe compte. Sur chacun, je connais les patterns avancés (state management, routing, SSR/SSG) et surtout les compromis qui dictent le choix d'un outil plutôt qu'un autre dans un contexte donné.
 
 ## Mes éléments de preuve
 
 ### React 19 sur AppStandard (216k lignes)
 
-Mon projet personnel **[AppStandard](/projects/appstandard)** est entièrement développé en React 19 avec une architecture moderne : Server Components, hooks personnalisés, et un design system partagé entre trois applications (Calendar, Tasks, Contacts). Cette expérience sur un projet de grande envergure démontre ma capacité à structurer et maintenir une base de code React conséquente.
+Mon projet personnel **[AppStandard](/projects/appstandard)** est entièrement développé en React 19 avec une architecture moderne : Server Components, hooks personnalisés, et un design system partagé entre trois applications (Calendar, Tasks, Contacts). Gérer un projet React de cette taille m'a obligé à être rigoureux sur la structure et les conventions dès le départ.
 
 ### Migration Angular 14 → Svelte 5 (Syren et Luce)
 
-Chez BH Technologies, j'ai participé activement à la migration de **[Syren V4](/projects/syren-platform)** et **[Luce V4](/projects/luce-platform)** d'Angular 14 vers SvelteKit 2 avec Svelte 5. Cette migration impliquait de repenser les patterns (RxJS vers stores Svelte, services vers modules), tout en conservant les fonctionnalités existantes. Le résultat a été une amélioration significative des performances et de l'expérience développeur.
+Chez BH Technologies, j'ai participé activement à la migration de **[Syren V4](/projects/syren-platform)** et **[Luce V4](/projects/luce-platform)** d'Angular 14 vers SvelteKit 2 avec Svelte 5. Cette migration impliquait de repenser les patterns (RxJS vers stores Svelte, services vers modules), tout en conservant les fonctionnalités existantes. Au final, les pages chargent plus vite et le code est plus agréable à maintenir.
 
 ### Optimisation Angular et accessibilité (Syren V3)
 
-Sur **[Syren V3](/projects/syren-platform)**, j'ai optimisé la carte temps-réel qui était lente avec de gros volumes de conteneurs. J'ai refactorisé le composant avec lazy loading, virtualisation des marqueurs et optimisation de la change detection Angular. J'ai également ajouté les attributs ARIA appropriés pour l'accessibilité. Résultat : amélioration notable du temps de rendu et conformité WCAG 2.1 AA atteinte.
+Sur **[Syren V3](/projects/syren-platform)**, j'ai optimisé la carte temps-réel qui était lente avec de gros volumes de conteneurs. J'ai refactorisé le composant avec lazy loading, virtualisation des marqueurs et optimisation de la change detection Angular. J'ai également ajouté les attributs ARIA appropriés pour l'accessibilité. Le temps de rendu a nettement baissé et on a atteint la conformité WCAG 2.1 AA.
 
 ## Mon autocritique
 
-Ma polyvalence sur les frameworks frontend est un atout majeur. Je peux rejoindre une équipe React, Angular ou Svelte et être productif rapidement car je comprends les concepts fondamentaux qui transcendent les outils : composants, réactivité, gestion d'état, cycle de vie.
+Connaître plusieurs frameworks me permet d'être productif vite quelle que soit la stack d'une équipe, parce que les concepts de fond sont les mêmes : composants, réactivité, gestion d'état, cycle de vie.
 
-Angular m'a appris la rigueur architecturale, React m'a apporté la flexibilité et l'écosystème le plus riche, et Svelte m'a montré qu'on peut faire plus simple et plus performant.
-
-Mon conseil : ne pas se limiter à un seul framework. Comprendre plusieurs approches permet de mieux appréhender les concepts fondamentaux du développement frontend et de choisir l'outil adapté à chaque contexte.
+Angular m'a appris la rigueur architecturale, React la flexibilité, et Svelte m'a montré qu'on peut faire plus simple et plus rapide. Chacun a ses forces ; en avoir pratiqué plusieurs, c'est surtout mieux comprendre les fondamentaux qui ne changent pas d'un framework à l'autre.
 
 ## Mon évolution dans cette compétence
 
-Je souhaite approfondir les patterns émergents : Server Components (React/Next.js), le nouveau système de réactivité de Svelte 5 (runes), et les architectures hybrides SSR/SSG. Je suis également attentif aux nouveaux frameworks comme Solid.js qui apportent des idées innovantes.
+Ce que je veux creuser ensuite : les Server Components (React/Next.js), le système de runes de Svelte 5 plus en profondeur, et les architectures hybrides SSR/SSG. Je garde aussi un œil sur Solid.js, qui apporte des idées intéressantes.
 
 ## Réalisations associées
 

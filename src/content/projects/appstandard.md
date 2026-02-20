@@ -56,9 +56,9 @@ Le projet représente plus de 216 000 lignes de TypeScript, organisées en monor
 
 ## Acteurs – les interactions
 
-Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son évolution :
+Le projet est perso, mais je n'ai pas bossé dans le vide :
 
-- **Communauté open source** : Retours et suggestions via les issues GitHub, contributions potentielles sur les parsers RFC
+- **Contributeurs GitHub** : Retours et suggestions via les issues, quelques contributions sur les parsers RFC
 - **Utilisateurs beta** : Tests des applications en conditions réelles, retours sur l'ergonomie et les bugs rencontrés avec différents fichiers .ics/.vcf
 - **Communauté RFC/iCalendar** : Échanges sur les forums spécialisés pour clarifier les ambiguïtés des spécifications
 - **Écosystème NPM** : Publication des packages pour réutilisation par d'autres développeurs
@@ -67,11 +67,11 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 ### Pour moi
 
-- Maîtrise approfondie de TypeScript à grande échelle (216k+ lignes)
-- Expertise sur les standards ouverts RFC 5545 et RFC 6350
-- Compétences en architecture monorepo et publication de packages NPM
-- Montée en compétence sur React 19 et les dernières pratiques frontend
-- Capacité à lire et implémenter des spécifications techniques complexes
+- TypeScript à grande échelle : 216k+ lignes, ça forge
+- Standards ouverts RFC 5545 et RFC 6350 : lus, compris, implémentés
+- Architecture monorepo et publication de packages NPM
+- React 19 et les pratiques frontend récentes
+- Capable de lire une spec technique de 200 pages et de l'implémenter
 
 ### Pour la communauté
 
@@ -96,13 +96,13 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 ### Aujourd'hui
 
-- Le projet est en développement actif
+- Je continue à travailler dessus activement
 - Les packages NPM sont publiés et fonctionnels
-- L'infrastructure de base est opérationnelle
+- L'infra de base tourne
 
 ## Regard critique
 
-**Ce qui a bien fonctionné** : L'architecture monorepo avec packages partagés a permis une réutilisation massive du code (environ 60% du code est mutualisé). Les parsers RFC sont robustes et passent une batterie de tests avec des fichiers .ics/.vcf réels exportés de Google, Apple et Outlook.
+**Ce qui a bien fonctionné** : L'architecture monorepo avec packages partagés — environ 60% du code est mutualisé entre les trois applications. Les parsers RFC sont solides et passent une batterie de tests avec des fichiers .ics/.vcf réels exportés de Google, Apple et Outlook.
 
 **Ce que j'aurais fait différemment** : J'ai sous-estimé la complexité des RRULE (règles de récurrence). J'aurais dû commencer par Calendar seul avant d'attaquer les deux autres applications. Également, j'aurais dû écrire les tests en parallèle du développement plutôt qu'après.
 

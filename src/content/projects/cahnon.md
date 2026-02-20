@@ -27,7 +27,7 @@ Cahnon est une application desktop dédiée aux auteurs de fiction, conçue pour
 
 L'application propose un environnement d'écriture sans distraction couplé à des outils puissants d'organisation narrative : une **bible narrative** (personnages, lieux, objets, factions, concepts, glossaire) avec détection automatique dans le texte, une **timeline chronologique** avec détection de conflits, un système d'**arcs narratifs** avec suivi de statut narratif, et un **corkboard** pour visualiser les scènes comme des fiches.
 
-Le projet représente environ **13 000 lignes de code Rust** pour le backend (plus **21 000 lignes de tests**) et **1 300 lignes TypeScript** pour la couche API frontend, avec **51 composants Svelte** et **25+ modules de base de données** SQLite. Chaque projet d'écriture est stocké dans un fichier unique `.cahnon` (base SQLite), garantissant portabilité et confidentialité totale des données.
+Le projet représente environ **13 000 lignes de code Rust** pour le backend (plus **21 000 lignes de tests**) et **1 300 lignes TypeScript** pour la couche API frontend, avec **51 composants Svelte** et **25+ modules de base de données** SQLite. Chaque projet d'écriture tient dans un seul fichier `.cahnon` (une base SQLite) : portable, pas de cloud, données 100% locales.
 
 L'architecture repose sur **Tauri v2** pour le shell natif desktop, **Svelte 5 avec le système de runes** pour la réactivité fine du frontend, **Rust** pour la logique métier et les opérations fichiers, et **TipTap/ProseMirror** pour l'éditeur de texte riche extensible.
 
@@ -55,23 +55,23 @@ L'architecture repose sur **Tauri v2** pour le shell natif desktop, **Svelte 5 a
 
 ## Acteurs – les interactions
 
-Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son évolution :
+Même en solo, j'ai eu pas mal d'échanges autour du projet :
 
-- **Communauté open source** : Retours via les issues GitHub, suggestions sur l'ergonomie de l'éditeur et les fonctionnalités de gestion narrative souhaitées par les auteurs
-- **Auteurs beta-testeurs** : Tests en conditions réelles d'écriture avec des manuscrits de différentes tailles, identification de cas d'usage non anticipés (séries multi-tomes, récits non linéaires)
-- **Communauté Tauri** : Échanges sur Discord pour résoudre les problématiques d'intégration IPC et de distribution cross-platform
-- **Communauté Svelte** : Discussions sur les patterns avancés de Svelte 5 runes, notamment pour le state management réactif à grande échelle
+- **Utilisateurs GitHub** : Issues et suggestions sur l'ergonomie de l'éditeur et les fonctionnalités que les auteurs attendent
+- **Auteurs beta-testeurs** : Tests en conditions réelles avec des manuscrits de tailles variées, identification de cas d'usage que je n'avais pas prévus (séries multi-tomes, récits non linéaires)
+- **Discord Tauri** : Aide pour résoudre des problèmes d'intégration IPC et de distribution cross-platform
+- **Discord Svelte** : Discussions sur les patterns avancés des runes Svelte 5 pour le state management à grande échelle
 
 ## Résultats
 
 ### Pour moi
 
-- Maîtrise de Rust pour le développement d'applications backend performantes (13k lignes de code + 21k de tests)
-- Expertise approfondie de Tauri v2 et de l'architecture IPC frontend/backend
-- Compétences avancées en Svelte 5 avec le système de runes pour la réactivité fine
-- Maîtrise de TipTap/ProseMirror et des extensions d'éditeur de texte riche
-- Expérience en conception de bases de données SQLite complexes (25+ tables, relations N:M)
-- Capacité à architecturer une application desktop complète de bout en bout
+- Rust appris et pratiqué sérieusement (13k lignes de code + 21k de tests)
+- Tauri v2 et l'architecture IPC frontend/backend : plus de secrets
+- Svelte 5 avec le système de runes pour une réactivité granulaire
+- TipTap/ProseMirror et les extensions d'éditeur de texte riche
+- Conception de base SQLite complexe (25+ tables, relations N:M)
+- Une application desktop architecturée de bout en bout
 
 ### Pour les utilisateurs
 
@@ -99,14 +99,14 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 ### Aujourd'hui
 
-- Le projet est en développement actif avec des releases régulières
-- L'architecture modulaire permet d'ajouter de nouvelles fonctionnalités sans régressions
-- Le système de qualité (hooks git, linting, tests) garantit la stabilité du code
+- Je continue à sortir des releases régulièrement
+- La structure modulaire rend l'ajout de fonctionnalités assez indolore
+- Les hooks git, le linting et les tests gardent le code stable
 
 ## Regard critique
 
-**Ce qui a bien fonctionné** : Le choix de Tauri v2 avec Rust s'est révélé excellent pour les performances et la taille du bundle. L'architecture modulaire du backend (25+ modules SQLite indépendants) a permis un développement itératif rapide sans régressions. Le système de runes de Svelte 5 offre une réactivité fine parfaitement adaptée à un éditeur de texte temps réel.
+**Ce qui a bien fonctionné** : Le choix de Tauri v2 avec Rust — les performances et la taille du bundle sont au rendez-vous. L'architecture modulaire du backend (25+ modules SQLite indépendants) m'a permis d'avancer vite sans casser ce qui existait. Le système de runes de Svelte 5 colle bien à un éditeur de texte temps réel où la réactivité doit être granulaire.
 
 **Ce que j'aurais fait différemment** : J'aurais dû investir plus tôt dans les tests E2E pour une application desktop — les interactions IPC entre Svelte et Rust sont complexes à tester unitairement. J'aurais également conçu le schéma de base de données avec un système de migrations dès le départ plutôt que de le gérer après coup.
 
-**Leçon apprise** : Développer une application desktop avec des technologies web (Tauri) demande de penser différemment qu'une webapp : la gestion de l'état local, le verrouillage de fichiers, la récupération après crash et les permissions système sont des préoccupations fondamentales absentes du développement web classique.
+**Leçon apprise** : Développer une application desktop avec des technologies web (Tauri) demande de penser différemment qu'une webapp : gestion de l'état local, verrouillage de fichiers, récupération après crash, permissions système — autant de sujets qu'on ne croise jamais en développement web classique.

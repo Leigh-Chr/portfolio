@@ -26,7 +26,7 @@ context:
 
 Syren est une plateforme SaaS destinée aux collectivités territoriales pour la gestion intelligente de leurs déchets. Le système repose sur des capteurs à ultrasons installés dans les conteneurs (aériens ou enterrés) qui remontent en temps réel le niveau de remplissage via les réseaux LoRaWAN et cellulaires (NB-IoT, LTE-M). Ces capteurs, autonomes pendant 10 ans et résistants aux conditions difficiles (lavages haute pression, chocs), alimentent une interface web permettant aux gestionnaires d'optimiser les tournées de collecte.
 
-L'enjeu principal est de réduire les coûts opérationnels des collectivités tout en améliorant la qualité du service. Les résultats sont significatifs : **40% d'économies sur les coûts de collecte**, un taux de remplissage moyen passant de 50% à 85%, et **25-30% de kilomètres parcourus en moins**. La plateforme intègre le système Redin pour le contrôle d'accès aux Points d'Apport Volontaire (PAV) et la supervision de la **redevance incitative** : contrôle par badge, QR code ou application mobile Ecopass, suivi des ouvertures de tambour, et gestion des foyers. L'écosystème comprend également l'application terrain Redin Tech pour la récupération des données via Bluetooth en zone sans réseau. C'est un projet à fort impact environnemental qui s'inscrit dans la démarche smart city de BH Technologies, déployé notamment sur l'agglomération grenobloise.
+L'enjeu principal est de réduire les coûts opérationnels des collectivités tout en améliorant la qualité du service. En chiffres : **40% d'économies sur les coûts de collecte**, un taux de remplissage moyen qui passe de 50% à 85%, et **25-30% de kilomètres parcourus en moins**. La plateforme intègre le système Redin pour le contrôle d'accès aux Points d'Apport Volontaire (PAV) et la supervision de la **redevance incitative** : contrôle par badge, QR code ou application mobile Ecopass, suivi des ouvertures de tambour, et gestion des foyers. L'écosystème comprend également l'application terrain Redin Tech pour la récupération des données via Bluetooth en zone sans réseau. Le projet est déployé notamment sur l'agglomération grenobloise, dans le cadre de la démarche smart city de BH Technologies.
 
 ## Objectifs, contexte, enjeu et risques
 
@@ -65,13 +65,13 @@ L'enjeu principal est de réduire les coûts opérationnels des collectivités t
 
 ### Pour moi
 
-- Développement de l'expertise en UX research grâce aux ateliers utilisateurs directs
-- Maîtrise approfondie de RxJS pour la gestion des flux temps-réel et Socket.IO
-- Expérience complète de migration Angular 14 vers Svelte 5 (réécriture majeure)
-- Compétences en internationalisation avec Transloco (Angular) et Paraglide.js (Svelte)
-- Montée en compétence significative sur l'accessibilité numérique (WCAG 2.1 AA)
-- Expertise en cartographie interactive avec Mapbox GL et Mapbox Draw
-- Expérience concrète de la méthodologie Scrum en contexte professionnel
+- Pratique concrète de l'UX research via les ateliers utilisateurs
+- RxJS maîtrisé en profondeur pour les flux temps-réel et Socket.IO
+- Migration complète Angular 14 → Svelte 5 (réécriture de A à Z)
+- Internationalisation avec Transloco (Angular) et Paraglide.js (Svelte)
+- Accessibilité numérique : WCAG 2.1 AA, ce n'est plus un sujet flou pour moi
+- Cartographie interactive avec Mapbox GL et Mapbox Draw
+- Scrum pratiqué au quotidien pendant 3 ans
 
 ### Pour l'entreprise
 
@@ -79,7 +79,7 @@ L'enjeu principal est de réduire les coûts opérationnels des collectivités t
 - Réduction des appels au support client grâce à une UX repensée
 - Plateforme accessible conforme aux exigences des marchés publics (RGAA)
 - Support multilingue facilité par Paraglide.js pour l'expansion internationale
-- Architecture modulaire facilitant l'ajout de nouvelles fonctionnalités
+- Architecture modulaire où ajouter une fonctionnalité ne casse pas le reste
 - Performance améliorée avec Svelte 5 par rapport à Angular
 - Retours positifs des utilisateurs lors des enquêtes de satisfaction
 
@@ -93,20 +93,20 @@ L'enjeu principal est de réduire les coûts opérationnels des collectivités t
 
 ### À moyen terme
 
-- Retours utilisateurs très positifs après le déploiement de la V4
-- Demandes d'évolution pour de nouvelles fonctionnalités d'édition cartographique
-- Intérêt de nouvelles collectivités internationales grâce au support multilingue
+- Les retours utilisateurs sur la V4 sont bons
+- Des demandes d'évolution sur l'édition cartographique commencent à arriver
+- Le support multilingue attire de nouvelles collectivités à l'international
 
 ### Aujourd'hui
 
-- Syren V4 représente l'aboutissement de la modernisation technique
+- Syren V4 est en production et marque la fin de la modernisation technique
 - L'expérience de migration Angular → Svelte acquise sur ce projet a directement bénéficié à Luce V4
 - Les patterns d'internationalisation Paraglide.js servent de référence pour les futurs projets
 
 ## Regard critique
 
-**Ce qui a bien fonctionné** : L'implication des utilisateurs finaux dès les premières phases a permis de construire une interface vraiment adaptée à leurs besoins. La méthodologie Scrum avec des démonstrations régulières a créé une boucle de feedback efficace. L'investissement sur l'accessibilité s'est révélé être un différenciateur pour les marchés publics. La migration vers Svelte 5 a apporté des gains de performance significatifs et une meilleure expérience développeur.
+**Ce qui a bien fonctionné** : Impliquer les utilisateurs finaux dès le début — l'interface est vraiment calée sur leurs besoins parce qu'on les a écoutés tôt. Le rythme Scrum avec des démos régulières a créé une boucle de feedback efficace. L'investissement sur l'accessibilité s'est avéré être un vrai différenciateur pour les marchés publics. Et la migration vers Svelte 5 a clairement amélioré les performances et le confort de développement.
 
 **Ce que j'aurais fait différemment** : J'aurais dû anticiper plus tôt les problèmes de performance de la carte avec de gros volumes de conteneurs. La virtualisation et le lazy loading auraient dû être intégrés dès la conception initiale. Pour la migration V4, j'aurais prévu plus de temps pour former l'équipe sur les spécificités de Svelte 5 et son nouveau système de réactivité (runes).
 
-**Leçon apprise** : Toujours tester avec des données représentatives de la production dès les premières phases. Un jeu de données de test ne révèle pas les mêmes problèmes qu'une collectivité avec plusieurs milliers de conteneurs. Une migration de framework majeure (Angular → Svelte) est un investissement conséquent mais payant sur le long terme en termes de performance et maintenabilité.
+**Leçon apprise** : Toujours tester avec des données représentatives de la production dès les premières phases. Un jeu de données de test ne révèle pas les mêmes problèmes qu'une collectivité avec plusieurs milliers de conteneurs. Une migration de framework majeure (Angular → Svelte) coûte cher en temps, mais ça se rentabilise vite côté performance et maintenabilité.

@@ -13,6 +13,6 @@ relatedProjects: []
 relatedSkills: ['nodejs-backend', 'databases', 'problem-solving', 'adaptability']
 ---
 
-Formation de niveau Bac+3 axée sur la conception et le développement de services numériques professionnels. J'ai appris à respecter les normes et standards de la profession tout en intégrant les exigences de sécurité informatique à chaque étape du développement.
+Bac+3 centré sur la conception et le développement de services numériques. J'y ai appris à respecter les normes du métier et à intégrer la sécurité informatique dès la phase de conception.
 
-La formation couvrait les méthodologies Agile, le développement mobile avec Flutter, les bases de données NoSQL, et le développement backend avec Node.js. Une attention particulière était portée à la conception responsable de services numériques et à la prise en compte des contraintes économiques (coûts et délais).
+Au programme : méthodologies Agile, développement mobile avec Flutter, bases de données NoSQL, et backend Node.js. La formation insistait aussi sur la conception responsable et les contraintes économiques (coûts, délais) — le genre de trucs qu'on n'apprend pas en autodidacte.

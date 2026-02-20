@@ -14,7 +14,7 @@ context:
 
 Durant mon stage de 3 mois chez BH Technologies, ma mission principale portait sur l'optimisation et la gestion du site web de l'entreprise. BH Technologies, spécialisée dans les solutions IoT pour l'éclairage public et la gestion des déchets, avait besoin de moderniser sa présence digitale pour mieux refléter son positionnement d'entreprise innovante.
 
-Ce projet m'a permis de découvrir l'entreprise et son écosystème avant de rejoindre l'équipe SI en alternance.
+C'est aussi grâce à ce projet que j'ai découvert l'entreprise et son écosystème avant de rejoindre l'équipe SI en alternance.
 
 ## Objectifs, contexte, enjeu et risques
 
@@ -42,19 +42,19 @@ Ce projet m'a permis de découvrir l'entreprise et son écosystème avant de rej
 
 - **Direction générale** : Présentation des propositions de refonte, validation des orientations stratégiques et des messages clés à communiquer.
 - **Responsable marketing** : Coordination quotidienne sur le contenu, définition de la ligne éditoriale et validation des visuels.
-- **Chefs de produit Syren et Luce** : Collecte d'informations techniques sur les solutions pour rédiger des contenus précis et pertinents.
+- **Chefs de produit Syren et Luce** : Collecte d'informations techniques sur les solutions pour rédiger des contenus précis et justes.
 - **Équipe SI** : Premiers échanges techniques, découverte des projets en cours et préparation de mon intégration en alternance.
 
 ## Résultats
 
 ### Pour moi
 
-- Découverte approfondie de l'entreprise, ses produits et son écosystème
-- Compétences acquises en SEO technique et rédactionnel
-- Maîtrise des outils d'analyse web (Google Analytics, Search Console, Lighthouse)
-- Première expérience de communication digitale en contexte B2B
-- Compréhension des enjeux de positionnement d'une entreprise tech
-- Création de relations avec les équipes avant mon alternance
+- Bonne découverte de l'entreprise, ses produits et son écosystème
+- Bases solides en SEO technique et rédactionnel
+- Google Analytics, Search Console, Lighthouse : pris en main
+- Première expérience de communication digitale en B2B
+- Compréhension des enjeux de positionnement d'une boîte tech
+- Premiers contacts avec les équipes avant l'alternance
 
 ### Pour l'entreprise
 
@@ -79,13 +79,13 @@ Ce projet m'a permis de découvrir l'entreprise et son écosystème avant de rej
 
 ### Aujourd'hui
 
-- Ce stage m'a permis de découvrir BH Technologies avant de rejoindre l'équipe SI en alternance
+- C'est par ce stage que j'ai connu BH Technologies avant de rejoindre l'équipe SI en alternance
 - L'expérience de communication acquise m'aide dans la documentation et la présentation des projets techniques
 
 ## Regard critique
 
-**Ce qui a bien fonctionné** : L'approche data-driven avec des métriques claires (Lighthouse, Search Console) a permis de démontrer l'impact concret des actions menées. L'immersion dans l'entreprise m'a donné une compréhension globale des produits qui s'est révélée précieuse pour mon alternance.
+**Ce qui a bien fonctionné** : S'appuyer sur des métriques concrètes (Lighthouse, Search Console) pour montrer les résultats — ça rend les améliorations tangibles. Et l'immersion dans l'entreprise m'a donné une vision globale des produits qui m'a beaucoup servi en alternance.
 
 **Ce que j'aurais fait différemment** : J'aurais dû solliciter plus tôt des sessions d'observation avec l'équipe SI pour mieux comprendre les aspects techniques des produits. Cela m'aurait permis de créer des contenus encore plus précis.
 
-**Leçon apprise** : La communication digitale est un levier stratégique pour valoriser des solutions techniques complexes. Savoir vulgariser et présenter clairement des concepts IoT est une compétence transverse utile même dans un rôle de développeur.
+**Leçon apprise** : Savoir vulgariser des concepts techniques IoT pour un public non-technique, c'est utile même quand on est développeur. Ça aide pour la documentation, les démos clients, et la communication interne.

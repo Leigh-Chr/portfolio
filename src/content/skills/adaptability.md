@@ -20,31 +20,31 @@ summary: "Capacité à m'adapter à des contextes variés : domaines métier, é
 
 ## Ma Définition
 
-L'adaptabilité est la capacité à évoluer efficacement dans des contextes changeants : nouveaux domaines métier, nouvelles équipes, nouvelles méthodologies, ou évolution des besoins en cours de projet. Dans le secteur tech en 2024, cette compétence est plus critique que jamais : l'émergence rapide de l'IA générative, les évolutions fréquentes des frameworks (Svelte 5, React 19), et les transformations du marché de l'emploi tech exigent une capacité d'adaptation permanente. C'est une compétence essentielle dans un environnement professionnel où les priorités et les contraintes évoluent constamment.
+L'adaptabilité, c'est savoir rester efficace quand le contexte bouge : nouveau domaine métier, nouvelle équipe, changement de méthode, ou virage en plein milieu d'un projet. Dans la tech, les outils et les pratiques changent vite — je l'ai vécu avec les migrations de frameworks chez BH Technologies et mes projets perso. Savoir s'y retrouver sans perdre le rythme, c'est ce qui fait la différence.
 
 ## Mes éléments de preuve
 
 ### Un parcours académique non linéaire
 
-Mon parcours illustre cette adaptabilité : du Bac STI2D orienté industrie, j'ai bifurqué vers le multimédia avec le DUT MMI (design, vidéo, web), puis vers le développement pur avec le Bachelor et le Mastère. À chaque étape, j'ai dû m'immerger dans un nouvel environnement, de nouvelles méthodes de travail, et de nouveaux objectifs. Cette capacité à me réorienter et à m'épanouir dans des contextes différents est devenue une force.
+Mon parcours n'a rien de linéaire : Bac STI2D orienté industrie, puis DUT MMI (design, vidéo, web), puis Bachelor et Mastère en développement. À chaque fois, nouveau cadre, nouvelles attentes, nouvelles façons de travailler. Ces transitions m'ont appris à ne pas rester bloqué sur mes acquis et à me mettre rapidement dans le bain.
 
 ### Des domaines métier très différents
 
-Chez BH Technologies, j'ai travaillé sur deux plateformes aux domaines métier distincts : **[Syren](/projects/syren-platform)** (gestion des déchets) et **[Luce](/projects/luce-platform)** (éclairage public). Chaque projet nécessitait de comprendre des problématiques terrain spécifiques : les contraintes des collectes de déchets, les réglementations de l'éclairage public, les attentes des gestionnaires de collectivités. J'ai su m'immerger dans ces domaines pour proposer des solutions adaptées aux utilisateurs finaux.
+Chez BH Technologies, j'ai travaillé sur deux plateformes aux domaines métier distincts : **[Syren](/projects/syren-platform)** (gestion des déchets) et **[Luce](/projects/luce-platform)** (éclairage public). Chaque projet nécessitait de comprendre des problématiques terrain spécifiques : les contraintes des collectes de déchets, les réglementations de l'éclairage public, les attentes des gestionnaires de collectivités. Il a fallu que je comprenne ces métiers sur le terrain pour que les interfaces que je développais aient du sens pour ceux qui les utilisent chaque jour.
 
 ### Évolution des priorités en cours de projet
 
-Sur **[Syren V4](/projects/syren-platform)**, les priorités ont évolué plusieurs fois : d'abord focalisé sur la refonte UX, le projet s'est réorienté vers l'internationalisation pour répondre à une opportunité commerciale à l'étranger. J'ai su m'adapter à ces changements de cap sans perdre en efficacité, en réorganisant mon travail et en communiquant clairement avec l'équipe sur les impacts.
+Sur **[Syren V4](/projects/syren-platform)**, les priorités ont évolué plusieurs fois : d'abord focalisé sur la refonte UX, le projet s'est réorienté vers l'internationalisation pour répondre à une opportunité commerciale à l'étranger. J'ai dû réorganiser mon travail à chaque fois et prévenir l'équipe des impacts concrets sur le planning — pas toujours simple, mais c'est le jeu.
 
 ## Mon autocritique
 
-L'adaptabilité est une compétence que j'ai développée naturellement au fil de mon parcours. Elle me permet d'être opérationnel rapidement dans de nouveaux contextes, que ce soit un nouveau domaine métier ou une nouvelle organisation d'équipe.
+C'est une compétence que j'ai construite un peu par la force des choses — mon parcours m'y a obligé. Aujourd'hui, je suis capable de devenir opérationnel vite dans un contexte que je ne connais pas, que ce soit un métier ou une équipe.
 
-Mon conseil : toujours chercher à comprendre le "pourquoi" avant le "comment". Comprendre les enjeux métier et les contraintes des utilisateurs permet de s'adapter plus efficacement que de simplement appliquer des consignes.
+Ce que j'en retiens : comprendre le "pourquoi" avant le "comment" fait gagner du temps. Quand on saisit les enjeux métier, on s'adapte mieux que si on se contente de suivre des consignes.
 
 ## Mon évolution dans cette compétence
 
-Je souhaite continuer à diversifier mes expériences pour renforcer cette adaptabilité : travailler sur des domaines métier encore différents, collaborer avec des équipes internationales, et peut-être expérimenter d'autres méthodologies de gestion de projet.
+Pour la suite, j'aimerais continuer à varier les contextes : d'autres domaines métier, des équipes internationales, et peut-être d'autres méthodologies de gestion de projet.
 
 ## Réalisations associées
 

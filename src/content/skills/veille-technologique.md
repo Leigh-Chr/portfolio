@@ -15,42 +15,40 @@ relatedProjects:
     'cahnon',
     'transit-display-hub',
   ]
-summary: 'Capacité à identifier, apprendre et adopter de nouvelles technologies pertinentes pour rester à la pointe du développement.'
+summary: 'Identifier, apprendre et adopter les technologies qui comptent pour rester à jour dans mon métier.'
 ---
 
 ## Ma Définition
 
-La veille technologique est la pratique consistant à surveiller activement l'évolution des technologies, outils et pratiques du développement logiciel. L'année 2024 a été particulièrement dense : explosion de l'IA générative avec Claude, GPT-4 et les modèles open source (Llama, Mistral), sorties majeures de frameworks (Svelte 5, React 19, Angular 18), et émergence de nouvelles pratiques comme le "vibe coding" assisté par IA. Dans un domaine où les frameworks et les standards évoluent constamment, cette compétence est essentielle pour maintenir la pertinence technique et proposer des solutions modernes.
+Dans le développement web, ce qui est à la pointe aujourd'hui sera la norme demain et obsolète après-demain. Je fais de la veille non pas pour cocher une case, mais parce que j'en ai besoin pour prendre les bonnes décisions techniques dans mes projets.
 
-Cette veille ne se limite pas à lire des articles : elle implique d'expérimenter les technologies prometteuses, d'évaluer leur maturité et leur adéquation aux besoins réels, et de les intégrer concrètement dans des projets.
+Ma veille ne se limite pas à lire des newsletters : j'expérimente les technos qui m'intéressent sur des projets perso, j'évalue si elles sont assez mûres pour de la production, et je les intègre quand ça fait sens.
 
 ## Mes éléments de preuve
 
 ### Adoption précoce de Svelte 5
 
-Lors de la refonte de **[Syren V4](/projects/syren-platform)** et **[Luce V4](/projects/luce-platform)**, j'ai proposé et défendu le choix de migrer d'Angular vers Svelte 5, alors que le framework venait tout juste de sortir. Cette décision s'appuyait sur plusieurs mois de veille : suivi des RFC, tests des versions beta, analyse des retours de la communauté. Le résultat a été une amélioration significative des performances et de l'expérience développeur. J'ai également adopté Paraglide.js (Inlang) pour l'internationalisation, une solution moderne qui remplace avantageusement les approches traditionnelles comme i18next.
+Lors de la refonte de **[Syren V4](/projects/syren-platform)** et **[Luce V4](/projects/luce-platform)**, j'ai proposé et défendu le choix de migrer d'Angular vers Svelte 5, alors que le framework venait tout juste de sortir. Cette décision s'appuyait sur plusieurs mois de veille : suivi des RFC, tests des versions beta, analyse des retours de la communauté. Le pari a payé : les perfs sont meilleures et le code est plus agréable à maintenir. J'ai aussi poussé Paraglide.js (Inlang) pour l'internationalisation, qui s'est avéré bien plus ergonomique que les approches classiques type i18next.
 
 ### Exploration de Tauri et Rust
 
-Pour mon projet personnel **[Tidy App](/projects/tidy-app)**, j'ai choisi Tauri 2.0 plutôt qu'Electron après un benchmark approfondi. Cette décision m'a amené à apprendre Rust pour les parties natives de l'application. Le résultat : une application desktop de 15 Mo au lieu de 150 Mo, avec des performances nettement supérieures. Cette exploration autonome démontre ma capacité à sortir de ma zone de confort (JavaScript/TypeScript) pour adopter des technologies plus adaptées au besoin.
+Pour mon projet personnel **[Tidy App](/projects/tidy-app)**, j'ai choisi Tauri 2.0 plutôt qu'Electron après un benchmark approfondi. Cette décision m'a amené à apprendre Rust pour les parties natives de l'application. Le résultat : une application desktop de 15 Mo au lieu de 150 Mo, et des performances bien supérieures. Ça m'a aussi poussé hors de ma zone de confort JavaScript/TypeScript pour apprendre Rust — pas le chemin le plus facile, mais le bon pour ce cas d'usage.
 
 ### Intégration des LLMs
 
-Toujours sur **[Tidy App](/projects/tidy-app)**, j'ai intégré des modèles de langage (Ollama en local, OpenAI en distant) pour la suggestion intelligente de noms de fichiers. Cette fonctionnalité nécessitait de comprendre les APIs des LLMs, d'optimiser les prompts, et de gérer les contraintes de latence et de coût. J'ai anticipé l'importance de l'IA générative dans les outils de productivité avant que cela ne devienne mainstream.
+Toujours sur **[Tidy App](/projects/tidy-app)**, j'ai intégré des modèles de langage (Ollama en local, OpenAI en distant) pour la suggestion intelligente de noms de fichiers. Ça m'a demandé de comprendre les APIs des LLMs, d'optimiser les prompts, et de gérer les contraintes de latence et de coût — des compétences qui se sont révélées utiles bien au-delà de ce projet.
 
 ## Mon autocritique
 
-Ma veille technologique est un point fort de mon profil. Je consacre régulièrement du temps à explorer de nouvelles technologies, que ce soit via des newsletters (JavaScript Weekly, Svelte Society), des conférences en ligne, ou des projets personnels d'expérimentation.
+Je consacre du temps chaque semaine à la veille : newsletters (JavaScript Weekly, Svelte Society), conférences en ligne, et surtout des projets perso pour tester en vrai plutôt que juste lire.
 
-Cette compétence est centrale dans mon métier de développeur fullstack : elle me permet de proposer des solutions techniques pertinentes et de rester employable dans un domaine en constante évolution.
+Ma méthode d'apprentissage, c'est le projet pilote : je prends une techno et je construis quelque chose de concret avec. En général, ça me prend 2-3 semaines pour être opérationnel sur un nouveau framework.
 
-Ma vitesse d'acquisition est bonne : je peux être opérationnel sur un nouveau framework en 2-3 semaines grâce à ma méthode d'apprentissage par projet pilote.
-
-Mon conseil : ne pas se disperser. La veille doit être ciblée sur les technologies qui répondent à des besoins réels, pas sur chaque nouveau framework à la mode. Il vaut mieux maîtriser quelques outils que survoler des dizaines.
+Le piège à éviter : se disperser. Il vaut mieux maîtriser quelques outils que survoler des dizaines. La veille doit être ciblée sur ce qui répond à un vrai besoin, pas sur chaque nouveau repo trending sur GitHub.
 
 ## Mon évolution dans cette compétence
 
-Je souhaite approfondir ma veille dans plusieurs directions :
+Les axes sur lesquels je veux aller plus loin :
 
 - **Architecture logicielle** : patterns avancés, DDD, event sourcing
 - **Intelligence artificielle** : au-delà des LLMs, comprendre les fondamentaux du ML pour mieux les intégrer

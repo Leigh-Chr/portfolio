@@ -12,9 +12,7 @@ summary: "Conception d'APIs RESTful bien structurées et compréhension des prin
 
 ## Ma Définition
 
-La conception d'APIs REST de qualité est une compétence que j'ai développée à la fois en entreprise et sur mes projets personnels. En 2024, le paysage des APIs continue d'évoluer avec l'émergence de solutions type-safe comme tRPC, la maturité de GraphQL Federation pour les architectures distribuées, et l'adoption croissante d'OpenAPI 3.1 pour la documentation. Les patterns de communication temps réel (WebSockets, Server-Sent Events) complètent les APIs REST traditionnelles pour des applications réactives.
-
-Une bonne API doit être intuitive, cohérente et bien documentée pour faciliter son utilisation par les autres développeurs et les applications clientes. Je m'attache à respecter les conventions REST : utilisation appropriée des verbes HTTP (GET, POST, PUT, DELETE), codes de statut significatifs, ressources nommées au pluriel, et versioning de l'API. La documentation automatique avec Swagger/OpenAPI fait partie intégrante de mon processus de développement.
+J'ai appris à concevoir des APIs REST en entreprise avec NestJS, puis j'ai creusé le sujet sur mes projets perso. Côté méthode, je m'attache aux conventions REST : bons verbes HTTP, codes de statut parlants, nommage cohérent des ressources, versioning. Swagger/OpenAPI pour la doc, c'est systématique — une API sans doc, c'est une API que personne n'a envie d'intégrer.
 
 ## Mes éléments de preuve
 
@@ -28,15 +26,15 @@ Sur **[AppStandard](/projects/appstandard)**, j'ai conçu une architecture compl
 
 ### CI/CD et conteneurisation
 
-Sur mes projets personnels **[AppStandard](/projects/appstandard)** et **[Tidy App](/projects/tidy-app)**, j'ai mis en place des pipelines CI/CD avec GitHub Actions et des déploiements conteneurisés avec Docker, permettant un self-hosting facile.
+Sur **[AppStandard](/projects/appstandard)** et **[Tidy App](/projects/tidy-app)**, j'ai mis en place des pipelines CI/CD avec GitHub Actions et des déploiements conteneurisés avec Docker pour que n'importe qui puisse self-host facilement.
 
 ## Mon autocritique
 
-Ma compréhension de l'architecture logicielle s'est construite progressivement. Je maîtrise les patterns classiques (MVC, couches, injection de dépendances) mais je souhaite approfondir les architectures plus avancées comme le DDD ou l'event sourcing.
+Ma compréhension de l'architecture logicielle s'est construite au fil des projets. Je connais bien les patterns classiques (MVC, couches, injection de dépendances) et je commence à explorer des approches comme le DDD et l'event sourcing.
 
 ## Mon évolution dans cette compétence
 
-Je souhaite approfondir mes connaissances en architecture logicielle : patterns DDD, CQRS, event sourcing, et microservices. Ces approches sont pertinentes pour des applications à grande échelle.
+Prochaine étape : aller plus loin en architecture logicielle — DDD, CQRS, event sourcing, microservices. C'est vers là que je veux aller pour gérer des applications plus ambitieuses.
 
 ## Réalisations associées
 

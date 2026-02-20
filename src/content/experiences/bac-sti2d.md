@@ -13,6 +13,6 @@ relatedProjects: []
 relatedSkills: ['problem-solving', 'teamwork']
 ---
 
-Baccalauréat Sciences et Technologies de l'Industrie et du Développement Durable avec la spécialité Innovation Technologique et Éco-Conception (ITEC). Cette formation m'a initié à la démarche d'ingénieur : imaginer, concevoir et réaliser des produits en intégrant les dimensions du développement durable.
+Baccalauréat Sciences et Technologies de l'Industrie et du Développement Durable, spécialité Innovation Technologique et Éco-Conception (ITEC). C'est là que j'ai découvert la démarche d'ingénieur : imaginer, concevoir et réaliser des produits en intégrant le développement durable.
 
-J'y ai développé ma capacité à analyser des systèmes techniques complexes, à travailler en équipe projet et à rechercher des solutions constructives innovantes. Ces compétences fondamentales me servent encore aujourd'hui dans mon approche du développement logiciel.
+J'y ai appris à analyser des systèmes techniques, à travailler en équipe projet et à chercher des solutions concrètes. Des réflexes que j'ai gardés quand je suis passé au développement logiciel.

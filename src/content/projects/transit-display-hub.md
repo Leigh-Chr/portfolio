@@ -33,7 +33,7 @@ Le déploiement est conteneurisé via **Docker Compose** avec trois services (Po
 
 ## Objectifs, contexte, enjeu et risques
 
-**Contexte** : Projet personnel conçu pour démontrer la maîtrise du développement fullstack moderne avec un domaine métier concret — l'information voyageurs temps réel — qui impose des contraintes de performance, de fiabilité et de mise à jour instantanée.
+**Contexte** : Projet personnel pour me confronter à un domaine métier concret (l'information voyageurs temps réel) qui impose des contraintes fortes de performance, de fiabilité et de mise à jour instantanée.
 
 **Problématique** : Les systèmes d'information voyageurs existants sont généralement des solutions propriétaires coûteuses et fermées. Il n'existe pas de plateforme open source complète couvrant à la fois la gestion du réseau, la diffusion temps réel et l'affichage sur écrans connectés.
 
@@ -55,23 +55,23 @@ Le déploiement est conteneurisé via **Docker Compose** avec trois services (Po
 
 ## Acteurs – les interactions
 
-Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son évolution :
+Projet solo, mais pas sans échanges :
 
-- **Communauté open source** : Retours via les issues GitHub sur l'ergonomie du dashboard d'administration et la configuration du réseau
-- **Opérateurs de transport simulés** : Scénarios de test réalistes avec des réseaux multi-lignes, des perturbations et des messages d'alerte de différentes sévérités
-- **Communauté Spring Boot** : Échanges sur les forums pour les patterns avancés de Spring Boot 4 (événements domaine, WebSocket STOMP, caching Caffeine)
-- **Communauté Angular** : Discussions sur l'adoption des Signals, le mode zoneless et les standalone components avec Angular 21
+- **Utilisateurs GitHub** : Retours sur l'ergonomie du dashboard et la configuration du réseau via les issues
+- **Scénarios de test réalistes** : Réseaux multi-lignes simulés avec perturbations et messages d'alerte de différentes sévérités
+- **Forums Spring Boot** : Échanges sur les patterns avancés de Spring Boot 4 (événements domaine, WebSocket STOMP, caching Caffeine)
+- **Forums Angular** : Discussions sur l'adoption des Signals, le mode zoneless et les standalone components
 
 ## Résultats
 
 ### Pour moi
 
-- Maîtrise de Spring Boot 4 et de l'écosystème Java 21 pour le développement backend
-- Expertise en Angular 21 avec Signals, standalone components et mode zoneless
-- Compétences en architecture DDD appliquée à un domaine métier concret
-- Maîtrise de la communication temps réel via WebSocket STOMP
-- Expérience en conteneurisation Docker multi-service pour le déploiement production
-- Capacité à produire une couverture de tests complète (plus de 1 500 tests)
+- Spring Boot 4 et Java 21 : je suis maintenant à l'aise sur cette stack
+- Angular 21 avec Signals, standalone components et mode zoneless
+- Architecture DDD appliquée à un vrai domaine métier, pas juste en théorie
+- Communication temps réel via WebSocket STOMP
+- Conteneurisation Docker multi-service pour du déploiement production
+- Plus de 1 500 tests écrits (JUnit 5 + Vitest)
 
 ### Pour les utilisateurs
 
@@ -104,7 +104,7 @@ Bien que ce soit un projet personnel, plusieurs acteurs ont contribué à son é
 
 ## Regard critique
 
-**Ce qui a bien fonctionné** : L'architecture DDD avec séparation stricte des couches a permis un développement rapide et structuré en seulement 7 jours. Le pré-calcul des états d'affichage côté serveur via les événements domaine élimine les problèmes de performance N+1 côté client. Le choix de WebSocket STOMP offre une communication temps réel fiable avec reconnexion automatique.
+**Ce qui a bien fonctionné** : L'architecture DDD avec séparation stricte des couches — j'ai pu développer l'ensemble en 7 jours grâce à cette structure. Le pré-calcul des états d'affichage côté serveur via les événements domaine évite les problèmes de performance N+1 côté client. WebSocket STOMP s'est avéré fiable pour le temps réel avec reconnexion automatique.
 
 **Ce que j'aurais fait différemment** : J'aurais dû implémenter le format GTFS dès le départ pour permettre l'import de données de réseaux réels plutôt que la saisie manuelle. J'aurais également intégré des tests de charge pour valider le comportement avec des centaines d'écrans connectés simultanément.
 

@@ -17,7 +17,7 @@ relatedSkills:
 
 BH Technologies est une PME grenobloise fondée en 1998, leader français de la gestion intelligente de l'éclairage public et des déchets. L'entreprise équipe près de 50% des collectivités françaises et ses solutions bénéficient à 3 millions de citoyens.
 
-En collaboration avec l'équipe SI (50% de l'effectif dédié à la R&D), j'ai participé au développement des plateformes web **Syren** et **Luce**. Syren est une solution de gestion intelligente des déchets permettant aux collectivités d'optimiser leurs tournées de collecte grâce à des capteurs IoT (LoRaWAN, NB-IoT). Luce est une plateforme de télémanagement de l'éclairage public permettant le monitoring et le pilotage à distance des luminaires, avec interopérabilité TALQ.
+En collaboration avec l'équipe SI (50% de l'effectif dédié à la R&D), j'ai participé au développement des plateformes web **Syren** et **Luce**. Syren est une solution de gestion intelligente des déchets : les collectivités optimisent leurs tournées de collecte grâce à des capteurs IoT (LoRaWAN, NB-IoT). Luce est une plateforme de télémanagement de l'éclairage public pour le monitoring et le pilotage à distance des luminaires, avec interopérabilité TALQ.
 
 **Stack technique :**
 

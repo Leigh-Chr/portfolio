@@ -11,7 +11,7 @@ summary: "Collaboration efficace au sein d'équipes pluridisciplinaires pour att
 
 ## Ma Définition
 
-Le travail en équipe est la capacité à collaborer efficacement avec d'autres personnes pour atteindre des objectifs communs. Depuis la généralisation du travail hybride, les pratiques de collaboration ont évolué : outils asynchrones (Slack, Notion), rituels agiles adaptés au distanciel, et importance accrue de la documentation partagée. Les méthodologies comme le "trunk-based development" et les feature flags facilitent la collaboration sur le code en continu. Chez BH Technologies, je collabore quotidiennement avec d'autres développeurs, mais aussi avec les équipes métier, les UX designers, et les chefs de projet.
+Chez BH Technologies, je travaille au quotidien avec d'autres développeurs, mais aussi avec les équipes métier, l'UX designer et les chefs de projet. Savoir collaborer avec des profils aussi différents, c'est ce que j'appelle le travail en équipe — pas juste "être sympa en réunion", mais vraiment s'organiser pour avancer ensemble.
 
 ## Mes éléments de preuve
 
@@ -29,13 +29,13 @@ Les plateformes **[Syren](/projects/syren-platform)** et **[Luce](/projects/luce
 
 ## Mon autocritique
 
-Ma formation en DUT MMI était très orientée projets en équipe, ce qui m'a préparé à cette réalité professionnelle. J'ai appris à trouver ma place dans un collectif tout en apportant ma contribution technique.
+Le DUT MMI m'a bien préparé là-dessus : presque tout se faisait en groupe, avec des profils très variés. J'ai appris à trouver ma place et à contribuer techniquement sans écraser les autres.
 
-Mon conseil : toujours communiquer proactivement sur les blocages. Une difficulté partagée tôt est souvent résolue plus vite qu'un problème gardé pour soi.
+Ce que j'en retiens : dire tôt qu'on est bloqué. Un problème partagé vite se résout souvent en quelques minutes. Gardé pour soi, il peut pourrir pendant des jours.
 
 ## Mon évolution dans cette compétence
 
-Je souhaite développer mes compétences en pair programming et en mob programming, des pratiques que j'ai peu explorées. Je souhaite aussi améliorer ma capacité à onboarder de nouveaux membres dans une équipe.
+J'aimerais pratiquer davantage le pair programming et le mob programming, des formats que je n'ai pas encore beaucoup testés. Et apprendre à mieux onboarder de nouveaux membres dans une équipe — c'est un skill sous-estimé.
 
 ## Réalisations associées
 

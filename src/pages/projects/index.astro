@@ -15,7 +15,8 @@ const placeholderProjects = [
     slug: 'project-1',
     data: {
       title: 'Application Web E-commerce',
-      shortDescription: 'Développement d\'une plateforme e-commerce complète avec panier, paiement et gestion des stocks.',
+      shortDescription:
+        "Développement d'une plateforme e-commerce complète avec panier, paiement et gestion des stocks.",
       thumbnail: null,
       context: { period: '2024', role: 'Lead Developer', company: 'Entreprise X' },
     },
@@ -24,7 +25,8 @@ const placeholderProjects = [
     slug: 'project-2',
     data: {
       title: 'API REST Microservices',
-      shortDescription: 'Architecture microservices pour une application bancaire avec haute disponibilité.',
+      shortDescription:
+        'Architecture microservices pour une application bancaire avec haute disponibilité.',
       thumbnail: null,
       context: { period: '2023', role: 'Backend Developer', company: 'Entreprise Y' },
     },
@@ -33,7 +35,8 @@ const placeholderProjects = [
     slug: 'project-3',
     data: {
       title: 'Dashboard Analytics',
-      shortDescription: 'Interface de visualisation de données en temps réel pour le monitoring d\'infrastructure.',
+      shortDescription:
+        "Interface de visualisation de données en temps réel pour le monitoring d'infrastructure.",
       thumbnail: null,
       context: { period: '2023', role: 'Full Stack Developer', company: 'Entreprise Z' },
     },
@@ -42,7 +45,8 @@ const placeholderProjects = [
     slug: 'project-4',
     data: {
       title: 'Application Mobile Cross-Platform',
-      shortDescription: 'Application mobile React Native pour la gestion de tâches et la productivité.',
+      shortDescription:
+        'Application mobile React Native pour la gestion de tâches et la productivité.',
       thumbnail: null,
       context: { period: '2022', role: 'Mobile Developer', company: 'Startup A' },
     },
@@ -61,28 +65,46 @@ const placeholderProjects = [
 const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
 ---
 
-<BaseLayout title="Réalisations" description="Découvrez mes projets et réalisations professionnelles les plus significatifs.">
+<BaseLayout
+  title="Réalisations"
+  description="Mes projets en entreprise et perso, du frontend au backend."
+>
   <!-- Hero Section -->
   <section class="section-padding section-hero relative overflow-hidden">
     <div class="container-custom text-center" data-gsap="hero">
       <h1 class="page-title">
-        Mes <span class="gradient-text-animated underline-zigzag underline-zigzag-accent" data-text="Réalisations">Réalisations</span>
+        Mes <span
+          class="gradient-text-animated underline-zigzag underline-zigzag-accent"
+          data-text="Réalisations">Réalisations</span
+        >
       </h1>
       <div class="section-divider section-divider-accent section-divider-long"></div>
       <p class="page-subtitle">
-        Un aperçu de mes projets les plus significatifs, illustrant ma capacité
-        à résoudre des problèmes complexes et à livrer des solutions de qualité.
+        Ce que j'ai construit, en entreprise et sur mon temps libre. Chaque projet raconte un bout
+        de mon parcours.
       </p>
 
       <!-- Stats - Bold Memphis with subtle tilts -->
       <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-12 sm:mt-16">
-        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]">
+        <div
+          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]"
+        >
           <p class="stat-large text-primary-400">{hasRealContent ? sortedProjects.length : 3}</p>
-          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">Réalisations</p>
+          <p
+            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+          >
+            Réalisations
+          </p>
         </div>
-        <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]">
+        <div
+          class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]"
+        >
           <p class="stat-large text-accent-400">+3</p>
-          <p class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2">Années d'exp.</p>
+          <p
+            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+          >
+            Années d'exp.
+          </p>
         </div>
       </div>
     </div>
@@ -91,92 +113,106 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
   <!-- Projects Grid (5 pts) -->
   <section class="section-padding section-alt">
     <div class="container-custom">
-      {!hasRealContent && (
-        <div class="alert-placeholder mb-8">
-          <strong>[PLACEHOLDER]</strong> Les projets ci-dessous sont des exemples.
-          Remplacez-les par vos vraies réalisations dans les fichiers de contenu.
-        </div>
-      )}
+      {
+        !hasRealContent && (
+          <div class="alert-placeholder mb-8">
+            <strong>[PLACEHOLDER]</strong> Les projets ci-dessous sont des exemples. Remplacez-les
+            par vos vraies réalisations dans les fichiers de contenu.
+          </div>
+        )
+      }
 
       <!-- Projects as list/cards with short descriptions -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
-        {displayProjects.map((project, index) => (
-          <a
-            href={url(`/projects/${project.id}`)}
-            class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''}`}
-          >
-            <!-- Thumbnail -->
-            <div class="aspect-video bg-dark-700 relative overflow-hidden" transition:name={`project-thumb-${project.id}`}>
-              {project.data.fullImage ? (
-                <div class="w-full h-full scroll-preview">
+        {
+          displayProjects.map((project, index) => (
+            <a
+              href={url(`/projects/${project.id}`)}
+              class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''}`}
+            >
+              {/* Thumbnail */}
+              <div
+                class="aspect-video bg-dark-700 relative overflow-hidden"
+                transition:name={`project-thumb-${project.id}`}
+              >
+                {project.data.fullImage ? (
+                  <div class="w-full h-full scroll-preview">
+                    <img
+                      src={url(project.data.fullImage)}
+                      alt={`Aperçu du projet ${project.data.title}`}
+                      class="scroll-preview-img"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : project.data.thumbnail ? (
                   <img
-                    src={url(project.data.fullImage)}
+                    src={url(project.data.thumbnail)}
                     alt={`Aperçu du projet ${project.data.title}`}
-                    class="scroll-preview-img"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     loading="lazy"
                     decoding="async"
+                    width="384"
+                    height="216"
                   />
-                </div>
-              ) : project.data.thumbnail ? (
-                <img
-                  src={url(project.data.thumbnail)}
-                  alt={`Aperçu du projet ${project.data.title}`}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  loading="lazy"
-                  decoding="async"
-                  width="384"
-                  height="216"
-                />
-              ) : (
-                <div class="w-full h-full flex items-center justify-center">
-                  <div class="text-center">
-                    <span class="text-6xl opacity-30">📁</span>
-                    <p class="text-gray-400 text-sm mt-2">[Image projet]</p>
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <div class="text-center">
+                      <span class="text-6xl opacity-30">📁</span>
+                      <p class="text-gray-400 text-sm mt-2">[Image projet]</p>
+                    </div>
                   </div>
+                )}
+                {/* Project number badge */}
+                <div class="absolute top-4 left-4 w-8 h-8 bg-primary-500 flex items-center justify-center z-10">
+                  <span class="text-white font-heading font-bold text-sm">{index + 1}</span>
                 </div>
-              )}
-              <!-- Project number badge -->
-              <div class="absolute top-4 left-4 w-8 h-8 bg-primary-500 flex items-center justify-center z-10">
-                <span class="text-white font-heading font-bold text-sm">{index + 1}</span>
-              </div>
-            </div>
-
-            <!-- Content -->
-            <div class="p-4 sm:p-6 md:p-8">
-              <!-- Context tags -->
-              <div class="flex flex-wrap gap-3 mb-4">
-                <span class="tag-primary text-xs">
-                  {project.data.context.period}
-                </span>
-                <span class="tag-gray text-xs">
-                  {project.data.context.role}
-                </span>
               </div>
 
-              <!-- Title -->
-              <h2
-                class="font-heading font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-primary-400 transition-colors"
-                transition:name={`project-title-${project.id}`}
-              >
-                {!hasRealContent && '[PLACEHOLDER] '}
-                {project.data.title}
-              </h2>
+              {/* Content */}
+              <div class="p-4 sm:p-6 md:p-8">
+                {/* Context tags */}
+                <div class="flex flex-wrap gap-3 mb-4">
+                  <span class="tag-primary text-xs">{project.data.context.period}</span>
+                  <span class="tag-gray text-xs">{project.data.context.role}</span>
+                </div>
 
-              <!-- Short description -->
-              <p class="text-gray-400 text-sm line-clamp-3 mb-6 leading-relaxed">
-                {project.data.shortDescription}
-              </p>
+                {/* Title */}
+                <h2
+                  class="font-heading font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-primary-400 transition-colors"
+                  transition:name={`project-title-${project.id}`}
+                >
+                  {!hasRealContent && '[PLACEHOLDER] '}
+                  {project.data.title}
+                </h2>
 
-              <!-- CTA -->
-              <div class="flex items-center text-primary-400 text-sm font-heading font-medium">
-                <span>Voir le projet</span>
-                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
+                {/* Short description */}
+                <p class="text-gray-400 text-sm line-clamp-3 mb-6 leading-relaxed">
+                  {project.data.shortDescription}
+                </p>
+
+                {/* CTA */}
+                <div class="flex items-center text-primary-400 text-sm font-heading font-medium">
+                  <span>Voir le projet</span>
+                  <svg
+                    class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
               </div>
-            </div>
-          </a>
-        ))}
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -185,17 +221,28 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
   <section class="section-padding">
     <div class="container-custom text-center">
       <h2 class="section-title">
-        Les compétences derrière ces <span class="text-accent-400 underline-memphis underline-memphis-accent">réalisations</span>
+        Les compétences derrière ces <span
+          class="text-accent-400 underline-memphis underline-memphis-accent">réalisations</span
+        >
       </h2>
       <div class="section-divider section-divider-accent"></div>
       <p class="section-subtitle mb-12">
-        Chaque projet a mobilisé un ensemble de compétences techniques et humaines.
-        Découvrez mon profil complet de compétences.
+        Derrière chaque projet, il y a des compétences concrètes. Voici le détail.
       </p>
       <a href={url('/skills')} class="btn-chunky-primary">
         Voir mes compétences
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
         </svg>
       </a>
     </div>
@@ -208,10 +255,12 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
         Un projet en <span class="text-accent-400 squiggle squiggle-accent">tête</span> ?
       </h2>
       <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-        Je suis toujours intéressé par de nouveaux défis.
-        N'hésitez pas à me contacter pour discuter de votre projet.
+        Vous avez un projet ? Parlons-en.
       </p>
-      <a href={url('/contact')} class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100">
+      <a
+        href={url('/contact')}
+        class="btn-chunky bg-white text-dark-900 border-dark-900 hover:bg-gray-100"
+      >
         Me contacter
       </a>
     </div>

@@ -51,14 +51,14 @@ function parseKeyValueSection(content: string): Record<string, string> {
   return result;
 }
 
-function parsePhases(content: string): Array<{title: string, description: string}> {
-  const phases: Array<{title: string, description: string}> = [];
+function parsePhases(content: string): Array<{ title: string; description: string }> {
+  const phases: Array<{ title: string; description: string }> = [];
   const regex = /\*\*([^*]+)\*\*\s*:\s*([^*]+?)(?=\*\*|$)/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
     phases.push({
       title: match[1].trim(),
-      description: match[2].trim()
+      description: match[2].trim(),
     });
   }
   return phases;
@@ -76,8 +76,8 @@ function parseList(content: string): string[] {
   return items;
 }
 
-function parseActeursList(content: string): Array<{role: string, description: string}> {
-  const acteurs: Array<{role: string, description: string}> = [];
+function parseActeursList(content: string): Array<{ role: string; description: string }> {
+  const acteurs: Array<{ role: string; description: string }> = [];
   const lines = content.split('\n');
   for (const line of lines) {
     // Format: - **Role** : Description
@@ -85,7 +85,7 @@ function parseActeursList(content: string): Array<{role: string, description: st
     if (match) {
       acteurs.push({
         role: match[1].trim(),
-        description: match[2].trim()
+        description: match[2].trim(),
       });
     }
   }
@@ -102,20 +102,25 @@ function parseSubsections(content: string): Record<string, string> {
   return result;
 }
 
-function parseResultats(content: string): {pourMoi: string[], pourEntreprise: string[], pourEntrepriseLabel: string, unified: string[]} {
+function parseResultats(content: string): {
+  pourMoi: string[];
+  pourEntreprise: string[];
+  pourEntrepriseLabel: string;
+  unified: string[];
+} {
   const subsections = parseSubsections(content);
   const result = {
     pourMoi: [] as string[],
     pourEntreprise: [] as string[],
     pourEntrepriseLabel: "Pour l'entreprise",
-    unified: [] as string[]
+    unified: [] as string[],
   };
 
   if (subsections['Pour moi']) {
     result.pourMoi = parseList(subsections['Pour moi']);
   }
-  if (subsections['Pour l\'entreprise']) {
-    result.pourEntreprise = parseList(subsections['Pour l\'entreprise']);
+  if (subsections["Pour l'entreprise"]) {
+    result.pourEntreprise = parseList(subsections["Pour l'entreprise"]);
   } else if (subsections['Pour les utilisateurs']) {
     result.pourEntreprise = parseList(subsections['Pour les utilisateurs']);
     result.pourEntrepriseLabel = 'Pour les utilisateurs';
@@ -132,7 +137,11 @@ function parseResultats(content: string): {pourMoi: string[], pourEntreprise: st
   return result;
 }
 
-function parseCritique(content: string): {intro: string, positif: string[], amelioration: string[]} {
+function parseCritique(content: string): {
+  intro: string;
+  positif: string[];
+  amelioration: string[];
+} {
   const result = { intro: '', positif: [] as string[], amelioration: [] as string[] };
 
   const positifMatch = content.match(/\*\*Ce qui a bien fonctionné\*\*\s*:\s*([^*]+?)(?=\*\*|$)/);
@@ -140,7 +149,9 @@ function parseCritique(content: string): {intro: string, positif: string[], amel
     result.positif = [positifMatch[1].trim()];
   }
 
-  const diffMatch = content.match(/\*\*Ce que j'aurais fait différemment\*\*\s*:\s*([^*]+?)(?=\*\*|$)/);
+  const diffMatch = content.match(
+    /\*\*Ce que j'aurais fait différemment\*\*\s*:\s*([^*]+?)(?=\*\*|$)/
+  );
   if (diffMatch) {
     result.amelioration = [diffMatch[1].trim()];
   }
@@ -156,8 +167,10 @@ function parseCritique(content: string): {intro: string, positif: string[], amel
 // Extract sections
 const presentationContent = extractSection(rawContent, 'Présentation');
 const objectifsContent = extractSection(rawContent, 'Objectifs, contexte, enjeu et risques');
-const etapesContent = extractSection(rawContent, 'Étapes – ce que j\'ai fait');
-const acteursContent = extractSection(rawContent, 'Acteurs – les interactions') || extractSection(rawContent, 'Compétences mobilisées');
+const etapesContent = extractSection(rawContent, "Étapes – ce que j'ai fait");
+const acteursContent =
+  extractSection(rawContent, 'Acteurs – les interactions') ||
+  extractSection(rawContent, 'Compétences mobilisées');
 const resultatsContent = extractSection(rawContent, 'Résultats');
 const lendemainsContent = extractSection(rawContent, 'Lendemains du projet');
 const critiqueContent = extractSection(rawContent, 'Regard critique');
@@ -172,16 +185,15 @@ const critique = parseCritique(critiqueContent);
 
 // Get related skills
 const allSkills = await getCollection('skills');
-const relatedSkills = allSkills.filter(s =>
-  project.data.relatedSkills.includes(s.id)
-);
+const relatedSkills = allSkills.filter((s) => project.data.relatedSkills.includes(s.id));
 
 // Get all projects for navigation
 const allProjects = await getCollection('projects');
 const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
-const currentIndex = sortedProjects.findIndex(p => p.id === project.id);
+const currentIndex = sortedProjects.findIndex((p) => p.id === project.id);
 const prevProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null;
-const nextProject = currentIndex < sortedProjects.length - 1 ? sortedProjects[currentIndex + 1] : null;
+const nextProject =
+  currentIndex < sortedProjects.length - 1 ? sortedProjects[currentIndex + 1] : null;
 
 // Check if it's a personal project
 const isPersonalProject = project.data.context.company === 'Projet Personnel';
@@ -189,36 +201,36 @@ const hasActeursList = acteursList.length > 0;
 const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEntreprise.length > 0;
 ---
 
-<BaseLayout
-  title={project.data.title}
-  description={project.data.shortDescription}
->
+<BaseLayout title={project.data.title} description={project.data.shortDescription}>
   <!-- BreadcrumbList Schema -->
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Accueil",
-          "item": "https://leigh-chr.github.io/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Réalisations",
-          "item": "https://leigh-chr.github.io/projects/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": project.data.title,
-          "item": `https://leigh-chr.github.io/projects/${project.id}/`
-        }
-      ]
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Accueil',
+            item: 'https://leigh-chr.github.io/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Réalisations',
+            item: 'https://leigh-chr.github.io/projects/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: project.data.title,
+            item: `https://leigh-chr.github.io/projects/${project.id}/`,
+          },
+        ],
+      })}
+    />
   </Fragment>
 
   <!-- Hero Section -->
@@ -229,7 +241,9 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
         <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6" aria-label="Fil d'Ariane">
           <a href={url('/')} class="hover:text-primary-400 transition-colors">Accueil</a>
           <span>/</span>
-          <a href={url('/projects')} class="hover:text-primary-400 transition-colors">Réalisations</a>
+          <a href={url('/projects')} class="hover:text-primary-400 transition-colors"
+            >Réalisations</a
+          >
           <span>/</span>
           <span class="text-white">{project.data.title}</span>
         </nav>
@@ -241,33 +255,35 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
             class="w-full md:w-1/3 aspect-video overflow-hidden bg-dark-700 shadow-hard-lg border-2 border-primary-500 flex-shrink-0 group/thumb"
             transition:name={`project-thumb-${project.id}`}
           >
-            {project.data.fullImage ? (
-              <div class="relative w-full h-full overflow-hidden scroll-preview">
+            {
+              project.data.fullImage ? (
+                <div class="relative w-full h-full overflow-hidden scroll-preview">
+                  <img
+                    src={url(project.data.fullImage)}
+                    alt={`Aperçu du projet ${project.data.title}`}
+                    class="scroll-preview-img"
+                    width="800"
+                    height="1600"
+                    loading="eager"
+                    fetchpriority="high"
+                  />
+                </div>
+              ) : project.data.thumbnail ? (
                 <img
-                  src={url(project.data.fullImage)}
+                  src={url(project.data.thumbnail)}
                   alt={`Aperçu du projet ${project.data.title}`}
-                  class="scroll-preview-img"
-                  width="800"
-                  height="1600"
+                  class="w-full h-full object-cover"
+                  width="400"
+                  height="225"
                   loading="eager"
                   fetchpriority="high"
                 />
-              </div>
-            ) : project.data.thumbnail ? (
-              <img
-                src={url(project.data.thumbnail)}
-                alt={`Aperçu du projet ${project.data.title}`}
-                class="w-full h-full object-cover"
-                width="400"
-                height="225"
-                loading="eager"
-                fetchpriority="high"
-              />
-            ) : (
-              <div class="w-full h-full flex items-center justify-center">
-                <span class="text-6xl opacity-30">📁</span>
-              </div>
-            )}
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <span class="text-6xl opacity-30">📁</span>
+                </div>
+              )
+            }
           </div>
 
           <!-- Info -->
@@ -279,11 +295,11 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
               <span class="tag-accent">
                 {project.data.context.role}
               </span>
-              {project.data.context.company && (
-                <span class="tag-gray">
-                  {project.data.context.company}
-                </span>
-              )}
+              {
+                project.data.context.company && (
+                  <span class="tag-gray">{project.data.context.company}</span>
+                )
+              }
             </div>
 
             <h1
@@ -298,38 +314,60 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
             </p>
 
             {/* Project Links */}
-            {links && (links.repository || links.website) && (
-              <div class="flex flex-wrap gap-3 mt-6">
-                {links.repository && (
-                  <a
-                    href={links.repository}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-dark-700 border-2 border-dark-600 hover:border-primary-500 text-gray-300 hover:text-white transition-all duration-200"
-                    aria-label={`Voir le code source de ${project.data.title} sur GitHub`}
-                  >
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="text-sm font-medium">Code source</span>
-                  </a>
-                )}
-                {links.website && (
-                  <a
-                    href={links.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-primary-500/10 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white transition-all duration-200"
-                    aria-label={`Visiter le site de ${project.data.title}`}
-                  >
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    <span class="text-sm font-medium">Voir le site</span>
-                  </a>
-                )}
-              </div>
-            )}
+            {
+              links && (links.repository || links.website) && (
+                <div class="flex flex-wrap gap-3 mt-6">
+                  {links.repository && (
+                    <a
+                      href={links.repository}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 px-4 py-2 bg-dark-700 border-2 border-dark-600 hover:border-primary-500 text-gray-300 hover:text-white transition-all duration-200"
+                      aria-label={`Voir le code source de ${project.data.title} sur GitHub`}
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span class="text-sm font-medium">Code source</span>
+                    </a>
+                  )}
+                  {links.website && (
+                    <a
+                      href={links.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-2 px-4 py-2 bg-primary-500/10 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white transition-all duration-200"
+                      aria-label={`Visiter le site de ${project.data.title}`}
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                      <span class="text-sm font-medium">Voir le site</span>
+                    </a>
+                  )}
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
@@ -338,360 +376,523 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
 
   <!-- Content Sections -->
   <section>
-  <div class="container-custom" transition:animate={slide({ duration: '0.3s' })}>
-    <div class="max-w-4xl mx-auto">
-
-      <!-- Section 1: Présentation du projet -->
-      {presentationContent && (
-        <section class="mb-20" id="presentation">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">📋</span>
-            </div>
-            <h2 class="content-section-title">Présentation du <span class="text-primary-400 underline-memphis">Projet</span></h2>
-          </div>
-          <div class="section-divider ml-0 mx-0 mb-8"></div>
-          <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-            <div set:html={presentationContent
-              .split('\n\n')
-              .map(p => `<p>${p.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')}</p>`)
-              .join('')
-            } />
-          </div>
-        </section>
-      )}
-
-      <!-- Section 2: Objectifs, Contexte, Enjeux, Risques -->
-      {Object.keys(objectifs).length > 0 && (
-        <section class="mb-20" id="contexte">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">🎯</span>
-            </div>
-            <h2 class="content-section-title">Objectifs, Contexte et <span class="text-accent-400 underline-memphis underline-memphis-accent">Enjeux</span></h2>
-          </div>
-          <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
-          <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            {objectifs['Contexte'] && (
-              <div class="detail-box">
-                <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                  <span class="text-accent-400">📍</span> Contexte
-                </h3>
-                <p class="text-gray-400 text-sm">{objectifs['Contexte']}</p>
+    <div class="container-custom" transition:animate={slide({ duration: '0.3s' })}>
+      <div class="max-w-4xl mx-auto">
+        <!-- Section 1: Présentation du projet -->
+        {
+          presentationContent && (
+            <section class="mb-20" id="presentation">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">📋</span>
+                </div>
+                <h2 class="content-section-title">
+                  Présentation du <span class="text-primary-400 underline-memphis">Projet</span>
+                </h2>
               </div>
-            )}
-
-            {objectifs['Problématique'] && (
-              <div class="detail-box">
-                <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                  <span class="text-primary-400">❓</span> Problématique
-                </h3>
-                <p class="text-gray-400 text-sm">{objectifs['Problématique']}</p>
+              <div class="section-divider ml-0 mx-0 mb-8" />
+              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
+                <div
+                  set:html={presentationContent
+                    .split('\n\n')
+                    .map(
+                      (p) =>
+                        `<p>${p.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')}</p>`
+                    )
+                    .join('')}
+                />
               </div>
-            )}
+            </section>
+          )
+        }
 
-            {objectifs['Objectifs'] && (
-              <div class="detail-box">
-                <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                  <span class="text-primary-400">🎯</span> Objectifs
-                </h3>
-                <p class="text-gray-400 text-sm">{objectifs['Objectifs']}</p>
+        <!-- Section 2: Objectifs, Contexte, Enjeux, Risques -->
+        {
+          Object.keys(objectifs).length > 0 && (
+            <section class="mb-20" id="contexte">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">🎯</span>
+                </div>
+                <h2 class="content-section-title">
+                  Objectifs, Contexte et{' '}
+                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                    Enjeux
+                  </span>
+                </h2>
               </div>
-            )}
-
-            {(objectifs['Enjeux'] || objectifs['Risques identifiés']) && (
-              <div class="detail-box">
-                <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                  <span class="text-accent-400">⚠️</span> {objectifs['Enjeux'] ? 'Enjeux' : 'Risques'}
-                </h3>
-                <p class="text-gray-400 text-sm">{objectifs['Enjeux'] || objectifs['Risques identifiés']}</p>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
-
-      <!-- Section 3: Les Étapes -->
-      {phases.length > 0 && (
-        <section class="mb-20" id="etapes">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">📝</span>
-            </div>
-            <h2 class="content-section-title">Les <span class="text-primary-400 underline-memphis">Étapes</span> - Ce que j'ai fait</h2>
-          </div>
-          <div class="section-divider ml-0 mx-0 mb-8"></div>
-          <div class="detail-box">
-            <div class="space-y-8">
-              {phases.map((phase, index) => (
-                <div class="flex gap-4">
-                  <div class="flex flex-col items-center">
-                    <div class={`w-10 h-10 ${index === phases.length - 1 ? 'bg-accent-400' : 'bg-primary-500'} flex items-center justify-center`}>
-                      <span class={`font-heading font-bold ${index === phases.length - 1 ? 'text-dark-900' : 'text-white'}`}>{index + 1}</span>
-                    </div>
-                    {index < phases.length - 1 && <div class="w-0.5 h-full bg-dark-600 mt-2"></div>}
-                  </div>
-                  <div class={index < phases.length - 1 ? 'pb-6' : ''}>
-                    <h3 class="font-heading font-bold text-white mb-2">{phase.title}</h3>
-                    <p class="text-gray-400 text-sm">{phase.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <!-- Section 4: Acteurs / Compétences mobilisées -->
-      {(hasActeursList || acteursContent) && (
-        <section class="mb-20" id="acteurs">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">{isPersonalProject ? '🛠️' : '👥'}</span>
-            </div>
-            <h2 class="content-section-title">
-              {isPersonalProject ? (
-                <span>Compétences <span class="text-accent-400 underline-memphis underline-memphis-accent">Mobilisées</span></span>
-              ) : (
-                <span>Les <span class="text-accent-400 underline-memphis underline-memphis-accent">Acteurs</span> - Les Interactions</span>
-              )}
-            </h2>
-          </div>
-          <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
-
-          {hasActeursList ? (
-            <div class="detail-box">
-              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                {acteursList.map((acteur, index) => (
-                  <div class="p-6 bg-dark-700 border border-dark-600 text-center">
-                    <div class={`w-12 h-12 bg-dark-600 border-2 ${index % 2 === 0 ? 'border-primary-500' : 'border-accent-400'} flex items-center justify-center mx-auto mb-2`}>
-                      <span class="text-xl">👤</span>
-                    </div>
-                    <h3 class="font-heading font-medium text-white text-sm">{acteur.role}</h3>
-                    <p class="text-gray-400 text-xs mt-1">{acteur.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div class="detail-box">
-              <p class="text-gray-400">{acteursContent}</p>
-            </div>
-          )}
-        </section>
-      )}
-
-      <!-- Section 5: Les Résultats -->
-      {(hasSubsectionResultats || resultats.unified.length > 0) && (
-        <section class="mb-20" id="resultats">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">🏆</span>
-            </div>
-            <h2 class="content-section-title">Les <span class="text-primary-400 underline-memphis">Résultats</span></h2>
-          </div>
-          <div class="section-divider ml-0 mx-0 mb-8"></div>
-
-          {hasSubsectionResultats ? (
-            <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-              {resultats.pourMoi.length > 0 && (
-                <div class="detail-box">
-                  <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                    <span class="text-primary-400">👤</span> Pour moi
-                  </h3>
-                  <ul class="space-y-2 text-gray-400 text-sm">
-                    {resultats.pourMoi.map((item) => (
-                      <li class="flex items-start gap-2">
-                        <svg class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {resultats.pourEntreprise.length > 0 && (
-                <div class="detail-box">
-                  <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                    <span class="text-accent-400">{isPersonalProject ? '🌍' : '🏢'}</span> {resultats.pourEntrepriseLabel}
-                  </h3>
-                  <ul class="space-y-2 text-gray-400 text-sm">
-                    {resultats.pourEntreprise.map((item) => (
-                      <li class="flex items-start gap-2">
-                        <svg class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div class="detail-box">
-              <ul class="space-y-2 text-gray-400 text-sm">
-                {resultats.unified.map((item) => (
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </section>
-      )}
-
-      <!-- Section 6: Les Lendemains du Projet -->
-      {Object.keys(lendemains).length > 0 && (
-        <section class="mb-20" id="lendemains">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">🔮</span>
-            </div>
-            <h2 class="content-section-title">Les <span class="text-accent-400 underline-memphis underline-memphis-accent">Lendemains</span> du Projet</h2>
-          </div>
-          <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
-          <div class="detail-box">
-            <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-              {lendemains['Futur immédiat'] && (
-                <div>
-                  <h3 class="font-heading font-semibold text-white mb-2 text-sm">Futur immédiat</h3>
-                  <p class="text-gray-400 text-sm" set:html={lendemains['Futur immédiat'].replace(/^- /gm, '• ').replace(/\n/g, '<br>')} />
-                </div>
-              )}
-              {lendemains['À moyen terme'] && (
-                <div>
-                  <h3 class="font-heading font-semibold text-white mb-2 text-sm">À moyen terme</h3>
-                  <p class="text-gray-400 text-sm" set:html={lendemains['À moyen terme'].replace(/^- /gm, '• ').replace(/\n/g, '<br>')} />
-                </div>
-              )}
-              {lendemains['Aujourd\'hui'] && (
-                <div>
-                  <h3 class="font-heading font-semibold text-white mb-2 text-sm">Aujourd'hui</h3>
-                  <p class="text-gray-400 text-sm" set:html={lendemains['Aujourd\'hui'].replace(/^- /gm, '• ').replace(/\n/g, '<br>')} />
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <!-- Section 7: Mon Regard Critique -->
-      {(critique.positif.length > 0 || critique.amelioration.length > 0) && (
-        <section class="mb-20" id="critique">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">🔍</span>
-            </div>
-            <h2 class="content-section-title">Mon Regard <span class="text-primary-400 underline-memphis">Critique</span></h2>
-          </div>
-          <div class="section-divider ml-0 mx-0 mb-8"></div>
-          <div class="detail-box">
-            <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-              {critique.positif.length > 0 && (
-                <div class="p-6 bg-dark-700 border border-dark-600">
-                  <h3 class="font-heading font-semibold text-white mb-2 text-sm">Ce qui a bien fonctionné</h3>
-                  <ul class="text-gray-400 text-sm space-y-1">
-                    {critique.positif.map((item) => (
-                      <li>• {item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {critique.amelioration.length > 0 && (
-                <div class="p-6 bg-dark-700 border border-dark-600">
-                  <h3 class="font-heading font-semibold text-white mb-2 text-sm">Axes d'amélioration</h3>
-                  <ul class="text-gray-400 text-sm space-y-1">
-                    {critique.amelioration.map((item) => (
-                      <li>• {item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <!-- Section 8: Compétences Associées -->
-      {relatedSkills.length > 0 && (
-        <section class="mb-20" id="competences">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">🔗</span>
-            </div>
-            <h2 class="content-section-title">Compétences <span class="text-accent-400 underline-memphis underline-memphis-accent">Associées</span></h2>
-          </div>
-          <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
-
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
-            {relatedSkills.map((skill) => (
-              <a
-                href={url(`/skills/${skill.id}`)}
-                class="card-glow p-6 group"
-              >
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-dark-700 border-2 border-primary-500 flex items-center justify-center">
-                    <span class="text-lg">{skill.data.icon || (skill.data.category === 'technical' ? '💻' : '🤝')}</span>
-                  </div>
-                  <div>
-                    <h3 class="font-heading font-semibold text-white text-sm group-hover:text-primary-400 transition-colors">
-                      {skill.data.title}
+              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
+              <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                {objectifs['Contexte'] && (
+                  <div class="detail-box">
+                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
+                      <span class="text-accent-400">📍</span> Contexte
                     </h3>
-                    <span class="text-xs text-gray-400">
-                      {skill.data.category === 'technical' ? 'Technique' : 'Humaine'}
+                    <p class="text-gray-400 text-sm">{objectifs['Contexte']}</p>
+                  </div>
+                )}
+
+                {objectifs['Problématique'] && (
+                  <div class="detail-box">
+                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
+                      <span class="text-primary-400">❓</span> Problématique
+                    </h3>
+                    <p class="text-gray-400 text-sm">{objectifs['Problématique']}</p>
+                  </div>
+                )}
+
+                {objectifs['Objectifs'] && (
+                  <div class="detail-box">
+                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
+                      <span class="text-primary-400">🎯</span> Objectifs
+                    </h3>
+                    <p class="text-gray-400 text-sm">{objectifs['Objectifs']}</p>
+                  </div>
+                )}
+
+                {(objectifs['Enjeux'] || objectifs['Risques identifiés']) && (
+                  <div class="detail-box">
+                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
+                      <span class="text-accent-400">⚠️</span>{' '}
+                      {objectifs['Enjeux'] ? 'Enjeux' : 'Risques'}
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                      {objectifs['Enjeux'] || objectifs['Risques identifiés']}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 3: Les Étapes -->
+        {
+          phases.length > 0 && (
+            <section class="mb-20" id="etapes">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">📝</span>
+                </div>
+                <h2 class="content-section-title">
+                  Les <span class="text-primary-400 underline-memphis">Étapes</span> - Ce que j'ai
+                  fait
+                </h2>
+              </div>
+              <div class="section-divider ml-0 mx-0 mb-8" />
+              <div class="detail-box">
+                <div class="space-y-8">
+                  {phases.map((phase, index) => (
+                    <div class="flex gap-4">
+                      <div class="flex flex-col items-center">
+                        <div
+                          class={`w-10 h-10 ${index === phases.length - 1 ? 'bg-accent-400' : 'bg-primary-500'} flex items-center justify-center`}
+                        >
+                          <span
+                            class={`font-heading font-bold ${index === phases.length - 1 ? 'text-dark-900' : 'text-white'}`}
+                          >
+                            {index + 1}
+                          </span>
+                        </div>
+                        {index < phases.length - 1 && <div class="w-0.5 h-full bg-dark-600 mt-2" />}
+                      </div>
+                      <div class={index < phases.length - 1 ? 'pb-6' : ''}>
+                        <h3 class="font-heading font-bold text-white mb-2">{phase.title}</h3>
+                        <p class="text-gray-400 text-sm">{phase.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 4: Acteurs / Compétences mobilisées -->
+        {
+          (hasActeursList || acteursContent) && (
+            <section class="mb-20" id="acteurs">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">{isPersonalProject ? '🛠️' : '👥'}</span>
+                </div>
+                <h2 class="content-section-title">
+                  {isPersonalProject ? (
+                    <span>
+                      Compétences{' '}
+                      <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                        Mobilisées
+                      </span>
                     </span>
+                  ) : (
+                    <span>
+                      Les{' '}
+                      <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                        Acteurs
+                      </span>{' '}
+                      - Les Interactions
+                    </span>
+                  )}
+                </h2>
+              </div>
+              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
+
+              {hasActeursList ? (
+                <div class="detail-box">
+                  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+                    {acteursList.map((acteur, index) => (
+                      <div class="p-6 bg-dark-700 border border-dark-600 text-center">
+                        <div
+                          class={`w-12 h-12 bg-dark-600 border-2 ${index % 2 === 0 ? 'border-primary-500' : 'border-accent-400'} flex items-center justify-center mx-auto mb-2`}
+                        >
+                          <span class="text-xl">👤</span>
+                        </div>
+                        <h3 class="font-heading font-medium text-white text-sm">{acteur.role}</h3>
+                        <p class="text-gray-400 text-xs mt-1">{acteur.description}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
+              ) : (
+                <div class="detail-box">
+                  <p class="text-gray-400">{acteursContent}</p>
+                </div>
+              )}
+            </section>
+          )
+        }
+
+        <!-- Section 5: Les Résultats -->
+        {
+          (hasSubsectionResultats || resultats.unified.length > 0) && (
+            <section class="mb-20" id="resultats">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">🏆</span>
+                </div>
+                <h2 class="content-section-title">
+                  Les <span class="text-primary-400 underline-memphis">Résultats</span>
+                </h2>
+              </div>
+              <div class="section-divider ml-0 mx-0 mb-8" />
+
+              {hasSubsectionResultats ? (
+                <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                  {resultats.pourMoi.length > 0 && (
+                    <div class="detail-box">
+                      <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
+                        <span class="text-primary-400">👤</span> Pour moi
+                      </h3>
+                      <ul class="space-y-2 text-gray-400 text-sm">
+                        {resultats.pourMoi.map((item) => (
+                          <li class="flex items-start gap-2">
+                            <svg
+                              class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {resultats.pourEntreprise.length > 0 && (
+                    <div class="detail-box">
+                      <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
+                        <span class="text-accent-400">{isPersonalProject ? '🌍' : '🏢'}</span>{' '}
+                        {resultats.pourEntrepriseLabel}
+                      </h3>
+                      <ul class="space-y-2 text-gray-400 text-sm">
+                        {resultats.pourEntreprise.map((item) => (
+                          <li class="flex items-start gap-2">
+                            <svg
+                              class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div class="detail-box">
+                  <ul class="space-y-2 text-gray-400 text-sm">
+                    {resultats.unified.map((item) => (
+                      <li class="flex items-start gap-2">
+                        <svg
+                          class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+          )
+        }
+
+        <!-- Section 6: Les Lendemains du Projet -->
+        {
+          Object.keys(lendemains).length > 0 && (
+            <section class="mb-20" id="lendemains">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">🔮</span>
+                </div>
+                <h2 class="content-section-title">
+                  Les{' '}
+                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                    Lendemains
+                  </span>{' '}
+                  du Projet
+                </h2>
+              </div>
+              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
+              <div class="detail-box">
+                <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+                  {lendemains['Futur immédiat'] && (
+                    <div>
+                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
+                        Futur immédiat
+                      </h3>
+                      <p
+                        class="text-gray-400 text-sm"
+                        set:html={lendemains['Futur immédiat']
+                          .replace(/^- /gm, '• ')
+                          .replace(/\n/g, '<br>')}
+                      />
+                    </div>
+                  )}
+                  {lendemains['À moyen terme'] && (
+                    <div>
+                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
+                        À moyen terme
+                      </h3>
+                      <p
+                        class="text-gray-400 text-sm"
+                        set:html={lendemains['À moyen terme']
+                          .replace(/^- /gm, '• ')
+                          .replace(/\n/g, '<br>')}
+                      />
+                    </div>
+                  )}
+                  {lendemains["Aujourd'hui"] && (
+                    <div>
+                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
+                        Aujourd'hui
+                      </h3>
+                      <p
+                        class="text-gray-400 text-sm"
+                        set:html={lendemains["Aujourd'hui"]
+                          .replace(/^- /gm, '• ')
+                          .replace(/\n/g, '<br>')}
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 7: Mon Regard Critique -->
+        {
+          (critique.positif.length > 0 || critique.amelioration.length > 0) && (
+            <section class="mb-20" id="critique">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">🔍</span>
+                </div>
+                <h2 class="content-section-title">
+                  Mon Regard <span class="text-primary-400 underline-memphis">Critique</span>
+                </h2>
+              </div>
+              <div class="section-divider ml-0 mx-0 mb-8" />
+              <div class="detail-box">
+                <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+                  {critique.positif.length > 0 && (
+                    <div class="p-6 bg-dark-700 border border-dark-600">
+                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
+                        Ce qui a bien fonctionné
+                      </h3>
+                      <ul class="text-gray-400 text-sm space-y-1">
+                        {critique.positif.map((item) => (
+                          <li>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {critique.amelioration.length > 0 && (
+                    <div class="p-6 bg-dark-700 border border-dark-600">
+                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
+                        Axes d'amélioration
+                      </h3>
+                      <ul class="text-gray-400 text-sm space-y-1">
+                        {critique.amelioration.map((item) => (
+                          <li>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 8: Compétences Associées -->
+        {
+          relatedSkills.length > 0 && (
+            <section class="mb-20" id="competences">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">🔗</span>
+                </div>
+                <h2 class="content-section-title">
+                  Compétences{' '}
+                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                    Associées
+                  </span>
+                </h2>
+              </div>
+              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
+
+              <div
+                class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+                data-gsap="stagger"
+              >
+                {relatedSkills.map((skill) => (
+                  <a href={url(`/skills/${skill.id}`)} class="card-glow p-6 group">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-dark-700 border-2 border-primary-500 flex items-center justify-center">
+                        <span class="text-lg">
+                          {skill.data.icon || (skill.data.category === 'technical' ? '💻' : '🤝')}
+                        </span>
+                      </div>
+                      <div>
+                        <h3 class="font-heading font-semibold text-white text-sm group-hover:text-primary-400 transition-colors">
+                          {skill.data.title}
+                        </h3>
+                        <span class="text-xs text-gray-400">
+                          {skill.data.category === 'technical' ? 'Technique' : 'Humaine'}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Navigation between projects -->
+        <nav
+          class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-10 border-t border-dark-600"
+          aria-label="Navigation entre projets"
+        >
+          {
+            prevProject ? (
+              <a
+                href={url(`/projects/${prevProject.id}`)}
+                class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-2 sm:order-1"
+                aria-label={`Projet précédent : ${prevProject.data.title}`}
+              >
+                <svg
+                  class="w-5 h-5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">
+                  {prevProject.data.title}
+                </span>
               </a>
-            ))}
-          </div>
-        </section>
-      )}
+            ) : (
+              <span class="order-2 sm:order-1" />
+            )
+          }
 
-      <!-- Navigation between projects -->
-      <nav class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-10 border-t border-dark-600" aria-label="Navigation entre projets">
-        {prevProject ? (
           <a
-            href={url(`/projects/${prevProject.id}`)}
-            class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-2 sm:order-1"
-            aria-label={`Projet précédent : ${prevProject.data.title}`}
+            href={url('/projects')}
+            class="text-sm text-gray-400 hover:text-primary-400 transition-colors order-1 sm:order-2"
           >
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">{prevProject.data.title}</span>
+            Toutes les réalisations
           </a>
-        ) : (
-          <span class="order-2 sm:order-1"></span>
-        )}
 
-        <a href={url('/projects')} class="text-sm text-gray-400 hover:text-primary-400 transition-colors order-1 sm:order-2">
-          Toutes les réalisations
-        </a>
-
-        {nextProject ? (
-          <a
-            href={url(`/projects/${nextProject.id}`)}
-            class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-3"
-            aria-label={`Projet suivant : ${nextProject.data.title}`}
-          >
-            <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">{nextProject.data.title}</span>
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        ) : (
-          <span class="order-3"></span>
-        )}
-      </nav>
+          {
+            nextProject ? (
+              <a
+                href={url(`/projects/${nextProject.id}`)}
+                class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-3"
+                aria-label={`Projet suivant : ${nextProject.data.title}`}
+              >
+                <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">
+                  {nextProject.data.title}
+                </span>
+                <svg
+                  class="w-5 h-5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            ) : (
+              <span class="order-3" />
+            )
+          }
+        </nav>
+      </div>
     </div>
-  </div>
   </section>
 </BaseLayout>

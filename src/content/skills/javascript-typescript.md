@@ -12,15 +12,15 @@ summary: "Maîtrise avancée de JavaScript et TypeScript pour le développement 
 
 ## Ma Définition
 
-TypeScript est devenu mon langage de prédilection pour tout projet d'envergure. Le typage statique qu'il apporte transforme radicalement l'expérience de développement : les erreurs sont détectées à la compilation plutôt qu'en production, l'autocomplétion devient intelligente, et le refactoring devient sûr. Avec la sortie de TypeScript 5.x en 2024, l'écosystème continue de s'enrichir avec des fonctionnalités comme les décorateurs standardisés (stage 3) et l'amélioration des performances de compilation, consolidant sa position de standard pour le développement JavaScript à grande échelle.
+TypeScript est mon langage de prédilection dès qu'un projet dépasse le stade du prototype. Le typage statique change concrètement la donne : erreurs détectées à la compilation plutôt qu'en prod, autocomplétion qui suit, refactoring sans sueur froide.
 
-Dans mon travail quotidien chez BH Technologies, j'utilise TypeScript aussi bien côté frontend (Angular, SvelteJS) que backend (NestJS). Cette cohérence technologique sur l'ensemble de la stack facilite le partage de types entre le client et le serveur, réduisant drastiquement les bugs liés aux interfaces de données.
+Chez BH Technologies, j'utilise TypeScript partout — frontend (Angular, Svelte) et backend (NestJS). Avoir le même langage des deux côtés de la stack permet de partager les types entre client et serveur, ce qui élimine une bonne partie des bugs d'intégration.
 
 ## Mes éléments de preuve
 
 ### Plus de 280 000 lignes de TypeScript sur mes projets personnels
 
-**[AppStandard](/projects/appstandard)** représente plus de 216 000 lignes de TypeScript organisées en monorepo avec 19 packages. **[Tidy App](/projects/tidy-app)** ajoute 70 000 lignes supplémentaires. Cette échelle démontre ma capacité à structurer et maintenir des bases de code conséquentes avec un typage rigoureux.
+**[AppStandard](/projects/appstandard)** représente plus de 216 000 lignes de TypeScript organisées en monorepo avec 19 packages. **[Tidy App](/projects/tidy-app)** ajoute 70 000 lignes supplémentaires. À cette échelle, sans typage rigoureux, le projet serait ingérable.
 
 ### Typage avancé et patterns idiomatiques
 
@@ -28,17 +28,17 @@ Au-delà de la syntaxe de base, je maîtrise les patterns TypeScript avancés : 
 
 ### Stack fullstack unifiée
 
-Chez BH Technologies, j'utilise TypeScript sur toute la stack : Angular/Svelte côté frontend, NestJS côté backend. Cette maîtrise transversale me permet de comprendre et intervenir sur l'ensemble d'une application, du formulaire utilisateur jusqu'à la base de données.
+Chez BH Technologies, j'utilise TypeScript sur toute la stack : Angular/Svelte côté frontend, NestJS côté backend. Concrètement, je peux intervenir sur n'importe quelle couche d'une application, du formulaire utilisateur jusqu'à la requête en base de données.
 
 ## Mon autocritique
 
-TypeScript est ma compétence technique la plus solide. Je suis à l'aise avec les concepts avancés et je peux être productif immédiatement sur n'importe quel projet TypeScript.
+C'est ma compétence technique la plus solide. Je suis à l'aise avec les concepts avancés et productif rapidement sur n'importe quel projet TypeScript.
 
-Mon conseil : investir du temps dans la compréhension du système de types de TypeScript. Les génériques et les types conditionnels peuvent sembler complexes au début, mais ils permettent d'écrire du code plus sûr et plus expressif.
+Un conseil pour ceux qui débutent : ne pas esquiver le système de types. Les génériques et les types conditionnels font peur au début, mais une fois qu'on les maîtrise, on écrit du code plus sûr et plus lisible.
 
 ## Mon évolution dans cette compétence
 
-Je souhaite approfondir certains aspects avancés : les types conditionnels complexes, l'utilisation de TypeScript avec des outils de validation de schémas (Zod, io-ts), et les patterns de programmation fonctionnelle typée.
+Ce que je veux creuser : les types conditionnels complexes, TypeScript couplé à des outils de validation de schémas (Zod, io-ts), et les patterns de programmation fonctionnelle typée.
 
 ## Réalisations associées
 

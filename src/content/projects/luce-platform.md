@@ -27,7 +27,7 @@ Luce est une plateforme de télémanagement de l'éclairage public, composée de
 
 Le système communique avec des équipements terrain (Radiolite, BH Gate) installés sur les armoires électriques et des contrôleurs (lightnodes) sur les points lumineux, via les réseaux LoRaWAN et MESH. L'architecture permet un pilotage fin de l'éclairage : variation d'intensité avec paramétrage du fading, programmation horaire avec jusqu'à 16 scènes par scénario, et réaction aux conditions de luminosité via trois modes pré-définis (Astro standard, Socio-astro éco, Socio-astro confort). La plateforme est interopérable avec le protocole standard TALQ2 ainsi qu'avec les GMAO, SIG et hyperviseurs du marché.
 
-L'enjeu est majeur : l'éclairage public représente en moyenne **40% de la facture d'électricité** d'une commune, et la plateforme permet **jusqu'à 80% d'économies** grâce à une gestion fine de l'éclairage. BH Technologies a contribué à économiser plus de **30 millions de kWh** pour les collectivités françaises, équipant près de 50% d'entre elles.
+Pour situer : l'éclairage public représente en moyenne **40% de la facture d'électricité** d'une commune, et la plateforme permet **jusqu'à 80% d'économies** grâce à une gestion fine de l'éclairage. BH Technologies a contribué à économiser plus de **30 millions de kWh** pour les collectivités françaises, équipant près de 50% d'entre elles.
 
 ## Objectifs, contexte, enjeu et risques
 
@@ -63,17 +63,17 @@ L'enjeu est majeur : l'éclairage public représente en moyenne **40% de la fact
 
 ### Pour moi
 
-- Maîtrise des patterns Angular 14 avancés (lazy loading, change detection, state management avec RxJS)
-- Apprentissage approfondi de SvelteKit 2 et Svelte 5 avec son nouveau système de réactivité
-- Expérience de migration complète Angular vers Svelte sur un projet d'envergure
-- Développement d'APIs NestJS avec TypeORM et authentification JWT
-- Compréhension des systèmes de permissions RBAC et multi-tenancy
+- Angular 14 avancé : lazy loading, change detection, state management RxJS
+- SvelteKit 2 et Svelte 5 avec le nouveau système de réactivité
+- Une migration complète Angular → Svelte sur un vrai projet de prod
+- APIs NestJS avec TypeORM et authentification JWT
+- Systèmes de permissions RBAC et multi-tenancy compris en pratique
 
 ### Pour l'entreprise
 
 - Amélioration notable des temps de chargement avec la V4 grâce à SvelteKit
 - Interface utilisateur modernisée et plus réactive pour les gestionnaires de collectivités
-- Architecture microservices scalable permettant de gérer des parcs lumineux plus importants
+- Architecture microservices capable d'encaisser des parcs lumineux plus importants
 - Migration progressive sans interruption de service pour les clients existants
 - Base technique solide et documentée pour les évolutions futures de la plateforme
 
@@ -89,7 +89,7 @@ L'enjeu est majeur : l'éclairage public représente en moyenne **40% de la fact
 
 - Adoption progressive par les collectivités existantes
 - Demandes d'intégration avec d'autres systèmes municipaux via l'API REST documentée Swagger
-- Intérêt commercial accru grâce aux performances améliorées et à l'UX modernisée
+- Les performances et l'UX modernisée attirent de nouveaux prospects
 
 ### Aujourd'hui
 
@@ -99,8 +99,8 @@ L'enjeu est majeur : l'éclairage public représente en moyenne **40% de la fact
 
 ## Regard critique
 
-**Ce qui a bien fonctionné** : L'architecture modulaire de la V4 a permis à plusieurs développeurs de travailler en parallèle sans conflits. Le choix de SvelteKit s'est avéré excellent pour les performances et la maintenabilité. La séparation claire entre frontend et backend a facilité le développement et les tests.
+**Ce qui a bien fonctionné** : L'architecture modulaire de la V4 — chacun pouvait bosser sur son service sans marcher sur les pieds des autres. SvelteKit s'est avéré solide pour les performances et la maintenabilité. La séparation nette entre frontend et backend a simplifié le dev et les tests.
 
 **Ce que j'aurais fait différemment** : En V3, j'aurais mis en place plus tôt des outils de documentation partagée (Notion, ADR) pour fluidifier la coordination inter-modules. En V4, j'aurais prévu davantage de temps de formation collective sur les nouveaux outils (SvelteKit, Svelte 5) avant de démarrer le développement.
 
-**Leçon apprise** : L'architecture technique doit refléter l'organisation de l'équipe (loi de Conway). Une migration technologique majeure nécessite un investissement significatif en formation et accompagnement pour garantir une adoption réussie par l'équipe.
+**Leçon apprise** : L'architecture technique doit refléter l'organisation de l'équipe (loi de Conway). Une migration de framework majeure, ça ne passe que si on investit du temps en formation et en accompagnement de l'équipe.

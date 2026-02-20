@@ -32,14 +32,12 @@ const evolutionContent = extractSection(rawContent, 'Mon évolution dans cette c
 
 // Get related projects
 const allProjects = await getCollection('projects');
-const relatedProjects = allProjects.filter(p =>
-  skill.data.relatedProjects.includes(p.id)
-);
+const relatedProjects = allProjects.filter((p) => skill.data.relatedProjects.includes(p.id));
 
 // Get all skills for navigation
 const allSkills = await getCollection('skills');
 const sortedSkills = allSkills.sort((a, b) => a.data.order - b.data.order);
-const currentIndex = sortedSkills.findIndex(s => s.id === skill.id);
+const currentIndex = sortedSkills.findIndex((s) => s.id === skill.id);
 const prevSkill = currentIndex > 0 ? sortedSkills[currentIndex - 1] : null;
 const nextSkill = currentIndex < sortedSkills.length - 1 ? sortedSkills[currentIndex + 1] : null;
 
@@ -48,34 +46,37 @@ const isTechnical = skill.data.category === 'technical';
 
 <BaseLayout
   title={skill.data.title}
-  description={`Découvrez ma compétence en ${skill.data.title}: définition, preuves concrètes, autocritique et perspectives d'évolution.`}
+  description={`${skill.data.title} : ce que j'en fais, comment je la pratique, et mon regard critique.`}
 >
   <!-- BreadcrumbList Schema -->
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Accueil",
-          "item": "https://leigh-chr.github.io/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Compétences",
-          "item": "https://leigh-chr.github.io/skills/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": skill.data.title,
-          "item": `https://leigh-chr.github.io/skills/${skill.id}/`
-        }
-      ]
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Accueil',
+            item: 'https://leigh-chr.github.io/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Compétences',
+            item: 'https://leigh-chr.github.io/skills/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: skill.data.title,
+            item: `https://leigh-chr.github.io/skills/${skill.id}/`,
+          },
+        ],
+      })}
+    />
   </Fragment>
 
   <!-- Hero Section -->
@@ -93,15 +94,22 @@ const isTechnical = skill.data.category === 'technical';
 
         <!-- Header -->
         <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 md:gap-8">
-          <div class="profile-avatar-xl flex items-center justify-center flex-shrink-0" transition:name={`skill-icon-${skill.id}`}>
-            <span class="text-3xl sm:text-4xl">{skill.data.icon || (isTechnical ? '💻' : '🤝')}</span>
+          <div
+            class="profile-avatar-xl flex items-center justify-center flex-shrink-0"
+            transition:name={`skill-icon-${skill.id}`}
+          >
+            <span class="text-3xl sm:text-4xl"
+              >{skill.data.icon || (isTechnical ? '💻' : '🤝')}</span
+            >
           </div>
           <div>
             <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
               <span class={isTechnical ? 'tag-primary' : 'tag-accent'}>
                 {isTechnical ? 'Technique' : 'Humaine'}
               </span>
-              <span class="tag-gray" transition:name={`skill-level-${skill.id}`}>{`${skill.data.level}/10`}</span>
+              <span class="tag-gray" transition:name={`skill-level-${skill.id}`}
+                >{`${skill.data.level}/10`}</span
+              >
             </div>
             <h1
               class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black text-white mb-4 tracking-tight"
@@ -117,17 +125,19 @@ const isTechnical = skill.data.category === 'technical';
 
         <!-- Level indicator - Bold Memphis -->
         <div class="mt-6 sm:mt-8 detail-box border-3 border-dark-600">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4 mb-4">
-            <span class="text-base sm:text-xl font-heading font-bold text-gray-300 uppercase tracking-wide">Niveau de maîtrise</span>
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4 mb-4"
+          >
+            <span
+              class="text-base sm:text-xl font-heading font-bold text-gray-300 uppercase tracking-wide"
+              >Niveau de maîtrise</span
+            >
             <span class="text-2xl sm:text-3xl font-heading font-black text-primary-400">
               {`${skill.data.level}/10`}
             </span>
           </div>
           <div class="skill-level-animated h-4">
-            <div
-              class="skill-fill"
-              style={`width: ${skill.data.level * 10}%`}
-            ></div>
+            <div class="skill-fill" style={`width: ${skill.data.level * 10}%`}></div>
           </div>
         </div>
       </div>
@@ -136,178 +146,283 @@ const isTechnical = skill.data.category === 'technical';
 
   <!-- Content Sections -->
   <section>
-  <div class="container-custom" transition:animate={slide({ duration: '0.3s' })}>
-    <div class="max-w-4xl mx-auto">
-
-      <!-- Section 1: Ma Définition -->
-      {definitionContent && (
-        <section class="mb-20" id="definition">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">📖</span>
-            </div>
-            <h2 class="content-section-title">Ma <span class="text-primary-400 underline-memphis">Définition</span></h2>
-          </div>
-          <div class="section-divider ml-0 mx-0 mb-8"></div>
-          <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-            <div set:html={definitionContent
-              .replace(/\n\n/g, '</p><p>')
-              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
-              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
-              .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
-              .replace(/^(.+)$/gm, '<p>$1</p>')
-              .replace(/<p><\/p>/g, '')
-            } />
-          </div>
-        </section>
-      )}
-
-      <!-- Section 2: Mes Éléments de Preuve -->
-      {preuvesContent && (
-        <section class="mb-20" id="preuves">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">🎯</span>
-            </div>
-            <h2 class="content-section-title">Mes Éléments de <span class="text-accent-400 underline-memphis underline-memphis-accent">Preuve</span></h2>
-          </div>
-          <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
-          <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-            <div set:html={preuvesContent
-              .replace(/### ([^\n]+)/g, '<h3 class="text-xl font-heading font-bold text-white mt-8 mb-4">$1</h3>')
-              .replace(/\n\n/g, '</p><p>')
-              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
-              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
-              .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
-              .replace(/^(?!<[hp])(.*[^>])$/gm, '<p>$1</p>')
-              .replace(/<p><\/p>/g, '')
-              .replace(/<p><h3/g, '<h3')
-              .replace(/<\/h3><\/p>/g, '</h3>')
-            } />
-          </div>
-        </section>
-      )}
-
-      <!-- Section 3: Mon Autocritique -->
-      {autocritiqueContent && (
-        <section class="mb-20" id="autocritique">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">🔍</span>
-            </div>
-            <h2 class="content-section-title">Mon <span class="text-primary-400 underline-memphis">Autocritique</span></h2>
-          </div>
-          <div class="section-divider ml-0 mx-0 mb-8"></div>
-          <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-            <div set:html={autocritiqueContent
-              .replace(/\n\n/g, '</p><p>')
-              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
-              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
-              .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
-              .replace(/^(.+)$/gm, '<p>$1</p>')
-              .replace(/<p><\/p>/g, '')
-            } />
-          </div>
-        </section>
-      )}
-
-      <!-- Section 4: Mon Évolution -->
-      {evolutionContent && (
-        <section class="mb-20" id="evolution">
-          <div class="content-section-header">
-            <div class="icon-box-sm">
-              <span class="text-xl">📈</span>
-            </div>
-            <h2 class="content-section-title">Mon <span class="text-accent-400 underline-memphis underline-memphis-accent">Évolution</span></h2>
-          </div>
-          <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
-          <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-            <div set:html={evolutionContent
-              .replace(/\n\n/g, '</p><p>')
-              .replace(/\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g, '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>')
-              .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary-400 hover:underline">$1</a>')
-              .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
-              .replace(/^(.+)$/gm, '<p>$1</p>')
-              .replace(/<p><\/p>/g, '')
-            } />
-          </div>
-        </section>
-      )}
-
-      <!-- Section 5: Réalisations Associées -->
-      <section class="mb-20" id="realisations">
-        <div class="content-section-header">
-          <div class="icon-box-sm">
-            <span class="text-xl">🔗</span>
-          </div>
-          <h2 class="content-section-title">Réalisations <span class="text-accent-400 underline-memphis underline-memphis-accent">Associées</span></h2>
-        </div>
-        <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
-
-        {relatedProjects.length > 0 ? (
-          <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
-            {relatedProjects.map((project) => (
-              <a
-                href={url(`/projects/${project.id}`)}
-                class="card-glow p-4 sm:p-6 md:p-8 group"
-              >
-                <h3 class="font-heading font-bold text-xl text-white mb-3 group-hover:text-primary-400 transition-colors">
-                  {project.data.title}
-                </h3>
-                <p class="text-gray-400 text-sm line-clamp-2 mb-6">
-                  {project.data.shortDescription}
-                </p>
-                <div class="flex items-center text-primary-400 text-sm font-heading font-medium">
-                  <span>Voir la réalisation</span>
-                  <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
+    <div class="container-custom" transition:animate={slide({ duration: '0.3s' })}>
+      <div class="max-w-4xl mx-auto">
+        <!-- Section 1: Ma Définition -->
+        {
+          definitionContent && (
+            <section class="mb-20" id="definition">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">📖</span>
                 </div>
-              </a>
-            ))}
+                <h2 class="content-section-title">
+                  Ma <span class="text-primary-400 underline-memphis">Définition</span>
+                </h2>
+              </div>
+              <div class="section-divider ml-0 mx-0 mb-8" />
+              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
+                <div
+                  set:html={definitionContent
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(
+                      /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
+                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                    )
+                    .replace(
+                      /\[([^\]]+)\]\(([^)]+)\)/g,
+                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                    )
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
+                    .replace(/^(.+)$/gm, '<p>$1</p>')
+                    .replace(/<p><\/p>/g, '')}
+                />
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 2: Mes Éléments de Preuve -->
+        {
+          preuvesContent && (
+            <section class="mb-20" id="preuves">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">🎯</span>
+                </div>
+                <h2 class="content-section-title">
+                  Mes Éléments de{' '}
+                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                    Preuve
+                  </span>
+                </h2>
+              </div>
+              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
+              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
+                <div
+                  set:html={preuvesContent
+                    .replace(
+                      /### ([^\n]+)/g,
+                      '<h3 class="text-xl font-heading font-bold text-white mt-8 mb-4">$1</h3>'
+                    )
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(
+                      /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
+                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                    )
+                    .replace(
+                      /\[([^\]]+)\]\(([^)]+)\)/g,
+                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                    )
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
+                    .replace(/^(?!<[hp])(.*[^>])$/gm, '<p>$1</p>')
+                    .replace(/<p><\/p>/g, '')
+                    .replace(/<p><h3/g, '<h3')
+                    .replace(/<\/h3><\/p>/g, '</h3>')}
+                />
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 3: Mon Autocritique -->
+        {
+          autocritiqueContent && (
+            <section class="mb-20" id="autocritique">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">🔍</span>
+                </div>
+                <h2 class="content-section-title">
+                  Mon <span class="text-primary-400 underline-memphis">Autocritique</span>
+                </h2>
+              </div>
+              <div class="section-divider ml-0 mx-0 mb-8" />
+              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
+                <div
+                  set:html={autocritiqueContent
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(
+                      /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
+                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                    )
+                    .replace(
+                      /\[([^\]]+)\]\(([^)]+)\)/g,
+                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                    )
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
+                    .replace(/^(.+)$/gm, '<p>$1</p>')
+                    .replace(/<p><\/p>/g, '')}
+                />
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 4: Mon Évolution -->
+        {
+          evolutionContent && (
+            <section class="mb-20" id="evolution">
+              <div class="content-section-header">
+                <div class="icon-box-sm">
+                  <span class="text-xl">📈</span>
+                </div>
+                <h2 class="content-section-title">
+                  Mon{' '}
+                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                    Évolution
+                  </span>
+                </h2>
+              </div>
+              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
+              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
+                <div
+                  set:html={evolutionContent
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(
+                      /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
+                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                    )
+                    .replace(
+                      /\[([^\]]+)\]\(([^)]+)\)/g,
+                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                    )
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
+                    .replace(/^(.+)$/gm, '<p>$1</p>')
+                    .replace(/<p><\/p>/g, '')}
+                />
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Section 5: Réalisations Associées -->
+        <section class="mb-20" id="realisations">
+          <div class="content-section-header">
+            <div class="icon-box-sm">
+              <span class="text-xl">🔗</span>
+            </div>
+            <h2 class="content-section-title">
+              Réalisations <span class="text-accent-400 underline-memphis underline-memphis-accent"
+                >Associées</span
+              >
+            </h2>
           </div>
-        ) : (
-          <p class="text-gray-400 detail-box">Aucune réalisation associée pour le moment.</p>
-        )}
-      </section>
+          <div class="section-divider section-divider-accent ml-0 mx-0 mb-8"></div>
 
-      <!-- Navigation between skills -->
-      <nav class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-10 border-t border-dark-600" aria-label="Navigation entre compétences">
-        {prevSkill ? (
+          {
+            relatedProjects.length > 0 ? (
+              <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
+                {relatedProjects.map((project) => (
+                  <a
+                    href={url(`/projects/${project.id}`)}
+                    class="card-glow p-4 sm:p-6 md:p-8 group"
+                  >
+                    <h3 class="font-heading font-bold text-xl text-white mb-3 group-hover:text-primary-400 transition-colors">
+                      {project.data.title}
+                    </h3>
+                    <p class="text-gray-400 text-sm line-clamp-2 mb-6">
+                      {project.data.shortDescription}
+                    </p>
+                    <div class="flex items-center text-primary-400 text-sm font-heading font-medium">
+                      <span>Voir la réalisation</span>
+                      <svg
+                        class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <p class="text-gray-400 detail-box">Aucune réalisation associée pour le moment.</p>
+            )
+          }
+        </section>
+
+        <!-- Navigation between skills -->
+        <nav
+          class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-10 border-t border-dark-600"
+          aria-label="Navigation entre compétences"
+        >
+          {
+            prevSkill ? (
+              <a
+                href={url(`/skills/${prevSkill.id}`)}
+                class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-2 sm:order-1"
+                aria-label={`Compétence précédente : ${prevSkill.data.title}`}
+              >
+                <svg
+                  class="w-5 h-5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">
+                  {prevSkill.data.title}
+                </span>
+              </a>
+            ) : (
+              <span class="order-2 sm:order-1" />
+            )
+          }
+
           <a
-            href={url(`/skills/${prevSkill.id}`)}
-            class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-2 sm:order-1"
-            aria-label={`Compétence précédente : ${prevSkill.data.title}`}
+            href={url('/skills')}
+            class="text-sm text-gray-400 hover:text-primary-400 transition-colors order-1 sm:order-2"
           >
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">{prevSkill.data.title}</span>
+            Toutes les compétences
           </a>
-        ) : (
-          <span class="order-2 sm:order-1"></span>
-        )}
 
-        <a href={url('/skills')} class="text-sm text-gray-400 hover:text-primary-400 transition-colors order-1 sm:order-2">
-          Toutes les compétences
-        </a>
-
-        {nextSkill ? (
-          <a
-            href={url(`/skills/${nextSkill.id}`)}
-            class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-3"
-            aria-label={`Compétence suivante : ${nextSkill.data.title}`}
-          >
-            <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">{nextSkill.data.title}</span>
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        ) : (
-          <span class="order-3"></span>
-        )}
-      </nav>
+          {
+            nextSkill ? (
+              <a
+                href={url(`/skills/${nextSkill.id}`)}
+                class="flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors order-3"
+                aria-label={`Compétence suivante : ${nextSkill.data.title}`}
+              >
+                <span class="text-sm line-clamp-1 max-w-[120px] sm:max-w-[150px]">
+                  {nextSkill.data.title}
+                </span>
+                <svg
+                  class="w-5 h-5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            ) : (
+              <span class="order-3" />
+            )
+          }
+        </nav>
+      </div>
     </div>
-  </div>
   </section>
 </BaseLayout>

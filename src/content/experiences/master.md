@@ -12,13 +12,13 @@ relatedProjects: []
 relatedSkills: ['javascript-typescript', 'nodejs-backend', 'problem-solving']
 ---
 
-Formation de niveau Bac+5 axée sur l'architecture logicielle et les méthodologies agiles avancées. Spécialisation en développement web moderne et accessibilité numérique.
+Bac+5 axé sur l'architecture logicielle et les méthodologies agiles avancées, avec une spécialisation en développement web moderne et accessibilité numérique.
 
-Compétences développées :
+Au programme :
 
 - Architecture logicielle et patterns avancés
 - Méthodologies agiles et DevOps
 - Accessibilité numérique et RGAA
 - Sécurité des applications web
 
-Les modules couvrent notamment le développement avec Java et Spring Boot, React et React Native pour le mobile, ainsi que les patterns de conception et les bonnes pratiques de développement.
+Côté technique : Java et Spring Boot, React et React Native pour le mobile, patterns de conception et bonnes pratiques de développement.
