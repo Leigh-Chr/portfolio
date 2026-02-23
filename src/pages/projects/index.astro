@@ -14,51 +14,56 @@ const hasRealContent = sortedProjects.length > 0;
 // Placeholder projects if none exist
 const placeholderProjects = [
   {
-    slug: 'project-1',
+    id: 'project-1',
     data: {
       title: 'Application Web E-commerce',
       shortDescription:
         "Développement d'une plateforme e-commerce complète avec panier, paiement et gestion des stocks.",
-      thumbnail: null,
+      thumbnail: undefined as string | undefined,
+      fullImage: undefined as string | undefined,
       context: { period: '2024', role: 'Lead Developer', company: 'Entreprise X' },
     },
   },
   {
-    slug: 'project-2',
+    id: 'project-2',
     data: {
       title: 'API REST Microservices',
       shortDescription:
         'Architecture microservices pour une application bancaire avec haute disponibilité.',
-      thumbnail: null,
+      thumbnail: undefined as string | undefined,
+      fullImage: undefined as string | undefined,
       context: { period: '2023', role: 'Backend Developer', company: 'Entreprise Y' },
     },
   },
   {
-    slug: 'project-3',
+    id: 'project-3',
     data: {
       title: 'Dashboard Analytics',
       shortDescription:
         "Interface de visualisation de données en temps réel pour le monitoring d'infrastructure.",
-      thumbnail: null,
+      thumbnail: undefined as string | undefined,
+      fullImage: undefined as string | undefined,
       context: { period: '2023', role: 'Full Stack Developer', company: 'Entreprise Z' },
     },
   },
   {
-    slug: 'project-4',
+    id: 'project-4',
     data: {
       title: 'Application Mobile Cross-Platform',
       shortDescription:
         'Application mobile React Native pour la gestion de tâches et la productivité.',
-      thumbnail: null,
+      thumbnail: undefined as string | undefined,
+      fullImage: undefined as string | undefined,
       context: { period: '2022', role: 'Mobile Developer', company: 'Startup A' },
     },
   },
   {
-    slug: 'project-5',
+    id: 'project-5',
     data: {
       title: 'Système de Gestion de Contenu',
       shortDescription: 'CMS sur mesure avec éditeur WYSIWYG et système de permissions avancé.',
-      thumbnail: null,
+      thumbnail: undefined as string | undefined,
+      fullImage: undefined as string | undefined,
       context: { period: '2022', role: 'Full Stack Developer', company: 'Agence B' },
     },
   },
@@ -127,97 +132,105 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
       <!-- Projects as list/cards with short descriptions -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {
-          displayProjects.map((project, index) => (
-            <a
-              href={url(`/projects/${project.id}`)}
-              class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''}`}
-            >
-              {/* Thumbnail */}
-              <div
-                class="aspect-video bg-dark-700 relative overflow-hidden"
-                transition:name={`project-thumb-${project.id}`}
+          displayProjects.map((project, index) => {
+            const fullImg = project.data.fullImage
+              ? getProjectImage(project.data.fullImage)
+              : undefined;
+            const thumbImg = project.data.thumbnail
+              ? getProjectImage(project.data.thumbnail)
+              : undefined;
+            return (
+              <a
+                href={url(`/projects/${project.id}`)}
+                class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''}`}
               >
-                {project.data.fullImage && getProjectImage(project.data.fullImage) ? (
-                  <div class="w-full h-full scroll-preview">
+                {/* Thumbnail */}
+                <div
+                  class="aspect-video bg-dark-700 relative overflow-hidden"
+                  transition:name={`project-thumb-${project.id}`}
+                >
+                  {fullImg ? (
+                    <div class="w-full h-full scroll-preview">
+                      <Image
+                        src={fullImg}
+                        alt={`Aperçu du projet ${project.data.title}`}
+                        class="scroll-preview-img"
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        decoding={index === 0 ? 'sync' : 'async'}
+                        fetchpriority={index === 0 ? 'high' : undefined}
+                        widths={[384, 768]}
+                        sizes="(max-width: 768px) 100vw, 384px"
+                      />
+                    </div>
+                  ) : thumbImg ? (
                     <Image
-                      src={getProjectImage(project.data.fullImage)!}
+                      src={thumbImg}
                       alt={`Aperçu du projet ${project.data.title}`}
-                      class="scroll-preview-img"
+                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       loading={index === 0 ? 'eager' : 'lazy'}
                       decoding={index === 0 ? 'sync' : 'async'}
                       fetchpriority={index === 0 ? 'high' : undefined}
-                      widths={[384, 768]}
-                      sizes="(max-width: 768px) 100vw, 384px"
+                      width={384}
+                      height={216}
                     />
-                  </div>
-                ) : project.data.thumbnail && getProjectImage(project.data.thumbnail) ? (
-                  <Image
-                    src={getProjectImage(project.data.thumbnail)!}
-                    alt={`Aperçu du projet ${project.data.title}`}
-                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                    decoding={index === 0 ? 'sync' : 'async'}
-                    fetchpriority={index === 0 ? 'high' : undefined}
-                    width={384}
-                    height={216}
-                  />
-                ) : (
-                  <div class="w-full h-full flex items-center justify-center">
-                    <div class="text-center">
-                      <span class="text-6xl opacity-30">📁</span>
-                      <p class="text-gray-400 text-sm mt-2">[Image projet]</p>
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center">
+                      <div class="text-center">
+                        <span class="text-6xl opacity-30">📁</span>
+                        <p class="text-gray-400 text-sm mt-2">[Image projet]</p>
+                      </div>
                     </div>
+                  )}
+                  {/* Project number badge */}
+                  <div class="absolute top-4 left-4 w-8 h-8 bg-primary-500 flex items-center justify-center z-10">
+                    <span class="text-white font-heading font-bold text-sm">{index + 1}</span>
                   </div>
-                )}
-                {/* Project number badge */}
-                <div class="absolute top-4 left-4 w-8 h-8 bg-primary-500 flex items-center justify-center z-10">
-                  <span class="text-white font-heading font-bold text-sm">{index + 1}</span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div class="p-4 sm:p-6 md:p-8">
-                {/* Context tags */}
-                <div class="flex flex-wrap gap-3 mb-4">
-                  <span class="tag-primary text-xs">{project.data.context.period}</span>
-                  <span class="tag-gray text-xs">{project.data.context.role}</span>
                 </div>
 
-                {/* Title */}
-                <h2
-                  class="font-heading font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-primary-400 transition-colors"
-                  transition:name={`project-title-${project.id}`}
-                >
-                  {!hasRealContent && '[PLACEHOLDER] '}
-                  {project.data.title}
-                </h2>
+                {/* Content */}
+                <div class="p-4 sm:p-6 md:p-8">
+                  {/* Context tags */}
+                  <div class="flex flex-wrap gap-3 mb-4">
+                    <span class="tag-primary text-xs">{project.data.context.period}</span>
+                    <span class="tag-gray text-xs">{project.data.context.role}</span>
+                  </div>
 
-                {/* Short description */}
-                <p class="text-gray-400 text-sm line-clamp-3 mb-6 leading-relaxed">
-                  {project.data.shortDescription}
-                </p>
-
-                {/* CTA */}
-                <div class="flex items-center text-primary-400 text-sm font-heading font-medium">
-                  <span>Voir le projet</span>
-                  <svg
-                    class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
+                  {/* Title */}
+                  <h2
+                    class="font-heading font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-primary-400 transition-colors"
+                    transition:name={`project-title-${project.id}`}
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                    {!hasRealContent && '[PLACEHOLDER] '}
+                    {project.data.title}
+                  </h2>
+
+                  {/* Short description */}
+                  <p class="text-gray-400 text-sm line-clamp-3 mb-6 leading-relaxed">
+                    {project.data.shortDescription}
+                  </p>
+
+                  {/* CTA */}
+                  <div class="flex items-center text-primary-400 text-sm font-heading font-medium">
+                    <span>Voir le projet</span>
+                    <svg
+                      class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))
+              </a>
+            );
+          })
         }
       </div>
     </div>

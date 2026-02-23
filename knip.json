@@ -1,7 +1,11 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["src/pages/**/*.astro", "src/layouts/**/*.astro"],
   "project": ["src/**/*.{astro,ts,js}"],
-  "ignore": [".astro/**", "dist/**", ".codacy/**"],
-  "ignoreDependencies": ["@eslint/js", "tailwindcss"]
+  "ignore": [".astro/**", "dist/**"],
+  "ignoreDependencies": ["tailwindcss"],
+  "ignoreExportsUsedInFile": {
+    "interface": true,
+    "type": true
+  },
+  "includeEntryExports": true
 }

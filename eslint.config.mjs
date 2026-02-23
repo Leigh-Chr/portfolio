@@ -12,8 +12,8 @@ export default tseslint.config(
   // Base ESLint recommended rules
   eslint.configs.recommended,
 
-  // TypeScript rules
-  ...tseslint.configs.recommended,
+  // TypeScript strict rules
+  ...tseslint.configs.strict,
 
   // Astro rules
   ...eslintPluginAstro.configs.recommended,
@@ -28,9 +28,9 @@ export default tseslint.config(
     },
   },
 
-  // TypeScript specific rules
+  // TypeScript + Astro shared rules
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.astro'],
     rules: {
       // Prefer const over let
       'prefer-const': 'error',
@@ -61,7 +61,7 @@ export default tseslint.config(
     },
   },
 
-  // Astro specific rules
+  // Astro specific overrides
   {
     files: ['**/*.astro'],
     rules: {

@@ -365,7 +365,7 @@ function buildStyle(s: FgShape): string {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d={`M0 ${s.h! / 2} Q ${s.size / 8} 0, ${s.size / 4} ${s.h! / 2} T ${s.size / 2} ${s.h! / 2} T ${(s.size * 3) / 4} ${s.h! / 2} T ${s.size} ${s.h! / 2}`}
+                d={`M0 ${(s.h ?? s.size) / 2} Q ${s.size / 8} 0, ${s.size / 4} ${(s.h ?? s.size) / 2} T ${s.size / 2} ${(s.h ?? s.size) / 2} T ${(s.size * 3) / 4} ${(s.h ?? s.size) / 2} T ${s.size} ${(s.h ?? s.size) / 2}`}
                 stroke="currentColor"
                 stroke-width={s.sw || 3}
                 fill="none"
@@ -407,7 +407,7 @@ function buildStyle(s: FgShape): string {
       }
 
       if (s.type === 'squiggle') {
-        const h = s.h!;
+        const h = s.h ?? s.size;
         return (
           <div class="memphis-shape-fg fg-squiggle" data-fg-anim={s.anim} style={style}>
             <svg
@@ -450,7 +450,7 @@ function buildStyle(s: FgShape): string {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {hasPat && <g set:html={svgPatternDefs(patId, s.pattern!)} />}
+              {hasPat && s.pattern && <g set:html={svgPatternDefs(patId, s.pattern)} />}
               <polygon
                 points={starPoints}
                 stroke={isFilled ? 'none' : 'currentColor'}
@@ -503,7 +503,7 @@ function buildStyle(s: FgShape): string {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {hasPat && <g set:html={svgPatternDefs(patId, s.pattern!)} />}
+              {hasPat && s.pattern && <g set:html={svgPatternDefs(patId, s.pattern)} />}
               <polygon points={hexPoints} fill={fillVal} stroke-linejoin="round" />
             </svg>
           </div>
@@ -524,7 +524,7 @@ function buildStyle(s: FgShape): string {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              {hasPat && <g set:html={svgPatternDefs(patId, s.pattern!)} />}
+              {hasPat && s.pattern && <g set:html={svgPatternDefs(patId, s.pattern)} />}
               <path
                 d={`M ${r} 0 A ${r} ${r} 0 1 1 ${r} ${s.size} A ${r * 0.65} ${r * 0.65} 0 1 0 ${r} 0 Z`}
                 fill={fillVal}

@@ -60,10 +60,10 @@
 
   /* Font families */
   --font-heading:
-    'Space Grotesk Variable', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Space Grotesk Variable', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', roboto,
     sans-serif;
   --font-sans:
-    'DM Sans Variable', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'DM Sans Variable', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', roboto,
     'Helvetica Neue', sans-serif;
 
   /* Neo-Memphis hard shadows */
@@ -82,20 +82,20 @@
   --shadow-hard-white-lg: 10px 10px 0 0 #fff;
 
   /* Neon glow effects */
-  --shadow-glow-purple: 0 0 20px #a855f7, 0 0 40px rgba(168, 85, 247, 0.5);
-  --shadow-glow-purple-sm: 0 0 10px #a855f7, 0 0 20px rgba(168, 85, 247, 0.3);
+  --shadow-glow-purple: 0 0 20px #a855f7, 0 0 40px rgb(168 85 247 / 50%);
+  --shadow-glow-purple-sm: 0 0 10px #a855f7, 0 0 20px rgb(168 85 247 / 30%);
   --shadow-glow-purple-lg:
-    0 0 30px #a855f7, 0 0 60px rgba(168, 85, 247, 0.5), 0 0 90px rgba(168, 85, 247, 0.3);
-  --shadow-glow-yellow: 0 0 20px #facc15, 0 0 40px rgba(250, 204, 21, 0.5);
-  --shadow-glow-yellow-sm: 0 0 10px #facc15, 0 0 20px rgba(250, 204, 21, 0.3);
+    0 0 30px #a855f7, 0 0 60px rgb(168 85 247 / 50%), 0 0 90px rgb(168 85 247 / 30%);
+  --shadow-glow-yellow: 0 0 20px #facc15, 0 0 40px rgb(250 204 21 / 50%);
+  --shadow-glow-yellow-sm: 0 0 10px #facc15, 0 0 20px rgb(250 204 21 / 30%);
   --shadow-glow-yellow-lg:
-    0 0 30px #facc15, 0 0 60px rgba(250, 204, 21, 0.5), 0 0 90px rgba(250, 204, 21, 0.3);
+    0 0 30px #facc15, 0 0 60px rgb(250 204 21 / 50%), 0 0 90px rgb(250 204 21 / 30%);
 
   /* Combined hard + glow */
-  --shadow-hard-glow-purple: 6px 6px 0 0 #a855f7, 0 0 25px rgba(168, 85, 247, 0.5);
-  --shadow-hard-glow-purple-lg: 10px 10px 0 0 #a855f7, 0 0 35px rgba(168, 85, 247, 0.5);
-  --shadow-hard-glow-yellow: 6px 6px 0 0 #facc15, 0 0 25px rgba(250, 204, 21, 0.5);
-  --shadow-hard-glow-yellow-lg: 10px 10px 0 0 #facc15, 0 0 35px rgba(250, 204, 21, 0.5);
+  --shadow-hard-glow-purple: 6px 6px 0 0 #a855f7, 0 0 25px rgb(168 85 247 / 50%);
+  --shadow-hard-glow-purple-lg: 10px 10px 0 0 #a855f7, 0 0 35px rgb(168 85 247 / 50%);
+  --shadow-hard-glow-yellow: 6px 6px 0 0 #facc15, 0 0 25px rgb(250 204 21 / 50%);
+  --shadow-hard-glow-yellow-lg: 10px 10px 0 0 #facc15, 0 0 35px rgb(250 204 21 / 50%);
 
   /* Memphis bounce animation timing */
   --ease-memphis: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -616,7 +616,7 @@
     0 0,
     4px 0,
     4px -4px,
-    0px 4px;
+    0 4px;
 }
 
 .underline-zigzag-accent::after {
@@ -630,7 +630,7 @@
     0 0,
     4px 0,
     4px -4px,
-    0px 4px;
+    0 4px;
 }
 
 /* Squiggle/wave decoration */
@@ -1149,7 +1149,7 @@
 }
 
 /* Hide on very small screens to avoid clutter */
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .memphis-shapes-fg {
     display: none;
   }

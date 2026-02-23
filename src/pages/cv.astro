@@ -91,8 +91,8 @@ function extractMissionPoints(text: string, maxPoints: number = 4): string[] {
   let headerMatch;
 
   while ((headerMatch = headerRegex.exec(text)) !== null && points.length < maxPoints) {
-    const headerText = headerMatch[1].toLowerCase();
-    const sectionContent = headerMatch[2];
+    const headerText = (headerMatch[1] ?? '').toLowerCase();
+    const sectionContent = headerMatch[2] ?? '';
 
     // Skip stack/technique sections
     if (stackKeywords.some((kw) => headerText.includes(kw))) {
@@ -107,7 +107,7 @@ function extractMissionPoints(text: string, maxPoints: number = 4): string[] {
         (bulletMatch = sectionBulletRegex.exec(sectionContent)) !== null &&
         points.length < maxPoints
       ) {
-        const cleanPoint = bulletMatch[1]
+        const cleanPoint = (bulletMatch[1] ?? '')
           .replace(/\*\*([^*]+)\*\*/g, '$1')
           .replace(/\*([^*]+)\*/g, '$1')
           .trim();
@@ -129,7 +129,7 @@ function extractMissionPoints(text: string, maxPoints: number = 4): string[] {
     const bulletRegex = /^[-*+]\s+(.+)$/gm;
     let match;
     while ((match = bulletRegex.exec(cleanedText)) !== null && points.length < maxPoints) {
-      const cleanPoint = match[1]
+      const cleanPoint = (match[1] ?? '')
         .replace(/\*\*([^*]+)\*\*/g, '$1')
         .replace(/\*([^*]+)\*/g, '$1')
         .trim();
@@ -396,8 +396,8 @@ function formatAvailability(): string {
 
       {
         workExperiences.map((exp) => {
-          const keyPoints = extractMissionPoints(exp.body);
-          const summary = cleanMarkdownForCV(exp.body);
+          const keyPoints = extractMissionPoints(exp.body ?? '');
+          const summary = cleanMarkdownForCV(exp.body ?? '');
 
           return (
             <article class="cv-entry" itemscope itemtype="https://schema.org/OrganizationRole">
@@ -486,7 +486,7 @@ function formatAvailability(): string {
 
       {
         educationExperiences.map((exp) => {
-          const summary = cleanMarkdownForCV(exp.body);
+          const summary = cleanMarkdownForCV(exp.body ?? '');
 
           return (
             <article

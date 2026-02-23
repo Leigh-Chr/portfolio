@@ -1,0 +1,19 @@
+---
+engines:
+  eslint:
+    enabled: true
+  stylelint:
+    enabled: true
+  markdownlint:
+    enabled: true
+  jscpd:
+    enabled: true
+
+exclude_paths:
+  - "dist/**"
+  - "node_modules/**"
+  - ".astro/**"
+  - ".husky/**"
+  - "public/**"
+  - "*.config.*"
+  - "**/*.d.ts"

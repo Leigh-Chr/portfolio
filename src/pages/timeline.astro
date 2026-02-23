@@ -13,8 +13,8 @@ const allProjects = await getCollection('projects');
 const allSkills = await getCollection('skills');
 
 // Create lookup maps for slug -> title
-const projectTitles = new Map(allProjects.map((p) => [p.slug, p.data.title]));
-const skillTitles = new Map(allSkills.map((s) => [s.slug, s.data.title]));
+const projectTitles = new Map(allProjects.map((p) => [p.id, p.data.title]));
+const skillTitles = new Map(allSkills.map((s) => [s.id, s.data.title]));
 const sortedExperiences = allExperiences.sort((a, b) => {
   // Sort by start date ascending (chronological: oldest first)
   return new Date(a.data.startDate).getTime() - new Date(b.data.startDate).getTime();
@@ -30,14 +30,16 @@ const placeholderExperiences = [
       type: 'education' as const,
       title: 'Licence Informatique',
       organization: 'Université',
-      logo: null,
+      logo: undefined as string | undefined,
       location: 'Bordeaux, France',
       startDate: '2016-09',
-      endDate: '2019-06',
+      endDate: '2019-06' as string | undefined,
       current: false,
+      status: undefined as string | undefined,
+      website: undefined as string | undefined,
       order: 5,
-      relatedProjects: [],
-      relatedSkills: [],
+      relatedProjects: [] as string[],
+      relatedSkills: [] as string[],
     },
     body: 'Formation fondamentale en informatique.',
   },
@@ -47,14 +49,16 @@ const placeholderExperiences = [
       type: 'education' as const,
       title: 'Master Ingénierie Logicielle',
       organization: "École d'Ingénieurs",
-      logo: null,
+      logo: undefined as string | undefined,
       location: 'Paris, France',
       startDate: '2019-09',
-      endDate: '2021-06',
+      endDate: '2021-06' as string | undefined,
       current: false,
+      status: undefined as string | undefined,
+      website: undefined as string | undefined,
       order: 3,
-      relatedProjects: [],
-      relatedSkills: [],
+      relatedProjects: [] as string[],
+      relatedSkills: [] as string[],
     },
     body: 'Formation en génie logiciel et systèmes distribués.',
   },
@@ -64,14 +68,16 @@ const placeholderExperiences = [
       type: 'work' as const,
       title: 'Stagiaire Développeur',
       organization: 'Agence Web',
-      logo: null,
+      logo: undefined as string | undefined,
       location: 'Bordeaux, France',
       startDate: '2020-04',
-      endDate: '2020-09',
+      endDate: '2020-09' as string | undefined,
       current: false,
+      status: undefined as string | undefined,
+      website: undefined as string | undefined,
       order: 4,
-      relatedProjects: [],
-      relatedSkills: [],
+      relatedProjects: [] as string[],
+      relatedSkills: [] as string[],
     },
     body: "Stage de fin d'études en développement web.",
   },
@@ -81,14 +87,16 @@ const placeholderExperiences = [
       type: 'work' as const,
       title: 'Développeur Backend',
       organization: 'Startup Innovante',
-      logo: null,
+      logo: undefined as string | undefined,
       location: 'Lyon, France',
       startDate: '2021-06',
-      endDate: '2022-12',
+      endDate: '2022-12' as string | undefined,
       current: false,
+      status: undefined as string | undefined,
+      website: undefined as string | undefined,
       order: 2,
-      relatedProjects: [],
-      relatedSkills: [],
+      relatedProjects: [] as string[],
+      relatedSkills: [] as string[],
     },
     body: "Développement d'APIs et microservices.",
   },
@@ -98,14 +106,16 @@ const placeholderExperiences = [
       type: 'work' as const,
       title: 'Développeur Full Stack Senior',
       organization: 'Entreprise Tech',
-      logo: null,
+      logo: undefined as string | undefined,
       location: 'Paris, France',
       startDate: '2023-01',
-      endDate: null,
+      endDate: undefined as string | undefined,
       current: true,
+      status: undefined as string | undefined,
+      website: undefined as string | undefined,
       order: 1,
-      relatedProjects: [],
-      relatedSkills: [],
+      relatedProjects: [] as string[],
+      relatedSkills: [] as string[],
     },
     body: 'Description du poste et des responsabilités.',
   },
@@ -228,6 +238,7 @@ function formatDate(dateStr: string): string {
           <!-- Education Timeline items -->
           {
             educationExperiences.map((exp) => {
+              const logoImg = exp.data.logo ? getLogoImage(exp.data.logo) : undefined;
               return (
                 <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
                   {/* Timeline dot */}
@@ -266,7 +277,7 @@ function formatDate(dateStr: string): string {
 
                       {/* Organization with logo */}
                       <div class="flex items-center gap-4 mb-4">
-                        {exp.data.logo && getLogoImage(exp.data.logo) ? (
+                        {logoImg ? (
                           exp.data.website ? (
                             <a
                               href={exp.data.website}
@@ -276,7 +287,7 @@ function formatDate(dateStr: string): string {
                               aria-label={`Visiter le site de ${exp.data.organization} (nouvelle fenêtre)`}
                             >
                               <Image
-                                src={getLogoImage(exp.data.logo)!}
+                                src={logoImg}
                                 alt={exp.data.organization}
                                 class="w-10 h-10 object-contain"
                                 width={80}
@@ -287,7 +298,7 @@ function formatDate(dateStr: string): string {
                             </a>
                           ) : (
                             <Image
-                              src={getLogoImage(exp.data.logo)!}
+                              src={logoImg}
                               alt={exp.data.organization}
                               class="w-10 h-10 object-contain"
                               width={80}
@@ -422,6 +433,7 @@ function formatDate(dateStr: string): string {
           <!-- Work Timeline items -->
           {
             workExperiences.map((exp) => {
+              const logoImg = exp.data.logo ? getLogoImage(exp.data.logo) : undefined;
               return (
                 <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
                   {/* Timeline dot */}
@@ -462,7 +474,7 @@ function formatDate(dateStr: string): string {
 
                       {/* Organization with logo */}
                       <div class="flex items-center gap-4 mb-4">
-                        {exp.data.logo && getLogoImage(exp.data.logo) ? (
+                        {logoImg ? (
                           exp.data.website ? (
                             <a
                               href={exp.data.website}
@@ -472,7 +484,7 @@ function formatDate(dateStr: string): string {
                               aria-label={`Visiter le site de ${exp.data.organization} (nouvelle fenêtre)`}
                             >
                               <Image
-                                src={getLogoImage(exp.data.logo)!}
+                                src={logoImg}
                                 alt={exp.data.organization}
                                 class="w-10 h-10 object-contain"
                                 width={80}
@@ -483,7 +495,7 @@ function formatDate(dateStr: string): string {
                             </a>
                           ) : (
                             <Image
-                              src={getLogoImage(exp.data.logo)!}
+                              src={logoImg}
                               alt={exp.data.organization}
                               class="w-10 h-10 object-contain"
                               width={80}

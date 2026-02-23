@@ -32,3 +32,10 @@ Thumbs.db
 
 # Astro
 .astro/
+
+# Codacy CLI
+.codacy/
+
+# Linter caches
+.eslintcache
+.stylelintcache

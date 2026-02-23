@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "@dreamsicle.io/stylelint-config-tailwindcss"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "declaration-empty-line-before": null,
+    "rule-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreFunctions": ["local"],
+        "camelCaseSvgKeywords": true,
+        "ignoreKeywords": ["BlinkMacSystemFont"]
+      }
+    ],
+    "length-zero-no-unit": [
+      true,
+      {
+        "ignore": ["custom-properties"]
+      }
+    ],
+    "max-nesting-depth": [
+      3,
+      {
+        "ignoreAtRules": ["media", "supports", "layer"]
+      }
+    ],
+    "selector-max-compound-selectors": 4,
+    "selector-max-specificity": "0,4,0",
+    "selector-max-id": 0,
+    "declaration-no-important": [true, { "severity": "warning" }],
+    "color-named": "never",
+    "number-max-precision": 4,
+    "selector-max-universal": 1
+  },
+  "ignoreFiles": ["dist/**", "node_modules/**", ".astro/**"]
+}

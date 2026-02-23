@@ -53,7 +53,8 @@ const experiences = defineCollection({
     startDate: z.string(),
     endDate: z.string().optional(),
     current: z.boolean().default(false),
-    status: z.string().optional(), // CDI, Alternance, Stage, etc.
+    status: z.string().optional(),
+    website: z.string().url().optional(),
     order: z.number(),
     relatedProjects: z.array(z.string()).default([]),
     relatedSkills: z.array(z.string()).default([]),

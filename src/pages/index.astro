@@ -199,15 +199,18 @@ const featuredProjects = allProjects.slice(0, 3);
       <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {
           featuredProjects.map((project) => {
+            const thumbImage = project.data.thumbnail
+              ? getProjectImage(project.data.thumbnail)
+              : undefined;
             return (
               <a href={url(`/projects/${project.id}`)} class="card-glow overflow-hidden group">
                 <div
                   class="aspect-video bg-dark-700 relative overflow-hidden"
                   transition:name={`project-thumb-${project.id}`}
                 >
-                  {project.data.thumbnail && getProjectImage(project.data.thumbnail) ? (
+                  {thumbImage ? (
                     <Image
-                      src={getProjectImage(project.data.thumbnail)!}
+                      src={thumbImage}
                       alt={`Aperçu du projet ${project.data.title}`}
                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"

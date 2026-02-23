@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { skill } = Astro.props;
 
 // Parse markdown content into sections
-const rawContent = skill.body;
+const rawContent = skill.body ?? '';
 
 function extractSection(content: string, sectionName: string): string {
   const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=\\n## |$)`, 'i');

@@ -1,0 +1,16 @@
+{
+  "threshold": 5,
+  "minLines": 5,
+  "minTokens": 50,
+  "mode": "strict",
+  "reporters": ["console"],
+  "ignore": [
+    "node_modules/**",
+    "dist/**",
+    ".astro/**",
+    "**/*.md"
+  ],
+  "ignorePattern": ["import\\s.*from\\s"],
+  "absolute": false,
+  "gitignore": true
+}

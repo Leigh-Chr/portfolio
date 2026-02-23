@@ -20,7 +20,7 @@ const { project } = Astro.props;
 const links = project.data.links;
 
 // Parse markdown content into sections
-const rawContent = project.body;
+const rawContent = project.body ?? '';
 
 function extractSection(content: string, sectionName: string): string {
   const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=\\n## [^#]|$)`, 'i');
@@ -37,7 +37,7 @@ function parseKeyValueSection(content: string): Record<string, string> {
 
   for (const line of lines) {
     const match = line.match(/^\*\*([^*]+)\*\*\s*:\s*(.*)$/);
-    if (match) {
+    if (match?.[1] && match[2] !== undefined) {
       if (currentKey) {
         result[currentKey] = currentValue.trim();
       }
@@ -58,6 +58,7 @@ function parsePhases(content: string): Array<{ title: string; description: strin
   const regex = /\*\*([^*]+)\*\*\s*:\s*([^*]+?)(?=\*\*|$)/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
+    if (!match[1] || !match[2]) continue;
     phases.push({
       title: match[1].trim(),
       description: match[2].trim(),
@@ -71,7 +72,7 @@ function parseList(content: string): string[] {
   const lines = content.split('\n');
   for (const line of lines) {
     const match = line.match(/^[-*]\s+(.+)$/);
-    if (match) {
+    if (match?.[1]) {
       items.push(match[1].trim());
     }
   }
@@ -84,7 +85,7 @@ function parseActeursList(content: string): Array<{ role: string; description: s
   for (const line of lines) {
     // Format: - **Role** : Description
     const match = line.match(/^[-*]\s+\*\*([^*]+)\*\*\s*:\s*(.+)$/);
-    if (match) {
+    if (match?.[1] && match[2]) {
       acteurs.push({
         role: match[1].trim(),
         description: match[2].trim(),
@@ -99,6 +100,7 @@ function parseSubsections(content: string): Record<string, string> {
   const regex = /### ([^\n]+)\n([\s\S]*?)(?=### |$)/g;
   let match;
   while ((match = regex.exec(content)) !== null) {
+    if (!match[1] || !match[2]) continue;
     result[match[1].trim()] = match[2].trim();
   }
   return result;
@@ -147,19 +149,19 @@ function parseCritique(content: string): {
   const result = { intro: '', positif: [] as string[], amelioration: [] as string[] };
 
   const positifMatch = content.match(/\*\*Ce qui a bien fonctionné\*\*\s*:\s*([^*]+?)(?=\*\*|$)/);
-  if (positifMatch) {
+  if (positifMatch?.[1]) {
     result.positif = [positifMatch[1].trim()];
   }
 
   const diffMatch = content.match(
     /\*\*Ce que j'aurais fait différemment\*\*\s*:\s*([^*]+?)(?=\*\*|$)/
   );
-  if (diffMatch) {
+  if (diffMatch?.[1]) {
     result.amelioration = [diffMatch[1].trim()];
   }
 
   const leconMatch = content.match(/\*\*Leçon apprise\*\*\s*:\s*([^*]+?)(?=\*\*|$)/);
-  if (leconMatch) {
+  if (leconMatch?.[1]) {
     result.amelioration.push(leconMatch[1].trim());
   }
 
@@ -184,6 +186,9 @@ const acteursList = parseActeursList(acteursContent);
 const resultats = parseResultats(resultatsContent);
 const lendemains = parseSubsections(lendemainsContent);
 const critique = parseCritique(critiqueContent);
+
+const fullImage = project.data.fullImage ? getProjectImage(project.data.fullImage) : undefined;
+const thumbImage = project.data.thumbnail ? getProjectImage(project.data.thumbnail) : undefined;
 
 // Get related skills
 const allSkills = await getCollection('skills');
@@ -266,10 +271,10 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
             transition:name={`project-thumb-${project.id}`}
           >
             {
-              project.data.fullImage && getProjectImage(project.data.fullImage) ? (
+              fullImage ? (
                 <div class="relative w-full h-full overflow-hidden scroll-preview">
                   <Image
-                    src={getProjectImage(project.data.fullImage)!}
+                    src={fullImage}
                     alt={`Aperçu du projet ${project.data.title}`}
                     class="scroll-preview-img"
                     width={800}
@@ -277,9 +282,9 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
                     fetchpriority="high"
                   />
                 </div>
-              ) : project.data.thumbnail && getProjectImage(project.data.thumbnail) ? (
+              ) : thumbImage ? (
                 <Image
-                  src={getProjectImage(project.data.thumbnail)!}
+                  src={thumbImage}
                   alt={`Aperçu du projet ${project.data.title}`}
                   class="w-full h-full object-cover"
                   width={400}

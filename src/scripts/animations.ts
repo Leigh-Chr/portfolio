@@ -192,7 +192,7 @@ function initAnimations(): void {
     function runNext() {
       if (i < deferredAnimations.length) {
         try {
-          deferredAnimations[i]!();
+          deferredAnimations[i]?.();
         } catch (e) {
           console.warn(`[GSAP] Animation failed:`, e);
         }

@@ -1,0 +1,27 @@
+{
+  "config": {
+    // Heading structure
+    "MD001": true,
+    "MD003": { "style": "atx" },
+    "MD024": { "siblings_only": true },
+    "MD025": { "front_matter_title": "^\\s*title\\s*[:=]" },
+    "MD041": { "front_matter_title": "^\\s*title\\s*[:=]" },
+
+    // List style
+    "MD004": { "style": "dash" },
+    "MD029": { "style": "ordered" },
+
+    // Emphasis style
+    "MD049": { "style": "asterisk" },
+    "MD050": { "style": "asterisk" },
+
+    // Disabled (justified for content files)
+    "MD013": false,
+    "MD033": false,
+    "MD036": false,
+
+    // Heading punctuation
+    "MD026": { "punctuation": ".,;:!" }
+  },
+  "ignores": ["node_modules/**", "dist/**", "CHANGELOG.md"]
+}
