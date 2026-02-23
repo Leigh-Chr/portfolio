@@ -6,6 +6,9 @@ import MemphisShapesFg from '@components/MemphisShapesFg.astro';
 import { url } from '@utils/url';
 import '../styles/global.css';
 
+import dmSansLatinUrl from '@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url';
+import spaceGroteskLatinUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+
 interface Props {
   title: string;
   description?: string;
@@ -109,6 +112,10 @@ const jsonLd = {
     <!-- Referrer Policy -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
+    <!-- Preload critical fonts to break CSS→Font chain -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={dmSansLatinUrl} />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href={spaceGroteskLatinUrl} />
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
@@ -140,6 +147,13 @@ const jsonLd = {
         requestIdleCallback(load);
       } else {
         setTimeout(load, 200);
+      }
+    </script>
+    <script define:vars={{ swUrl: url('/sw.js'), swScope: url('/') }}>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register(swUrl, { scope: swScope });
+        });
       }
     </script>
   </body>

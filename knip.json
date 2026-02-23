@@ -3,5 +3,5 @@
   "entry": ["src/pages/**/*.astro", "src/layouts/**/*.astro"],
   "project": ["src/**/*.{astro,ts,js}"],
   "ignore": [".astro/**", "dist/**", ".codacy/**"],
-  "ignoreDependencies": ["@eslint/js", "tailwindcss", "@fontsource-variable/dm-sans", "@fontsource-variable/space-grotesk"]
+  "ignoreDependencies": ["@eslint/js", "tailwindcss"]
 }

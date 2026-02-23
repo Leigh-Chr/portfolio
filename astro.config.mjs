@@ -12,7 +12,7 @@ export default defineConfig({
   base: '/portfolio',
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   prefetch: {
     prefetchAll: true,
