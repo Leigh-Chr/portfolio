@@ -115,10 +115,13 @@ const featuredProjects = allProjects.slice(0, 3);
   </section>
 
   <!-- Featured Skills Section -->
-  <section class="section-padding section-alt relative overflow-hidden section-lazy">
+  <section
+    class="section-padding section-alt relative overflow-hidden section-lazy"
+    aria-labelledby="skills-heading"
+  >
     <div class="container-custom">
       <div class="section-header" data-gsap="reveal">
-        <h2 class="section-title">
+        <h2 id="skills-heading" class="section-title">
           Mes <span class="text-primary-400 underline-memphis">Compétences</span> Clés
         </h2>
         <div class="section-divider"></div>
@@ -176,10 +179,13 @@ const featuredProjects = allProjects.slice(0, 3);
   </section>
 
   <!-- Featured Projects Section -->
-  <section class="section-padding relative overflow-hidden section-lazy">
+  <section
+    class="section-padding relative overflow-hidden section-lazy"
+    aria-labelledby="projects-heading"
+  >
     <div class="container-custom">
       <div class="section-header" data-gsap="reveal">
-        <h2 class="section-title">
+        <h2 id="projects-heading" class="section-title">
           Réalisations <span class="text-accent-400 underline-memphis underline-memphis-accent"
             >Récentes</span
           >
@@ -233,7 +239,7 @@ const featuredProjects = allProjects.slice(0, 3);
                   <p class="text-gray-400 text-sm line-clamp-2 mb-6">
                     {project.data.shortDescription}
                   </p>
-                  <span class="link-arrow">
+                  <span class="link-arrow" aria-hidden="true">
                     Voir le projet
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path
@@ -273,9 +279,12 @@ const featuredProjects = allProjects.slice(0, 3);
   </section>
 
   <!-- CTA Section -->
-  <section class="section-padding section-cta relative overflow-hidden section-lazy">
+  <section
+    class="section-padding section-cta relative overflow-hidden section-lazy"
+    aria-labelledby="cta-heading"
+  >
     <div class="container-custom text-center" data-gsap="cta">
-      <h2 class="section-title text-white mb-8">
+      <h2 id="cta-heading" class="section-title text-white mb-8">
         Envie d'en savoir <span class="text-accent-400 squiggle squiggle-accent">plus</span> ?
       </h2>
       <p class="text-gray-300 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">

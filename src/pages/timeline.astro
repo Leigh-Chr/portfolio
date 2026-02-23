@@ -182,7 +182,7 @@ function formatDate(dateStr: string): string {
   </section>
 
   <!-- Education Section -->
-  <section class="section-padding section-alt section-lazy">
+  <section class="section-padding section-alt section-lazy" aria-labelledby="education-heading">
     <div class="container-custom">
       {
         !hasRealContent && (
@@ -199,7 +199,7 @@ function formatDate(dateStr: string): string {
           <div class="icon-box-lg bg-accent-400 border-accent-400">
             <span class="text-2xl">🎓</span>
           </div>
-          <h2 class="text-2xl md:text-3xl font-heading font-bold text-white">
+          <h2 id="education-heading" class="text-2xl md:text-3xl font-heading font-bold text-white">
             <span class="text-accent-400">Formation</span> Académique
           </h2>
         </div>
@@ -245,12 +245,22 @@ function formatDate(dateStr: string): string {
                       {/* Date badge */}
                       <div class="flex mb-3">
                         <span class="tag-accent">
-                          {formatDate(exp.data.startDate)}
-                          {exp.data.current
-                            ? ' - Présent'
-                            : exp.data.endDate
-                              ? ` - ${formatDate(exp.data.endDate)}`
-                              : ''}
+                          <time datetime={exp.data.startDate}>
+                            {formatDate(exp.data.startDate)}
+                          </time>
+                          {exp.data.current ? (
+                            ' - Présent'
+                          ) : exp.data.endDate ? (
+                            <Fragment>
+                              {' '}
+                              -{' '}
+                              <time datetime={exp.data.endDate}>
+                                {formatDate(exp.data.endDate)}
+                              </time>
+                            </Fragment>
+                          ) : (
+                            ''
+                          )}
                         </span>
                       </div>
 
@@ -263,7 +273,7 @@ function formatDate(dateStr: string): string {
                               target="_blank"
                               rel="noopener noreferrer"
                               class="flex-shrink-0 hover:opacity-80 transition-opacity"
-                              title={`Visiter le site de ${exp.data.organization}`}
+                              aria-label={`Visiter le site de ${exp.data.organization} (nouvelle fenêtre)`}
                             >
                               <Image
                                 src={getLogoImage(exp.data.logo)!}
@@ -303,6 +313,7 @@ function formatDate(dateStr: string): string {
                                 class="hover:text-accent-400 transition-colors"
                               >
                                 {exp.data.organization}
+                                <span class="sr-only"> (nouvelle fenêtre)</span>
                               </a>
                             ) : (
                               exp.data.organization
@@ -386,7 +397,7 @@ function formatDate(dateStr: string): string {
   </section>
 
   <!-- Work Experience Section -->
-  <section class="section-padding section-lazy">
+  <section class="section-padding section-lazy" aria-labelledby="work-heading">
     <div class="container-custom">
       <div class="max-w-4xl mx-auto">
         <!-- Work Experience Header -->
@@ -394,7 +405,7 @@ function formatDate(dateStr: string): string {
           <div class="icon-box-lg bg-primary-500 border-primary-500">
             <span class="text-2xl">💼</span>
           </div>
-          <h2 class="text-2xl md:text-3xl font-heading font-bold text-white">
+          <h2 id="work-heading" class="text-2xl md:text-3xl font-heading font-bold text-white">
             Expériences <span class="text-primary-400">Professionnelles</span>
           </h2>
         </div>
@@ -430,12 +441,22 @@ function formatDate(dateStr: string): string {
                       {/* Date badge */}
                       <div class="flex mb-3">
                         <span class="tag-primary">
-                          {formatDate(exp.data.startDate)}
-                          {exp.data.current
-                            ? ' - Présent'
-                            : exp.data.endDate
-                              ? ` - ${formatDate(exp.data.endDate)}`
-                              : ''}
+                          <time datetime={exp.data.startDate}>
+                            {formatDate(exp.data.startDate)}
+                          </time>
+                          {exp.data.current ? (
+                            ' - Présent'
+                          ) : exp.data.endDate ? (
+                            <Fragment>
+                              {' '}
+                              -{' '}
+                              <time datetime={exp.data.endDate}>
+                                {formatDate(exp.data.endDate)}
+                              </time>
+                            </Fragment>
+                          ) : (
+                            ''
+                          )}
                         </span>
                       </div>
 
@@ -448,7 +469,7 @@ function formatDate(dateStr: string): string {
                               target="_blank"
                               rel="noopener noreferrer"
                               class="flex-shrink-0 hover:opacity-80 transition-opacity"
-                              title={`Visiter le site de ${exp.data.organization}`}
+                              aria-label={`Visiter le site de ${exp.data.organization} (nouvelle fenêtre)`}
                             >
                               <Image
                                 src={getLogoImage(exp.data.logo)!}
@@ -489,6 +510,7 @@ function formatDate(dateStr: string): string {
                                 class="hover:text-primary-400 transition-colors"
                               >
                                 {exp.data.organization}
+                                <span class="sr-only"> (nouvelle fenêtre)</span>
                               </a>
                             ) : (
                               exp.data.organization

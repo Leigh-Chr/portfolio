@@ -288,7 +288,8 @@ function formatAvailability(): string {
               target="_blank"
               rel="noopener noreferrer"
               class="cv-link"
-              itemprop="sameAs">{contact.linkedinDisplay}</a
+              itemprop="sameAs"
+              >{contact.linkedinDisplay}<span class="sr-only"> (nouvelle fenêtre)</span></a
             >
           </li>
           <li class="cv-contact-item">
@@ -303,7 +304,8 @@ function formatAvailability(): string {
               target="_blank"
               rel="noopener noreferrer"
               class="cv-link"
-              itemprop="sameAs">{contact.githubDisplay}</a
+              itemprop="sameAs"
+              >{contact.githubDisplay}<span class="sr-only"> (nouvelle fenêtre)</span></a
             >
           </li>
           <li class="cv-contact-item">
@@ -414,6 +416,7 @@ function formatAvailability(): string {
                         itemprop="memberOf"
                       >
                         {exp.data.organization}
+                        <span class="sr-only"> (nouvelle fenêtre)</span>
                       </a>
                     ) : (
                       <span itemprop="memberOf">{exp.data.organization}</span>
@@ -506,6 +509,7 @@ function formatAvailability(): string {
                         itemprop="recognizedBy"
                       >
                         {exp.data.organization}
+                        <span class="sr-only"> (nouvelle fenêtre)</span>
                       </a>
                     ) : (
                       <span itemprop="recognizedBy">{exp.data.organization}</span>
@@ -640,7 +644,7 @@ function formatAvailability(): string {
                       rel="noopener noreferrer"
                       class="cv-link"
                     >
-                      GitHub
+                      GitHub<span class="sr-only"> (nouvelle fenêtre)</span>
                     </a>
                   )}
                   {project.data.links.repository && project.data.links.website && ' • '}
@@ -651,7 +655,7 @@ function formatAvailability(): string {
                       rel="noopener noreferrer"
                       class="cv-link"
                     >
-                      Site web
+                      Site web<span class="sr-only"> (nouvelle fenêtre)</span>
                     </a>
                   )}
                 </p>

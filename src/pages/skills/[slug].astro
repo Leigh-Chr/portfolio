@@ -85,11 +85,21 @@ const isTechnical = skill.data.category === 'technical';
       <div class="max-w-4xl mx-auto" data-gsap="reveal">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6" aria-label="Fil d'Ariane">
-          <a href={url('/')} class="hover:text-primary-400 transition-colors">Accueil</a>
-          <span>/</span>
-          <a href={url('/skills')} class="hover:text-primary-400 transition-colors">Compétences</a>
-          <span>/</span>
-          <span class="text-white">{skill.data.title}</span>
+          <ol role="list" class="flex items-center gap-2">
+            <li>
+              <a href={url('/')} class="hover:text-primary-400 transition-colors">Accueil</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <span aria-hidden="true">/</span>
+              <a href={url('/skills')} class="hover:text-primary-400 transition-colors"
+                >Compétences</a
+              >
+            </li>
+            <li class="flex items-center gap-2">
+              <span aria-hidden="true">/</span>
+              <span class="text-white" aria-current="page">{skill.data.title}</span>
+            </li>
+          </ol>
         </nav>
 
         <!-- Header -->

@@ -38,11 +38,11 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <!-- Quick Links -->
-      <div>
-        <p class="font-heading font-bold text-lg text-white mb-6 flex items-center gap-3">
+      <nav aria-label="Navigation du pied de page">
+        <h2 class="font-heading font-bold text-lg text-white mb-6 flex items-center gap-3">
           <span class="w-2 h-2 bg-primary-500"></span>
           Navigation
-        </p>
+        </h2>
         <ul class="space-y-3">
           {
             mainNavigation.map((link) => (
@@ -57,15 +57,18 @@ const currentYear = new Date().getFullYear();
             ))
           }
         </ul>
-      </div>
+      </nav>
 
       <!-- Contact -->
-      <div>
-        <p class="font-heading font-bold text-lg text-white mb-6 flex items-center gap-3">
+      <section aria-labelledby="footer-contact-heading">
+        <h2
+          id="footer-contact-heading"
+          class="font-heading font-bold text-lg text-white mb-6 flex items-center gap-3"
+        >
           <span class="w-2 h-2 bg-accent-400"></span>
           Contact
-        </p>
-        <div class="space-y-4">
+        </h2>
+        <address class="space-y-4 not-italic">
           <a
             href="mailto:virgil.07@hotmail.fr"
             class="flex items-center gap-3 text-gray-400 hover:text-primary-400 transition-colors text-sm group"
@@ -105,7 +108,7 @@ const currentYear = new Date().getFullYear();
                 ></path>
               </svg>
             </span>
-            LinkedIn
+            LinkedIn<span class="sr-only"> (nouvelle fenêtre)</span>
           </a>
           <a
             href="https://github.com/Leigh-Chr"
@@ -122,10 +125,10 @@ const currentYear = new Date().getFullYear();
                 ></path>
               </svg>
             </span>
-            GitHub
+            GitHub<span class="sr-only"> (nouvelle fenêtre)</span>
           </a>
-        </div>
-      </div>
+        </address>
+      </section>
     </div>
 
     <!-- Bottom Bar -->

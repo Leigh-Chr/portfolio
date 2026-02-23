@@ -66,7 +66,8 @@ const orderedSkills = [
   <svg
     viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
     class="w-full h-auto"
-    role="group"
+    role="img"
+    aria-describedby="skill-chart-desc"
     aria-label="Graphique radar représentant les niveaux de compétences par domaine : Frontend, Backend, Personnelles et Interpersonnelles"
   >
     <!-- Background circles -->
@@ -187,6 +188,44 @@ const orderedSkills = [
       </linearGradient>
     </defs>
   </svg>
+
+  <!-- Accessible data table (screen readers only) -->
+  <p id="skill-chart-desc" class="sr-only">
+    Tableau des niveaux de compétences par domaine, sur une échelle de 1 à 10.
+  </p>
+  <table class="sr-only">
+    <caption>Niveaux de compétences par domaine</caption>
+    <thead>
+      <tr>
+        <th scope="col">Compétence</th>
+        <th scope="col">Domaine</th>
+        <th scope="col">Niveau (/10)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        orderedSkills.map((skill) => {
+          const groupLabel =
+            skill.group === 'frontend'
+              ? 'Frontend'
+              : skill.group === 'backend'
+                ? 'Backend'
+                : skill.group === 'personal'
+                  ? 'Personnelles'
+                  : 'Interpersonnelles';
+          return (
+            <tr>
+              <td>
+                <a href={url(`/skills/${skill.slug}`)}>{skill.name}</a>
+              </td>
+              <td>{groupLabel}</td>
+              <td>{skill.level}</td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
 
   <!-- Legend with 4 groups -->
   <div class="grid grid-cols-2 gap-3 sm:gap-4 mt-6 sm:mt-8 max-w-lg mx-auto px-4 sm:px-0">
