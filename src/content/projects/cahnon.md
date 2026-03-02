@@ -1,7 +1,8 @@
 ---
 title: 'Cahnon'
 shortDescription: 'Application desktop native pour auteurs de fiction, combinant éditeur de texte riche, bible narrative, timeline et outils de cohérence, construite avec Svelte 5, Tauri v2 et Rust.'
-thumbnail: '/images/projects/cahnon-thumbnail.svg'
+thumbnail: '/images/projects/cahnon-thumbnail.jpg'
+fullImage: '/images/projects/cahnon-full.jpg'
 order: 6
 links:
   repository: 'https://github.com/Leigh-Chr/cahnon'

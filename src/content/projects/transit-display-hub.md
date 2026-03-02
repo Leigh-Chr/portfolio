@@ -1,7 +1,8 @@
 ---
 title: 'Transit Display Hub'
 shortDescription: "Plateforme fullstack d'information voyageurs en temps réel pour les réseaux de transport, avec affichage kiosk, carte réseau interactive et communication WebSocket."
-thumbnail: '/images/projects/transit-display-hub-thumbnail.svg'
+thumbnail: '/images/projects/transit-display-hub-thumbnail.jpg'
+fullImage: '/images/projects/transit-display-hub-full.jpg'
 order: 7
 links:
   repository: 'https://github.com/Leigh-Chr/transit-display-hub'
