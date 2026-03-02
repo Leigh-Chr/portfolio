@@ -6,6 +6,7 @@ fullImage: '/images/projects/transit-display-hub-full.jpg'
 order: 7
 links:
   repository: 'https://github.com/Leigh-Chr/transit-display-hub'
+  website: 'https://leigh-chr.github.io/transit-display-hub/'
 relatedSkills:
   [
     'javascript-typescript',
