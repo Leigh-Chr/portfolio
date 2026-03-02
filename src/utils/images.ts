@@ -12,6 +12,10 @@ export function getProjectImage(path: string): ImageMetadata | undefined {
   return projectImages[assetPath]?.default;
 }
 
+export function isVideo(src: string): boolean {
+  return /\.(mp4|webm)$/i.test(src);
+}
+
 export function getLogoImage(path: string): ImageMetadata | undefined {
   const assetPath = path.replace('/images/logos/', '/src/assets/images/logos/');
   return logoImages[assetPath]?.default;

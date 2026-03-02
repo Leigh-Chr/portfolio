@@ -18,6 +18,13 @@ relatedSkills:
     'adaptability',
     'veille-technologique',
   ]
+gallery:
+  - src: '/images/projects/appstandard-event-form.png'
+    alt: "Formulaire de création d'événement avec templates"
+  - src: '/images/projects/appstandard-event-list.png'
+    alt: 'Liste des événements avec filtres et recherche'
+  - src: '/images/projects/appstandard-calendar-view.png'
+    alt: 'Vue calendrier mensuel avec événements'
 context:
   period: '2024 - 2025'
   role: 'Développeur Fullstack'

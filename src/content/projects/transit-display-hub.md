@@ -17,6 +17,13 @@ relatedSkills:
     'adaptability',
     'veille-technologique',
   ]
+gallery:
+  - src: '/images/projects/transit-dashboard.png'
+    alt: 'Dashboard administrateur avec statistiques du réseau'
+  - src: '/images/projects/transit-lines.png'
+    alt: 'Gestion des lignes de transport (Tram, Bus)'
+  - src: '/images/projects/transit-stops.png'
+    alt: 'Liste des arrêts avec filtres par ligne et actions'
 context:
   period: '2026'
   role: 'Développeur Fullstack'

@@ -5,6 +5,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
 import { getProjectImage } from '@utils/images';
+import ProjectGallery from '@components/ProjectGallery.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -387,6 +388,19 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
       </div>
     </div>
   </section>
+
+  <!-- Gallery -->
+  {
+    project.data.gallery && project.data.gallery.length > 0 && (
+      <section class="section-padding !pt-0">
+        <div class="container-custom">
+          <div class="max-w-4xl mx-auto">
+            <ProjectGallery gallery={project.data.gallery} />
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <!-- Content Sections -->
   <section>

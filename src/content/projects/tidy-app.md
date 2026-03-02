@@ -17,6 +17,11 @@ relatedSkills:
     'adaptability',
     'veille-technologique',
   ]
+gallery:
+  - src: '/images/projects/tidy-hero.png'
+    alt: 'Page vitrine Tidy App — Organize your files'
+  - src: '/images/projects/tidy-platforms.png'
+    alt: 'Disponible sur Windows, macOS et Linux'
 context:
   period: '2024 - 2025'
   role: 'Développeur Fullstack'

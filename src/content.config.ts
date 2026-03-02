@@ -38,6 +38,14 @@ const projects = defineCollection({
         website: z.string().url().optional(),
       })
       .optional(),
+    gallery: z
+      .array(
+        z.object({
+          src: z.string(),
+          alt: z.string(),
+        })
+      )
+      .optional(),
   }),
 });
 

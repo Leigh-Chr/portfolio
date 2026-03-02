@@ -17,6 +17,13 @@ relatedSkills:
     'adaptability',
     'veille-technologique',
   ]
+gallery:
+  - src: '/images/projects/cahnon-editor.png'
+    alt: "Éditeur de manuscrit avec panneau d'organisation"
+  - src: '/images/projects/cahnon-corkboard.png'
+    alt: 'Corkboard avec fiches scènes par chapitre'
+  - src: '/images/projects/cahnon-bible.png'
+    alt: 'Bible narrative avec catégories et filtres'
 context:
   period: '2026'
   role: 'Développeur Fullstack'
