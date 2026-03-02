@@ -24,6 +24,10 @@ gallery:
     alt: 'Gestion des lignes de transport (Tram, Bus)'
   - src: '/images/projects/transit-stops.png'
     alt: 'Liste des arrêts avec filtres par ligne et actions'
+  - src: '/images/projects/transit-schedules.png'
+    alt: 'Gestion des horaires par ligne et arrêt'
+  - src: '/images/projects/transit-messages.png'
+    alt: "Messages d'alerte avec niveaux de sévérité et portées"
 context:
   period: '2026'
   role: 'Développeur Fullstack'
