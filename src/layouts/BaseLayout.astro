@@ -119,6 +119,23 @@ const jsonLd = {
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
+    <!-- Fallback: ensure GSAP-animated content is visible without JS -->
+    <noscript>
+      <style>
+        [data-gsap],
+        [data-gsap='stagger'] > *,
+        [data-gsap='hero'] > *,
+        [data-gsap='reveal'],
+        [data-gsap='cta'],
+        [data-gsap='timeline-item'] .timeline-dot-lg,
+        [data-gsap='timeline-item'] .card-glow,
+        [data-gsap='timeline-line'] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+
     <!-- Additional head content from child pages -->
     <slot name="head" />
 
