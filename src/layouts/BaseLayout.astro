@@ -13,16 +13,32 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  robots?: string;
 }
 
 const {
   title,
   description = 'Portfolio de Virgil CHAREYRE - Développeur Web Fullstack',
   image = url('/images/profile.jpg'),
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  imageWidth,
+  imageHeight,
+  robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
 } = Astro.props;
 const currentPath = Astro.url.pathname;
-const canonicalURL = new URL(currentPath, Astro.site || 'https://leigh-chr.github.io');
-const imageURL = new URL(image, Astro.site || 'https://leigh-chr.github.io');
+const siteOrigin = Astro.site || 'https://leigh-chr.github.io';
+const canonicalURL = new URL(currentPath, siteOrigin);
+const imageURL = new URL(image, siteOrigin);
+const profileImageURL = new URL(url('/images/profile.jpg'), siteOrigin);
+const ogImageWidth = imageWidth ?? 1628;
+const ogImageHeight = imageHeight ?? 1628;
 const fullTitle = `${title} | Portfolio Virgil CHAREYRE`;
 
 // JSON-LD structured data
@@ -34,7 +50,7 @@ const jsonLd = {
   familyName: 'CHAREYRE',
   jobTitle: 'Développeur Web Fullstack',
   url: 'https://leigh-chr.github.io/portfolio',
-  image: imageURL.toString(),
+  image: profileImageURL.toString(),
   email: 'virgil.07@hotmail.fr',
   address: {
     '@type': 'PostalAddress',
@@ -77,23 +93,37 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Virgil CHAREYRE" />
-    <meta
-      name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-    />
+    <meta name="robots" content={robots} />
     <meta name="googlebot" content="index, follow" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL.toString()} />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL.toString()} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageURL.toString()} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Portfolio Virgil CHAREYRE" />
+    {
+      ogType === 'article' && publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )
+    }
+    {
+      ogType === 'article' && modifiedTime && (
+        <meta property="article:modified_time" content={modifiedTime} />
+      )
+    }
+    {
+      ogType === 'article' && (
+        <meta property="article:author" content="https://leigh-chr.github.io/portfolio" />
+      )
+    }
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

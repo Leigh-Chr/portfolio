@@ -14,6 +14,8 @@ const skills = defineCollection({
     order: z.number(),
     relatedProjects: z.array(z.string()).default([]),
     summary: z.string(),
+    publishedDate: z.string().optional(),
+    modifiedDate: z.string().optional(),
   }),
 });
 
@@ -46,6 +48,8 @@ const projects = defineCollection({
         })
       )
       .optional(),
+    publishedDate: z.string().optional(),
+    modifiedDate: z.string().optional(),
   }),
 });
 

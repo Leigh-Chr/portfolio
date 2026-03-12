@@ -7,6 +7,8 @@ icon: '🤝'
 order: 9
 relatedProjects: ['syren-platform', 'luce-platform']
 summary: "Collaboration efficace au sein d'équipes pluridisciplinaires pour atteindre des objectifs communs."
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

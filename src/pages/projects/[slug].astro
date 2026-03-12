@@ -207,11 +207,52 @@ const nextProject =
 const isPersonalProject = project.data.context.company === 'Projet Personnel';
 const hasActeursList = acteursList.length > 0;
 const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEntreprise.length > 0;
+
+// Resolve thumbnail through Astro's image pipeline for og:image
+const ogImagePath = thumbImage?.src;
+const siteOrigin = 'https://leigh-chr.github.io';
+const ogImageAbsolute = ogImagePath
+  ? `${siteOrigin}${ogImagePath}`
+  : `${siteOrigin}/portfolio/images/profile.jpg`;
 ---
 
-<BaseLayout title={project.data.title} description={project.data.shortDescription}>
-  <!-- BreadcrumbList Schema -->
+<BaseLayout
+  title={project.data.title}
+  description={project.data.shortDescription}
+  image={ogImagePath}
+  ogType="article"
+  publishedTime={project.data.publishedDate}
+  modifiedTime={project.data.modifiedDate}
+  imageWidth={thumbImage?.width}
+  imageHeight={thumbImage?.height}
+>
+  <!-- Article + BreadcrumbList Schema -->
   <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: project.data.title,
+        description: project.data.shortDescription,
+        ...(project.data.publishedDate && { datePublished: project.data.publishedDate }),
+        ...(project.data.modifiedDate && { dateModified: project.data.modifiedDate }),
+        author: {
+          '@type': 'Person',
+          name: 'Virgil CHAREYRE',
+          url: 'https://leigh-chr.github.io/portfolio',
+        },
+        publisher: {
+          '@type': 'Person',
+          name: 'Virgil CHAREYRE',
+        },
+        image: ogImageAbsolute,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://leigh-chr.github.io/portfolio/projects/${project.id}/`,
+        },
+      })}
+    />
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -222,19 +263,19 @@ const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEnt
             '@type': 'ListItem',
             position: 1,
             name: 'Accueil',
-            item: 'https://leigh-chr.github.io/',
+            item: 'https://leigh-chr.github.io/portfolio/',
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Réalisations',
-            item: 'https://leigh-chr.github.io/projects/',
+            item: 'https://leigh-chr.github.io/portfolio/projects/',
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: project.data.title,
-            item: `https://leigh-chr.github.io/projects/${project.id}/`,
+            item: `https://leigh-chr.github.io/portfolio/projects/${project.id}/`,
           },
         ],
       })}

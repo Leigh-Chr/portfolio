@@ -6,10 +6,8 @@ import { url } from '@utils/url';
 <BaseLayout
   title="Page non trouvée"
   description="La page que vous recherchez n'existe pas ou a été déplacée."
+  robots="noindex, nofollow"
 >
-  <Fragment slot="head">
-    <meta name="robots" content="noindex, nofollow" />
-  </Fragment>
   <section class="min-h-[80vh] flex items-center relative overflow-hidden py-20 md:py-32">
     <div class="container-custom text-center">
       <div class="max-w-2xl mx-auto" data-gsap="hero">

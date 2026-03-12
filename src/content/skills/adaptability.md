@@ -16,6 +16,8 @@ relatedProjects:
     'transit-display-hub',
   ]
 summary: "Capacité à m'adapter à des contextes variés : domaines métier, équipes, méthodologies et évolutions de projet."
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

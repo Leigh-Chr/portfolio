@@ -7,6 +7,8 @@ icon: '💬'
 order: 6
 relatedProjects: ['syren-platform', 'site-bh-technologies']
 summary: 'Capacité à transmettre des idées techniques de manière claire et à adapter mon discours à différents interlocuteurs.'
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

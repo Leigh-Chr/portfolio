@@ -26,6 +26,8 @@ context:
   period: '2024 - 2025'
   role: 'Développeur Fullstack'
   company: 'Projet Personnel'
+publishedDate: '2026-01-20'
+modifiedDate: '2026-03-02'
 ---
 
 ## Présentation

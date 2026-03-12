@@ -1,6 +1,6 @@
 ---
 title: 'Cahnon'
-shortDescription: 'Application desktop native pour auteurs de fiction, combinant éditeur de texte riche, bible narrative, timeline et outils de cohérence, construite avec Svelte 5, Tauri v2 et Rust.'
+shortDescription: 'Application desktop native pour auteurs de fiction : éditeur riche, bible narrative, timeline et outils de cohérence. Svelte 5, Tauri v2 et Rust.'
 thumbnail: '/images/projects/cahnon-thumbnail.jpg'
 fullImage: '/images/projects/cahnon-full.jpg'
 order: 6
@@ -28,6 +28,8 @@ context:
   period: '2026'
   role: 'Développeur Fullstack'
   company: 'Projet Personnel'
+publishedDate: '2026-02-11'
+modifiedDate: '2026-03-02'
 ---
 
 ## Présentation

@@ -8,6 +8,8 @@ order: 1
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']
 summary: "Maîtrise avancée de JavaScript et TypeScript pour le développement d'applications web modernes, robustes et maintenables."
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

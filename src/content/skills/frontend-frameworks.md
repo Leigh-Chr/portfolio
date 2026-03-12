@@ -8,6 +8,8 @@ order: 2
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']
 summary: "Développement d'interfaces utilisateur modernes avec les principaux frameworks du marché : React, Angular, Svelte et Vue."
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

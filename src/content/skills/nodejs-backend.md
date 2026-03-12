@@ -7,6 +7,8 @@ icon: '🖥️'
 order: 3
 relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app']
 summary: "Développement d'APIs et de services backend robustes avec l'écosystème Node.js (NestJS, Express, Hono)."
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

@@ -8,6 +8,8 @@ order: 8
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']
 summary: 'Approche méthodique pour analyser, décomposer et résoudre des problèmes techniques de manière efficace.'
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

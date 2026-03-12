@@ -16,6 +16,8 @@ relatedProjects:
     'transit-display-hub',
   ]
 summary: 'Identifier, apprendre et adopter les technologies qui comptent pour rester à jour dans mon métier.'
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition

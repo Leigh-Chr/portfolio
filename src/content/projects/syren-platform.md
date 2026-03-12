@@ -20,6 +20,8 @@ context:
   period: '2022 - 2025'
   role: 'Développeur Fullstack'
   company: 'BH Technologies'
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Présentation

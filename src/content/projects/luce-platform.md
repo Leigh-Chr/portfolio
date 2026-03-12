@@ -1,6 +1,6 @@
 ---
 title: 'Plateforme Luce'
-shortDescription: "Solution de gestion et de pilotage à distance de l'éclairage public pour les villes et collectivités, avec architecture microservices et communication IoT temps réel."
+shortDescription: "Gestion et pilotage à distance de l'éclairage public pour collectivités, avec architecture microservices et IoT temps réel."
 thumbnail: '/images/projects/luce-thumbnail.jpg'
 order: 2
 relatedSkills:
@@ -19,6 +19,8 @@ context:
   period: '2022 - 2025'
   role: 'Développeur Fullstack'
   company: 'BH Technologies'
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Présentation

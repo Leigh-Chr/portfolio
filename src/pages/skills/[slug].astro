@@ -47,9 +47,37 @@ const isTechnical = skill.data.category === 'technical';
 <BaseLayout
   title={skill.data.title}
   description={`${skill.data.title} : ce que j'en fais, comment je la pratique, et mon regard critique.`}
+  ogType="article"
+  publishedTime={skill.data.publishedDate}
+  modifiedTime={skill.data.modifiedDate}
 >
-  <!-- BreadcrumbList Schema -->
+  <!-- Article + BreadcrumbList Schema -->
   <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: skill.data.title,
+        description: `${skill.data.title} : ce que j'en fais, comment je la pratique, et mon regard critique.`,
+        ...(skill.data.publishedDate && { datePublished: skill.data.publishedDate }),
+        ...(skill.data.modifiedDate && { dateModified: skill.data.modifiedDate }),
+        author: {
+          '@type': 'Person',
+          name: 'Virgil CHAREYRE',
+          url: 'https://leigh-chr.github.io/portfolio',
+        },
+        publisher: {
+          '@type': 'Person',
+          name: 'Virgil CHAREYRE',
+        },
+        image: 'https://leigh-chr.github.io/portfolio/images/profile.jpg',
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://leigh-chr.github.io/portfolio/skills/${skill.id}/`,
+        },
+      })}
+    />
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -60,19 +88,19 @@ const isTechnical = skill.data.category === 'technical';
             '@type': 'ListItem',
             position: 1,
             name: 'Accueil',
-            item: 'https://leigh-chr.github.io/',
+            item: 'https://leigh-chr.github.io/portfolio/',
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Compétences',
-            item: 'https://leigh-chr.github.io/skills/',
+            item: 'https://leigh-chr.github.io/portfolio/skills/',
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: skill.data.title,
-            item: `https://leigh-chr.github.io/skills/${skill.id}/`,
+            item: `https://leigh-chr.github.io/portfolio/skills/${skill.id}/`,
           },
         ],
       })}

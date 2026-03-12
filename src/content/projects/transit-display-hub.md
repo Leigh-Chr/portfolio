@@ -1,6 +1,6 @@
 ---
 title: 'Transit Display Hub'
-shortDescription: "Plateforme fullstack d'information voyageurs en temps réel pour les réseaux de transport, avec affichage kiosk, carte réseau interactive et communication WebSocket."
+shortDescription: "Plateforme fullstack d'information voyageurs temps réel : affichage kiosk, carte réseau interactive et communication WebSocket."
 thumbnail: '/images/projects/transit-display-hub-thumbnail.jpg'
 fullImage: '/images/projects/transit-display-hub-full.jpg'
 order: 7
@@ -32,6 +32,8 @@ context:
   period: '2026'
   role: 'Développeur Fullstack'
   company: 'Projet Personnel'
+publishedDate: '2026-02-11'
+modifiedDate: '2026-03-02'
 ---
 
 ## Présentation

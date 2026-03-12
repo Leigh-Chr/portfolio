@@ -8,6 +8,8 @@ order: 5
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']
 summary: "Conception d'APIs RESTful bien structurées et compréhension des principes d'architecture logicielle."
+publishedDate: '2026-01-20'
+modifiedDate: '2026-02-20'
 ---
 
 ## Ma Définition
