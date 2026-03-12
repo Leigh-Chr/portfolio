@@ -172,6 +172,7 @@
     width: 100%;
     height: 100%;
     container-type: inline-size;
+    mask-image: linear-gradient(to bottom, transparent, #000 5%, #000 90%, transparent);
   }
 
   .scroll-preview-img {
@@ -329,6 +330,7 @@
 
   .section-title {
     @apply text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 tracking-tight;
+    text-shadow: 0 0 30px rgb(168 85 247 / 30%);
   }
 
   .section-subtitle {
@@ -340,6 +342,7 @@
      =================== */
   .page-title {
     @apply text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-10 tracking-tight leading-none;
+    text-shadow: 0 0 40px rgb(168 85 247 / 35%);
   }
 
   .page-subtitle {
@@ -467,6 +470,22 @@
    =================== */
 :focus-visible {
   @apply outline-2 outline-offset-2 outline-primary-500;
+}
+
+/* ===================
+   TOUCH DEVICES
+   =================== */
+@media (pointer: coarse) {
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-accent:hover,
+  .btn-chunky:hover,
+  .btn-chunky-primary:hover,
+  .btn-chunky-accent:hover,
+  .card-glow:hover,
+  .gallery-item:hover {
+    transform: none;
+  }
 }
 
 /* ===================
@@ -756,10 +775,12 @@
 /* Big bold stats - Memphis style */
 .stat-large {
   @apply text-6xl md:text-7xl font-heading font-black tracking-tight leading-none;
+  font-variant-numeric: tabular-nums;
 }
 
 .stat-medium {
   @apply text-5xl md:text-6xl font-heading font-bold tracking-tight leading-none;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Chunky buttons - more Memphis impact */
@@ -825,6 +846,7 @@
 .memphis-shape-fg {
   position: absolute;
   will-change: transform;
+  filter: drop-shadow(0 0 4px var(--fg-c));
 }
 
 /* --- Shape types --- */
