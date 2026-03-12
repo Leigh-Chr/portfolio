@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -18,10 +18,26 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: 'hover',
   },
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: 'DM Sans',
+      cssVariable: '--font-dm-sans',
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Space Grotesk',
+      cssVariable: '--font-space-grotesk',
+    },
+  ],
   vite: {
     plugins: [tailwindcss()],
     build: {
       cssMinify: true,
     },
+  },
+  experimental: {
+    clientPrerender: true,
+    contentIntellisense: true,
   },
 });

@@ -36,8 +36,8 @@ const projects = defineCollection({
     }),
     links: z
       .object({
-        repository: z.string().url().optional(),
-        website: z.string().url().optional(),
+        repository: z.url().optional(),
+        website: z.url().optional(),
       })
       .optional(),
     gallery: z
@@ -66,7 +66,7 @@ const experiences = defineCollection({
     endDate: z.string().optional(),
     current: z.boolean().default(false),
     status: z.string().optional(),
-    website: z.string().url().optional(),
+    website: z.url().optional(),
     order: z.number(),
     relatedProjects: z.array(z.string()).default([]),
     relatedSkills: z.array(z.string()).default([]),

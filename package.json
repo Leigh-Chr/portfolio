@@ -37,35 +37,33 @@
     ]
   },
   "overrides": {
-    "devalue": "^5.6.3"
+    "devalue": "^5.6.4"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
-    "@fontsource-variable/dm-sans": "^5.2.8",
-    "@fontsource-variable/space-grotesk": "^5.2.10",
-    "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.17.1",
+    "@astrojs/sitemap": "^3.7.1",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.4",
     "gsap": "^3.14.2",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.6",
+    "@astrojs/check": "^0.9.7",
     "@dreamsicle.io/stylelint-config-tailwindcss": "^1.2.2",
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.2.3",
-    "eslint": "^10.0.2",
+    "@types/node": "^25.5.0",
+    "eslint": "^10.0.3",
     "eslint-plugin-astro": "^1.6.0",
-    "globals": "^17.3.0",
+    "globals": "^17.4.0",
     "husky": "^9.1.7",
     "jscpd": "^4.0.8",
-    "knip": "^5.83.1",
-    "lint-staged": "^16.2.7",
+    "knip": "^5.86.0",
+    "lint-staged": "^16.3.3",
     "markdownlint-cli2": "^0.21.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
-    "stylelint": "^17.3.0",
+    "stylelint": "^17.4.0",
     "stylelint-config-standard": "^40.0.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.55.0"
+    "typescript-eslint": "^8.57.0"
   }
 }
