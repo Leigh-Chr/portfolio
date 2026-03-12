@@ -24,6 +24,10 @@ function extractSection(content: string, sectionName: string): string {
   return match[0].replace(new RegExp(`## ${sectionName}[^\\n]*\\n?`, 'i'), '').trim();
 }
 
+function resolveLinks(href: string): string {
+  return href.startsWith('/') ? url(href) : href;
+}
+
 // Extract all sections
 const definitionContent = extractSection(rawContent, 'Ma Définition');
 const preuvesContent = extractSection(rawContent, 'Mes éléments de preuve');
@@ -205,11 +209,13 @@ const isTechnical = skill.data.category === 'technical';
                     .replace(/\n\n/g, '</p><p>')
                     .replace(
                       /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
-                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline font-semibold">${text}</a>`
                     )
                     .replace(
                       /\[([^\]]+)\]\(([^)]+)\)/g,
-                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline">${text}</a>`
                     )
                     .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
                     .replace(/^(.+)$/gm, '<p>$1</p>')
@@ -246,11 +252,13 @@ const isTechnical = skill.data.category === 'technical';
                     .replace(/\n\n/g, '</p><p>')
                     .replace(
                       /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
-                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline font-semibold">${text}</a>`
                     )
                     .replace(
                       /\[([^\]]+)\]\(([^)]+)\)/g,
-                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline">${text}</a>`
                     )
                     .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
                     .replace(/^(?!<[hp])(.*[^>])$/gm, '<p>$1</p>')
@@ -282,11 +290,13 @@ const isTechnical = skill.data.category === 'technical';
                     .replace(/\n\n/g, '</p><p>')
                     .replace(
                       /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
-                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline font-semibold">${text}</a>`
                     )
                     .replace(
                       /\[([^\]]+)\]\(([^)]+)\)/g,
-                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline">${text}</a>`
                     )
                     .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
                     .replace(/^(.+)$/gm, '<p>$1</p>')
@@ -319,11 +329,13 @@ const isTechnical = skill.data.category === 'technical';
                     .replace(/\n\n/g, '</p><p>')
                     .replace(
                       /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
-                      '<a href="$2" class="text-primary-400 hover:underline font-semibold">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline font-semibold">${text}</a>`
                     )
                     .replace(
                       /\[([^\]]+)\]\(([^)]+)\)/g,
-                      '<a href="$2" class="text-primary-400 hover:underline">$1</a>'
+                      (_: string, text: string, href: string) =>
+                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline">${text}</a>`
                     )
                     .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
                     .replace(/^(.+)$/gm, '<p>$1</p>')
