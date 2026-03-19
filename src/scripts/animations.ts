@@ -29,6 +29,21 @@ function animateHero(): void {
   });
 }
 
+function animateStatsBar(): void {
+  const statsBar = document.querySelector<HTMLElement>('[data-gsap="stats-bar"]');
+  if (!statsBar) return;
+
+  gsap.set(statsBar, { opacity: 0, y: 20, scale: 0.95 });
+  gsap.to(statsBar, {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    duration: 0.8,
+    ease: 'power3.out',
+    delay: 0.3,
+  });
+}
+
 function animateScrollReveal(): void {
   const reveals = document.querySelectorAll<HTMLElement>('[data-gsap="reveal"]');
   if (reveals.length === 0) return;
@@ -180,6 +195,7 @@ function initAnimations(): void {
 
     // Defer remaining animations to avoid blocking main thread
     const deferredAnimations = [
+      animateStatsBar,
       animateScrollReveal,
       animateStagger,
       animateTimeline,
