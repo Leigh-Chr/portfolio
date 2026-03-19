@@ -6,7 +6,7 @@ import profileImage from '@assets/images/profile.jpg';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t-2 border-dark-700 relative overflow-hidden">
+<footer class="border-t relative overflow-hidden" style="border-color: var(--color-border-subtle);">
   <div class="container-custom py-12 md:py-16 relative">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
       <!-- Identity -->
@@ -27,7 +27,9 @@ const currentYear = new Date().getFullYear();
             </div>
           </div>
           <div>
-            <p class="font-heading font-bold text-lg text-white">Virgil CHAREYRE</p>
+            <p class="font-heading font-bold text-lg text-white">
+              Virgil <span class="text-primary-400">CHAREYRE</span>
+            </p>
             <p class="text-sm text-gray-400">Développeur Web Fullstack</p>
           </div>
         </div>
@@ -74,7 +76,8 @@ const currentYear = new Date().getFullYear();
             class="flex items-center gap-3 text-gray-400 hover:text-primary-400 transition-colors text-sm group"
           >
             <span
-              class="w-8 h-8 flex items-center justify-center bg-dark-800 border border-dark-600 group-hover:border-primary-500 transition-colors"
+              class="w-8 h-8 flex items-center justify-center border group-hover:border-primary-500 transition-colors"
+              style="background: var(--color-surface-1); border-color: var(--color-border-subtle);"
             >
               <svg
                 class="w-4 h-4"
@@ -100,7 +103,8 @@ const currentYear = new Date().getFullYear();
             class="flex items-center gap-3 text-gray-400 hover:text-primary-400 transition-colors text-sm group"
           >
             <span
-              class="w-8 h-8 flex items-center justify-center bg-dark-800 border border-dark-600 group-hover:border-primary-500 transition-colors"
+              class="w-8 h-8 flex items-center justify-center border group-hover:border-primary-500 transition-colors"
+              style="background: var(--color-surface-1); border-color: var(--color-border-subtle);"
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
@@ -117,7 +121,8 @@ const currentYear = new Date().getFullYear();
             class="flex items-center gap-3 text-gray-400 hover:text-primary-400 transition-colors text-sm group"
           >
             <span
-              class="w-8 h-8 flex items-center justify-center bg-dark-800 border border-dark-600 group-hover:border-primary-500 transition-colors"
+              class="w-8 h-8 flex items-center justify-center border group-hover:border-primary-500 transition-colors"
+              style="background: var(--color-surface-1); border-color: var(--color-border-subtle);"
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
@@ -133,7 +138,8 @@ const currentYear = new Date().getFullYear();
 
     <!-- Bottom Bar -->
     <div
-      class="mt-16 pt-10 border-t border-dark-700 flex flex-col md:flex-row justify-between items-center gap-6"
+      class="mt-16 pt-10 border-t flex flex-col md:flex-row justify-between items-center gap-6"
+      style="border-color: var(--color-border-subtle);"
     >
       <p class="text-gray-400 text-sm">
         &copy; {currentYear}
