@@ -313,7 +313,7 @@ function getSkillIconColor(group: string): string {
                 <div
                   class="skill-bar-fill-elevated"
                   style={`width: ${jsTs.data.level * 10}%; background: ${getSkillBarGradient(jsTs.data.group)};`}
-                ></div>
+                />
               </div>
             </a>
           )
@@ -350,7 +350,7 @@ function getSkillIconColor(group: string): string {
                 <div
                   class="skill-bar-fill-elevated"
                   style={`width: ${skill.data.level * 10}%; background: ${getSkillBarGradient(skill.data.group)};`}
-                ></div>
+                />
               </div>
             </a>
           ))
@@ -385,7 +385,7 @@ function getSkillIconColor(group: string): string {
                   <div
                     class="skill-bar-fill-elevated"
                     style={`width: ${problemSolving.data.level * 10}%; background: ${getSkillBarGradient(problemSolving.data.group)};`}
-                  ></div>
+                  />
                 </div>
               </a>
               <a href={url(`/skills/${teamwork.id}`)} class="group">
@@ -413,7 +413,7 @@ function getSkillIconColor(group: string): string {
                   <div
                     class="skill-bar-fill-elevated"
                     style={`width: ${teamwork.data.level * 10}%; background: ${getSkillBarGradient(teamwork.data.group)};`}
-                  ></div>
+                  />
                 </div>
               </a>
             </div>
@@ -502,7 +502,7 @@ function getSkillIconColor(group: string): string {
                     class="absolute inset-0 opacity-[0.05] pointer-events-none"
                     style="background-image: repeating-conic-gradient(var(--color-text-4) 0% 25%, transparent 0% 50%); background-size: 20px 20px;"
                     aria-hidden="true"
-                  ></div>
+                  />
 
                   {thumbImage ? (
                     <Image
@@ -529,7 +529,7 @@ function getSkillIconColor(group: string): string {
                   <div
                     class="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent pointer-events-none"
                     aria-hidden="true"
-                  ></div>
+                  />
 
                   {/* Arrow icon on hover */}
                   <div
