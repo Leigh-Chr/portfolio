@@ -39,3 +39,6 @@ Thumbs.db
 # Linter caches
 .eslintcache
 .stylelintcache
+
+# Brainstorm sessions
+.superpowers/
