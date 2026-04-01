@@ -92,28 +92,28 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
       </p>
 
       <!-- Stats - Bold Memphis with subtle tilts -->
-      <div class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-12 sm:mt-16">
+      <dl class="flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 mt-12 sm:mt-16 m-0">
         <div
           class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]"
         >
-          <p class="stat-large text-primary-400">{hasRealContent ? sortedProjects.length : 3}</p>
-          <p
-            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+          <dt class="stat-large text-primary-400">{hasRealContent ? sortedProjects.length : 3}</dt>
+          <dd
+            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2 m-0"
           >
             Réalisations
-          </p>
+          </dd>
         </div>
         <div
           class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-accent-400 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]"
         >
-          <p class="stat-large text-accent-400">+3</p>
-          <p
-            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
+          <dt class="stat-large text-accent-400">+3</dt>
+          <dd
+            class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2 m-0"
           >
             Années d'exp.
-          </p>
+          </dd>
         </div>
-      </div>
+      </dl>
     </div>
   </section>
 
@@ -176,7 +176,9 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
                   ) : (
                     <div class="w-full h-full flex items-center justify-center">
                       <div class="text-center">
-                        <span class="text-6xl opacity-30">📁</span>
+                        <span class="text-6xl opacity-30" aria-hidden="true">
+                          📁
+                        </span>
                         <p class="text-gray-400 text-sm mt-2">[Image projet]</p>
                       </div>
                     </div>

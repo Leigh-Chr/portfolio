@@ -178,7 +178,14 @@ const isTechnical = skill.data.category === 'technical';
               {`${skill.data.level}/10`}
             </span>
           </div>
-          <div class="skill-level-animated h-4">
+          <div
+            class="skill-level-animated h-4"
+            role="meter"
+            aria-valuenow={skill.data.level}
+            aria-valuemin={0}
+            aria-valuemax={10}
+            aria-label={`Niveau ${skill.data.title} : ${skill.data.level} sur 10`}
+          >
             <div class="skill-fill" style={`width: ${skill.data.level * 10}%`}></div>
           </div>
         </div>
@@ -193,12 +200,14 @@ const isTechnical = skill.data.category === 'technical';
         <!-- Section 1: Ma Définition -->
         {
           definitionContent && (
-            <section class="mb-20" id="definition">
+            <section class="mb-20" id="definition" aria-labelledby="definition-title">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">📖</span>
+                  <span class="text-xl" aria-hidden="true">
+                    📖
+                  </span>
                 </div>
-                <h2 class="content-section-title">
+                <h2 class="content-section-title" id="definition-title">
                   Ma <span class="text-primary-400 underline-memphis">Définition</span>
                 </h2>
               </div>
@@ -229,12 +238,14 @@ const isTechnical = skill.data.category === 'technical';
         <!-- Section 2: Mes Éléments de Preuve -->
         {
           preuvesContent && (
-            <section class="mb-20" id="preuves">
+            <section class="mb-20" id="preuves" aria-labelledby="preuves-title">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">🎯</span>
+                  <span class="text-xl" aria-hidden="true">
+                    🎯
+                  </span>
                 </div>
-                <h2 class="content-section-title">
+                <h2 class="content-section-title" id="preuves-title">
                   Mes Éléments de{' '}
                   <span class="text-accent-400 underline-memphis underline-memphis-accent">
                     Preuve
@@ -274,12 +285,14 @@ const isTechnical = skill.data.category === 'technical';
         <!-- Section 3: Mon Autocritique -->
         {
           autocritiqueContent && (
-            <section class="mb-20" id="autocritique">
+            <section class="mb-20" id="autocritique" aria-labelledby="autocritique-title">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">🔍</span>
+                  <span class="text-xl" aria-hidden="true">
+                    🔍
+                  </span>
                 </div>
-                <h2 class="content-section-title">
+                <h2 class="content-section-title" id="autocritique-title">
                   Mon <span class="text-primary-400 underline-memphis">Autocritique</span>
                 </h2>
               </div>
@@ -310,12 +323,14 @@ const isTechnical = skill.data.category === 'technical';
         <!-- Section 4: Mon Évolution -->
         {
           evolutionContent && (
-            <section class="mb-20" id="evolution">
+            <section class="mb-20" id="evolution" aria-labelledby="evolution-title">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">📈</span>
+                  <span class="text-xl" aria-hidden="true">
+                    📈
+                  </span>
                 </div>
-                <h2 class="content-section-title">
+                <h2 class="content-section-title" id="evolution-title">
                   Mon{' '}
                   <span class="text-accent-400 underline-memphis underline-memphis-accent">
                     Évolution
@@ -347,12 +362,12 @@ const isTechnical = skill.data.category === 'technical';
         }
 
         <!-- Section 5: Réalisations Associées -->
-        <section class="mb-20" id="realisations">
+        <section class="mb-20" id="realisations" aria-labelledby="realisations-title">
           <div class="content-section-header">
             <div class="icon-box-sm">
-              <span class="text-xl">🔗</span>
+              <span class="text-xl" aria-hidden="true">🔗</span>
             </div>
-            <h2 class="content-section-title">
+            <h2 class="content-section-title" id="realisations-title">
               Réalisations <span class="text-accent-400 underline-memphis underline-memphis-accent"
                 >Associées</span
               >

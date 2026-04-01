@@ -100,33 +100,35 @@ const groupColors = {
       </p>
 
       <!-- Group Stats -->
-      <div
-        class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 max-w-4xl mx-auto"
+      <dl
+        class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 max-w-4xl mx-auto m-0"
       >
         {
           groupData.map((group) => (
             <div
               class={`text-center p-3 sm:p-4 md:p-6 bg-dark-800 border-2 sm:border-3 border-dark-600 group ${groupColors[group.key].hoverBorder} transition-all shadow-hard-lg hover:scale-105 hover:shadow-hard-xl`}
             >
-              <span class="text-2xl sm:text-3xl mb-2 block">{skillGroups[group.key].icon}</span>
-              <p
+              <span class="text-2xl sm:text-3xl mb-2 block" aria-hidden="true">
+                {skillGroups[group.key].icon}
+              </span>
+              <dt
                 class={`text-3xl sm:text-4xl md:text-5xl font-heading font-black ${groupColors[group.key].text}`}
               >
                 {group.avg}
                 <span class="text-base sm:text-xl text-gray-400">/10</span>
-              </p>
-              <p class="text-[10px] sm:text-xs text-gray-400 font-heading uppercase tracking-wide mt-1 leading-tight">
+              </dt>
+              <dd class="text-[10px] sm:text-xs text-gray-400 font-heading uppercase tracking-wide mt-1 leading-tight m-0">
                 {skillGroups[group.key].label
                   .replace('Développement ', '')
                   .replace('Compétences ', '')}
-              </p>
-              <p class="text-[10px] sm:text-xs text-gray-400 mt-1">
+              </dd>
+              <dd class="text-[10px] sm:text-xs text-gray-400 mt-1 m-0">
                 {group.skills.length} compétence{group.skills.length > 1 ? 's' : ''}
-              </p>
+              </dd>
             </div>
           ))
         }
-      </div>
+      </dl>
     </div>
   </section>
 
@@ -170,7 +172,10 @@ const groupColors = {
             <div>
               {/* Group Header */}
               <div class="flex flex-wrap items-center gap-3 sm:gap-6 mb-6 sm:mb-8">
-                <span class={`w-3 h-3 ${groupColors[group.key].bg} flex-shrink-0`} />
+                <span
+                  class={`w-3 h-3 ${groupColors[group.key].bg} flex-shrink-0`}
+                  aria-hidden="true"
+                />
                 <h3 class="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-white flex items-center gap-2 sm:gap-3">
                   <span>{skillGroups[group.key].icon}</span>
                   <span class="break-words">{skillGroups[group.key].label}</span>

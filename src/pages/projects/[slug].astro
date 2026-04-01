@@ -336,7 +336,9 @@ const ogImageAbsolute = ogImagePath
                 />
               ) : (
                 <div class="w-full h-full flex items-center justify-center">
-                  <span class="text-6xl opacity-30">📁</span>
+                  <span class="text-6xl opacity-30" aria-hidden="true">
+                    📁
+                  </span>
                 </div>
               )
             }
@@ -372,7 +374,7 @@ const ogImageAbsolute = ogImagePath
             {/* Project Links */}
             {
               links && (links.repository || links.website) && (
-                <div class="flex flex-wrap gap-3 mt-6">
+                <nav class="flex flex-wrap gap-3 mt-6" aria-label="Liens du projet">
                   {links.repository && (
                     <a
                       href={links.repository}
@@ -421,7 +423,7 @@ const ogImageAbsolute = ogImagePath
                       <span class="text-sm font-medium">Voir le site</span>
                     </a>
                   )}
-                </div>
+                </nav>
               )
             }
           </div>
@@ -453,7 +455,9 @@ const ogImageAbsolute = ogImagePath
             <section class="mb-20" id="presentation">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">📋</span>
+                  <span class="text-xl" aria-hidden="true">
+                    📋
+                  </span>
                 </div>
                 <h2 class="content-section-title">
                   Présentation du <span class="text-primary-400 underline-memphis">Projet</span>
@@ -481,7 +485,9 @@ const ogImageAbsolute = ogImagePath
             <section class="mb-20" id="contexte">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">🎯</span>
+                  <span class="text-xl" aria-hidden="true">
+                    🎯
+                  </span>
                 </div>
                 <h2 class="content-section-title">
                   Objectifs, Contexte et{' '}
@@ -541,7 +547,9 @@ const ogImageAbsolute = ogImagePath
             <section class="mb-20" id="etapes">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">📝</span>
+                  <span class="text-xl" aria-hidden="true">
+                    📝
+                  </span>
                 </div>
                 <h2 class="content-section-title">
                   Les <span class="text-primary-400 underline-memphis">Étapes</span> - Ce que j'ai
@@ -550,9 +558,9 @@ const ogImageAbsolute = ogImagePath
               </div>
               <div class="section-divider ml-0 mx-0 mb-8" />
               <div class="detail-box">
-                <div class="space-y-8">
+                <ol class="space-y-8 list-none p-0 m-0">
                   {phases.map((phase, index) => (
-                    <div class="flex gap-4">
+                    <li class="flex gap-4">
                       <div class="flex flex-col items-center">
                         <div
                           class={`w-10 h-10 ${index === phases.length - 1 ? 'bg-accent-400' : 'bg-primary-800'} flex items-center justify-center`}
@@ -563,15 +571,17 @@ const ogImageAbsolute = ogImagePath
                             {index + 1}
                           </span>
                         </div>
-                        {index < phases.length - 1 && <div class="w-0.5 h-full bg-dark-600 mt-2" />}
+                        {index < phases.length - 1 && (
+                          <div class="w-0.5 h-full bg-dark-600 mt-2" aria-hidden="true" />
+                        )}
                       </div>
                       <div class={index < phases.length - 1 ? 'pb-6' : ''}>
                         <h3 class="font-heading font-bold text-white mb-2">{phase.title}</h3>
                         <p class="text-gray-400 text-sm">{phase.description}</p>
                       </div>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ol>
               </div>
             </section>
           )
@@ -614,7 +624,9 @@ const ogImageAbsolute = ogImagePath
                         <div
                           class={`w-12 h-12 bg-dark-600 border-2 ${index % 2 === 0 ? 'border-primary-500' : 'border-accent-400'} flex items-center justify-center mx-auto mb-2`}
                         >
-                          <span class="text-xl">👤</span>
+                          <span class="text-xl" aria-hidden="true">
+                            👤
+                          </span>
                         </div>
                         <h3 class="font-heading font-medium text-white text-sm">{acteur.role}</h3>
                         <p class="text-gray-400 text-xs mt-1">{acteur.description}</p>
@@ -637,7 +649,9 @@ const ogImageAbsolute = ogImagePath
             <section class="mb-20" id="resultats">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">🏆</span>
+                  <span class="text-xl" aria-hidden="true">
+                    🏆
+                  </span>
                 </div>
                 <h2 class="content-section-title">
                   Les <span class="text-primary-400 underline-memphis">Résultats</span>
@@ -741,7 +755,9 @@ const ogImageAbsolute = ogImagePath
             <section class="mb-20" id="lendemains">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">🔮</span>
+                  <span class="text-xl" aria-hidden="true">
+                    🔮
+                  </span>
                 </div>
                 <h2 class="content-section-title">
                   Les{' '}
@@ -805,7 +821,9 @@ const ogImageAbsolute = ogImagePath
             <section class="mb-20" id="critique">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">🔍</span>
+                  <span class="text-xl" aria-hidden="true">
+                    🔍
+                  </span>
                 </div>
                 <h2 class="content-section-title">
                   Mon Regard <span class="text-primary-400 underline-memphis">Critique</span>
@@ -819,9 +837,9 @@ const ogImageAbsolute = ogImagePath
                       <h3 class="font-heading font-semibold text-white mb-2 text-sm">
                         Ce qui a bien fonctionné
                       </h3>
-                      <ul class="text-gray-400 text-sm space-y-1">
+                      <ul class="text-gray-400 text-sm space-y-1 list-disc list-inside">
                         {critique.positif.map((item) => (
-                          <li>• {item}</li>
+                          <li>{item}</li>
                         ))}
                       </ul>
                     </div>
@@ -831,9 +849,9 @@ const ogImageAbsolute = ogImagePath
                       <h3 class="font-heading font-semibold text-white mb-2 text-sm">
                         Axes d'amélioration
                       </h3>
-                      <ul class="text-gray-400 text-sm space-y-1">
+                      <ul class="text-gray-400 text-sm space-y-1 list-disc list-inside">
                         {critique.amelioration.map((item) => (
-                          <li>• {item}</li>
+                          <li>{item}</li>
                         ))}
                       </ul>
                     </div>
@@ -850,7 +868,9 @@ const ogImageAbsolute = ogImagePath
             <section class="mb-20" id="competences">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">🔗</span>
+                  <span class="text-xl" aria-hidden="true">
+                    🔗
+                  </span>
                 </div>
                 <h2 class="content-section-title">
                   Compétences{' '}

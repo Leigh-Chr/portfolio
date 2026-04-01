@@ -52,7 +52,7 @@ import { url } from '@utils/url';
         </div>
 
         <!-- Quick Links -->
-        <div class="mt-16 pt-10 border-t border-dark-700">
+        <nav class="mt-16 pt-10 border-t border-dark-700" aria-label="Pages suggérées">
           <p class="text-gray-500 text-sm mb-6">Ou explorez ces pages :</p>
           <div class="flex flex-wrap justify-center gap-6">
             <a
@@ -61,21 +61,21 @@ import { url } from '@utils/url';
             >
               Compétences
             </a>
-            <span class="text-dark-600">•</span>
+            <span class="text-dark-600" aria-hidden="true">•</span>
             <a
               href={url('/projects')}
               class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
             >
               Réalisations
             </a>
-            <span class="text-dark-600">•</span>
+            <span class="text-dark-600" aria-hidden="true">•</span>
             <a
               href={url('/timeline')}
               class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
             >
               Parcours
             </a>
-            <span class="text-dark-600">•</span>
+            <span class="text-dark-600" aria-hidden="true">•</span>
             <a
               href={url('/about')}
               class="text-primary-400 hover:text-primary-300 font-heading font-medium transition-colors"
@@ -83,7 +83,7 @@ import { url } from '@utils/url';
               À propos
             </a>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
   </section>

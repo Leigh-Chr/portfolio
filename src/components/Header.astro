@@ -22,7 +22,7 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
   <nav class="nav-pill" aria-label="Navigation principale">
     <!-- Logo -->
     <a href={url('/')} class="nav-logo" aria-label="Accueil">
-      V<span class="nav-logo-dot">.</span>C
+      V<span class="nav-logo-dot" aria-hidden="true">.</span>C
     </a>
 
     <!-- Desktop links -->
@@ -86,7 +86,7 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
   </nav>
 
   <!-- Mobile dropdown -->
-  <div class="nav-mobile hidden" id="mobile-menu">
+  <nav class="nav-mobile hidden" id="mobile-menu" aria-label="Navigation mobile">
     <ul class="nav-mobile-links">
       {
         mainNavigation.map((item) => (
@@ -105,7 +105,7 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
     <div class="nav-mobile-cta-wrap">
       <a href={url('/contact')} class="nav-mobile-cta"> Contact </a>
     </div>
-  </div>
+  </nav>
 </header>
 
 <style>
