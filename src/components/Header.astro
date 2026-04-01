@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { mainNavigation } from '@/config/navigation';
 import { url } from '@utils/url';
+import profileImage from '@assets/images/profile.jpg';
 
 interface Props {
   currentPath: string;
@@ -14,342 +16,152 @@ const isActive = (href: string) => {
   if (href === homePath) return currentPath === homePath;
   return currentPath.startsWith(href);
 };
-
-const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
 ---
 
-<header id="main-header" transition:persist transition:name="main-header">
-  <nav class="nav-pill" aria-label="Navigation principale">
-    <!-- Logo -->
-    <a href={url('/')} class="nav-logo" aria-label="Accueil">
-      V<span class="nav-logo-dot" aria-hidden="true">.</span>C
-    </a>
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b-2 border-dark-700 transition-all duration-300"
+  id="main-header"
+  transition:persist
+  transition:name="main-header"
+>
+  <div class="container-custom">
+    <nav class="flex items-center justify-between h-20" aria-label="Navigation principale">
+      <!-- Logo / Identity -->
+      <a href={url('/')} class="flex items-center gap-3 group">
+        <div class="profile-avatar">
+          <div class="w-full h-full bg-dark-700 flex items-center justify-center overflow-hidden">
+            <Image
+              src={profileImage}
+              alt="Photo de Virgil CHAREYRE"
+              class="w-full h-full object-cover"
+              width={48}
+              height={48}
+              loading="eager"
+              format="webp"
+              quality={80}
+            />
+          </div>
+        </div>
+        <div class="hidden sm:block">
+          <p
+            class="font-heading font-bold text-lg text-white group-hover:text-primary-400 transition-colors"
+          >
+            Virgil CHAREYRE
+          </p>
+          <p class="text-xs text-gray-400">Développeur Web Fullstack</p>
+        </div>
+      </a>
 
-    <!-- Desktop links -->
-    <ul class="nav-links" id="desktop-nav">
-      {
-        navLinks.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              class:list={['nav-link', { 'nav-active': isActive(item.href) }]}
-            >
-              {item.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+      <!-- Desktop Navigation -->
+      <ul class="hidden md:flex items-center gap-1">
+        {
+          mainNavigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class={`px-4 py-2 text-sm font-heading font-semibold transition-colors duration-200 border-b-2 ${
+                  isActive(item.href)
+                    ? 'text-primary-400 border-primary-500'
+                    : 'text-gray-300 border-transparent hover:text-white hover:border-accent-400'
+                }`}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
 
-    <!-- CTA button (desktop) -->
-    <a href={url('/contact')} class="nav-cta"> Contact </a>
+      <!-- CTA Button (Desktop) -->
+      <a href={url('/contact')} class="hidden lg:flex btn-accent text-sm px-4 py-2">
+        Me contacter
+      </a>
 
-    <!-- Mobile burger -->
-    <button
-      type="button"
-      class="nav-burger"
-      id="mobile-menu-button"
-      aria-label="Menu"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-    >
-      <svg
-        class="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        id="menu-icon"
-        aria-hidden="true"
+      <!-- Mobile Menu Button -->
+      <button
+        type="button"
+        class="md:hidden btn-icon text-white"
+        id="mobile-menu-button"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-      <svg
-        class="w-5 h-5 hidden"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        id="close-icon"
-        aria-hidden="true"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-  </nav>
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          id="menu-icon"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg
+          class="w-6 h-6 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          id="close-icon"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
 
-  <!-- Mobile dropdown -->
-  <nav class="nav-mobile hidden" id="mobile-menu" aria-label="Navigation mobile">
-    <ul class="nav-mobile-links">
-      {
-        mainNavigation.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              class:list={['nav-mobile-link', { 'nav-mobile-active': isActive(item.href) }]}
-            >
-              {item.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <div class="nav-mobile-cta-wrap">
-      <a href={url('/contact')} class="nav-mobile-cta"> Contact </a>
+  <!-- Mobile Navigation -->
+  <nav
+    class="md:hidden hidden bg-dark-800 border-t-2 border-dark-600"
+    id="mobile-menu"
+    aria-label="Navigation mobile"
+  >
+    <div class="container-custom py-4">
+      <ul class="flex flex-col gap-1">
+        {
+          mainNavigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class={`block px-4 py-3 text-sm font-heading font-semibold transition-colors duration-200 border-l-2 ${
+                  isActive(item.href)
+                    ? 'bg-dark-700 text-primary-400 border-primary-500'
+                    : 'text-gray-300 border-transparent hover:text-white hover:bg-dark-700 hover:border-accent-400'
+                }`}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-4 pt-4 border-t border-dark-600">
+        <a href={url('/contact')} class="btn-accent w-full justify-center text-sm">
+          Me contacter
+        </a>
+      </div>
     </div>
   </nav>
 </header>
 
-<style>
-  /* ========================================
-     FLOATING PILL NAV — Desktop
-     ======================================== */
-  header {
-    position: fixed;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 50;
-    width: auto;
-    max-width: calc(100% - 2rem);
-  }
-
-  .nav-pill {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    background: rgba(5, 5, 5, 0.6);
-    backdrop-filter: blur(24px) saturate(1.5);
-    -webkit-backdrop-filter: blur(24px) saturate(1.5);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 100px;
-    padding: 0.5rem 0.5rem 0.5rem 1.25rem;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-    transition:
-      border-color 0.3s ease,
-      box-shadow 0.3s ease;
-  }
-
-  /* Scroll state */
-  header.scrolled .nav-pill {
-    border-color: var(--color-border-medium);
-    box-shadow:
-      0 4px 30px rgba(0, 0, 0, 0.5),
-      0 0 15px rgba(168, 85, 247, 0.08);
-  }
-
-  /* Logo */
-  .nav-logo {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 0.85rem;
-    color: var(--color-text-1);
-    margin-right: 1rem;
-    letter-spacing: -0.02em;
-    text-decoration: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .nav-logo-dot {
-    color: var(--color-primary-500);
-  }
-
-  /* Desktop nav links */
-  .nav-links {
-    display: none;
-    align-items: center;
-    gap: 0.125rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  @media (min-width: 768px) {
-    .nav-links {
-      display: flex;
-    }
-  }
-
-  .nav-link {
-    color: var(--color-text-3);
-    text-decoration: none;
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 0.4rem 0.75rem;
-    border-radius: 100px;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .nav-link:hover {
-    color: var(--color-text-1);
-    background: var(--color-surface-2);
-  }
-
-  .nav-link.nav-active {
-    color: var(--color-neon);
-    background: rgba(224, 255, 0, 0.08);
-  }
-
-  /* CTA button */
-  .nav-cta {
-    display: none;
-    background: var(--color-primary-500);
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.75rem;
-    padding: 0.45rem 1rem;
-    border-radius: 100px;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: background 0.2s ease;
-  }
-
-  .nav-cta:hover {
-    background: var(--color-primary-400);
-  }
-
-  @media (min-width: 1024px) {
-    .nav-cta {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  /* Burger button */
-  .nav-burger {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.4rem;
-    color: var(--color-text-2);
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 100px;
-    transition:
-      color 0.2s ease,
-      background 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .nav-burger:hover {
-    color: var(--color-text-1);
-    background: var(--color-surface-2);
-  }
-
-  @media (min-width: 768px) {
-    .nav-burger {
-      display: none;
-    }
-  }
-
-  /* ========================================
-     MOBILE — Full-width glass bar
-     ======================================== */
-  @media (max-width: 767px) {
-    header {
-      top: 0;
-      left: 0;
-      right: 0;
-      transform: none;
-      width: 100%;
-      max-width: 100%;
-    }
-
-    .nav-pill {
-      border-radius: 0;
-      padding: 0.6rem 1rem;
-    }
-  }
-
-  /* Mobile dropdown */
-  .nav-mobile {
-    background: rgba(5, 5, 5, 0.85);
-    backdrop-filter: blur(24px) saturate(1.5);
-    -webkit-backdrop-filter: blur(24px) saturate(1.5);
-    border-top: 1px solid var(--color-border-subtle);
-    padding: 0.75rem 1rem 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .nav-mobile {
-      border-radius: 0 0 20px 20px;
-    }
-  }
-
-  .nav-mobile-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-  }
-
-  .nav-mobile-link {
-    display: block;
-    color: var(--color-text-3);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 0.6rem 0.75rem;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-  }
-
-  .nav-mobile-link:hover {
-    color: var(--color-text-1);
-    background: var(--color-surface-2);
-  }
-
-  .nav-mobile-link.nav-mobile-active {
-    color: var(--color-neon);
-    background: rgba(224, 255, 0, 0.08);
-  }
-
-  .nav-mobile-cta-wrap {
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--color-border-subtle);
-  }
-
-  .nav-mobile-cta {
-    display: block;
-    text-align: center;
-    background: var(--color-primary-500);
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.82rem;
-    padding: 0.6rem 1rem;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: background 0.2s ease;
-  }
-
-  .nav-mobile-cta:hover {
-    background: var(--color-primary-400);
-  }
-</style>
-
 <script define:vars={{ base }}>
+  // Defer non-critical initialization to avoid blocking main thread
   function initHeader() {
-    // --- Active navigation state for View Transitions ---
+    // Update active navigation state on page change (for View Transitions)
     function updateActiveNavigation() {
       const currentPath = window.location.pathname;
-      const desktopNav = document.getElementById('desktop-nav');
-      const mobileMenu = document.getElementById('mobile-menu');
+      const desktopNav = document.querySelector('header nav ul.hidden.md\\:flex');
+      const mobileNav = document.getElementById('mobile-menu');
       const homePath = base + '/';
 
       function isActive(href) {
@@ -358,32 +170,39 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
         return currentPath.startsWith(href);
       }
 
+      // Update desktop navigation
       desktopNav?.querySelectorAll('a').forEach((link) => {
         const href = link.getAttribute('href') || '';
         if (isActive(href)) {
-          link.classList.add('nav-active');
+          link.classList.add('text-primary-400', 'border-primary-500');
+          link.classList.remove('text-gray-300', 'border-transparent');
           link.setAttribute('aria-current', 'page');
         } else {
-          link.classList.remove('nav-active');
+          link.classList.remove('text-primary-400', 'border-primary-500');
+          link.classList.add('text-gray-300', 'border-transparent');
           link.removeAttribute('aria-current');
         }
       });
 
-      mobileMenu?.querySelectorAll('.nav-mobile-link').forEach((link) => {
+      // Update mobile navigation
+      mobileNav?.querySelectorAll('a').forEach((link) => {
         const href = link.getAttribute('href') || '';
         if (isActive(href)) {
-          link.classList.add('nav-mobile-active');
+          link.classList.add('bg-dark-700', 'text-primary-400', 'border-primary-500');
+          link.classList.remove('text-gray-300', 'border-transparent');
           link.setAttribute('aria-current', 'page');
         } else {
-          link.classList.remove('nav-mobile-active');
+          link.classList.remove('bg-dark-700', 'text-primary-400', 'border-primary-500');
+          link.classList.add('text-gray-300', 'border-transparent');
           link.removeAttribute('aria-current');
         }
       });
     }
 
+    // Listen for View Transitions page swap
     document.addEventListener('astro:after-swap', updateActiveNavigation);
 
-    // --- Mobile menu toggle ---
+    // Mobile menu toggle
     const menuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menu-icon');
@@ -408,6 +227,7 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
       return !mobileMenu?.classList.contains('hidden');
     }
 
+    // Toggle on button click
     menuButton?.addEventListener('click', (e) => {
       e.stopPropagation();
       if (isMenuOpen()) {
@@ -430,7 +250,7 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
       }
     });
 
-    // Escape + focus trap
+    // Close on Escape key + focus trap
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isMenuOpen()) {
         closeMenu();
@@ -458,14 +278,14 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
       }
     });
 
-    // Close when clicking nav links
+    // Close when clicking a navigation link
     mobileMenu?.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         closeMenu();
       });
     });
 
-    // --- Scroll observer: pill border/shadow change ---
+    // Use IntersectionObserver instead of scroll listener for header border
     const sentinel = document.createElement('div');
     sentinel.setAttribute('aria-hidden', 'true');
     sentinel.style.cssText = 'position:absolute;top:10px;height:1px;width:1px;pointer-events:none';
@@ -474,9 +294,11 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
     const scrollObserver = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) {
-          header?.classList.add('scrolled');
+          header?.classList.add('border-primary-500/50');
+          header?.classList.remove('border-dark-700');
         } else {
-          header?.classList.remove('scrolled');
+          header?.classList.remove('border-primary-500/50');
+          header?.classList.add('border-dark-700');
         }
       },
       { threshold: 0 }
@@ -484,6 +306,7 @@ const navLinks = mainNavigation.filter((item) => item.href !== url('/contact'));
     scrollObserver.observe(sentinel);
   }
 
+  // Use requestIdleCallback to defer initialization, fallback to setTimeout
   if ('requestIdleCallback' in window) {
     requestIdleCallback(initHeader, { timeout: 200 });
   } else {

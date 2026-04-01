@@ -93,27 +93,6 @@
   --shadow-hard-glow-yellow: 6px 6px 0 0 #facc15, 0 0 25px rgb(250 204 21 / 50%);
   --shadow-hard-glow-yellow-lg: 10px 10px 0 0 #facc15, 0 0 35px rgb(250 204 21 / 50%);
 
-  /* Elevated Neo-Memphis: Neon accent (replaces warm gold in UI) */
-  --color-neon: #e0ff00;
-  --color-neon-dim: rgb(224 255 0 / 60%);
-
-  /* Elevated Neo-Memphis: Glass surfaces */
-  --color-surface-1: rgb(255 255 255 / 3%);
-  --color-surface-2: rgb(255 255 255 / 5%);
-  --color-surface-3: rgb(255 255 255 / 8%);
-  --color-border-subtle: rgb(255 255 255 / 6%);
-  --color-border-medium: rgb(255 255 255 / 10%);
-
-  /* Elevated Neo-Memphis: Semantic text */
-  --color-text-1: #f5f5f7;
-  --color-text-2: #d1d5db;
-  --color-text-3: #9ca3af;
-  --color-text-4: #6b7280;
-
-  /* Elevated Neo-Memphis: Glow shadows */
-  --shadow-glow-violet: 0 0 30px rgb(168 85 247 / 25%), 0 20px 40px rgb(0 0 0 / 30%);
-  --shadow-glow-neon: 0 0 30px rgb(224 255 0 / 20%), 0 12px 32px rgb(224 255 0 / 15%);
-
   /* Memphis bounce animation timing */
   --ease-memphis: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -504,7 +483,6 @@
   .btn-chunky-primary:hover,
   .btn-chunky-accent:hover,
   .card-glow:hover,
-  .card-glass:hover,
   .gallery-item:hover {
     transform: none;
   }
@@ -531,8 +509,6 @@
   [data-gsap],
   [data-gsap='stagger'] > *,
   [data-gsap='hero'] > *,
-  [data-gsap='stats-bar'],
-  [data-gsap='stats-bar'] > *,
   [data-gsap='timeline-item'] .timeline-dot-lg,
   [data-gsap='timeline-item'] .card-glow,
   [data-gsap='timeline-line'] {
@@ -543,17 +519,6 @@
   /* Static gradient text */
   .gradient-text-animated {
     background-position: 0% center !important;
-  }
-
-  .card-glass:hover,
-  .btn-elevated-primary:hover,
-  .btn-elevated-ghost:hover,
-  .btn-elevated-neon:hover {
-    transform: none !important;
-  }
-
-  .grain-overlay::before {
-    display: none;
   }
 }
 
@@ -568,9 +533,10 @@
   @apply text-transparent bg-clip-text font-bold;
   background-image: linear-gradient(
     90deg,
-    #c4b5fd,
     var(--color-primary-500),
-    var(--color-neon),
+    var(--color-primary-300),
+    var(--color-accent-400),
+    var(--color-accent-300),
     var(--color-primary-500)
   );
   background-size: 200% auto;
@@ -597,119 +563,6 @@
 .card-glow:hover {
   @apply border-primary-500 shadow-hard-glow-purple;
   transform: translateX(-4px) translateY(-4px);
-}
-
-/* ===================
-   ELEVATED NEO-MEMPHIS: Glass cards
-   =================== */
-.card-glass {
-  background: var(--color-surface-1);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 16px;
-  transition: all 0.4s var(--ease-memphis);
-}
-
-.card-glass:hover {
-  border-color: var(--color-primary-500);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-glow-violet);
-}
-
-.card-glass-featured {
-  border-color: rgb(168 85 247 / 20%);
-  background: linear-gradient(135deg, var(--color-surface-1), rgb(124 58 237 / 5%));
-}
-
-/* ===================
-   ELEVATED NEO-MEMPHIS: Buttons
-   =================== */
-.btn-elevated {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.75rem;
-  border-radius: 12px;
-  border: 2px solid transparent;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-memphis);
-  letter-spacing: 0.02em;
-}
-
-.btn-elevated-primary {
-  background: var(--color-primary-500);
-  color: #fff;
-  border-color: var(--color-primary-500);
-  box-shadow: 0 8px 24px rgb(124 58 237 / 25%);
-}
-
-.btn-elevated-primary:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 0 30px rgb(168 85 247 / 25%),
-    0 12px 32px rgb(124 58 237 / 35%);
-}
-
-.btn-elevated-ghost {
-  background: transparent;
-  color: var(--color-text-2);
-  border-color: var(--color-border-medium);
-}
-
-.btn-elevated-ghost:hover {
-  border-color: var(--color-neon-dim);
-  color: var(--color-neon);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-glow-neon);
-}
-
-.btn-elevated-neon {
-  background: var(--color-neon);
-  color: var(--color-dark-950);
-  border-color: var(--color-neon);
-  box-shadow: 0 8px 24px rgb(224 255 0 / 15%);
-}
-
-.btn-elevated-neon:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 0 30px rgb(224 255 0 / 20%),
-    0 12px 32px rgb(224 255 0 / 25%);
-}
-
-/* ===================
-   ELEVATED NEO-MEMPHIS: Grain overlay
-   =================== */
-.grain-overlay::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px;
-}
-
-/* ===================
-   ELEVATED NEO-MEMPHIS: Skill bars
-   =================== */
-.skill-bar-elevated {
-  width: 100%;
-  height: 4px;
-  background: var(--color-surface-3);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.skill-bar-fill-elevated {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 1s ease-out;
 }
 
 /* ===================
