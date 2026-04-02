@@ -48,7 +48,7 @@ const isTechnical = skill.data.category === 'technical';
 
 <BaseLayout
   title={skill.data.title}
-  description={`${skill.data.title} : ce que j'en fais, comment je la pratique, et mon regard critique.`}
+  description={`${skill.data.title} : ce que j'en fais et comment je la pratique.`}
   ogType="article"
   publishedTime={skill.data.publishedDate}
   modifiedTime={skill.data.modifiedDate}
@@ -61,7 +61,7 @@ const isTechnical = skill.data.category === 'technical';
         '@context': 'https://schema.org',
         '@type': 'Article',
         headline: skill.data.title,
-        description: `${skill.data.title} : ce que j'en fais, comment je la pratique, et mon regard critique.`,
+        description: `${skill.data.title} : ce que j'en fais et comment je la pratique.`,
         ...(skill.data.publishedDate && { datePublished: skill.data.publishedDate }),
         ...(skill.data.modifiedDate && { dateModified: skill.data.modifiedDate }),
         author: {
