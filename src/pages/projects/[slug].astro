@@ -80,113 +80,18 @@ function parseList(content: string): string[] {
   return items;
 }
 
-function parseActeursList(content: string): Array<{ role: string; description: string }> {
-  const acteurs: Array<{ role: string; description: string }> = [];
-  const lines = content.split('\n');
-  for (const line of lines) {
-    // Format: - **Role** : Description
-    const match = line.match(/^[-*]\s+\*\*([^*]+)\*\*\s*:\s*(.+)$/);
-    if (match?.[1] && match[2]) {
-      acteurs.push({
-        role: match[1].trim(),
-        description: match[2].trim(),
-      });
-    }
-  }
-  return acteurs;
-}
-
-function parseSubsections(content: string): Record<string, string> {
-  const result: Record<string, string> = {};
-  const regex = /### ([^\n]+)\n([\s\S]*?)(?=### |$)/g;
-  let match;
-  while ((match = regex.exec(content)) !== null) {
-    if (!match[1] || !match[2]) continue;
-    result[match[1].trim()] = match[2].trim();
-  }
-  return result;
-}
-
-function parseResultats(content: string): {
-  pourMoi: string[];
-  pourEntreprise: string[];
-  pourEntrepriseLabel: string;
-  unified: string[];
-} {
-  const subsections = parseSubsections(content);
-  const result = {
-    pourMoi: [] as string[],
-    pourEntreprise: [] as string[],
-    pourEntrepriseLabel: "Pour l'entreprise",
-    unified: [] as string[],
-  };
-
-  if (subsections['Pour moi']) {
-    result.pourMoi = parseList(subsections['Pour moi']);
-  }
-  if (subsections["Pour l'entreprise"]) {
-    result.pourEntreprise = parseList(subsections["Pour l'entreprise"]);
-  } else if (subsections['Pour les utilisateurs']) {
-    result.pourEntreprise = parseList(subsections['Pour les utilisateurs']);
-    result.pourEntrepriseLabel = 'Pour les utilisateurs';
-  } else if (subsections['Pour la communauté']) {
-    result.pourEntreprise = parseList(subsections['Pour la communauté']);
-    result.pourEntrepriseLabel = 'Pour la communauté';
-  }
-
-  // If no subsections, parse as unified list
-  if (result.pourMoi.length === 0 && result.pourEntreprise.length === 0) {
-    result.unified = parseList(content);
-  }
-
-  return result;
-}
-
-function parseCritique(content: string): {
-  intro: string;
-  positif: string[];
-  amelioration: string[];
-} {
-  const result = { intro: '', positif: [] as string[], amelioration: [] as string[] };
-
-  const positifMatch = content.match(/\*\*Ce qui a bien fonctionné\*\*\s*:\s*([^*]+?)(?=\*\*|$)/);
-  if (positifMatch?.[1]) {
-    result.positif = [positifMatch[1].trim()];
-  }
-
-  const diffMatch = content.match(
-    /\*\*Ce que j'aurais fait différemment\*\*\s*:\s*([^*]+?)(?=\*\*|$)/
-  );
-  if (diffMatch?.[1]) {
-    result.amelioration = [diffMatch[1].trim()];
-  }
-
-  const leconMatch = content.match(/\*\*Leçon apprise\*\*\s*:\s*([^*]+?)(?=\*\*|$)/);
-  if (leconMatch?.[1]) {
-    result.amelioration.push(leconMatch[1].trim());
-  }
-
-  return result;
-}
-
 // Extract sections
 const presentationContent = extractSection(rawContent, 'Présentation');
 const objectifsContent = extractSection(rawContent, 'Objectifs, contexte, enjeu et risques');
 const etapesContent = extractSection(rawContent, "Étapes – ce que j'ai fait");
-const acteursContent =
-  extractSection(rawContent, 'Acteurs – les interactions') ||
-  extractSection(rawContent, 'Compétences mobilisées');
+const equipeContent = extractSection(rawContent, 'Équipe');
 const resultatsContent = extractSection(rawContent, 'Résultats');
-const lendemainsContent = extractSection(rawContent, 'Lendemains du projet');
-const critiqueContent = extractSection(rawContent, 'Regard critique');
 
 // Parse structured data
 const objectifs = parseKeyValueSection(objectifsContent);
 const phases = parsePhases(etapesContent);
-const acteursList = parseActeursList(acteursContent);
-const resultats = parseResultats(resultatsContent);
-const lendemains = parseSubsections(lendemainsContent);
-const critique = parseCritique(critiqueContent);
+const equipeList = parseList(equipeContent);
+const resultatsList = parseList(resultatsContent);
 
 const fullImage = project.data.fullImage ? getProjectImage(project.data.fullImage) : undefined;
 const thumbImage = project.data.thumbnail ? getProjectImage(project.data.thumbnail) : undefined;
@@ -202,11 +107,6 @@ const currentIndex = sortedProjects.findIndex((p) => p.id === project.id);
 const prevProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null;
 const nextProject =
   currentIndex < sortedProjects.length - 1 ? sortedProjects[currentIndex + 1] : null;
-
-// Check if it's a personal project
-const isPersonalProject = project.data.context.company === 'Projet Personnel';
-const hasActeursList = acteursList.length > 0;
-const hasSubsectionResultats = resultats.pourMoi.length > 0 || resultats.pourEntreprise.length > 0;
 
 // Resolve thumbnail through Astro's image pipeline for og:image
 const ogImagePath = thumbImage?.src;
@@ -587,65 +487,51 @@ const ogImageAbsolute = ogImagePath
           )
         }
 
-        <!-- Section 4: Acteurs / Compétences mobilisées -->
+        <!-- Section 4: Équipe -->
         {
-          (hasActeursList || acteursContent) && (
-            <section class="mb-20" id="acteurs">
+          equipeContent && (
+            <section class="mb-20" id="equipe">
               <div class="content-section-header">
                 <div class="icon-box-sm">
-                  <span class="text-xl">{isPersonalProject ? '🛠️' : '👥'}</span>
+                  <span class="text-xl" aria-hidden="true">
+                    👥
+                  </span>
                 </div>
                 <h2 class="content-section-title">
-                  {isPersonalProject ? (
-                    <span>
-                      Compétences{' '}
-                      <span class="text-accent-400 underline-memphis underline-memphis-accent">
-                        Mobilisées
-                      </span>
-                    </span>
-                  ) : (
-                    <span>
-                      Les{' '}
-                      <span class="text-accent-400 underline-memphis underline-memphis-accent">
-                        Acteurs
-                      </span>{' '}
-                      - Les Interactions
-                    </span>
-                  )}
+                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
+                    Équipe
+                  </span>
                 </h2>
               </div>
               <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
-
-              {hasActeursList ? (
-                <div class="detail-box">
-                  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                    {acteursList.map((acteur, index) => (
-                      <div class="p-6 bg-dark-700 border border-dark-600 text-center">
-                        <div
-                          class={`w-12 h-12 bg-dark-600 border-2 ${index % 2 === 0 ? 'border-primary-500' : 'border-accent-400'} flex items-center justify-center mx-auto mb-2`}
-                        >
-                          <span class="text-xl" aria-hidden="true">
-                            👤
-                          </span>
-                        </div>
-                        <h3 class="font-heading font-medium text-white text-sm">{acteur.role}</h3>
-                        <p class="text-gray-400 text-xs mt-1">{acteur.description}</p>
-                      </div>
+              <div class="detail-box">
+                {equipeList.length > 0 ? (
+                  <ul class="space-y-2 text-gray-400 text-sm">
+                    {equipeList.map((item) => (
+                      <li class="flex items-start gap-2">
+                        <span class="text-accent-400 mt-0.5" aria-hidden="true">
+                          •
+                        </span>
+                        <span
+                          set:html={item.replace(
+                            /\*\*([^*]+)\*\*/g,
+                            '<strong class="text-white">$1</strong>'
+                          )}
+                        />
+                      </li>
                     ))}
-                  </div>
-                </div>
-              ) : (
-                <div class="detail-box">
-                  <p class="text-gray-400">{acteursContent}</p>
-                </div>
-              )}
+                  </ul>
+                ) : (
+                  <p class="text-gray-400 text-sm">{equipeContent}</p>
+                )}
+              </div>
             </section>
           )
         }
 
         <!-- Section 5: Les Résultats -->
         {
-          (hasSubsectionResultats || resultats.unified.length > 0) && (
+          resultatsList.length > 0 && (
             <section class="mb-20" id="resultats">
               <div class="content-section-header">
                 <div class="icon-box-sm">
@@ -658,211 +544,34 @@ const ogImageAbsolute = ogImagePath
                 </h2>
               </div>
               <div class="section-divider ml-0 mx-0 mb-8" />
-
-              {hasSubsectionResultats ? (
-                <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                  {resultats.pourMoi.length > 0 && (
-                    <div class="detail-box">
-                      <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                        <span class="text-primary-400">👤</span> Pour moi
-                      </h3>
-                      <ul class="space-y-2 text-gray-400 text-sm">
-                        {resultats.pourMoi.map((item) => (
-                          <li class="flex items-start gap-2">
-                            <svg
-                              class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {resultats.pourEntreprise.length > 0 && (
-                    <div class="detail-box">
-                      <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                        <span class="text-accent-400">{isPersonalProject ? '🌍' : '🏢'}</span>{' '}
-                        {resultats.pourEntrepriseLabel}
-                      </h3>
-                      <ul class="space-y-2 text-gray-400 text-sm">
-                        {resultats.pourEntreprise.map((item) => (
-                          <li class="flex items-start gap-2">
-                            <svg
-                              class="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div class="detail-box">
-                  <ul class="space-y-2 text-gray-400 text-sm">
-                    {resultats.unified.map((item) => (
-                      <li class="flex items-start gap-2">
-                        <svg
-                          class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </section>
-          )
-        }
-
-        <!-- Section 6: Les Lendemains du Projet -->
-        {
-          Object.keys(lendemains).length > 0 && (
-            <section class="mb-20" id="lendemains">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    🔮
-                  </span>
-                </div>
-                <h2 class="content-section-title">
-                  Les{' '}
-                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
-                    Lendemains
-                  </span>{' '}
-                  du Projet
-                </h2>
-              </div>
-              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
               <div class="detail-box">
-                <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-                  {lendemains['Futur immédiat'] && (
-                    <div>
-                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
-                        Futur immédiat
-                      </h3>
-                      <p
-                        class="text-gray-400 text-sm"
-                        set:html={lendemains['Futur immédiat']
-                          .replace(/^- /gm, '• ')
-                          .replace(/\n/g, '<br>')}
-                      />
-                    </div>
-                  )}
-                  {lendemains['À moyen terme'] && (
-                    <div>
-                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
-                        À moyen terme
-                      </h3>
-                      <p
-                        class="text-gray-400 text-sm"
-                        set:html={lendemains['À moyen terme']
-                          .replace(/^- /gm, '• ')
-                          .replace(/\n/g, '<br>')}
-                      />
-                    </div>
-                  )}
-                  {lendemains["Aujourd'hui"] && (
-                    <div>
-                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
-                        Aujourd'hui
-                      </h3>
-                      <p
-                        class="text-gray-400 text-sm"
-                        set:html={lendemains["Aujourd'hui"]
-                          .replace(/^- /gm, '• ')
-                          .replace(/\n/g, '<br>')}
-                      />
-                    </div>
-                  )}
-                </div>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                  {resultatsList.map((item) => (
+                    <li class="flex items-start gap-2">
+                      <svg
+                        class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </section>
           )
         }
 
-        <!-- Section 7: Mon Regard Critique -->
-        {
-          (critique.positif.length > 0 || critique.amelioration.length > 0) && (
-            <section class="mb-20" id="critique">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    🔍
-                  </span>
-                </div>
-                <h2 class="content-section-title">
-                  Mon Regard <span class="text-primary-400 underline-memphis">Critique</span>
-                </h2>
-              </div>
-              <div class="section-divider ml-0 mx-0 mb-8" />
-              <div class="detail-box">
-                <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                  {critique.positif.length > 0 && (
-                    <div class="p-6 bg-dark-700 border border-dark-600">
-                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
-                        Ce qui a bien fonctionné
-                      </h3>
-                      <ul class="text-gray-400 text-sm space-y-1 list-disc list-inside">
-                        {critique.positif.map((item) => (
-                          <li>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {critique.amelioration.length > 0 && (
-                    <div class="p-6 bg-dark-700 border border-dark-600">
-                      <h3 class="font-heading font-semibold text-white mb-2 text-sm">
-                        Axes d'amélioration
-                      </h3>
-                      <ul class="text-gray-400 text-sm space-y-1 list-disc list-inside">
-                        {critique.amelioration.map((item) => (
-                          <li>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </section>
-          )
-        }
-
-        <!-- Section 8: Compétences Associées -->
+        <!-- Section 6: Compétences Associées -->
         {
           relatedSkills.length > 0 && (
             <section class="mb-20" id="competences">
