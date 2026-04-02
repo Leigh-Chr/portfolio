@@ -14,7 +14,7 @@ export const mainNavigation: NavigationItem[] = [
   { name: 'Accueil', href: url('/') },
   { name: 'À propos', href: url('/about') },
   { name: 'Compétences', href: url('/skills') },
-  { name: 'Réalisations', href: url('/projects') },
+  { name: 'Projets', href: url('/projects') },
   { name: 'Parcours', href: url('/timeline') },
   { name: 'CV', href: url('/cv') },
   { name: 'Contact', href: url('/contact') },

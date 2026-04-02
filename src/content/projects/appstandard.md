@@ -71,51 +71,18 @@ Le projet représente plus de 216 000 lignes de TypeScript, organisées en monor
 
 **Phase 5 - Infrastructure** : Backend Node.js, PostgreSQL, pipeline CI/CD GitHub Actions, et déploiement Docker avec docker-compose pour le self-hosting.
 
-## Acteurs – les interactions
+## Équipe
 
 J'ai travaillé seul sur l'intégralité du projet. Lecture des spécifications RFC, architecture monorepo, développement des parsers et des trois applications, publication des packages NPM et mise en place de l'infrastructure : tout a été réalisé en autonomie.
 
 ## Résultats
-
-### Pour moi
 
 - TypeScript à grande échelle : 216k+ lignes, ça forge
 - Standards ouverts RFC 5545 et RFC 6350 : lus, compris, implémentés
 - Architecture monorepo et publication de packages NPM
 - React 19 et les pratiques frontend récentes
 - Capable de lire une spec technique de 200 pages et de l'implémenter
-
-### Pour la communauté
-
 - Trois applications fonctionnelles et interopérables disponibles en open source
 - Packages NPM publiés et réutilisables (parsers RFC 5545, RFC 6350)
 - Documentation technique complète pour faciliter les contributions
 - Alternative open source et respectueuse de la vie privée aux solutions propriétaires
-
-## Lendemains du projet
-
-### Futur immédiat
-
-- Finalisation des fonctionnalités core des trois applications
-- Documentation utilisateur et développeur
-- Tests automatisés complets
-
-### À moyen terme
-
-- Synchronisation CalDAV/CardDAV avec serveurs existants
-- Application mobile React Native
-- Gestion multi-utilisateurs
-
-### Aujourd'hui
-
-- Je continue à travailler dessus activement
-- Les packages NPM sont publiés et fonctionnels
-- L'infra de base tourne
-
-## Regard critique
-
-**Ce qui a bien fonctionné** : L'architecture monorepo avec packages partagés — environ 60% du code est mutualisé entre les trois applications. Les parsers RFC sont solides et passent une batterie de tests avec des fichiers .ics/.vcf réels exportés de Google, Apple et Outlook.
-
-**Ce que j'aurais fait différemment** : J'ai sous-estimé la complexité des RRULE (règles de récurrence). J'aurais dû commencer par Calendar seul avant d'attaquer les deux autres applications. Également, j'aurais dû écrire les tests en parallèle du développement plutôt qu'après.
-
-**Leçon apprise** : Les standards RFC sont volontairement flexibles, ce qui signifie que chaque implémentation (Google, Apple, Microsoft) a ses particularités. Tester avec des données réelles de différentes sources est indispensable.

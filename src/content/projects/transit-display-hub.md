@@ -68,13 +68,11 @@ Le déploiement est conteneurisé via **Docker Compose** avec trois services (Po
 
 **Phase 5 - Carte réseau et déploiement** : Développement de la carte réseau interactive avec algorithme de Dijkstra pour le calcul d'itinéraires et cache Caffeine pour les performances. Conteneurisation avec Docker multi-stage (JDK 21 + Nginx). Configuration Docker Compose 3 services. Mise en place de Husky, commitlint et lint-staged pour la qualité.
 
-## Acteurs – les interactions
+## Équipe
 
 J'ai travaillé seul sur ce projet de bout en bout. Architecture DDD, développement backend Spring Boot et frontend Angular, mise en place du temps réel WebSocket, conteneurisation Docker et rédaction des tests : tout a été fait en autonomie.
 
 ## Résultats
-
-### Pour moi
 
 - Spring Boot 4 et Java 21 : je suis maintenant à l'aise sur cette stack
 - Angular 21 avec Signals, standalone components et mode zoneless
@@ -82,40 +80,9 @@ J'ai travaillé seul sur ce projet de bout en bout. Architecture DDD, développe
 - Communication temps réel via WebSocket STOMP
 - Conteneurisation Docker multi-service pour du déploiement production
 - Plus de 1 500 tests écrits (JUnit 5 + Vitest)
-
-### Pour les utilisateurs
-
 - Plateforme fonctionnelle prête pour la production avec Docker Compose
 - Interface d'administration complète pour la gestion du réseau de transport
 - Affichage kiosk temps réel adapté aux écrans de toutes tailles
 - Carte réseau interactive avec calcul d'itinéraires par algorithme de Dijkstra
 - Système de messages d'alerte multi-niveaux (info, warning, critical) avec portées configurables (réseau, ligne, arrêt)
 - API REST documentée avec 10 contrôleurs et authentification JWT
-
-## Lendemains du projet
-
-### Futur immédiat
-
-- Ajout de données GTFS (General Transit Feed Specification) pour l'import de réseaux réels
-- Amélioration de la carte réseau avec géolocalisation des arrêts
-- Monitoring des appareils connectés avec alertes de déconnexion
-
-### À moyen terme
-
-- Application mobile pour les voyageurs avec notifications push
-- Intégration de données de géolocalisation des véhicules en temps réel
-- Multi-tenancy pour gérer plusieurs réseaux de transport
-
-### Aujourd'hui
-
-- Le projet est fonctionnel et déployable en production via Docker
-- L'architecture DDD permet d'ajouter de nouveaux domaines sans régressions
-- La couverture de tests (plus de 1 500 tests) garantit la stabilité lors des évolutions
-
-## Regard critique
-
-**Ce qui a bien fonctionné** : L'architecture DDD avec séparation stricte des couches — j'ai pu développer l'ensemble en 7 jours grâce à cette structure. Le pré-calcul des états d'affichage côté serveur via les événements domaine évite les problèmes de performance N+1 côté client. WebSocket STOMP s'est avéré fiable pour le temps réel avec reconnexion automatique.
-
-**Ce que j'aurais fait différemment** : J'aurais dû implémenter le format GTFS dès le départ pour permettre l'import de données de réseaux réels plutôt que la saisie manuelle. J'aurais également intégré des tests de charge pour valider le comportement avec des centaines d'écrans connectés simultanément.
-
-**Leçon apprise** : La combinaison événements domaine + WebSocket + état pré-calculé est un pattern puissant pour les systèmes d'information temps réel. Elle découple la logique métier de la diffusion et garantit que chaque écran reçoit un état cohérent sans recalcul côté client.

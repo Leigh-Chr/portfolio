@@ -54,18 +54,16 @@ L'enjeu principal est de réduire les coûts opérationnels des collectivités t
 
 **Phase 6 - Accessibilité et qualité** : Audit et mise en conformité WCAG 2.1 AA. Ajout des attributs ARIA, gestion du focus clavier, tests avec lecteurs d'écran. Mise en place de tests unitaires avec Jest.
 
-## Acteurs – les interactions
+## Équipe
 
-- **Équipe de développement** : Collaboration quotidienne avec les développeurs front-end Angular puis Svelte, et back-end NestJS. Pair programming, revues de code et partage de connaissances sur les patterns RxJS et les bonnes pratiques Svelte.
-- **UX designer** : Travail en binôme sur les wireframes Penpot, itérations rapides sur les maquettes et participation aux tests utilisateurs.
-- **Responsables déchets des collectivités** : Ateliers de recueil de besoins, démonstrations des prototypes et validation des parcours utilisateurs en conditions réelles.
-- **Équipe support client** : Échanges réguliers pour identifier les fonctionnalités les plus demandées et les points de friction récurrents.
-- **Product Owner** : Refinement des user stories, priorisation du backlog et validation des livrables en fin de sprint.
-- **Équipe Luce** : Mutualisation de composants communs (authentification JWT, cartographie Mapbox, bibliothèques partagées db-schema) et partage d'expérience sur SvelteKit.
+- Équipe de développement front-end et back-end
+- UX designer
+- Responsables déchets des collectivités
+- Équipe support client
+- Product Owner
+- Équipe Luce
 
 ## Résultats
-
-### Pour moi
 
 - Pratique concrète de l'UX research via les ateliers utilisateurs
 - RxJS maîtrisé en profondeur pour les flux temps-réel et Socket.IO
@@ -74,9 +72,6 @@ L'enjeu principal est de réduire les coûts opérationnels des collectivités t
 - Accessibilité numérique : WCAG 2.1 AA, ce n'est plus un sujet flou pour moi
 - Cartographie interactive avec Mapbox GL et Mapbox Draw
 - Scrum pratiqué au quotidien pendant 3 ans
-
-### Pour l'entreprise
-
 - Interface cartographique nettement plus réactive grâce à Svelte 5 et aux optimisations de rendu
 - Réduction des appels au support client grâce à une UX repensée
 - Plateforme accessible conforme aux exigences des marchés publics (RGAA)
@@ -84,31 +79,3 @@ L'enjeu principal est de réduire les coûts opérationnels des collectivités t
 - Architecture modulaire où ajouter une fonctionnalité ne casse pas le reste
 - Performance améliorée avec Svelte 5 par rapport à Angular
 - Retours positifs des utilisateurs lors des enquêtes de satisfaction
-
-## Lendemains du projet
-
-### Futur immédiat
-
-- Formation des équipes support sur les nouvelles fonctionnalités Syren V4
-- Création de la documentation utilisateur multilingue
-- Déploiement progressif auprès des collectivités existantes
-
-### À moyen terme
-
-- Les retours utilisateurs sur la V4 sont bons
-- Des demandes d'évolution sur l'édition cartographique commencent à arriver
-- Le support multilingue attire de nouvelles collectivités à l'international
-
-### Aujourd'hui
-
-- Syren V4 est en production et marque la fin de la modernisation technique
-- L'expérience de migration Angular → Svelte acquise sur ce projet a directement bénéficié à Luce V4
-- Les patterns d'internationalisation Paraglide.js servent de référence pour les futurs projets
-
-## Regard critique
-
-**Ce qui a bien fonctionné** : Impliquer les utilisateurs finaux dès le début — l'interface est vraiment calée sur leurs besoins parce qu'on les a écoutés tôt. Le rythme Scrum avec des démos régulières a créé une boucle de feedback efficace. L'investissement sur l'accessibilité s'est avéré être un vrai différenciateur pour les marchés publics. Et la migration vers Svelte 5 a clairement amélioré les performances et le confort de développement.
-
-**Ce que j'aurais fait différemment** : J'aurais dû anticiper plus tôt les problèmes de performance de la carte avec de gros volumes de conteneurs. La virtualisation et le lazy loading auraient dû être intégrés dès la conception initiale. Pour la migration V4, j'aurais prévu plus de temps pour former l'équipe sur les spécificités de Svelte 5 et son nouveau système de réactivité (runes).
-
-**Leçon apprise** : Toujours tester avec des données représentatives de la production dès les premières phases. Un jeu de données de test ne révèle pas les mêmes problèmes qu'une collectivité avec plusieurs milliers de conteneurs. Une migration de framework majeure (Angular → Svelte) coûte cher en temps, mais ça se rentabilise vite côté performance et maintenabilité.
