@@ -43,7 +43,7 @@ const featuredProjects = allProjects.slice(0, 3);
           <!-- CTA Buttons - Bold Memphis -->
           <div class="flex flex-wrap gap-4">
             <a href={url('/projects')} class="btn-chunky-primary">
-              Voir mes réalisations
+              Voir mes projets
               <svg
                 class="w-6 h-6"
                 fill="none"
@@ -64,7 +64,7 @@ const featuredProjects = allProjects.slice(0, 3);
           <!-- Quick Stats - Bold Memphis with subtle variations -->
           <div class="mt-12 sm:mt-16 flex flex-wrap justify-start gap-6 sm:gap-10 md:gap-16">
             <div class="text-center group">
-              <p class="stat-large text-primary-400">10</p>
+              <p class="stat-large text-primary-400">{allSkills.length}</p>
               <p
                 class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
               >
@@ -72,11 +72,11 @@ const featuredProjects = allProjects.slice(0, 3);
               </p>
             </div>
             <div class="text-center group">
-              <p class="stat-large text-accent-400">5</p>
+              <p class="stat-large text-accent-400">{allProjects.length}</p>
               <p
                 class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2"
               >
-                Réalisations
+                Projets
               </p>
             </div>
             <div class="text-center group">
@@ -186,8 +186,8 @@ const featuredProjects = allProjects.slice(0, 3);
     <div class="container-custom">
       <div class="section-header" data-gsap="reveal">
         <h2 id="projects-heading" class="section-title">
-          Réalisations <span class="text-accent-400 underline-memphis underline-memphis-accent"
-            >Récentes</span
+          Projets <span class="text-accent-400 underline-memphis underline-memphis-accent"
+            >Récents</span
           >
         </h2>
         <div class="section-divider section-divider-accent"></div>
@@ -262,7 +262,7 @@ const featuredProjects = allProjects.slice(0, 3);
 
       <div class="text-center mt-16">
         <a href={url('/projects')} class="btn-primary">
-          Voir toutes mes réalisations
+          Voir tous mes projets
           <svg
             class="w-5 h-5"
             fill="none"
