@@ -20,113 +20,10 @@ const sortedExperiences = allExperiences.sort((a, b) => {
   return new Date(a.data.startDate).getTime() - new Date(b.data.startDate).getTime();
 });
 
-const hasRealContent = sortedExperiences.length > 0;
-
-// Placeholder experiences if none exist (chronological: oldest first)
-const placeholderExperiences = [
-  {
-    slug: 'exp-5',
-    data: {
-      type: 'education' as const,
-      title: 'Licence Informatique',
-      organization: 'Université',
-      logo: undefined as string | undefined,
-      location: 'Bordeaux, France',
-      startDate: '2016-09',
-      endDate: '2019-06' as string | undefined,
-      current: false,
-      status: undefined as string | undefined,
-      website: undefined as string | undefined,
-      order: 5,
-      relatedProjects: [] as string[],
-      relatedSkills: [] as string[],
-    },
-    body: 'Formation fondamentale en informatique.',
-  },
-  {
-    slug: 'exp-3',
-    data: {
-      type: 'education' as const,
-      title: 'Master Ingénierie Logicielle',
-      organization: "École d'Ingénieurs",
-      logo: undefined as string | undefined,
-      location: 'Paris, France',
-      startDate: '2019-09',
-      endDate: '2021-06' as string | undefined,
-      current: false,
-      status: undefined as string | undefined,
-      website: undefined as string | undefined,
-      order: 3,
-      relatedProjects: [] as string[],
-      relatedSkills: [] as string[],
-    },
-    body: 'Formation en génie logiciel et systèmes distribués.',
-  },
-  {
-    slug: 'exp-4',
-    data: {
-      type: 'work' as const,
-      title: 'Stagiaire Développeur',
-      organization: 'Agence Web',
-      logo: undefined as string | undefined,
-      location: 'Bordeaux, France',
-      startDate: '2020-04',
-      endDate: '2020-09' as string | undefined,
-      current: false,
-      status: undefined as string | undefined,
-      website: undefined as string | undefined,
-      order: 4,
-      relatedProjects: [] as string[],
-      relatedSkills: [] as string[],
-    },
-    body: "Stage de fin d'études en développement web.",
-  },
-  {
-    slug: 'exp-2',
-    data: {
-      type: 'work' as const,
-      title: 'Développeur Backend',
-      organization: 'Startup Innovante',
-      logo: undefined as string | undefined,
-      location: 'Lyon, France',
-      startDate: '2021-06',
-      endDate: '2022-12' as string | undefined,
-      current: false,
-      status: undefined as string | undefined,
-      website: undefined as string | undefined,
-      order: 2,
-      relatedProjects: [] as string[],
-      relatedSkills: [] as string[],
-    },
-    body: "Développement d'APIs et microservices.",
-  },
-  {
-    slug: 'exp-1',
-    data: {
-      type: 'work' as const,
-      title: 'Développeur Full Stack Senior',
-      organization: 'Entreprise Tech',
-      logo: undefined as string | undefined,
-      location: 'Paris, France',
-      startDate: '2023-01',
-      endDate: undefined as string | undefined,
-      current: true,
-      status: undefined as string | undefined,
-      website: undefined as string | undefined,
-      order: 1,
-      relatedProjects: [] as string[],
-      relatedSkills: [] as string[],
-    },
-    body: 'Description du poste et des responsabilités.',
-  },
-];
-
-const displayExperiences = hasRealContent ? sortedExperiences : placeholderExperiences;
-
 // Group by type
-const workExperiences = displayExperiences.filter((e) => e.data.type === 'work');
-const educationExperiences = displayExperiences.filter((e) => e.data.type === 'education');
-const certifications = displayExperiences.filter((e) => e.data.type === 'certification');
+const workExperiences = sortedExperiences.filter((e) => e.data.type === 'work');
+const educationExperiences = sortedExperiences.filter((e) => e.data.type === 'education');
+const certifications = sortedExperiences.filter((e) => e.data.type === 'certification');
 
 // Format date
 function formatDate(dateStr: string): string {
@@ -194,15 +91,6 @@ function formatDate(dateStr: string): string {
   <!-- Education Section -->
   <section class="section-padding section-alt section-lazy" aria-labelledby="education-heading">
     <div class="container-custom">
-      {
-        !hasRealContent && (
-          <div class="alert-placeholder mb-8">
-            <strong>[PLACEHOLDER]</strong> Les expériences ci-dessous sont des exemples.
-            Remplacez-les par votre vrai parcours dans les fichiers de contenu.
-          </div>
-        )
-      }
-
       <div class="max-w-4xl mx-auto">
         <!-- Education Header -->
         <div class="flex items-center gap-4 mb-12">
@@ -451,9 +339,7 @@ function formatDate(dateStr: string): string {
 
                   {/* Content card */}
                   <div class="ml-20 sm:ml-24 flex-1">
-                    <div
-                      class={`card-glow p-4 sm:p-6 md:p-8${!hasRealContent ? ' opacity-70' : ''}`}
-                    >
+                    <div class="card-glow p-4 sm:p-6 md:p-8">
                       {/* Date badge */}
                       <div class="flex mb-3">
                         <span class="tag-primary">
@@ -517,7 +403,6 @@ function formatDate(dateStr: string): string {
                         )}
                         <div>
                           <p class="font-medium text-white text-sm">
-                            {!hasRealContent && '[PLACEHOLDER] '}
                             {exp.data.website ? (
                               <a
                                 href={exp.data.website}

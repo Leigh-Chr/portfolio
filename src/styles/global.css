@@ -387,13 +387,6 @@
   }
 
   /* ===================
-     ALERT/PLACEHOLDER
-     =================== */
-  .alert-placeholder {
-    @apply bg-accent-400/10 border-2 border-accent-400/50 p-4 text-accent-300 text-sm text-center max-w-2xl mx-auto;
-  }
-
-  /* ===================
      TIMELINE ELEMENTS
      =================== */
   .timeline-dot-lg {

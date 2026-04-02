@@ -8,68 +8,6 @@ import { getProjectImage } from '@utils/images';
 // Get all projects from content collection
 const allProjects = await getCollection('projects');
 const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
-
-const hasRealContent = sortedProjects.length > 0;
-
-// Placeholder projects if none exist
-const placeholderProjects = [
-  {
-    id: 'project-1',
-    data: {
-      title: 'Application Web E-commerce',
-      shortDescription:
-        "Développement d'une plateforme e-commerce complète avec panier, paiement et gestion des stocks.",
-      thumbnail: undefined as string | undefined,
-      fullImage: undefined as string | undefined,
-      context: { period: '2024', role: 'Lead Developer', company: 'Entreprise X' },
-    },
-  },
-  {
-    id: 'project-2',
-    data: {
-      title: 'API REST Microservices',
-      shortDescription:
-        'Architecture microservices pour une application bancaire avec haute disponibilité.',
-      thumbnail: undefined as string | undefined,
-      fullImage: undefined as string | undefined,
-      context: { period: '2023', role: 'Backend Developer', company: 'Entreprise Y' },
-    },
-  },
-  {
-    id: 'project-3',
-    data: {
-      title: 'Dashboard Analytics',
-      shortDescription:
-        "Interface de visualisation de données en temps réel pour le monitoring d'infrastructure.",
-      thumbnail: undefined as string | undefined,
-      fullImage: undefined as string | undefined,
-      context: { period: '2023', role: 'Full Stack Developer', company: 'Entreprise Z' },
-    },
-  },
-  {
-    id: 'project-4',
-    data: {
-      title: 'Application Mobile Cross-Platform',
-      shortDescription:
-        'Application mobile React Native pour la gestion de tâches et la productivité.',
-      thumbnail: undefined as string | undefined,
-      fullImage: undefined as string | undefined,
-      context: { period: '2022', role: 'Mobile Developer', company: 'Startup A' },
-    },
-  },
-  {
-    id: 'project-5',
-    data: {
-      title: 'Système de Gestion de Contenu',
-      shortDescription: 'CMS sur mesure avec éditeur WYSIWYG et système de permissions avancé.',
-      thumbnail: undefined as string | undefined,
-      fullImage: undefined as string | undefined,
-      context: { period: '2022', role: 'Full Stack Developer', company: 'Agence B' },
-    },
-  },
-];
-
-const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
 ---
 
 <BaseLayout
@@ -96,7 +34,7 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
         <div
           class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-primary-500 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[120px]"
         >
-          <dt class="stat-large text-primary-400">{hasRealContent ? sortedProjects.length : 3}</dt>
+          <dt class="stat-large text-primary-400">{sortedProjects.length}</dt>
           <dd
             class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2 m-0"
           >
@@ -117,22 +55,12 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
     </div>
   </section>
 
-  <!-- Projects Grid (5 pts) -->
   <section class="section-padding section-alt">
     <div class="container-custom">
-      {
-        !hasRealContent && (
-          <div class="alert-placeholder mb-8">
-            <strong>[PLACEHOLDER]</strong> Les projets ci-dessous sont des exemples. Remplacez-les
-            par vos vraies réalisations dans les fichiers de contenu.
-          </div>
-        )
-      }
-
       <!-- Projects as list/cards with short descriptions -->
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {
-          displayProjects.map((project, index) => {
+          sortedProjects.map((project, index) => {
             const fullImg = project.data.fullImage
               ? getProjectImage(project.data.fullImage)
               : undefined;
@@ -140,10 +68,7 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
               ? getProjectImage(project.data.thumbnail)
               : undefined;
             return (
-              <a
-                href={url(`/projects/${project.id}`)}
-                class={`card-glow overflow-hidden group ${!hasRealContent ? 'opacity-70' : ''}`}
-              >
+              <a href={url(`/projects/${project.id}`)} class="card-glow overflow-hidden group">
                 {/* Thumbnail */}
                 <div
                   class="aspect-video bg-dark-700 relative overflow-hidden"
@@ -202,7 +127,6 @@ const displayProjects = hasRealContent ? sortedProjects : placeholderProjects;
                     class="font-heading font-bold text-xl md:text-2xl text-white mb-3 group-hover:text-primary-400 transition-colors"
                     transition:name={`project-title-${project.id}`}
                   >
-                    {!hasRealContent && '[PLACEHOLDER] '}
                     {project.data.title}
                   </h2>
 
