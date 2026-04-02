@@ -12,11 +12,11 @@ publishedDate: '2026-01-20'
 modifiedDate: '2026-02-20'
 ---
 
-## Ma Définition
+## En bref
 
 J'ai appris à concevoir des APIs REST en entreprise avec NestJS, puis j'ai creusé le sujet sur mes projets perso. Côté méthode, je m'attache aux conventions REST : bons verbes HTTP, codes de statut parlants, nommage cohérent des ressources, versioning. Swagger/OpenAPI pour la doc, c'est systématique — une API sans doc, c'est une API que personne n'a envie d'intégrer.
 
-## Mes éléments de preuve
+## En pratique
 
 ### APIs NestJS chez BH Technologies
 
@@ -29,20 +29,3 @@ Sur **[AppStandard](/projects/appstandard)**, j'ai conçu une architecture compl
 ### CI/CD et conteneurisation
 
 Sur **[AppStandard](/projects/appstandard)** et **[Tidy App](/projects/tidy-app)**, j'ai mis en place des pipelines CI/CD avec GitHub Actions et des déploiements conteneurisés avec Docker pour que n'importe qui puisse self-host facilement.
-
-## Mon autocritique
-
-Ma compréhension de l'architecture logicielle s'est construite au fil des projets. Je connais bien les patterns classiques (MVC, couches, injection de dépendances) et je commence à explorer des approches comme le DDD et l'event sourcing.
-
-## Mon évolution dans cette compétence
-
-Prochaine étape : aller plus loin en architecture logicielle — DDD, CQRS, event sourcing, microservices. C'est vers là que je veux aller pour gérer des applications plus ambitieuses.
-
-## Réalisations associées
-
-- [Plateforme Syren](/projects/syren-platform) - APIs NestJS, documentation Swagger
-- [Plateforme Luce](/projects/luce-platform) - Architecture microservices
-- [AppStandard](/projects/appstandard) - Monorepo 19 packages, CI/CD
-- [Tidy App](/projects/tidy-app) - Architecture Tauri, APIs internes
-- [Cahnon](/projects/cahnon) - Architecture IPC Tauri v2, 20 modules de commandes Rust
-- [Transit Display Hub](/projects/transit-display-hub) - API REST 10 contrôleurs, WebSocket STOMP, DDD
