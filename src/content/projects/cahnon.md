@@ -64,13 +64,11 @@ L'architecture repose sur **Tauri v2** pour le shell natif desktop, **Svelte 5 a
 
 **Phase 5 - Qualité et robustesse** : Tests unitaires frontend (Vitest) et backend (cargo test). Configuration E2E avec WebdriverIO. Mise en place de Husky (pre-commit/pre-push), ESLint, Prettier, Knip et cargo clippy. Résolution de toutes les alertes d'analyse statique Codacy.
 
-## Acteurs – les interactions
+## Équipe
 
 J'ai travaillé seul sur l'ensemble du projet. Conception de l'architecture Tauri/Rust/Svelte, développement du backend et du frontend, création de l'éditeur TipTap, modélisation de la base SQLite et mise en place de la chaîne de qualité : tout a été réalisé en autonomie.
 
 ## Résultats
-
-### Pour moi
 
 - Rust appris et pratiqué sérieusement (13k lignes de code + 21k de tests)
 - Tauri v2 et l'architecture IPC frontend/backend : plus de secrets
@@ -78,41 +76,9 @@ J'ai travaillé seul sur l'ensemble du projet. Conception de l'architecture Taur
 - TipTap/ProseMirror et les extensions d'éditeur de texte riche
 - Conception de base SQLite complexe (25+ tables, relations N:M)
 - Une application desktop architecturée de bout en bout
-
-### Pour les utilisateurs
-
 - Application desktop fonctionnelle pour Windows, macOS et Linux (bundle < 20 Mo)
 - Données 100% locales dans un fichier unique `.cahnon` — aucun cloud, confidentialité totale
 - Éditeur de texte riche avec modes focus, typewriter et compteur de mots
 - Bible narrative complète (6 types d'entrées) avec détection et liaison automatique dans le texte
 - Timeline avec détection de conflits et arcs narratifs avec suivi de statut
 - Export multi-format : Markdown, texte brut, PDF, DOCX, JSON, CSV
-
-## Lendemains du projet
-
-### Futur immédiat
-
-- Finalisation du mode démo avec projet exemple embarqué
-- Amélioration des performances de l'éditeur sur les manuscrits longs (100k+ mots)
-- Documentation utilisateur complète et tutoriels de prise en main
-
-### À moyen terme
-
-- GPS Narratif : 5 fonctionnalités d'intelligence narrative pour guider l'auteur
-- Carte relationnelle interactive des personnages et entités
-- Templates de structures narratives (voyage du héros, structure en trois actes)
-- Analyse d'impact automatique lors de modifications de la bible
-
-### Aujourd'hui
-
-- Je continue à sortir des releases régulièrement
-- La structure modulaire rend l'ajout de fonctionnalités assez indolore
-- Les hooks git, le linting et les tests gardent le code stable
-
-## Regard critique
-
-**Ce qui a bien fonctionné** : Le choix de Tauri v2 avec Rust — les performances et la taille du bundle sont au rendez-vous. L'architecture modulaire du backend (25+ modules SQLite indépendants) m'a permis d'avancer vite sans casser ce qui existait. Le système de runes de Svelte 5 colle bien à un éditeur de texte temps réel où la réactivité doit être granulaire.
-
-**Ce que j'aurais fait différemment** : J'aurais dû investir plus tôt dans les tests E2E pour une application desktop — les interactions IPC entre Svelte et Rust sont complexes à tester unitairement. J'aurais également conçu le schéma de base de données avec un système de migrations dès le départ plutôt que de le gérer après coup.
-
-**Leçon apprise** : Développer une application desktop avec des technologies web (Tauri) demande de penser différemment qu'une webapp : gestion de l'état local, verrouillage de fichiers, récupération après crash, permissions système — autant de sujets qu'on ne croise jamais en développement web classique.

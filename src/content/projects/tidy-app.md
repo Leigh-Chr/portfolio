@@ -58,50 +58,17 @@ Le projet représente plus de 70 000 lignes de TypeScript, avec un backend Rust 
 
 **Phase 4 - Sécurité et UX** : Système d'historique avec rollback complet. Prévisualisation avant exécution. Mode "dry run" pour tester sans modifier. Gestion des conflits de noms automatique.
 
-## Acteurs – les interactions
+## Équipe
 
 J'ai travaillé seul sur ce projet, de la conception à la publication. Choix technologiques, architecture, développement, tests, publication NPM et distribution desktop : tout a été fait en autonomie complète.
 
 ## Résultats
 
-### Pour moi
-
 - Tauri 2.0 et les bases de Rust appris sur ce projet
 - Intégration de LLMs en pratique (Ollama local, API OpenAI)
 - Développement d'applications desktop cross-platform
 - Apprentissage de la gestion des opérations fichiers sécurisées avec rollback
-
-### Pour les utilisateurs
-
 - Application fonctionnelle pour Windows, macOS et Linux (bundle < 20 Mo)
 - CLI publiée sur NPM pour l'automatisation
 - Système d'historique complet permettant d'annuler toutes les opérations
 - Mode hors-ligne respectueux de la vie privée grâce à Ollama
-
-## Lendemains du projet
-
-### Futur immédiat
-
-- Amélioration des performances sur les gros volumes de fichiers
-- Extension du support de formats de métadonnées
-- Documentation utilisateur complète
-
-### À moyen terme
-
-- Règles de rangement automatique basées sur des patterns
-- Synchronisation avec des services cloud
-- Mode batch pour le traitement de masse
-
-### Aujourd'hui
-
-- Le projet avance régulièrement
-- Les builds desktop tournent sur les trois plateformes
-- Le CLI est publié sur NPM
-
-## Regard critique
-
-**Ce qui a bien fonctionné** : Le choix de Tauri s'est révélé excellent : l'application fait moins de 20 Mo et démarre instantanément. Le système d'historique avec rollback a sauvé plusieurs fois des renommages accidentels pendant les tests.
-
-**Ce que j'aurais fait différemment** : J'ai commencé avec une architecture trop couplée entre l'UI et le core. La refactorisation pour extraire une CLI a pris plus de temps que prévu. J'aurais dû penser "library first" dès le départ.
-
-**Leçon apprise** : L'IA générative est impressionnante mais imprévisible. Il faut toujours prévoir des fallbacks et ne jamais exécuter automatiquement les suggestions sans validation utilisateur. La latence des appels API nécessite aussi une UX adaptée (spinners, suggestions progressives).
