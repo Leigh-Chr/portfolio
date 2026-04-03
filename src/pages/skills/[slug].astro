@@ -147,9 +147,6 @@ const isTechnical = skill.data.category === 'technical';
               <span class={isTechnical ? 'tag-primary' : 'tag-accent'}>
                 {isTechnical ? 'Technique' : 'Humaine'}
               </span>
-              <span class="tag-gray" transition:name={`skill-level-${skill.id}`}
-                >{`${skill.data.level}/10`}</span
-              >
             </div>
             <h1
               class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black text-white mb-4 tracking-tight"
@@ -160,31 +157,6 @@ const isTechnical = skill.data.category === 'technical';
             <p class="text-lg sm:text-xl text-gray-400">
               {skill.data.summary}
             </p>
-          </div>
-        </div>
-
-        <!-- Level indicator - Bold Memphis -->
-        <div class="mt-6 sm:mt-8 detail-box border-3 border-dark-600">
-          <div
-            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4 mb-4"
-          >
-            <span
-              class="text-base sm:text-xl font-heading font-bold text-gray-300 uppercase tracking-wide"
-              >Niveau de maîtrise</span
-            >
-            <span class="text-2xl sm:text-3xl font-heading font-black text-primary-400">
-              {`${skill.data.level}/10`}
-            </span>
-          </div>
-          <div
-            class="skill-level-animated h-4"
-            role="meter"
-            aria-valuenow={skill.data.level}
-            aria-valuemin={0}
-            aria-valuemax={10}
-            aria-label={`Niveau ${skill.data.title} : ${skill.data.level} sur 10`}
-          >
-            <div class="skill-fill" style={`width: ${skill.data.level * 10}%`}></div>
           </div>
         </div>
       </div>

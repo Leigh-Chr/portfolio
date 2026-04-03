@@ -625,37 +625,6 @@
 }
 
 /* ===================
-   4. SKILL BARS ANIMATED
-   =================== */
-.skill-level-animated {
-  @apply h-3 bg-dark-700 overflow-hidden border border-dark-600;
-}
-
-.skill-level-animated .skill-fill {
-  @apply h-full;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary-500) 0%,
-    var(--color-primary-300) 50%,
-    var(--color-accent-400) 100%
-  );
-  background-size: 200% 100%;
-  animation: skill-shimmer 2s ease-in-out infinite;
-  transform-origin: left;
-  transition: width 1s ease-out;
-}
-
-@keyframes skill-shimmer {
-  0%,
-  100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-}
-
-/* ===================
    BOLD MEMPHIS DECORATIONS
    =================== */
 

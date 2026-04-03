@@ -29,12 +29,3 @@ export const skillGroups = {
 } as const;
 
 export type SkillGroup = keyof typeof skillGroups;
-
-/**
- * Calcule la moyenne des niveaux d'un groupe de compétences
- */
-export function getGroupAverageLevel(skills: { data: { level: number } }[]): number {
-  if (skills.length === 0) return 0;
-  const sum = skills.reduce((acc, skill) => acc + skill.data.level, 0);
-  return Math.round(sum / skills.length);
-}
