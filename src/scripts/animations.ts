@@ -29,11 +29,11 @@ function animateHero(): void {
   });
 }
 
-function animateScrollReveal(): void {
-  const reveals = document.querySelectorAll<HTMLElement>('[data-gsap="reveal"]');
-  if (reveals.length === 0) return;
-  gsap.set(reveals, { opacity: 0, y: 30 });
-  ScrollTrigger.batch('[data-gsap="reveal"]', {
+function batchReveal(selector: string, tweenOverrides?: gsap.TweenVars): void {
+  const els = document.querySelectorAll<HTMLElement>(selector);
+  if (els.length === 0) return;
+  gsap.set(els, { opacity: 0, y: 30 });
+  ScrollTrigger.batch(selector, {
     start: 'top 85%',
     onEnter: (batch) => {
       gsap.to(batch, {
@@ -42,9 +42,14 @@ function animateScrollReveal(): void {
         duration: 0.7,
         ease: 'back.out(1.7)',
         stagger: 0.1,
+        ...tweenOverrides,
       });
     },
   });
+}
+
+function animateScrollReveal(): void {
+  batchReveal('[data-gsap="reveal"]');
 }
 
 function animateStagger(): void {
@@ -127,21 +132,7 @@ function animateTimelineLine(): void {
 }
 
 function animateCTA(): void {
-  const ctas = document.querySelectorAll<HTMLElement>('[data-gsap="cta"]');
-  if (ctas.length === 0) return;
-  gsap.set(ctas, { opacity: 0, y: 30 });
-  ScrollTrigger.batch('[data-gsap="cta"]', {
-    start: 'top 85%',
-    onEnter: (batch) => {
-      gsap.to(batch, {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: 'back.out(1.7)',
-        stagger: 0.1,
-      });
-    },
-  });
+  batchReveal('[data-gsap="cta"]');
 }
 
 function animateMemphisShapes(): void {

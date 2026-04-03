@@ -31,6 +31,16 @@ const humanSkills = allSkills
 // Sort projects by order
 const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
 
+// Compute total work experience years from work experiences
+const workYears = Math.floor(
+  workExperiences.reduce((total, exp) => {
+    const start = new Date(exp.data.startDate);
+    const end = exp.data.endDate ? new Date(exp.data.endDate) : new Date();
+    return total + (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+  }, 0)
+);
+const summary = profile.buildSummary(workYears);
+
 // Format date helper
 function formatDate(dateStr: string): string {
   if (/^\d{4}$/.test(dateStr)) return dateStr;
@@ -173,7 +183,7 @@ function formatAvailability(): string {
         '@type': 'Person',
         name: profile.name,
         jobTitle: profile.title,
-        description: profile.summary,
+        description: summary,
         email: contact.email,
         url: 'https://leigh-chr.github.io/portfolio/',
         image: 'https://leigh-chr.github.io/portfolio/images/profile.jpg',
@@ -372,7 +382,7 @@ function formatAvailability(): string {
         </svg>
         Profil
       </h2>
-      <p class="cv-summary">{profile.summary}</p>
+      <p class="cv-summary">{summary}</p>
     </section>
 
     <!-- Work Experience -->
