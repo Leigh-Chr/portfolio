@@ -9,7 +9,6 @@ interface Props {
 }
 
 const { currentPath } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const isActive = (href: string) => {
   const homePath = url('/');
@@ -154,9 +153,11 @@ const isActive = (href: string) => {
   </nav>
 </header>
 
-<script define:vars={{ base }}>
+<script>
   // Defer non-critical initialization to avoid blocking main thread
   function initHeader() {
+    const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
     // Update active navigation state on page change (for View Transitions)
     function updateActiveNavigation() {
       const currentPath = window.location.pathname;
@@ -164,7 +165,7 @@ const isActive = (href: string) => {
       const mobileNav = document.getElementById('mobile-menu');
       const homePath = base + '/';
 
-      function isActive(href) {
+      function isActive(href: string) {
         if (href === homePath || href === base)
           return currentPath === homePath || currentPath === base;
         return currentPath.startsWith(href);
@@ -292,7 +293,9 @@ const isActive = (href: string) => {
     document.body.prepend(sentinel);
 
     const scrollObserver = new IntersectionObserver(
-      ([entry]) => {
+      (entries) => {
+        const entry = entries[0];
+        if (!entry) return;
         if (!entry.isIntersecting) {
           header?.classList.add('border-primary-500/50');
           header?.classList.remove('border-dark-700');

@@ -360,6 +360,53 @@
     @apply text-2xl md:text-3xl font-heading font-bold text-white tracking-tight;
   }
 
+  /* Rendered markdown content (via Astro render()) */
+  .content-prose {
+    @apply text-gray-400 text-sm leading-relaxed;
+  }
+
+  .content-prose h2 {
+    @apply text-2xl md:text-3xl font-heading font-bold text-white mt-16 mb-6 flex items-center gap-4;
+  }
+
+  .content-prose h2:first-child {
+    @apply mt-0;
+  }
+
+  .content-prose h3 {
+    @apply text-xl font-heading font-bold text-white mt-8 mb-4;
+  }
+
+  .content-prose p {
+    @apply mb-4;
+  }
+
+  .content-prose strong {
+    @apply text-white font-semibold;
+  }
+
+  .content-prose a {
+    @apply text-primary-400 hover:underline font-medium;
+  }
+
+  .content-prose ul,
+  .content-prose ol {
+    @apply space-y-2 mb-6 pl-0 list-none;
+  }
+
+  .content-prose li {
+    @apply flex items-start gap-2;
+  }
+
+  .content-prose li::before {
+    content: '•';
+    @apply text-accent-400 flex-shrink-0 mt-px;
+  }
+
+  .content-prose > * + h2 {
+    @apply pt-10 border-t border-dark-600;
+  }
+
   /* ===================
      FORM ELEMENTS
      =================== */
@@ -1203,4 +1250,11 @@
    which breaks ScrollTrigger position calculations */
 .section-lazy:has([data-gsap]) {
   content-visibility: visible;
+}
+
+/* Ensure content-visibility doesn't hide content for print or assistive tech */
+@media print {
+  .section-lazy {
+    content-visibility: visible;
+  }
 }

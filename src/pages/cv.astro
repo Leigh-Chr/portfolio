@@ -6,6 +6,9 @@ import { url } from '@utils/url';
 import profileImage from '@assets/images/profile.jpg';
 import { profile, contact, availability, languages, techStack } from '@config/cv';
 
+const siteOrigin = Astro.site?.origin ?? 'https://leigh-chr.github.io';
+const siteBase = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 // Get all content from collections
 const allExperiences = await getCollection('experiences');
 const allSkills = await getCollection('skills');
@@ -185,8 +188,8 @@ function formatAvailability(): string {
         jobTitle: profile.title,
         description: summary,
         email: contact.email,
-        url: 'https://leigh-chr.github.io/portfolio/',
-        image: 'https://leigh-chr.github.io/portfolio/images/profile.jpg',
+        url: `${siteOrigin}${siteBase}/`,
+        image: `${siteOrigin}${siteBase}/images/profile.jpg`,
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Grenoble',

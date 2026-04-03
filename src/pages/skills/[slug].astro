@@ -1,7 +1,7 @@
 ---
 import { slide } from 'astro:transitions';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntries, render } from 'astro:content';
 import { url } from '@utils/url';
 
 export async function getStaticPaths() {
@@ -14,27 +14,11 @@ export async function getStaticPaths() {
 
 const { skill } = Astro.props;
 
-// Parse markdown content into sections
-const rawContent = skill.body ?? '';
-
-function extractSection(content: string, sectionName: string): string {
-  const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=\\n## |$)`, 'i');
-  const match = content.match(regex);
-  if (!match) return '';
-  return match[0].replace(new RegExp(`## ${sectionName}[^\\n]*\\n?`, 'i'), '').trim();
-}
-
-function resolveLinks(href: string): string {
-  return href.startsWith('/') ? url(href) : href;
-}
-
-// Extract all sections
-const definitionContent = extractSection(rawContent, 'En bref');
-const preuvesContent = extractSection(rawContent, 'En pratique');
+// Render markdown content via Astro's pipeline (sanitized, with rehype plugins)
+const { Content } = await render(skill);
 
 // Get related projects
-const allProjects = await getCollection('projects');
-const relatedProjects = allProjects.filter((p) => skill.data.relatedProjects.includes(p.id));
+const relatedProjects = await getEntries(skill.data.relatedProjects);
 
 // Get all skills for navigation
 const allSkills = await getCollection('skills');
@@ -44,14 +28,16 @@ const prevSkill = currentIndex > 0 ? sortedSkills[currentIndex - 1] : null;
 const nextSkill = currentIndex < sortedSkills.length - 1 ? sortedSkills[currentIndex + 1] : null;
 
 const isTechnical = skill.data.category === 'technical';
+const siteOrigin = Astro.site?.origin ?? 'https://leigh-chr.github.io';
+const siteBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout
   title={skill.data.title}
   description={`${skill.data.title} : ce que j'en fais et comment je la pratique.`}
   ogType="article"
-  publishedTime={skill.data.publishedDate}
-  modifiedTime={skill.data.modifiedDate}
+  publishedTime={skill.data.publishedDate?.toISOString()}
+  modifiedTime={skill.data.modifiedDate?.toISOString()}
 >
   <!-- Article + BreadcrumbList Schema -->
   <Fragment slot="head">
@@ -62,21 +48,21 @@ const isTechnical = skill.data.category === 'technical';
         '@type': 'Article',
         headline: skill.data.title,
         description: `${skill.data.title} : ce que j'en fais et comment je la pratique.`,
-        ...(skill.data.publishedDate && { datePublished: skill.data.publishedDate }),
-        ...(skill.data.modifiedDate && { dateModified: skill.data.modifiedDate }),
+        ...(skill.data.publishedDate && { datePublished: skill.data.publishedDate.toISOString() }),
+        ...(skill.data.modifiedDate && { dateModified: skill.data.modifiedDate.toISOString() }),
         author: {
           '@type': 'Person',
           name: 'Virgil CHAREYRE',
-          url: 'https://leigh-chr.github.io/portfolio',
+          url: `${siteOrigin}${siteBase}/`,
         },
         publisher: {
           '@type': 'Person',
           name: 'Virgil CHAREYRE',
         },
-        image: 'https://leigh-chr.github.io/portfolio/images/profile.jpg',
+        image: `${siteOrigin}${siteBase}/images/profile.jpg`,
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': `https://leigh-chr.github.io/portfolio/skills/${skill.id}/`,
+          '@id': `${siteOrigin}${siteBase}/skills/${skill.id}/`,
         },
       })}
     />
@@ -90,19 +76,19 @@ const isTechnical = skill.data.category === 'technical';
             '@type': 'ListItem',
             position: 1,
             name: 'Accueil',
-            item: 'https://leigh-chr.github.io/portfolio/',
+            item: `${siteOrigin}${siteBase}/`,
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Compétences',
-            item: 'https://leigh-chr.github.io/portfolio/skills/',
+            item: `${siteOrigin}${siteBase}/skills/`,
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: skill.data.title,
-            item: `https://leigh-chr.github.io/portfolio/skills/${skill.id}/`,
+            item: `${siteOrigin}${siteBase}/skills/${skill.id}/`,
           },
         ],
       })}
@@ -167,92 +153,12 @@ const isTechnical = skill.data.category === 'technical';
   <section>
     <div class="container-custom" transition:animate={slide({ duration: '0.3s' })}>
       <div class="max-w-4xl mx-auto">
-        <!-- Section 1: En bref -->
-        {
-          definitionContent && (
-            <section class="mb-20" id="definition" aria-labelledby="definition-title">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    💡
-                  </span>
-                </div>
-                <h2 class="content-section-title" id="definition-title">
-                  En <span class="text-primary-400 underline-memphis">bref</span>
-                </h2>
-              </div>
-              <div class="section-divider ml-0 mx-0 mb-8" />
-              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-                <div
-                  set:html={definitionContent
-                    .replace(/\n\n/g, '</p><p>')
-                    .replace(
-                      /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
-                      (_: string, text: string, href: string) =>
-                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline font-semibold">${text}</a>`
-                    )
-                    .replace(
-                      /\[([^\]]+)\]\(([^)]+)\)/g,
-                      (_: string, text: string, href: string) =>
-                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline">${text}</a>`
-                    )
-                    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
-                    .replace(/^(.+)$/gm, '<p>$1</p>')
-                    .replace(/<p><\/p>/g, '')}
-                />
-              </div>
-            </section>
-          )
-        }
+        <!-- Markdown content rendered via Astro's pipeline -->
+        <div class="detail-box content-prose mb-20">
+          <Content />
+        </div>
 
-        <!-- Section 2: En pratique -->
-        {
-          preuvesContent && (
-            <section class="mb-20" id="preuves" aria-labelledby="preuves-title">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    🛠️
-                  </span>
-                </div>
-                <h2 class="content-section-title" id="preuves-title">
-                  En{' '}
-                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
-                    pratique
-                  </span>
-                </h2>
-              </div>
-              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
-              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-                <div
-                  set:html={preuvesContent
-                    .replace(
-                      /### ([^\n]+)/g,
-                      '<h3 class="text-xl font-heading font-bold text-white mt-8 mb-4">$1</h3>'
-                    )
-                    .replace(/\n\n/g, '</p><p>')
-                    .replace(
-                      /\*\*\[([^\]]+)\]\(([^)]+)\)\*\*/g,
-                      (_: string, text: string, href: string) =>
-                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline font-semibold">${text}</a>`
-                    )
-                    .replace(
-                      /\[([^\]]+)\]\(([^)]+)\)/g,
-                      (_: string, text: string, href: string) =>
-                        `<a href="${resolveLinks(href)}" class="text-primary-400 hover:underline">${text}</a>`
-                    )
-                    .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')
-                    .replace(/^(?!<[hp])(.*[^>])$/gm, '<p>$1</p>')
-                    .replace(/<p><\/p>/g, '')
-                    .replace(/<p><h3/g, '<h3')
-                    .replace(/<\/h3><\/p>/g, '</h3>')}
-                />
-              </div>
-            </section>
-          )
-        }
-
-        <!-- Section 3: Projets Associés -->
+        <!-- Projets Associés -->
         <section class="mb-20" id="realisations" aria-labelledby="realisations-title">
           <div class="content-section-header">
             <div class="icon-box-sm">

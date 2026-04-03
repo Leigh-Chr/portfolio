@@ -262,12 +262,12 @@ function formatDate(dateStr: string): string {
                             <div class="mt-4 pt-4 border-t border-dark-600">
                               <p class="text-xs text-gray-400 mb-2">Compétences associées :</p>
                               <div class="flex flex-wrap gap-2">
-                                {exp.data.relatedSkills?.map((skillSlug: string) => (
+                                {exp.data.relatedSkills?.map((ref) => (
                                   <a
-                                    href={url(`/skills/${skillSlug}`)}
+                                    href={url(`/skills/${ref.id}`)}
                                     class="text-xs text-accent-400 hover:underline"
                                   >
-                                    ⚡ {skillTitles.get(skillSlug) || skillSlug}
+                                    ⚡ {skillTitles.get(ref.id) || ref.id}
                                   </a>
                                 ))}
                               </div>
@@ -473,20 +473,20 @@ function formatDate(dateStr: string): string {
                             <div class="mt-4 pt-4 border-t border-dark-600">
                               <p class="text-xs text-gray-400 mb-2">Voir aussi :</p>
                               <div class="flex flex-wrap gap-2">
-                                {exp.data.relatedProjects?.map((projectSlug: string) => (
+                                {exp.data.relatedProjects?.map((ref) => (
                                   <a
-                                    href={url(`/projects/${projectSlug}`)}
+                                    href={url(`/projects/${ref.id}`)}
                                     class="text-xs text-primary-400 hover:underline"
                                   >
-                                    📁 {projectTitles.get(projectSlug) || projectSlug}
+                                    📁 {projectTitles.get(ref.id) || ref.id}
                                   </a>
                                 ))}
-                                {exp.data.relatedSkills?.map((skillSlug: string) => (
+                                {exp.data.relatedSkills?.map((ref) => (
                                   <a
-                                    href={url(`/skills/${skillSlug}`)}
+                                    href={url(`/skills/${ref.id}`)}
                                     class="text-xs text-accent-400 hover:underline"
                                   >
-                                    ⚡ {skillTitles.get(skillSlug) || skillSlug}
+                                    ⚡ {skillTitles.get(ref.id) || ref.id}
                                   </a>
                                 ))}
                               </div>

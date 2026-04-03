@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -12,10 +12,10 @@ const skills = defineCollection({
     level: z.number().min(1).max(10),
     icon: z.string().optional(),
     order: z.number(),
-    relatedProjects: z.array(z.string()).default([]),
+    relatedProjects: z.array(reference('projects')).default([]),
     summary: z.string(),
-    publishedDate: z.string().optional(),
-    modifiedDate: z.string().optional(),
+    publishedDate: z.coerce.date().optional(),
+    modifiedDate: z.coerce.date().optional(),
   }),
 });
 
@@ -29,7 +29,7 @@ const projects = defineCollection({
       thumbnail: image().optional(),
       fullImage: image().optional(),
       order: z.number(),
-      relatedSkills: z.array(z.string()).default([]),
+      relatedSkills: z.array(reference('skills')).default([]),
       context: z.object({
         period: z.string(),
         role: z.string(),
@@ -49,8 +49,8 @@ const projects = defineCollection({
           })
         )
         .optional(),
-      publishedDate: z.string().optional(),
-      modifiedDate: z.string().optional(),
+      publishedDate: z.coerce.date().optional(),
+      modifiedDate: z.coerce.date().optional(),
     }),
 });
 
@@ -70,8 +70,8 @@ const experiences = defineCollection({
       status: z.string().optional(),
       website: z.url().optional(),
       order: z.number(),
-      relatedProjects: z.array(z.string()).default([]),
-      relatedSkills: z.array(z.string()).default([]),
+      relatedProjects: z.array(reference('projects')).default([]),
+      relatedSkills: z.array(reference('skills')).default([]),
     }),
 });
 

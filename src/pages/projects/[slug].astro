@@ -2,7 +2,7 @@
 import { Image, Picture } from 'astro:assets';
 import { slide } from 'astro:transitions';
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntries, render } from 'astro:content';
 import { url } from '@utils/url';
 import ProjectGallery from '@components/ProjectGallery.astro';
 
@@ -19,85 +19,14 @@ const { project } = Astro.props;
 // Project links from schema
 const links = project.data.links;
 
-// Parse markdown content into sections
-const rawContent = project.body ?? '';
-
-function extractSection(content: string, sectionName: string): string {
-  const regex = new RegExp(`## ${sectionName}[\\s\\S]*?(?=\\n## [^#]|$)`, 'i');
-  const match = content.match(regex);
-  if (!match) return '';
-  return match[0].replace(new RegExp(`## ${sectionName}[^\\n]*\\n?`, 'i'), '').trim();
-}
-
-function parseKeyValueSection(content: string): Record<string, string> {
-  const result: Record<string, string> = {};
-  const lines = content.split('\n');
-  let currentKey = '';
-  let currentValue = '';
-
-  for (const line of lines) {
-    const match = line.match(/^\*\*([^*]+)\*\*\s*:\s*(.*)$/);
-    if (match?.[1] && match[2] !== undefined) {
-      if (currentKey) {
-        result[currentKey] = currentValue.trim();
-      }
-      currentKey = match[1].trim();
-      currentValue = match[2];
-    } else if (currentKey && line.trim()) {
-      currentValue += ' ' + line.trim();
-    }
-  }
-  if (currentKey) {
-    result[currentKey] = currentValue.trim();
-  }
-  return result;
-}
-
-function parsePhases(content: string): Array<{ title: string; description: string }> {
-  const phases: Array<{ title: string; description: string }> = [];
-  const regex = /\*\*([^*]+)\*\*\s*:\s*([^*]+?)(?=\*\*|$)/g;
-  let match;
-  while ((match = regex.exec(content)) !== null) {
-    if (!match[1] || !match[2]) continue;
-    phases.push({
-      title: match[1].trim(),
-      description: match[2].trim(),
-    });
-  }
-  return phases;
-}
-
-function parseList(content: string): string[] {
-  const items: string[] = [];
-  const lines = content.split('\n');
-  for (const line of lines) {
-    const match = line.match(/^[-*]\s+(.+)$/);
-    if (match?.[1]) {
-      items.push(match[1].trim());
-    }
-  }
-  return items;
-}
-
-// Extract sections
-const presentationContent = extractSection(rawContent, 'Présentation');
-const objectifsContent = extractSection(rawContent, 'Objectifs, contexte, enjeu et risques');
-const etapesContent = extractSection(rawContent, "Étapes – ce que j'ai fait");
-const equipeContent = extractSection(rawContent, 'Équipe');
-const resultatsContent = extractSection(rawContent, 'Résultats');
-
-// Parse structured data
-const objectifs = parseKeyValueSection(objectifsContent);
-const phases = parsePhases(etapesContent);
-const equipeList = parseList(equipeContent);
-const resultatsList = parseList(resultatsContent);
+// Render markdown content via Astro's pipeline (sanitized, with rehype plugins)
+const { Content } = await render(project);
 
 const fullImage = project.data.fullImage;
 const thumbImage = project.data.thumbnail;
 
 // Get related skills
-const allSkills = await getCollection('skills');
-const relatedSkills = allSkills.filter((s) => project.data.relatedSkills.includes(s.id));
+const relatedSkills = await getEntries(project.data.relatedSkills);
 
 // Get all projects for navigation
 const allProjects = await getCollection('projects');
@@ -109,10 +38,11 @@ const nextProject =
 
 // Resolve thumbnail through Astro's image pipeline for og:image
 const ogImagePath = thumbImage?.src;
-const siteOrigin = 'https://leigh-chr.github.io';
+const siteOrigin = Astro.site?.origin ?? 'https://leigh-chr.github.io';
+const siteBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 const ogImageAbsolute = ogImagePath
   ? `${siteOrigin}${ogImagePath}`
-  : `${siteOrigin}/portfolio/images/profile.jpg`;
+  : `${siteOrigin}${siteBase}/images/profile.jpg`;
 ---
 
 <BaseLayout
@@ -120,8 +50,8 @@ const ogImageAbsolute = ogImagePath
   description={project.data.shortDescription}
   image={ogImagePath}
   ogType="article"
-  publishedTime={project.data.publishedDate}
-  modifiedTime={project.data.modifiedDate}
+  publishedTime={project.data.publishedDate?.toISOString()}
+  modifiedTime={project.data.modifiedDate?.toISOString()}
   imageWidth={thumbImage?.width}
   imageHeight={thumbImage?.height}
 >
@@ -134,12 +64,14 @@ const ogImageAbsolute = ogImagePath
         '@type': 'Article',
         headline: project.data.title,
         description: project.data.shortDescription,
-        ...(project.data.publishedDate && { datePublished: project.data.publishedDate }),
-        ...(project.data.modifiedDate && { dateModified: project.data.modifiedDate }),
+        ...(project.data.publishedDate && {
+          datePublished: project.data.publishedDate.toISOString(),
+        }),
+        ...(project.data.modifiedDate && { dateModified: project.data.modifiedDate.toISOString() }),
         author: {
           '@type': 'Person',
           name: 'Virgil CHAREYRE',
-          url: 'https://leigh-chr.github.io/portfolio',
+          url: `${siteOrigin}${siteBase}/`,
         },
         publisher: {
           '@type': 'Person',
@@ -148,7 +80,7 @@ const ogImageAbsolute = ogImagePath
         image: ogImageAbsolute,
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': `https://leigh-chr.github.io/portfolio/projects/${project.id}/`,
+          '@id': `${siteOrigin}${siteBase}/projects/${project.id}/`,
         },
       })}
     />
@@ -162,19 +94,19 @@ const ogImageAbsolute = ogImagePath
             '@type': 'ListItem',
             position: 1,
             name: 'Accueil',
-            item: 'https://leigh-chr.github.io/portfolio/',
+            item: `${siteOrigin}${siteBase}/`,
           },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Projets',
-            item: 'https://leigh-chr.github.io/portfolio/projects/',
+            item: `${siteOrigin}${siteBase}/projects/`,
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: project.data.title,
-            item: `https://leigh-chr.github.io/portfolio/projects/${project.id}/`,
+            item: `${siteOrigin}${siteBase}/projects/${project.id}/`,
           },
         ],
       })}
@@ -346,229 +278,12 @@ const ogImageAbsolute = ogImagePath
   <section>
     <div class="container-custom" transition:animate={slide({ duration: '0.3s' })}>
       <div class="max-w-4xl mx-auto">
-        <!-- Section 1: Présentation du projet -->
-        {
-          presentationContent && (
-            <section class="mb-20" id="presentation">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    📋
-                  </span>
-                </div>
-                <h2 class="content-section-title">
-                  Présentation du <span class="text-primary-400 underline-memphis">Projet</span>
-                </h2>
-              </div>
-              <div class="section-divider ml-0 mx-0 mb-8" />
-              <div class="prose prose-lg prose-invert max-w-none text-gray-400 detail-box">
-                <div
-                  set:html={presentationContent
-                    .split('\n\n')
-                    .map(
-                      (p) =>
-                        `<p>${p.replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white">$1</strong>')}</p>`
-                    )
-                    .join('')}
-                />
-              </div>
-            </section>
-          )
-        }
+        <!-- Markdown content rendered via Astro's pipeline -->
+        <div class="detail-box content-prose mb-20">
+          <Content />
+        </div>
 
-        <!-- Section 2: Objectifs, Contexte, Enjeux, Risques -->
-        {
-          Object.keys(objectifs).length > 0 && (
-            <section class="mb-20" id="contexte">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    🎯
-                  </span>
-                </div>
-                <h2 class="content-section-title">
-                  Objectifs, Contexte et{' '}
-                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
-                    Enjeux
-                  </span>
-                </h2>
-              </div>
-              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
-              <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                {objectifs['Contexte'] && (
-                  <div class="detail-box">
-                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                      <span class="text-accent-400">📍</span> Contexte
-                    </h3>
-                    <p class="text-gray-400 text-sm">{objectifs['Contexte']}</p>
-                  </div>
-                )}
-
-                {objectifs['Problématique'] && (
-                  <div class="detail-box">
-                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                      <span class="text-primary-400">❓</span> Problématique
-                    </h3>
-                    <p class="text-gray-400 text-sm">{objectifs['Problématique']}</p>
-                  </div>
-                )}
-
-                {objectifs['Objectifs'] && (
-                  <div class="detail-box">
-                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                      <span class="text-primary-400">🎯</span> Objectifs
-                    </h3>
-                    <p class="text-gray-400 text-sm">{objectifs['Objectifs']}</p>
-                  </div>
-                )}
-
-                {(objectifs['Enjeux'] || objectifs['Risques identifiés']) && (
-                  <div class="detail-box">
-                    <h3 class="font-heading font-bold text-xl text-white mb-3 flex items-center gap-2">
-                      <span class="text-accent-400">⚠️</span>{' '}
-                      {objectifs['Enjeux'] ? 'Enjeux' : 'Risques'}
-                    </h3>
-                    <p class="text-gray-400 text-sm">
-                      {objectifs['Enjeux'] || objectifs['Risques identifiés']}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </section>
-          )
-        }
-
-        <!-- Section 3: Les Étapes -->
-        {
-          phases.length > 0 && (
-            <section class="mb-20" id="etapes">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    📝
-                  </span>
-                </div>
-                <h2 class="content-section-title">
-                  Les <span class="text-primary-400 underline-memphis">Étapes</span> - Ce que j'ai
-                  fait
-                </h2>
-              </div>
-              <div class="section-divider ml-0 mx-0 mb-8" />
-              <div class="detail-box">
-                <ol class="space-y-8 list-none p-0 m-0">
-                  {phases.map((phase, index) => (
-                    <li class="flex gap-4">
-                      <div class="flex flex-col items-center">
-                        <div
-                          class={`w-10 h-10 ${index === phases.length - 1 ? 'bg-accent-400' : 'bg-primary-800'} flex items-center justify-center`}
-                        >
-                          <span
-                            class={`font-heading font-bold ${index === phases.length - 1 ? 'text-dark-900' : 'text-white'}`}
-                          >
-                            {index + 1}
-                          </span>
-                        </div>
-                        {index < phases.length - 1 && (
-                          <div class="w-0.5 h-full bg-dark-600 mt-2" aria-hidden="true" />
-                        )}
-                      </div>
-                      <div class={index < phases.length - 1 ? 'pb-6' : ''}>
-                        <h3 class="font-heading font-bold text-white mb-2">{phase.title}</h3>
-                        <p class="text-gray-400 text-sm">{phase.description}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </section>
-          )
-        }
-
-        <!-- Section 4: Équipe -->
-        {
-          equipeContent && (
-            <section class="mb-20" id="equipe">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    👥
-                  </span>
-                </div>
-                <h2 class="content-section-title">
-                  <span class="text-accent-400 underline-memphis underline-memphis-accent">
-                    Équipe
-                  </span>
-                </h2>
-              </div>
-              <div class="section-divider section-divider-accent ml-0 mx-0 mb-8" />
-              <div class="detail-box">
-                {equipeList.length > 0 ? (
-                  <ul class="space-y-2 text-gray-400 text-sm">
-                    {equipeList.map((item) => (
-                      <li class="flex items-start gap-2">
-                        <span class="text-accent-400 mt-0.5" aria-hidden="true">
-                          •
-                        </span>
-                        <span
-                          set:html={item.replace(
-                            /\*\*([^*]+)\*\*/g,
-                            '<strong class="text-white">$1</strong>'
-                          )}
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p class="text-gray-400 text-sm">{equipeContent}</p>
-                )}
-              </div>
-            </section>
-          )
-        }
-
-        <!-- Section 5: Les Résultats -->
-        {
-          resultatsList.length > 0 && (
-            <section class="mb-20" id="resultats">
-              <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    🏆
-                  </span>
-                </div>
-                <h2 class="content-section-title">
-                  Les <span class="text-primary-400 underline-memphis">Résultats</span>
-                </h2>
-              </div>
-              <div class="section-divider ml-0 mx-0 mb-8" />
-              <div class="detail-box">
-                <ul class="space-y-2 text-gray-400 text-sm">
-                  {resultatsList.map((item) => (
-                    <li class="flex items-start gap-2">
-                      <svg
-                        class="w-5 h-5 text-accent-400 mt-0.5 flex-shrink-0"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          )
-        }
-
-        <!-- Section 6: Compétences Associées -->
+        <!-- Compétences Associées -->
         {
           relatedSkills.length > 0 && (
             <section class="mb-20" id="competences">

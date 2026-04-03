@@ -334,132 +334,137 @@ import BaseLayout from '@layouts/BaseLayout.astro';
             </div>
 
             <script>
-              // Client-side form validation
-              const form = document.getElementById('contact-form') as HTMLFormElement;
-              const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-              const submitText = document.getElementById('submit-text');
-              const submitLoading = document.getElementById('submit-loading');
+              function initContactForm() {
+                const form = document.getElementById('contact-form') as HTMLFormElement;
+                if (!form) return;
 
-              const validators = {
-                name: (value: string) => {
-                  if (!value.trim()) return 'Le nom est requis';
-                  if (value.length < 2) return 'Le nom doit contenir au moins 2 caractères';
-                  return '';
-                },
-                email: (value: string) => {
-                  if (!value.trim()) return "L'email est requis";
-                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                  if (!emailRegex.test(value)) return 'Veuillez entrer un email valide';
-                  return '';
-                },
-                message: (value: string) => {
-                  if (!value.trim()) return 'Le message est requis';
-                  if (value.length < 10) return 'Le message doit contenir au moins 10 caractères';
-                  return '';
-                },
-              };
+                const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+                const submitText = document.getElementById('submit-text');
+                const submitLoading = document.getElementById('submit-loading');
 
-              function showError(fieldId: string, message: string) {
-                const errorEl = document.getElementById(`${fieldId}-error`);
-                const inputEl = document.getElementById(fieldId);
-                if (errorEl && inputEl) {
-                  errorEl.textContent = message;
-                  errorEl.classList.remove('hidden');
-                  inputEl.classList.add('border-red-400');
-                  inputEl.setAttribute('aria-invalid', 'true');
-                }
-              }
+                const validators = {
+                  name: (value: string) => {
+                    if (!value.trim()) return 'Le nom est requis';
+                    if (value.length < 2) return 'Le nom doit contenir au moins 2 caractères';
+                    return '';
+                  },
+                  email: (value: string) => {
+                    if (!value.trim()) return "L'email est requis";
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) return 'Veuillez entrer un email valide';
+                    return '';
+                  },
+                  message: (value: string) => {
+                    if (!value.trim()) return 'Le message est requis';
+                    if (value.length < 10) return 'Le message doit contenir au moins 10 caractères';
+                    return '';
+                  },
+                };
 
-              function clearError(fieldId: string) {
-                const errorEl = document.getElementById(`${fieldId}-error`);
-                const inputEl = document.getElementById(fieldId);
-                if (errorEl && inputEl) {
-                  errorEl.textContent = '';
-                  errorEl.classList.add('hidden');
-                  inputEl.classList.remove('border-red-400');
-                  inputEl.removeAttribute('aria-invalid');
-                }
-              }
-
-              // Validate on blur
-              ['name', 'email', 'message'].forEach((fieldId) => {
-                const input = document.getElementById(fieldId);
-                input?.addEventListener('blur', () => {
-                  const value = (input as HTMLInputElement | HTMLTextAreaElement).value;
-                  const error = validators[fieldId as keyof typeof validators]?.(value);
-                  if (error) {
-                    showError(fieldId, error);
-                  } else {
-                    clearError(fieldId);
+                function showError(fieldId: string, message: string) {
+                  const errorEl = document.getElementById(`${fieldId}-error`);
+                  const inputEl = document.getElementById(fieldId);
+                  if (errorEl && inputEl) {
+                    errorEl.textContent = message;
+                    errorEl.classList.remove('hidden');
+                    inputEl.classList.add('border-red-400');
+                    inputEl.setAttribute('aria-invalid', 'true');
                   }
-                });
+                }
 
-                // Clear error on input
-                input?.addEventListener('input', () => clearError(fieldId));
-              });
+                function clearError(fieldId: string) {
+                  const errorEl = document.getElementById(`${fieldId}-error`);
+                  const inputEl = document.getElementById(fieldId);
+                  if (errorEl && inputEl) {
+                    errorEl.textContent = '';
+                    errorEl.classList.add('hidden');
+                    inputEl.classList.remove('border-red-400');
+                    inputEl.removeAttribute('aria-invalid');
+                  }
+                }
 
-              // Form submission
-              form?.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                let hasErrors = false;
-
-                // Validate all fields
+                // Validate on blur
                 ['name', 'email', 'message'].forEach((fieldId) => {
-                  const input = document.getElementById(fieldId) as
-                    | HTMLInputElement
-                    | HTMLTextAreaElement;
-                  const error = validators[fieldId as keyof typeof validators]?.(
-                    input?.value || ''
-                  );
-                  if (error) {
-                    showError(fieldId, error);
-                    hasErrors = true;
-                  }
-                });
-
-                if (hasErrors) {
-                  // Focus first error field
-                  const firstError = form.querySelector('[aria-invalid="true"]') as HTMLElement;
-                  firstError?.focus();
-                  return;
-                }
-
-                // Show loading state
-                submitBtn.disabled = true;
-                submitBtn.setAttribute('aria-label', 'Envoi en cours, veuillez patienter');
-                submitText?.classList.add('hidden');
-                submitLoading?.classList.remove('hidden');
-
-                const formError = document.getElementById('form-error');
-                const formSuccess = document.getElementById('form-success');
-                formError?.classList.add('hidden');
-
-                try {
-                  const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { Accept: 'application/json' },
+                  const input = document.getElementById(fieldId);
+                  input?.addEventListener('blur', () => {
+                    const value = (input as HTMLInputElement | HTMLTextAreaElement).value;
+                    const error = validators[fieldId as keyof typeof validators]?.(value);
+                    if (error) {
+                      showError(fieldId, error);
+                    } else {
+                      clearError(fieldId);
+                    }
                   });
 
-                  if (response.ok) {
-                    form.classList.add('hidden');
-                    formSuccess?.classList.remove('hidden');
-                    formSuccess?.focus();
-                  } else {
-                    throw new Error("Erreur lors de l'envoi");
+                  // Clear error on input
+                  input?.addEventListener('input', () => clearError(fieldId));
+                });
+
+                // Form submission
+                form.addEventListener('submit', async (e) => {
+                  e.preventDefault();
+                  let hasErrors = false;
+
+                  // Validate all fields
+                  ['name', 'email', 'message'].forEach((fieldId) => {
+                    const input = document.getElementById(fieldId) as
+                      | HTMLInputElement
+                      | HTMLTextAreaElement;
+                    const error = validators[fieldId as keyof typeof validators]?.(
+                      input?.value || ''
+                    );
+                    if (error) {
+                      showError(fieldId, error);
+                      hasErrors = true;
+                    }
+                  });
+
+                  if (hasErrors) {
+                    // Focus first error field
+                    const firstError = form.querySelector('[aria-invalid="true"]') as HTMLElement;
+                    firstError?.focus();
+                    return;
                   }
-                } catch {
-                  submitBtn.disabled = false;
-                  submitBtn.removeAttribute('aria-label');
-                  submitText?.classList.remove('hidden');
-                  submitLoading?.classList.add('hidden');
-                  if (formError) {
-                    formError.textContent =
-                      'Une erreur est survenue. Veuillez réessayer ou me contacter par email.';
-                    formError.classList.remove('hidden');
+
+                  // Show loading state
+                  submitBtn.disabled = true;
+                  submitBtn.setAttribute('aria-label', 'Envoi en cours, veuillez patienter');
+                  submitText?.classList.add('hidden');
+                  submitLoading?.classList.remove('hidden');
+
+                  const formError = document.getElementById('form-error');
+                  const formSuccess = document.getElementById('form-success');
+                  formError?.classList.add('hidden');
+
+                  try {
+                    const response = await fetch(form.action, {
+                      method: 'POST',
+                      body: new FormData(form),
+                      headers: { Accept: 'application/json' },
+                    });
+
+                    if (response.ok) {
+                      form.classList.add('hidden');
+                      formSuccess?.classList.remove('hidden');
+                      formSuccess?.focus();
+                    } else {
+                      throw new Error("Erreur lors de l'envoi");
+                    }
+                  } catch {
+                    submitBtn.disabled = false;
+                    submitBtn.removeAttribute('aria-label');
+                    submitText?.classList.remove('hidden');
+                    submitLoading?.classList.add('hidden');
+                    if (formError) {
+                      formError.textContent =
+                        'Une erreur est survenue. Veuillez réessayer ou me contacter par email.';
+                      formError.classList.remove('hidden');
+                    }
                   }
-                }
-              });
+                });
+              }
+
+              document.addEventListener('astro:page-load', initContactForm);
             </script>
           </div>
         </div>
