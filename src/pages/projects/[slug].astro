@@ -1,10 +1,9 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import { slide } from 'astro:transitions';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
-import { getProjectImage } from '@utils/images';
 import ProjectGallery from '@components/ProjectGallery.astro';
 
 export async function getStaticPaths() {
@@ -93,8 +92,8 @@ const phases = parsePhases(etapesContent);
 const equipeList = parseList(equipeContent);
 const resultatsList = parseList(resultatsContent);
 
-const fullImage = project.data.fullImage ? getProjectImage(project.data.fullImage) : undefined;
-const thumbImage = project.data.thumbnail ? getProjectImage(project.data.thumbnail) : undefined;
+const fullImage = project.data.fullImage;
+const thumbImage = project.data.thumbnail;
 
 // Get related skills
 const allSkills = await getCollection('skills');
@@ -224,8 +223,9 @@ const ogImageAbsolute = ogImagePath
                   />
                 </div>
               ) : thumbImage ? (
-                <Image
+                <Picture
                   src={thumbImage}
+                  formats={['avif', 'webp']}
                   alt={`Aperçu du projet ${project.data.title}`}
                   class="w-full h-full object-cover"
                   width={400}

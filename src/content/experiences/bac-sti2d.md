@@ -2,7 +2,7 @@
 type: 'education'
 title: "Bac STI2D - Spécialité Sciences de l'Ingénieur"
 organization: 'Lycée les Catalins'
-logo: '/images/logos/lycee-catalins.jpg'
+logo: '../../assets/images/logos/lycee-catalins.jpg'
 website: 'https://catalins.ent.auvergnerhonealpes.fr'
 location: 'Montélimar, France'
 startDate: '2017-09'

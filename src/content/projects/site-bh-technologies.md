@@ -1,7 +1,7 @@
 ---
 title: 'Site Web BH Technologies'
 shortDescription: "Refonte et optimisation du site web corporate de BH Technologies, incluant SEO et gestion de l'image de marque digitale."
-thumbnail: '/images/projects/site-bh-technologies-thumbnail.svg'
+thumbnail: '../../assets/images/projects/site-bh-technologies-thumbnail.svg'
 order: 3
 relatedSkills: ['communication', 'adaptability', 'veille-technologique']
 context:

@@ -1,8 +1,8 @@
 ---
 title: 'AppStandard'
 shortDescription: 'Suite de 3 applications web de productivité (Calendar, Tasks, Contacts) basées sur les standards ouverts RFC 5545 et RFC 6350.'
-thumbnail: '/images/projects/appstandard-thumbnail.jpg'
-fullImage: '/images/projects/appstandard-full.jpg'
+thumbnail: '../../assets/images/projects/appstandard-thumbnail.jpg'
+fullImage: '../../assets/images/projects/appstandard-full.jpg'
 order: 4
 links:
   repository: 'https://github.com/Leigh-Chr/appstandard'
@@ -19,19 +19,19 @@ relatedSkills:
     'veille-technologique',
   ]
 gallery:
-  - src: '/images/projects/appstandard-event-form.png'
+  - src: '../../assets/images/projects/appstandard-event-form.png'
     alt: "Formulaire de création d'événement avec templates"
-  - src: '/images/projects/appstandard-event-list.png'
+  - src: '../../assets/images/projects/appstandard-event-list.png'
     alt: 'Liste des événements avec filtres et recherche'
-  - src: '/images/projects/appstandard-calendar-view.png'
+  - src: '../../assets/images/projects/appstandard-calendar-view.png'
     alt: 'Vue calendrier mensuel avec événements'
-  - src: '/images/projects/appstandard-task-form.png'
+  - src: '../../assets/images/projects/appstandard-task-form.png'
     alt: 'Création de tâche avec statut, priorité et progression'
-  - src: '/images/projects/appstandard-task-list.png'
+  - src: '../../assets/images/projects/appstandard-task-list.png'
     alt: 'Liste des tâches avec filtres et badges de priorité'
-  - src: '/images/projects/appstandard-contact-form.png'
+  - src: '../../assets/images/projects/appstandard-contact-form.png'
     alt: 'Formulaire de contact avec informations professionnelles'
-  - src: '/images/projects/appstandard-contact-list.png'
+  - src: '../../assets/images/projects/appstandard-contact-list.png'
     alt: 'Carnet de contacts avec groupement alphabétique'
 context:
   period: '2024 - 2025'

@@ -1,8 +1,8 @@
 ---
 title: 'Tidy App'
 shortDescription: 'Application desktop et CLI de rangement intelligent de fichiers avec support IA (Ollama local + OpenAI).'
-thumbnail: '/images/projects/tidy-app-thumbnail.jpg'
-fullImage: '/images/projects/tidy-app-full.jpg'
+thumbnail: '../../assets/images/projects/tidy-app-thumbnail.jpg'
+fullImage: '../../assets/images/projects/tidy-app-full.jpg'
 order: 5
 links:
   repository: 'https://github.com/Leigh-Chr/tidy-app'
@@ -18,9 +18,9 @@ relatedSkills:
     'veille-technologique',
   ]
 gallery:
-  - src: '/images/projects/tidy-hero.png'
+  - src: '../../assets/images/projects/tidy-hero.png'
     alt: 'Page vitrine Tidy App — Organize your files'
-  - src: '/images/projects/tidy-platforms.png'
+  - src: '../../assets/images/projects/tidy-platforms.png'
     alt: 'Disponible sur Windows, macOS et Linux'
 context:
   period: '2024 - 2025'

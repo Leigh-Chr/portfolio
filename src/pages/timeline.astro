@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
-import { getLogoImage } from '@utils/images';
 
 // Get all experiences from content collection
 const allExperiences = await getCollection('experiences');
@@ -116,7 +115,7 @@ function formatDate(dateStr: string): string {
           <!-- Education Timeline items -->
           {
             educationExperiences.map((exp) => {
-              const logoImg = exp.data.logo ? getLogoImage(exp.data.logo) : undefined;
+              const logoImg = exp.data.logo;
               return (
                 <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
                   {/* Timeline dot */}
@@ -313,7 +312,7 @@ function formatDate(dateStr: string): string {
           <!-- Work Timeline items -->
           {
             workExperiences.map((exp) => {
-              const logoImg = exp.data.logo ? getLogoImage(exp.data.logo) : undefined;
+              const logoImg = exp.data.logo;
               return (
                 <div class="relative flex items-start mb-12 last:mb-0" data-gsap="timeline-item">
                   {/* Timeline dot */}

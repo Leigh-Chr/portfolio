@@ -1,9 +1,8 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
-import { getProjectImage } from '@utils/images';
 
 // Get all projects from content collection
 const allProjects = await getCollection('projects');
@@ -61,12 +60,8 @@ const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {
           sortedProjects.map((project, index) => {
-            const fullImg = project.data.fullImage
-              ? getProjectImage(project.data.fullImage)
-              : undefined;
-            const thumbImg = project.data.thumbnail
-              ? getProjectImage(project.data.thumbnail)
-              : undefined;
+            const fullImg = project.data.fullImage;
+            const thumbImg = project.data.thumbnail;
             return (
               <a href={url(`/projects/${project.id}`)} class="card-glow overflow-hidden group">
                 {/* Thumbnail */}
@@ -88,8 +83,9 @@ const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
                       />
                     </div>
                   ) : thumbImg ? (
-                    <Image
+                    <Picture
                       src={thumbImg}
+                      formats={['avif', 'webp']}
                       alt={`Aperçu du projet ${project.data.title}`}
                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       loading={index === 0 ? 'eager' : 'lazy'}

@@ -1,7 +1,7 @@
 ---
 title: 'Plateforme Syren'
 shortDescription: "Plateforme web de gestion intelligente des déchets pour les collectivités, avec migration majeure d'Angular vers Svelte 5 et internationalisation complète."
-thumbnail: '/images/projects/syren-thumbnail.jpg'
+thumbnail: '../../assets/images/projects/syren-thumbnail.jpg'
 order: 1
 relatedSkills:
   [

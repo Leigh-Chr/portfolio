@@ -1,8 +1,8 @@
 ---
 title: 'Transit Display Hub'
 shortDescription: "Plateforme fullstack d'information voyageurs temps réel : affichage kiosk, carte réseau interactive et communication WebSocket."
-thumbnail: '/images/projects/transit-display-hub-thumbnail.jpg'
-fullImage: '/images/projects/transit-display-hub-full.jpg'
+thumbnail: '../../assets/images/projects/transit-display-hub-thumbnail.jpg'
+fullImage: '../../assets/images/projects/transit-display-hub-full.jpg'
 order: 7
 links:
   repository: 'https://github.com/Leigh-Chr/transit-display-hub'
@@ -18,15 +18,15 @@ relatedSkills:
     'veille-technologique',
   ]
 gallery:
-  - src: '/images/projects/transit-dashboard.png'
+  - src: '../../assets/images/projects/transit-dashboard.png'
     alt: 'Dashboard administrateur avec statistiques du réseau'
-  - src: '/images/projects/transit-lines.png'
+  - src: '../../assets/images/projects/transit-lines.png'
     alt: 'Gestion des lignes de transport (Tram, Bus)'
-  - src: '/images/projects/transit-stops.png'
+  - src: '../../assets/images/projects/transit-stops.png'
     alt: 'Liste des arrêts avec filtres par ligne et actions'
-  - src: '/images/projects/transit-schedules.png'
+  - src: '../../assets/images/projects/transit-schedules.png'
     alt: 'Gestion des horaires par ligne et arrêt'
-  - src: '/images/projects/transit-messages.png'
+  - src: '../../assets/images/projects/transit-messages.png'
     alt: "Messages d'alerte avec niveaux de sévérité et portées"
 context:
   period: '2026'

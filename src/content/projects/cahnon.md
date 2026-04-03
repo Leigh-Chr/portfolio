@@ -1,8 +1,8 @@
 ---
 title: 'Cahnon'
 shortDescription: 'Application desktop native pour auteurs de fiction : éditeur riche, bible narrative, timeline et outils de cohérence. Svelte 5, Tauri v2 et Rust.'
-thumbnail: '/images/projects/cahnon-thumbnail.jpg'
-fullImage: '/images/projects/cahnon-full.jpg'
+thumbnail: '../../assets/images/projects/cahnon-thumbnail.jpg'
+fullImage: '../../assets/images/projects/cahnon-full.jpg'
 order: 6
 links:
   repository: 'https://github.com/Leigh-Chr/cahnon'
@@ -18,11 +18,11 @@ relatedSkills:
     'veille-technologique',
   ]
 gallery:
-  - src: '/images/projects/cahnon-editor.png'
+  - src: '../../assets/images/projects/cahnon-editor.png'
     alt: "Éditeur de manuscrit avec panneau d'organisation"
-  - src: '/images/projects/cahnon-corkboard.png'
+  - src: '../../assets/images/projects/cahnon-corkboard.png'
     alt: 'Corkboard avec fiches scènes par chapitre'
-  - src: '/images/projects/cahnon-bible.png'
+  - src: '../../assets/images/projects/cahnon-bible.png'
     alt: 'Bible narrative avec catégories et filtres'
 context:
   period: '2026'

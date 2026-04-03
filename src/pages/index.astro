@@ -1,9 +1,8 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
-import { getProjectImage } from '@utils/images';
 import profileImage from '@assets/images/profile.jpg';
 
 // Get featured content
@@ -196,9 +195,7 @@ const featuredProjects = allProjects.sort((a, b) => a.data.order - b.data.order)
       <div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8" data-gsap="stagger">
         {
           featuredProjects.map((project) => {
-            const thumbImage = project.data.thumbnail
-              ? getProjectImage(project.data.thumbnail)
-              : undefined;
+            const thumbImage = project.data.thumbnail;
             return (
               <a href={url(`/projects/${project.id}`)} class="card-glow overflow-hidden group">
                 <div
@@ -206,8 +203,9 @@ const featuredProjects = allProjects.sort((a, b) => a.data.order - b.data.order)
                   transition:name={`project-thumb-${project.id}`}
                 >
                   {thumbImage ? (
-                    <Image
+                    <Picture
                       src={thumbImage}
+                      formats={['avif', 'webp']}
                       alt={`Aperçu du projet ${project.data.title}`}
                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
@@ -216,15 +214,11 @@ const featuredProjects = allProjects.sort((a, b) => a.data.order - b.data.order)
                       height={216}
                     />
                   ) : (
-                    <img
-                      src={url(project.data.thumbnail || '/images/project-placeholder.jpg')}
-                      alt={`Aperçu du projet ${project.data.title}`}
-                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      loading="lazy"
-                      decoding="async"
-                      width="384"
-                      height="216"
-                    />
+                    <div class="w-full h-full flex items-center justify-center">
+                      <span class="text-6xl opacity-30" aria-hidden="true">
+                        📁
+                      </span>
+                    </div>
                   )}
                   {/* Gradient overlay on hover */}
                   <div class="absolute inset-0 bg-gradient-to-t from-primary-500/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

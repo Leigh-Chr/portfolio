@@ -22,55 +22,57 @@ const skills = defineCollection({
 // Schema for projects/realizations
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
-  schema: z.object({
-    title: z.string(),
-    shortDescription: z.string(),
-    thumbnail: z.string().optional(),
-    fullImage: z.string().optional(),
-    order: z.number(),
-    relatedSkills: z.array(z.string()).default([]),
-    context: z.object({
-      period: z.string(),
-      role: z.string(),
-      company: z.string().optional(),
-    }),
-    links: z
-      .object({
-        repository: z.url().optional(),
-        website: z.url().optional(),
-      })
-      .optional(),
-    gallery: z
-      .array(
-        z.object({
-          src: z.string(),
-          alt: z.string(),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      shortDescription: z.string(),
+      thumbnail: image().optional(),
+      fullImage: image().optional(),
+      order: z.number(),
+      relatedSkills: z.array(z.string()).default([]),
+      context: z.object({
+        period: z.string(),
+        role: z.string(),
+        company: z.string().optional(),
+      }),
+      links: z
+        .object({
+          repository: z.url().optional(),
+          website: z.url().optional(),
         })
-      )
-      .optional(),
-    publishedDate: z.string().optional(),
-    modifiedDate: z.string().optional(),
-  }),
+        .optional(),
+      gallery: z
+        .array(
+          z.object({
+            src: image(),
+            alt: z.string(),
+          })
+        )
+        .optional(),
+      publishedDate: z.string().optional(),
+      modifiedDate: z.string().optional(),
+    }),
 });
 
 // Schema for experiences (timeline)
 const experiences = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/experiences' }),
-  schema: z.object({
-    type: z.enum(['work', 'education']),
-    title: z.string(),
-    organization: z.string(),
-    logo: z.string().optional(),
-    location: z.string().optional(),
-    startDate: z.string(),
-    endDate: z.string().optional(),
-    current: z.boolean().default(false),
-    status: z.string().optional(),
-    website: z.url().optional(),
-    order: z.number(),
-    relatedProjects: z.array(z.string()).default([]),
-    relatedSkills: z.array(z.string()).default([]),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      type: z.enum(['work', 'education']),
+      title: z.string(),
+      organization: z.string(),
+      logo: image().optional(),
+      location: z.string().optional(),
+      startDate: z.string(),
+      endDate: z.string().optional(),
+      current: z.boolean().default(false),
+      status: z.string().optional(),
+      website: z.url().optional(),
+      order: z.number(),
+      relatedProjects: z.array(z.string()).default([]),
+      relatedSkills: z.array(z.string()).default([]),
+    }),
 });
 
 export const collections = { skills, projects, experiences };

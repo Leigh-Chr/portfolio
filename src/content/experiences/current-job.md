@@ -2,7 +2,7 @@
 type: 'work'
 title: 'Développeur Web Fullstack'
 organization: 'BH Technologies - Éclairage Public & Environnement'
-logo: '/images/logos/bh-technologies.png'
+logo: '../../assets/images/logos/bh-technologies.png'
 website: 'https://www.bh-technologies.com'
 location: 'Grenoble, France'
 startDate: '2022-09'

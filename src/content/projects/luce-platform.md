@@ -1,7 +1,7 @@
 ---
 title: 'Plateforme Luce'
 shortDescription: "Gestion et pilotage à distance de l'éclairage public pour collectivités, avec architecture microservices et IoT temps réel."
-thumbnail: '/images/projects/luce-thumbnail.jpg'
+thumbnail: '../../assets/images/projects/luce-thumbnail.jpg'
 order: 2
 relatedSkills:
   [

@@ -2,7 +2,7 @@
 type: 'education'
 title: 'Mastère Expert en Ingénierie Logicielle'
 organization: 'ISCOD'
-logo: '/images/logos/iscod.jpg'
+logo: '../../assets/images/logos/iscod.jpg'
 website: 'https://www.iscod.fr'
 location: 'Formation à distance'
 startDate: '2023'
