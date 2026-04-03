@@ -33,6 +33,7 @@ const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
 
 // Format date helper
 function formatDate(dateStr: string): string {
+  if (/^\d{4}$/.test(dateStr)) return dateStr;
   const date = new Date(dateStr);
   return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
 }

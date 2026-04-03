@@ -23,10 +23,10 @@ const sortedExperiences = allExperiences.sort((a, b) => {
 // Group by type
 const workExperiences = sortedExperiences.filter((e) => e.data.type === 'work');
 const educationExperiences = sortedExperiences.filter((e) => e.data.type === 'education');
-const certifications = sortedExperiences.filter((e) => e.data.type === 'certification');
 
 // Format date
 function formatDate(dateStr: string): string {
+  if (/^\d{4}$/.test(dateStr)) return dateStr;
   const date = new Date(dateStr);
   return date.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
 }
@@ -74,16 +74,6 @@ function formatDate(dateStr: string): string {
             Expériences
           </dd>
         </div>
-        {
-          certifications.length > 0 && (
-            <div class="text-center p-4 sm:p-6 bg-dark-800 border-3 border-dark-600 group hover:border-white/50 transition-all shadow-hard-lg hover:shadow-hard-xl min-w-[100px]">
-              <dt class="stat-large text-white">{certifications.length}</dt>
-              <dd class="text-xs sm:text-sm text-gray-400 font-heading font-medium uppercase tracking-wide mt-2 m-0">
-                Certifications
-              </dd>
-            </div>
-          )
-        }
       </dl>
     </div>
   </section>

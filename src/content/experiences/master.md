@@ -5,8 +5,9 @@ organization: 'ISCOD'
 logo: '/images/logos/iscod.jpg'
 website: 'https://www.iscod.fr'
 location: 'Formation à distance'
-startDate: '2023-09'
-current: true
+startDate: '2023'
+endDate: '2025'
+current: false
 order: 3
 relatedProjects: []
 relatedSkills: ['javascript-typescript', 'nodejs-backend', 'problem-solving']

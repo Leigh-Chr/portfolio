@@ -57,7 +57,7 @@ const projects = defineCollection({
 const experiences = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/experiences' }),
   schema: z.object({
-    type: z.enum(['work', 'education', 'certification']),
+    type: z.enum(['work', 'education']),
     title: z.string(),
     organization: z.string(),
     logo: z.string().optional(),

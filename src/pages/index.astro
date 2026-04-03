@@ -10,8 +10,8 @@ import profileImage from '@assets/images/profile.jpg';
 const allSkills = await getCollection('skills');
 const allProjects = await getCollection('projects');
 
-const featuredSkills = allSkills.slice(0, 4);
-const featuredProjects = allProjects.slice(0, 3);
+const featuredSkills = allSkills.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
+const featuredProjects = allProjects.sort((a, b) => a.data.order - b.data.order).slice(0, 3);
 ---
 
 <BaseLayout title="Accueil">

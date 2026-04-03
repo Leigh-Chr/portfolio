@@ -34,7 +34,7 @@ export const profile: ProfileInfo = {
   name: 'Virgil CHAREYRE',
   title: 'Développeur Web Fullstack',
   subtitle: '',
-  summary: `Développeur Web Fullstack, 3 ans d'alternance chez BH Technologies. TypeScript, Svelte, React, Node.js, NestJS, PostgreSQL. Attaché à l'accessibilité et au code bien fait. Je cherche une équipe où le travail rime avec éthique et transparence.`,
+  summary: `Développeur Web Fullstack avec 3 ans d'expérience chez BH Technologies (éclairage public, gestion des déchets). TypeScript, Svelte, React, Node.js, NestJS, PostgreSQL. Attaché à l'accessibilité et au code bien fait. Je cherche une équipe où le travail rime avec éthique et transparence.`,
 };
 
 export const contact: ContactInfo = {
