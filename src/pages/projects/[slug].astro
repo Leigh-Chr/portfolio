@@ -218,8 +218,7 @@ const ogImageAbsolute = ogImagePath
                     alt={`Aperçu du projet ${project.data.title}`}
                     class="scroll-preview-img"
                     width={800}
-                    loading="eager"
-                    fetchpriority="high"
+                    priority
                   />
                 </div>
               ) : thumbImage ? (
@@ -230,8 +229,7 @@ const ogImageAbsolute = ogImagePath
                   class="w-full h-full object-cover"
                   width={400}
                   height={225}
-                  loading="eager"
-                  fetchpriority="high"
+                  priority
                 />
               ) : (
                 <div class="w-full h-full flex items-center justify-center">

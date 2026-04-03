@@ -15,9 +15,9 @@
       "type": "image/svg+xml"
     },
     {
-      "src": "/portfolio/apple-touch-icon.svg",
+      "src": "/portfolio/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     },
     {

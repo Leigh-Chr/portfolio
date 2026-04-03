@@ -3,8 +3,9 @@ import { ClientRouter } from 'astro:transitions';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import MemphisShapesFg from '@components/MemphisShapesFg.astro';
-import { Font } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 import { url } from '@utils/url';
+import profileImageSrc from '@assets/images/profile.jpg';
 import '../styles/global.css';
 
 interface Props {
@@ -19,10 +20,17 @@ interface Props {
   robots?: string;
 }
 
+const processedOgImage = await getImage({
+  src: profileImageSrc,
+  width: 800,
+  format: 'jpg',
+  quality: 80,
+});
+
 const {
   title,
   description = 'Portfolio de Virgil CHAREYRE - Développeur Web Fullstack',
-  image = url('/images/profile.jpg'),
+  image = processedOgImage.src,
   ogType = 'website',
   publishedTime,
   modifiedTime,
@@ -34,9 +42,9 @@ const currentPath = Astro.url.pathname;
 const siteOrigin = Astro.site || 'https://leigh-chr.github.io';
 const canonicalURL = new URL(currentPath, siteOrigin);
 const imageURL = new URL(image, siteOrigin);
-const profileImageURL = new URL(url('/images/profile.jpg'), siteOrigin);
-const ogImageWidth = imageWidth ?? 1628;
-const ogImageHeight = imageHeight ?? 1628;
+const profileImageURL = new URL(processedOgImage.src, siteOrigin);
+const ogImageWidth = imageWidth ?? 800;
+const ogImageHeight = imageHeight ?? 800;
 const fullTitle = `${title} | Portfolio Virgil CHAREYRE`;
 
 // JSON-LD structured data
@@ -132,7 +140,7 @@ const jsonLd = {
 
     <!-- Favicons & PWA -->
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
-    <link rel="apple-touch-icon" href={url('/apple-touch-icon.svg')} />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
     <link rel="manifest" href={url('/manifest.json')} />
     <meta name="theme-color" content="#0a0a0a" />
     <meta name="color-scheme" content="dark" />

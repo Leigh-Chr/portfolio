@@ -91,8 +91,8 @@ const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
                       loading={index === 0 ? 'eager' : 'lazy'}
                       decoding={index === 0 ? 'sync' : 'async'}
                       fetchpriority={index === 0 ? 'high' : undefined}
-                      width={384}
-                      height={216}
+                      widths={[320, 384]}
+                      sizes="(max-width: 768px) 100vw, 384px"
                     />
                   ) : (
                     <div class="w-full h-full flex items-center justify-center">
