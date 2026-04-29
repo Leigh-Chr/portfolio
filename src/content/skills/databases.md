@@ -3,7 +3,7 @@ title: 'Bases de données SQL / NoSQL'
 category: 'technical'
 group: 'backend'
 level: 6
-icon: '🗄️'
+icon: 'database'
 order: 4
 relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'cahnon', 'transit-display-hub']
 summary: 'Conception et optimisation de bases de données relationnelles et NoSQL adaptées aux besoins de chaque projet.'

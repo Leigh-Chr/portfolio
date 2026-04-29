@@ -201,7 +201,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                     id="name-error"
                     class="text-red-400 text-xs mt-1 hidden"
                     role="alert"
-                    aria-live="assertive"
+                    aria-live="polite"
                   >
                   </p>
                 </div>
@@ -226,7 +226,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                     id="email-error"
                     class="text-red-400 text-xs mt-1 hidden"
                     role="alert"
-                    aria-live="assertive"
+                    aria-live="polite"
                   >
                   </p>
                 </div>
@@ -275,7 +275,39 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                     id="message-error"
                     class="text-red-400 text-xs mt-1 hidden"
                     role="alert"
-                    aria-live="assertive"
+                    aria-live="polite"
+                  >
+                  </p>
+                </div>
+
+                <!-- RGPD consent -->
+                <div>
+                  <label class="flex items-start gap-3 cursor-pointer text-sm text-gray-300">
+                    <input
+                      type="checkbox"
+                      id="consent"
+                      name="consent"
+                      required
+                      aria-required="true"
+                      aria-describedby="consent-error"
+                      class="form-checkbox mt-0.5 flex-shrink-0"
+                    />
+                    <span>
+                      J'accepte que mes données soient transmises pour traiter ma demande,
+                      conformément à la
+                      <a href="#privacy-details" class="text-primary-400 underline">
+                        politique de confidentialité
+                      </a>
+                      ci-dessous. <span class="text-primary-400" aria-label="champ obligatoire"
+                        >*</span
+                      >
+                    </span>
+                  </label>
+                  <p
+                    id="consent-error"
+                    class="text-red-400 text-xs mt-1 hidden"
+                    role="alert"
+                    aria-live="polite"
                   >
                   </p>
                 </div>
@@ -306,10 +338,49 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                 </button>
               </div>
 
-              <!-- Note about form -->
-              <p class="text-gray-400 text-xs mt-4 text-center" id="privacy-notice">
-                Vos données sont traitées de manière sécurisée et ne seront jamais partagées.
-              </p>
+              <!-- Privacy details -->
+              <details
+                id="privacy-details"
+                class="mt-6 text-xs text-gray-400 border-t border-dark-600 pt-4"
+              >
+                <summary
+                  class="cursor-pointer font-medium hover:text-primary-400 transition-colors"
+                >
+                  Politique de confidentialité du formulaire
+                </summary>
+                <div class="mt-3 space-y-2 leading-relaxed">
+                  <p>
+                    <strong class="text-gray-300">Responsable :</strong> Virgil CHAREYRE,
+                    <a href="mailto:virgil.07@hotmail.fr" class="text-primary-400 hover:underline">
+                      virgil.07@hotmail.fr
+                    </a>.
+                  </p>
+                  <p>
+                    <strong class="text-gray-300">Finalité :</strong> répondre à votre message. Aucun
+                    traitement marketing, aucune cession à un tiers.
+                  </p>
+                  <p>
+                    <strong class="text-gray-300">Sous-traitant :</strong> le formulaire est routé par
+                    <a
+                      href="https://web3forms.com/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-primary-400 hover:underline"
+                    >
+                      Web3Forms<span class="sr-only"> (nouvelle fenêtre)</span>
+                    </a>
+                    qui transmet l'email puis ne conserve aucune donnée.
+                  </p>
+                  <p>
+                    <strong class="text-gray-300">Conservation :</strong> jusqu'à 12 mois après le dernier
+                    échange, puis suppression.
+                  </p>
+                  <p>
+                    <strong class="text-gray-300">Droits :</strong> accès, rectification, suppression,
+                    opposition — par email à l'adresse ci-dessus, conformément au RGPD.
+                  </p>
+                </div>
+              </details>
             </form>
 
             <!-- Live region for form submission feedback -->
@@ -358,6 +429,11 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                     if (value.length < 10) return 'Le message doit contenir au moins 10 caractères';
                     return '';
                   },
+                  consent: (value: string) => {
+                    if (value !== 'on')
+                      return 'Vous devez accepter la politique de confidentialité';
+                    return '';
+                  },
                 };
 
                 function showError(fieldId: string, message: string) {
@@ -399,6 +475,12 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                   input?.addEventListener('input', () => clearError(fieldId));
                 });
 
+                // Consent checkbox: validate on change
+                const consentInput = document.getElementById('consent') as HTMLInputElement | null;
+                consentInput?.addEventListener('change', () => {
+                  if (consentInput.checked) clearError('consent');
+                });
+
                 // Form submission
                 form.addEventListener('submit', async (e) => {
                   e.preventDefault();
@@ -417,6 +499,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                       hasErrors = true;
                     }
                   });
+
+                  // Validate consent checkbox
+                  const consentEl = document.getElementById('consent') as HTMLInputElement | null;
+                  const consentError = validators.consent(consentEl?.checked ? 'on' : '');
+                  if (consentError) {
+                    showError('consent', consentError);
+                    hasErrors = true;
+                  }
 
                   if (hasErrors) {
                     // Focus first error field

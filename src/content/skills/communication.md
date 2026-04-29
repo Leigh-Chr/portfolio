@@ -3,7 +3,7 @@ title: 'Communication'
 category: 'human'
 group: 'interpersonal'
 level: 6
-icon: '💬'
+icon: 'chat-bubble'
 order: 6
 relatedProjects: ['syren-platform', 'site-bh-technologies']
 summary: 'Capacité à transmettre des idées techniques de manière claire et à adapter mon discours à différents interlocuteurs.'

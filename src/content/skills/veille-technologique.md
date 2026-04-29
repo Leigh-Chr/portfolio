@@ -3,7 +3,7 @@ title: 'Veille Technologique'
 category: 'human'
 group: 'personal'
 level: 8
-icon: '🔍'
+icon: 'magnifying-glass'
 order: 7
 relatedProjects:
   [

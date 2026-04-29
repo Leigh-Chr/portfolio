@@ -122,12 +122,14 @@ const siteBase = import.meta.env.BASE_URL.replace(/\/$/, '');
         <!-- Header -->
         <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 md:gap-8">
           <div
-            class="profile-avatar-xl flex items-center justify-center flex-shrink-0"
+            class={`profile-avatar-xl flex items-center justify-center flex-shrink-0 ${isTechnical ? 'text-primary-400' : 'text-accent-400'}`}
             transition:name={`skill-icon-${skill.id}`}
           >
-            <span class="text-3xl sm:text-4xl"
-              >{skill.data.icon || (isTechnical ? '💻' : '🤝')}</span
-            >
+            <Icon
+              name={(skill.data.icon as Parameters<typeof Icon>[0]['name']) ||
+                (isTechnical ? 'code' : 'users')}
+              class="w-10 h-10 sm:w-12 sm:h-12"
+            />
           </div>
           <div>
             <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">

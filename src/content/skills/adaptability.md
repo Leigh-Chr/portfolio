@@ -3,7 +3,7 @@ title: 'Adaptabilité'
 category: 'human'
 group: 'personal'
 level: 8
-icon: '🔄'
+icon: 'arrows-cycle'
 order: 10
 relatedProjects:
   [

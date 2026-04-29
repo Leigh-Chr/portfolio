@@ -12,31 +12,38 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   ogType?: 'website' | 'article';
   publishedTime?: string;
   modifiedTime?: string;
   imageWidth?: number;
   imageHeight?: number;
   robots?: string;
+  skipPersonLd?: boolean;
 }
 
 const processedOgImage = await getImage({
   src: profileImageSrc,
-  width: 800,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  position: 'top',
   format: 'jpg',
-  quality: 80,
+  quality: 85,
 });
 
 const {
   title,
   description = 'Portfolio de Virgil CHAREYRE - Développeur Web Fullstack',
   image = processedOgImage.src,
+  imageAlt = 'Photo de Virgil CHAREYRE, développeur web fullstack',
   ogType = 'website',
   publishedTime,
   modifiedTime,
   imageWidth,
   imageHeight,
   robots = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  skipPersonLd = false,
 } = Astro.props;
 const currentPath = Astro.url.pathname;
 const siteOrigin = Astro.site || new URL('https://leigh-chr.github.io');
@@ -44,8 +51,8 @@ const siteBase = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonicalURL = new URL(currentPath, siteOrigin);
 const imageURL = new URL(image, siteOrigin);
 const profileImageURL = new URL(processedOgImage.src, siteOrigin);
-const ogImageWidth = imageWidth ?? 800;
-const ogImageHeight = imageHeight ?? 800;
+const ogImageWidth = imageWidth ?? 1200;
+const ogImageHeight = imageHeight ?? 630;
 const fullTitle = `${title} | Portfolio Virgil CHAREYRE`;
 const siteURL = `${siteOrigin.toString().replace(/\/$/, '')}${siteBase}`;
 
@@ -92,6 +99,19 @@ const jsonLd = {
     },
   ],
 };
+
+// JSON-LD WebSite — recommended for site-level entity recognition
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Portfolio Virgil CHAREYRE',
+  url: `${siteURL}/`,
+  inLanguage: 'fr-FR',
+  author: {
+    '@type': 'Person',
+    name: 'Virgil CHAREYRE',
+  },
+};
 ---
 
 <!doctype html>
@@ -101,8 +121,24 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Virgil CHAREYRE" />
+    <meta name="creator" content="Virgil CHAREYRE" />
     <meta name="robots" content={robots} />
     <meta name="googlebot" content="index, follow" />
+
+    <!--
+      Content Security Policy via meta (GitHub Pages doesn't expose HTTP headers).
+      Note: frame-ancestors and X-Frame-Options can only be set via HTTP headers,
+      so they are deliberately omitted here.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'; upgrade-insecure-requests"
+    />
+    <!-- Permissions Policy: deny browser APIs unused by the site -->
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), midi=(), fullscreen=(self), interest-cohort=()"
+    />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL.toString()} />
@@ -115,6 +151,7 @@ const jsonLd = {
     <meta property="og:image" content={imageURL.toString()} />
     <meta property="og:image:width" content={String(ogImageWidth)} />
     <meta property="og:image:height" content={String(ogImageHeight)} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Portfolio Virgil CHAREYRE" />
     {
@@ -139,6 +176,7 @@ const jsonLd = {
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL.toString()} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
     <!-- Favicons & PWA -->
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
@@ -158,7 +196,8 @@ const jsonLd = {
     <Font cssVariable="--font-space-grotesk" preload />
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteLd)} />
+    {!skipPersonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <!-- Fallback: ensure GSAP-animated content is visible without JS -->
     <noscript>

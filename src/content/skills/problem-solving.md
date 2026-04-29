@@ -3,7 +3,7 @@ title: 'Résolution de problèmes'
 category: 'human'
 group: 'personal'
 level: 8
-icon: '🧩'
+icon: 'puzzle'
 order: 8
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']

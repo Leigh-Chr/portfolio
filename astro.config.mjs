@@ -10,6 +10,25 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => !page.includes('/404'),
+      serialize: (item) => {
+        const url = item.url;
+        let priority = 0.7;
+        let changefreq = 'monthly';
+        if (url.endsWith('/portfolio/') || url.endsWith('/portfolio')) {
+          priority = 1.0;
+          changefreq = 'weekly';
+        } else if (
+          /\/(projects|skills|timeline|cv|about|contact)\/?$/.test(url)
+        ) {
+          priority = 0.8;
+        }
+        return {
+          ...item,
+          lastmod: new Date().toISOString(),
+          changefreq,
+          priority,
+        };
+      },
     }),
   ],
   site: 'https://leigh-chr.github.io',

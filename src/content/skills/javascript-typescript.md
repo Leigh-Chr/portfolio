@@ -3,7 +3,7 @@ title: 'JavaScript / TypeScript'
 category: 'technical'
 group: 'frontend'
 level: 8
-icon: '💻'
+icon: 'code'
 order: 1
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']

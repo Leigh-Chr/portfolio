@@ -3,7 +3,7 @@ title: 'API REST / Architecture'
 category: 'technical'
 group: 'backend'
 level: 7
-icon: '🔧'
+icon: 'wrench'
 order: 5
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']

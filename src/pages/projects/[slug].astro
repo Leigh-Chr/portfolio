@@ -306,10 +306,16 @@ const ogImageAbsolute = ogImagePath
                 {relatedSkills.map((skill) => (
                   <a href={url(`/skills/${skill.id}`)} class="card-glow p-6 group">
                     <div class="flex items-center gap-3">
-                      <div class="w-10 h-10 bg-dark-700 border-2 border-primary-500 flex items-center justify-center">
-                        <span class="text-lg">
-                          {skill.data.icon || (skill.data.category === 'technical' ? '💻' : '🤝')}
-                        </span>
+                      <div
+                        class={`w-10 h-10 bg-dark-700 border-2 border-primary-500 flex items-center justify-center ${skill.data.category === 'technical' ? 'text-primary-400' : 'text-accent-400'}`}
+                      >
+                        <Icon
+                          name={
+                            (skill.data.icon as Parameters<typeof Icon>[0]['name']) ||
+                            (skill.data.category === 'technical' ? 'code' : 'users')
+                          }
+                          class="w-5 h-5"
+                        />
                       </div>
                       <div>
                         <h3 class="font-heading font-semibold text-white text-sm group-hover:text-primary-400 transition-colors">

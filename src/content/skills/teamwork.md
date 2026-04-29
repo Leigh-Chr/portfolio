@@ -3,7 +3,7 @@ title: 'Travail en équipe'
 category: 'human'
 group: 'interpersonal'
 level: 6
-icon: '🤝'
+icon: 'users'
 order: 9
 relatedProjects: ['syren-platform', 'luce-platform']
 summary: "Collaboration efficace au sein d'équipes pluridisciplinaires pour atteindre des objectifs communs."

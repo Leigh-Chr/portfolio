@@ -3,7 +3,7 @@ title: 'Backend Node.js'
 category: 'technical'
 group: 'backend'
 level: 7
-icon: '🖥️'
+icon: 'server'
 order: 3
 relatedProjects: ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app']
 summary: "Développement d'APIs et de services backend robustes avec l'écosystème Node.js (NestJS, Express, Hono)."

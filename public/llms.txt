@@ -1,0 +1,41 @@
+# Virgil CHAREYRE — Portfolio
+
+> Développeur Web Fullstack basé à Grenoble (France). Spécialisé TypeScript, React, Svelte, Node.js, NestJS, PostgreSQL. Plus de 3 ans d'expérience chez BH Technologies sur des plateformes IoT pour collectivités (gestion des déchets, éclairage public). Disponible pour CDI ou CDD, en remote ou sur site.
+
+## Pages principales
+
+- [Accueil](https://leigh-chr.github.io/portfolio/): vue d'ensemble, compétences clés, projets récents
+- [À propos](https://leigh-chr.github.io/portfolio/about/): valeurs, parcours personnel, centres d'intérêt
+- [Compétences](https://leigh-chr.github.io/portfolio/skills/): détail des compétences techniques (frontend, backend) et humaines (personnelles, interpersonnelles), avec graphique radar comparatif
+- [Projets](https://leigh-chr.github.io/portfolio/projects/): 7 projets en entreprise et perso, avec contexte, étapes, équipe, résultats
+- [Parcours](https://leigh-chr.github.io/portfolio/timeline/): chronologie des formations académiques et expériences professionnelles
+- [CV](https://leigh-chr.github.io/portfolio/cv/): CV complet imprimable au format A4, avec données structurées Schema.org
+- [Contact](https://leigh-chr.github.io/portfolio/contact/): email, LinkedIn, GitHub, formulaire de contact
+
+## Projets phares
+
+- [Plateforme Syren](https://leigh-chr.github.io/portfolio/projects/syren-platform/): plateforme SaaS de gestion intelligente des déchets pour collectivités. Migration Angular vers Svelte 5, internationalisation, IoT LoRaWAN et NB-IoT.
+- [Plateforme Luce](https://leigh-chr.github.io/portfolio/projects/luce-platform/): pilotage à distance de l'éclairage public, architecture microservices, IoT temps réel.
+- [Site Web BH Technologies](https://leigh-chr.github.io/portfolio/projects/site-bh-technologies/): refonte du site corporate avec optimisation SEO.
+- [Tidy App](https://leigh-chr.github.io/portfolio/projects/tidy-app/): application personnelle.
+- [Cahnon](https://leigh-chr.github.io/portfolio/projects/cahnon/): projet personnel.
+
+## Compétences techniques principales
+
+JavaScript / TypeScript, React, Angular, Svelte / SvelteKit, Node.js, NestJS, PostgreSQL, MongoDB, Redis, REST API, WebSockets, Docker, Tailwind CSS, Tauri, Git.
+
+## Compétences humaines
+
+Travail en équipe, communication, résolution de problèmes, adaptabilité, veille technologique.
+
+## Contact
+
+- Email : virgil.07@hotmail.fr
+- LinkedIn : https://linkedin.com/in/virgil-chareyre
+- GitHub : https://github.com/Leigh-Chr
+- Localisation : Grenoble, France
+- Disponibilité : CDI ou CDD, remote ou Grenoble, ouvert à la mobilité
+
+## Technologies du portfolio
+
+Astro 5, TypeScript, Tailwind CSS v4, GSAP, déployé sur GitHub Pages. Code source : https://github.com/Leigh-Chr/portfolio

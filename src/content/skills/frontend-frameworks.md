@@ -3,7 +3,7 @@ title: 'Frameworks Frontend'
 category: 'technical'
 group: 'frontend'
 level: 8
-icon: '⚛️'
+icon: 'frameworks'
 order: 2
 relatedProjects:
   ['syren-platform', 'luce-platform', 'appstandard', 'tidy-app', 'cahnon', 'transit-display-hub']

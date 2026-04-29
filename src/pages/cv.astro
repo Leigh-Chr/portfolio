@@ -168,7 +168,8 @@ function formatAvailability(): string {
 
 <BaseLayout
   title={`CV - ${profile.name} - ${profile.title}`}
-  description={`CV de ${profile.name} - ${profile.title} spécialisé TypeScript, React, Svelte et Node.js. Disponible en téléchargement PDF.`}
+  description={`CV de ${profile.name} - ${profile.title} spécialisé TypeScript, React, Svelte et Node.js. Format A4 imprimable.`}
+  skipPersonLd
 >
   <!-- JSON-LD Resume structured data for SEO and ATS -->
   <Fragment slot="head">
@@ -213,11 +214,7 @@ function formatAvailability(): string {
 
   <!-- Print button (hidden on print) -->
   <div class="fixed bottom-6 right-6 z-50 print:hidden">
-    <button
-      onclick="window.print()"
-      class="btn-chunky-primary flex items-center gap-2"
-      aria-label="Imprimer ou enregistrer en PDF"
-    >
+    <button onclick="window.print()" class="btn-chunky-primary flex items-center gap-2">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path
           stroke-linecap="round"
