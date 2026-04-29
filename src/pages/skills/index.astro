@@ -161,7 +161,7 @@ const groupColors = {
               {skillGroups[group.key].label
                 .replace('Développement ', '')
                 .replace('Compétences ', '')}
-              <span class="ml-1 opacity-70">({group.skills.length})</span>
+              <span class="ml-1">({group.skills.length})</span>
             </a>
           ))
         }
@@ -203,8 +203,14 @@ const groupColors = {
                 {group.skills.map((skill) => (
                   <a href={url(`/skills/${skill.id}`)} class="card-glow p-4 sm:p-6 md:p-8 group">
                     <div class="flex items-start justify-between mb-6">
-                      <div class="icon-box" transition:name={`skill-icon-${skill.id}`}>
-                        <span class="text-xl">{skill.data.icon || '💻'}</span>
+                      <div
+                        class={`icon-box ${groupColors[group.key].text}`}
+                        transition:name={`skill-icon-${skill.id}`}
+                      >
+                        <Icon
+                          name={(skill.data.icon as Parameters<typeof Icon>[0]['name']) || 'code'}
+                          class="w-6 h-6"
+                        />
                       </div>
                     </div>
                     <h4
