@@ -18,7 +18,7 @@ relatedSkills:
   ]
 gallery:
   - src: '../../assets/images/projects/tidy-hero.png'
-    alt: 'Page vitrine Tidy App — Organize your files'
+    alt: 'Tidy App — Organize your files'
   - src: '../../assets/images/projects/tidy-platforms.png'
     alt: 'Disponible sur Windows, macOS et Linux'
 context:
