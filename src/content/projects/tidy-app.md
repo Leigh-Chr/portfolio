@@ -6,7 +6,6 @@ fullImage: '../../assets/images/projects/tidy-app-full.jpg'
 order: 5
 links:
   repository: 'https://github.com/Leigh-Chr/tidy-app'
-  website: 'https://leigh-chr.github.io/tidy-app/'
 relatedSkills:
   [
     'javascript-typescript',

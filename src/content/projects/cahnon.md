@@ -6,7 +6,6 @@ fullImage: '../../assets/images/projects/cahnon-full.jpg'
 order: 6
 links:
   repository: 'https://github.com/Leigh-Chr/cahnon'
-  website: 'https://leigh-chr.github.io/cahnon/'
 relatedSkills:
   [
     'javascript-typescript',

@@ -6,7 +6,6 @@ fullImage: '../../assets/images/projects/appstandard-full.jpg'
 order: 4
 links:
   repository: 'https://github.com/Leigh-Chr/appstandard'
-  website: 'https://appstandard.io'
 relatedSkills:
   [
     'javascript-typescript',
