@@ -26,10 +26,7 @@ const featuredProjects = allProjects.sort((a, b) => a.data.order - b.data.order)
             Bienvenue sur mon portfolio
           </p>
           <h1 class="page-title text-balance">
-            Bonjour, je suis <span
-              class="gradient-text-animated underline-zigzag"
-              data-text="Virgil">Virgil CHAREYRE</span
-            >
+            Bonjour, je suis <span class="text-primary-400 underline-zigzag">Virgil CHAREYRE</span>
           </h1>
           <p class="text-3xl md:text-4xl text-accent-400 mb-6 font-heading font-bold">
             <span class="highlight-marker highlight-marker-accent">Développeur Web Fullstack</span>
@@ -57,7 +54,12 @@ const featuredProjects = allProjects.sort((a, b) => a.data.order - b.data.order)
                   d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
               </svg>
             </a>
-            <a href={url('/contact')} class="btn-chunky-accent"> Me contacter </a>
+            <a
+              href={url('/contact')}
+              class="btn-chunky bg-transparent text-primary-400 border-primary-500 hover:bg-primary-500 hover:text-dark-900"
+            >
+              Me contacter
+            </a>
           </div>
 
           <!-- Quick Stats - Bold Memphis with subtle variations -->

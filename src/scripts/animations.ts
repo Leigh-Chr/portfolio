@@ -21,7 +21,7 @@ function animateHero(): void {
           y: 0,
           opacity: 1,
           duration: 0.6,
-          ease: 'back.out(1.7)',
+          ease: 'expo.out',
         },
         i * 0.12
       );
@@ -40,7 +40,7 @@ function batchReveal(selector: string, tweenOverrides?: gsap.TweenVars): void {
         y: 0,
         opacity: 1,
         duration: 0.7,
-        ease: 'back.out(1.7)',
+        ease: 'expo.out',
         stagger: 0.1,
         ...tweenOverrides,
       });
@@ -63,7 +63,7 @@ function animateStagger(): void {
       y: 0,
       opacity: 1,
       duration: 0.5,
-      ease: 'back.out(1.7)',
+      ease: 'expo.out',
       stagger: 0.1,
       scrollTrigger: {
         trigger: container,
@@ -95,7 +95,7 @@ function animateTimeline(): void {
       tl.to(dot, {
         scale: 1,
         duration: 0.4,
-        ease: 'back.out(2)',
+        ease: 'expo.out',
       });
     }
 
@@ -106,7 +106,7 @@ function animateTimeline(): void {
           x: 0,
           opacity: 1,
           duration: 0.6,
-          ease: 'back.out(1.7)',
+          ease: 'expo.out',
         },
         dot ? '-=0.2' : 0
       );
@@ -151,7 +151,7 @@ function animateMemphisShapes(): void {
       gsap.to(batch, {
         opacity: (_i: number, el: HTMLElement) => parseFloat(el.dataset['targetOpacity'] || '0.1'),
         duration: 0.7,
-        ease: 'back.out(1.7)',
+        ease: 'expo.out',
         stagger: 0.05,
       });
     },

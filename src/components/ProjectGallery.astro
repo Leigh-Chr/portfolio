@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import Icon from '@components/Icon.astro';
 
 interface Props {
   gallery: { src: ImageMetadata; alt: string }[];
@@ -11,8 +12,8 @@ const { gallery } = Astro.props;
 
 <section class="gallery-section" data-gsap="reveal">
   <div class="content-section-header">
-    <div class="icon-box-sm">
-      <span class="text-xl" aria-hidden="true">📸</span>
+    <div class="icon-box-sm text-primary-400">
+      <Icon name="camera" class="w-5 h-5" />
     </div>
     <h2 class="content-section-title">
       <span class="text-primary-400 underline-memphis">Galerie</span>
@@ -39,7 +40,13 @@ const { gallery } = Astro.props;
               loading="lazy"
             />
             <span class="gallery-zoom-icon" aria-hidden="true">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -59,7 +66,13 @@ const { gallery } = Astro.props;
   <dialog class="gallery-lightbox" aria-label="Image agrandie">
     <div class="gallery-lightbox-content">
       <button type="button" class="gallery-lightbox-close" aria-label="Fermer">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"

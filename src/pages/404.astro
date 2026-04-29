@@ -15,7 +15,7 @@ import { url } from '@utils/url';
         <!-- 404 Number -->
         <div class="mb-10">
           <span
-            class="text-[10rem] md:text-[14rem] font-heading font-black leading-none gradient-text-animated"
+            class="text-[10rem] md:text-[14rem] font-heading font-black leading-none text-primary-400"
           >
             404
           </span>
@@ -36,7 +36,12 @@ import { url } from '@utils/url';
             <Icon name="home" />
             Retour à l'accueil
           </a>
-          <a href={url('/contact')} class="btn-chunky-accent"> Me contacter </a>
+          <a
+            href={url('/contact')}
+            class="btn-chunky bg-transparent text-primary-400 border-primary-500 hover:bg-primary-500 hover:text-dark-900"
+          >
+            Me contacter
+          </a>
         </div>
 
         <!-- Quick Links -->

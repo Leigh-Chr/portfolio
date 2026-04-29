@@ -5,6 +5,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { getCollection, getEntries, render } from 'astro:content';
 import { url } from '@utils/url';
 import ProjectGallery from '@components/ProjectGallery.astro';
+import Icon from '@components/Icon.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -164,10 +165,8 @@ const ogImageAbsolute = ogImagePath
                   priority
                 />
               ) : (
-                <div class="w-full h-full flex items-center justify-center">
-                  <span class="text-6xl opacity-30" aria-hidden="true">
-                    📁
-                  </span>
+                <div class="w-full h-full flex items-center justify-center text-gray-600">
+                  <Icon name="folder" class="w-16 h-16" />
                 </div>
               )
             }
@@ -288,10 +287,8 @@ const ogImageAbsolute = ogImagePath
           relatedSkills.length > 0 && (
             <section class="mb-20" id="competences">
               <div class="content-section-header">
-                <div class="icon-box-sm">
-                  <span class="text-xl" aria-hidden="true">
-                    🔗
-                  </span>
+                <div class="icon-box-sm text-primary-400">
+                  <Icon name="link" class="w-5 h-5" />
                 </div>
                 <h2 class="content-section-title">
                   Compétences{' '}

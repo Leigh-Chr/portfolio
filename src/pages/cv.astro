@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
 import profileImage from '@assets/images/profile.jpg';
 import { profile, contact, availability, languages, techStack } from '@config/cv';
+import { levelToText } from '@utils/skills';
 
 const siteOrigin = Astro.site?.origin ?? 'https://leigh-chr.github.io';
 const siteBase = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -54,14 +55,6 @@ function formatDate(dateStr: string): string {
 // Get ISO date for datetime attribute
 function getISODate(dateStr: string): string {
   return dateStr; // Already in YYYY-MM format or YYYY-MM-DD
-}
-
-// Level to text helper
-function levelToText(level: number): string {
-  if (level >= 8) return 'Confirmé';
-  if (level >= 6) return 'Avancé';
-  if (level >= 4) return 'Intermédiaire';
-  return 'Débutant';
 }
 
 // Clean markdown and extract first paragraph for CV display

@@ -1,6 +1,7 @@
 ---
 import { Image, Picture } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import Icon from '@components/Icon.astro';
 import { getCollection } from 'astro:content';
 import { url } from '@utils/url';
 
@@ -17,10 +18,7 @@ const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
   <section class="section-padding section-hero relative overflow-hidden">
     <div class="container-custom text-center" data-gsap="hero">
       <h1 class="page-title">
-        Mes <span
-          class="gradient-text-animated underline-zigzag underline-zigzag-accent"
-          data-text="Projets">Projets</span
-        >
+        Mes <span class="text-accent-400 underline-zigzag underline-zigzag-accent">Projets</span>
       </h1>
       <div class="section-divider section-divider-accent section-divider-long"></div>
       <p class="page-subtitle">
@@ -96,10 +94,8 @@ const sortedProjects = allProjects.sort((a, b) => a.data.order - b.data.order);
                     />
                   ) : (
                     <div class="w-full h-full flex items-center justify-center">
-                      <div class="text-center">
-                        <span class="text-6xl opacity-30" aria-hidden="true">
-                          📁
-                        </span>
+                      <div class="text-center text-gray-600">
+                        <Icon name="folder" class="w-14 h-14 mx-auto" />
                         <p class="text-gray-400 text-sm mt-2">[Image projet]</p>
                       </div>
                     </div>

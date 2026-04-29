@@ -1,5 +1,7 @@
 ---
 import type { SkillGroup } from '@utils/skills';
+import { levelToText } from '@utils/skills';
+import Icon from '@components/Icon.astro';
 import { url } from '@utils/url';
 
 interface Skill {
@@ -131,7 +133,7 @@ const orderedSkills = [
         return (
           <a
             href={url(`/skills/${skill.slug}`)}
-            aria-label={`${skill.name} - niveau ${skill.level}/10`}
+            aria-label={`${skill.name} : ${levelToText(skill.level)}`}
           >
             <circle
               cx={x}
@@ -190,16 +192,14 @@ const orderedSkills = [
   </svg>
 
   <!-- Accessible data table (screen readers only) -->
-  <p id="skill-chart-desc" class="sr-only">
-    Tableau des niveaux de compétences par domaine, sur une échelle de 1 à 10.
-  </p>
+  <p id="skill-chart-desc" class="sr-only">Tableau des niveaux de compétences par domaine.</p>
   <table class="sr-only">
     <caption>Niveaux de compétences par domaine</caption>
     <thead>
       <tr>
         <th scope="col">Compétence</th>
         <th scope="col">Domaine</th>
-        <th scope="col">Niveau (/10)</th>
+        <th scope="col">Niveau</th>
       </tr>
     </thead>
     <tbody>
@@ -219,7 +219,7 @@ const orderedSkills = [
                 <a href={url(`/skills/${skill.slug}`)}>{skill.name}</a>
               </td>
               <td>{groupLabel}</td>
-              <td>{skill.level}</td>
+              <td>{levelToText(skill.level)}</td>
             </tr>
           );
         })
@@ -268,10 +268,11 @@ const orderedSkills = [
   >
     <h3 class="font-heading font-bold text-base text-white mb-6 flex items-center gap-2">
       <span class="w-3 h-3 bg-info-400" aria-hidden="true"></span>
-      🎨 Développement Frontend
-      <span class="ml-auto text-xs text-info-400 font-normal"
-        >Moy. {calculateAverage(frontendSkills)}/10</span
-      >
+      <Icon name="palette" class="w-5 h-5 text-info-400" />
+      Développement Frontend
+      <span class="ml-auto text-xs text-info-400 font-normal uppercase tracking-wide">
+        Moy. {levelToText(calculateAverage(frontendSkills))}
+      </span>
     </h3>
     <div class="space-y-4">
       {
@@ -279,7 +280,9 @@ const orderedSkills = [
           <div>
             <div class="flex justify-between mb-1">
               <span class="text-sm font-medium text-gray-200">{skill.name}</span>
-              <span class="text-xs text-info-400 font-heading font-semibold">{skill.level}/10</span>
+              <span class="text-xs text-info-400 font-heading font-semibold uppercase tracking-wide">
+                {levelToText(skill.level)}
+              </span>
             </div>
             <div
               class="skill-level"
@@ -287,7 +290,7 @@ const orderedSkills = [
               aria-valuenow={skill.level}
               aria-valuemin={0}
               aria-valuemax={10}
-              aria-label={`${skill.name} : ${skill.level} sur 10`}
+              aria-label={`${skill.name} : ${levelToText(skill.level)} (${skill.level} sur 10)`}
             >
               <div class="h-full bg-info-400" style={`width: ${skill.level * 10}%`} />
             </div>
@@ -303,10 +306,11 @@ const orderedSkills = [
   >
     <h3 class="font-heading font-bold text-base text-white mb-6 flex items-center gap-2">
       <span class="w-3 h-3 bg-primary-500" aria-hidden="true"></span>
-      ⚙️ Développement Backend
-      <span class="ml-auto text-xs text-primary-400 font-normal"
-        >Moy. {calculateAverage(backendSkills)}/10</span
-      >
+      <Icon name="gear" class="w-5 h-5 text-primary-400" />
+      Développement Backend
+      <span class="ml-auto text-xs text-primary-400 font-normal uppercase tracking-wide">
+        Moy. {levelToText(calculateAverage(backendSkills))}
+      </span>
     </h3>
     <div class="space-y-4">
       {
@@ -314,8 +318,8 @@ const orderedSkills = [
           <div>
             <div class="flex justify-between mb-1">
               <span class="text-sm font-medium text-gray-200">{skill.name}</span>
-              <span class="text-xs text-primary-400 font-heading font-semibold">
-                {skill.level}/10
+              <span class="text-xs text-primary-400 font-heading font-semibold uppercase tracking-wide">
+                {levelToText(skill.level)}
               </span>
             </div>
             <div
@@ -324,7 +328,7 @@ const orderedSkills = [
               aria-valuenow={skill.level}
               aria-valuemin={0}
               aria-valuemax={10}
-              aria-label={`${skill.name} : ${skill.level} sur 10`}
+              aria-label={`${skill.name} : ${levelToText(skill.level)} (${skill.level} sur 10)`}
             >
               <div class="h-full bg-primary-500" style={`width: ${skill.level * 10}%`} />
             </div>
@@ -340,10 +344,11 @@ const orderedSkills = [
   >
     <h3 class="font-heading font-bold text-base text-white mb-6 flex items-center gap-2">
       <span class="w-3 h-3 bg-accent-400" aria-hidden="true"></span>
-      🧠 Compétences Personnelles
-      <span class="ml-auto text-xs text-accent-400 font-normal"
-        >Moy. {calculateAverage(personalSkills)}/10</span
-      >
+      <Icon name="brain" class="w-5 h-5 text-accent-400" />
+      Compétences Personnelles
+      <span class="ml-auto text-xs text-accent-400 font-normal uppercase tracking-wide">
+        Moy. {levelToText(calculateAverage(personalSkills))}
+      </span>
     </h3>
     <div class="space-y-4">
       {
@@ -351,8 +356,8 @@ const orderedSkills = [
           <div>
             <div class="flex justify-between mb-1">
               <span class="text-sm font-medium text-gray-200">{skill.name}</span>
-              <span class="text-xs text-accent-400 font-heading font-semibold">
-                {skill.level}/10
+              <span class="text-xs text-accent-400 font-heading font-semibold uppercase tracking-wide">
+                {levelToText(skill.level)}
               </span>
             </div>
             <div
@@ -361,7 +366,7 @@ const orderedSkills = [
               aria-valuenow={skill.level}
               aria-valuemin={0}
               aria-valuemax={10}
-              aria-label={`${skill.name} : ${skill.level} sur 10`}
+              aria-label={`${skill.name} : ${levelToText(skill.level)} (${skill.level} sur 10)`}
             >
               <div class="h-full bg-accent-400" style={`width: ${skill.level * 10}%`} />
             </div>
@@ -377,10 +382,11 @@ const orderedSkills = [
   >
     <h3 class="font-heading font-bold text-base text-white mb-6 flex items-center gap-2">
       <span class="w-3 h-3 bg-tertiary-400" aria-hidden="true"></span>
-      🤝 Compétences Interpersonnelles
-      <span class="ml-auto text-xs text-tertiary-400 font-normal"
-        >Moy. {calculateAverage(interpersonalSkills)}/10</span
-      >
+      <Icon name="users" class="w-5 h-5 text-tertiary-400" />
+      Compétences Interpersonnelles
+      <span class="ml-auto text-xs text-tertiary-400 font-normal uppercase tracking-wide">
+        Moy. {levelToText(calculateAverage(interpersonalSkills))}
+      </span>
     </h3>
     <div class="space-y-4">
       {
@@ -388,8 +394,8 @@ const orderedSkills = [
           <div>
             <div class="flex justify-between mb-1">
               <span class="text-sm font-medium text-gray-200">{skill.name}</span>
-              <span class="text-xs text-tertiary-400 font-heading font-semibold">
-                {skill.level}/10
+              <span class="text-xs text-tertiary-400 font-heading font-semibold uppercase tracking-wide">
+                {levelToText(skill.level)}
               </span>
             </div>
             <div
@@ -398,7 +404,7 @@ const orderedSkills = [
               aria-valuenow={skill.level}
               aria-valuemin={0}
               aria-valuemax={10}
-              aria-label={`${skill.name} : ${skill.level} sur 10`}
+              aria-label={`${skill.name} : ${levelToText(skill.level)} (${skill.level} sur 10)`}
             >
               <div class="h-full bg-tertiary-400" style={`width: ${skill.level * 10}%`} />
             </div>

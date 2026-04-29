@@ -77,22 +77,6 @@
   --shadow-hard-white: 6px 6px 0 0 #fff;
   --shadow-hard-white-lg: 10px 10px 0 0 #fff;
 
-  /* Neon glow effects */
-  --shadow-glow-purple: 0 0 20px #a855f7, 0 0 40px rgb(168 85 247 / 50%);
-  --shadow-glow-purple-sm: 0 0 10px #a855f7, 0 0 20px rgb(168 85 247 / 30%);
-  --shadow-glow-purple-lg:
-    0 0 30px #a855f7, 0 0 60px rgb(168 85 247 / 50%), 0 0 90px rgb(168 85 247 / 30%);
-  --shadow-glow-yellow: 0 0 20px #facc15, 0 0 40px rgb(250 204 21 / 50%);
-  --shadow-glow-yellow-sm: 0 0 10px #facc15, 0 0 20px rgb(250 204 21 / 30%);
-  --shadow-glow-yellow-lg:
-    0 0 30px #facc15, 0 0 60px rgb(250 204 21 / 50%), 0 0 90px rgb(250 204 21 / 30%);
-
-  /* Combined hard + glow */
-  --shadow-hard-glow-purple: 6px 6px 0 0 #a855f7, 0 0 25px rgb(168 85 247 / 50%);
-  --shadow-hard-glow-purple-lg: 10px 10px 0 0 #a855f7, 0 0 35px rgb(168 85 247 / 50%);
-  --shadow-hard-glow-yellow: 6px 6px 0 0 #facc15, 0 0 25px rgb(250 204 21 / 50%);
-  --shadow-hard-glow-yellow-lg: 10px 10px 0 0 #facc15, 0 0 35px rgb(250 204 21 / 50%);
-
   /* Memphis bounce animation timing */
   --ease-memphis: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -199,6 +183,13 @@
 
   /* ===================
      BUTTONS - Bold Neo-Memphis
+     ===================
+     Hiérarchie d'usage :
+     - btn-chunky-primary / btn-chunky-accent : action principale (hero CTA, submit form, 404 main)
+     - btn-chunky bg-transparent border-* : action secondaire / outline (CTA hero #2, 404 #2)
+     - btn-chunky bg-white / bg-transparent : duo CTA section finale (sur fond section-cta purple-800)
+     - btn-primary / btn-secondary / btn-accent : CTA intermédiaires de section (taille moyenne)
+     - btn-icon : bouton icône seule (mobile menu, footer arrows)
      =================== */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
@@ -330,7 +321,6 @@
 
   .section-title {
     @apply text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 tracking-tight;
-    text-shadow: 0 0 30px rgb(168 85 247 / 30%);
   }
 
   .section-subtitle {
@@ -342,7 +332,6 @@
      =================== */
   .page-title {
     @apply text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-10 tracking-tight leading-none;
-    text-shadow: 0 0 40px rgb(168 85 247 / 35%);
   }
 
   .page-subtitle {
@@ -555,11 +544,6 @@
     opacity: 1 !important;
     transform: none !important;
   }
-
-  /* Static gradient text */
-  .gradient-text-animated {
-    background-position: 0% center !important;
-  }
 }
 
 /* =============================================================================
@@ -567,46 +551,19 @@
    ============================================================================= */
 
 /* ===================
-   1. ANIMATED GRADIENT TEXT
-   =================== */
-.gradient-text-animated {
-  @apply text-transparent bg-clip-text font-bold;
-  background-image: linear-gradient(
-    90deg,
-    var(--color-primary-500),
-    var(--color-primary-300),
-    var(--color-accent-400),
-    var(--color-accent-300),
-    var(--color-primary-500)
-  );
-  background-size: 200% auto;
-  animation: gradient-shift 4s ease-in-out infinite;
-}
-
-@keyframes gradient-shift {
-  0%,
-  100% {
-    background-position: 0% center;
-  }
-  50% {
-    background-position: 100% center;
-  }
-}
-
-/* ===================
-   2. CARD LIFT EFFECT (Memphis-style)
+   CARD LIFT EFFECT (Memphis-style)
    =================== */
 .card-glow {
   @apply bg-dark-800 border-2 border-dark-600 shadow-hard transition-all duration-300;
 }
 
 .card-glow:hover {
-  @apply border-primary-500 shadow-hard-glow-purple;
+  @apply border-primary-500 shadow-hard-purple;
   transform: translateX(-4px) translateY(-4px);
 }
 
 /* ===================
-   3. PROJECT GALLERY
+   PROJECT GALLERY
    =================== */
 .gallery-grid {
   @apply grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6;
@@ -619,7 +576,7 @@
 .gallery-item:hover {
   @apply border-primary-500;
   transform: translateX(-2px) translateY(-2px);
-  box-shadow: var(--shadow-hard-glow-purple);
+  box-shadow: var(--shadow-hard-purple);
 }
 
 .gallery-trigger {
@@ -855,7 +812,6 @@
 .memphis-shape-fg {
   position: absolute;
   will-change: transform;
-  filter: drop-shadow(0 0 4px var(--fg-c));
 }
 
 /* --- Shape types --- */

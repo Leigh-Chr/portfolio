@@ -39,3 +39,6 @@ Thumbs.db
 # Linter caches
 .eslintcache
 .stylelintcache
+
+# Local design notes (not for distribution)
+.impeccable.md
